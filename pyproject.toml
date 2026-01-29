@@ -1,0 +1,122 @@
+[project]
+name = "vemcp"
+version = "1.0.0"
+description = "Video Editing MCP Server - A comprehensive video editing pipeline built on FFmpeg for use by Large Language Models"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "VEMCP Team" }
+]
+keywords = ["video", "editing", "mcp", "ffmpeg", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Video",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "fastmcp>=0.1.0",
+    # Audio transcription (GPU auto-detection built-in)
+    "faster-whisper>=1.0.0",
+    "pysrt>=1.1.2",
+    # Scene detection
+    "scenedetect>=0.6.0",
+    "opencv-python>=4.5.0",
+    # Audio analysis & normalization
+    "pyloudnorm>=0.1.1",
+    # Image/array processing
+    "numpy>=1.24.0",
+    "Pillow>=10.0.0",
+    # Video I/O utilities
+    "imageio>=2.31.0",
+    "imageio-ffmpeg>=0.4.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.8.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+vemcp = "server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unreachable = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+check_untyped_defs = true
+no_implicit_optional = true
+strict_equality = true
+extra_checks = true
+show_error_codes = true
+show_column_numbers = true
+pretty = true
+
+# Per-module options
+[[tool.mypy.overrides]]
+module = "fastmcp.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "faster_whisper.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "pysrt.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "scenedetect.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "pyloudnorm.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "imageio.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+
+[tool.ruff]
+exclude = [".venv", ".mypy_cache", ".pytest_cache", ".git", ".agents", "media"]
+line-length = 150
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+
+[tool.ruff.lint.per-file-ignores]
+"run_demo*.py" = ["E402", "E501"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["video_editor"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.14",
+]
