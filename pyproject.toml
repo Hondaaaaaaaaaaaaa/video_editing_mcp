@@ -97,6 +97,34 @@ ignore_missing_imports = true
 module = "imageio.*"
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "torch.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "torchaudio.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "demucs.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "pedalboard.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "webrtcvad.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "librosa.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "soundfile.*"
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"

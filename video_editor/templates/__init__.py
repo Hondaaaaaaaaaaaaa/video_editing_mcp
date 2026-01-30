@@ -48,7 +48,7 @@ def load_template(
     name: str,
     template_dir: str = "",
     include_metadata: bool = False,
-) -> list[dict] | dict:
+) -> list[dict[str, Any]] | dict[str, Any]:
     """Load a template from disk.
 
     Args:
@@ -72,8 +72,8 @@ def load_template(
         data = json.load(f)
 
     if include_metadata:
-        return data
-    return data.get("operations", [])
+        return dict(data)
+    return list(data.get("operations", []))
 
 
 def list_templates(template_dir: str = "") -> list[str]:

@@ -7,6 +7,8 @@ but extract information from them.
 
 from __future__ import annotations
 
+from typing import Any
+
 from scenedetect import detect, ContentDetector
 
 __all__ = [
@@ -21,7 +23,7 @@ def detect_scenes(
     video_path: str,
     threshold: float = 30.0,
     min_scene_length: float = 0.0,
-) -> list[dict]:
+) -> list[dict[str, Any]]:
     """Detect scene changes in video.
 
     Args:
@@ -50,7 +52,7 @@ def generate_chapters(
     video_path: str,
     threshold: float = 30.0,
     title_pattern: str = "Chapter {n}",
-) -> list[dict]:
+) -> list[dict[str, Any]]:
     """Generate chapter markers from scene detection.
 
     Args:
@@ -71,7 +73,7 @@ def generate_chapters(
 
 
 def export_chapters_ffmetadata(
-    chapters: list[dict],
+    chapters: list[dict[str, Any]],
     output_path: str,
 ) -> None:
     """Export chapters as FFmpeg metadata format.
@@ -92,7 +94,7 @@ def export_chapters_ffmetadata(
             f.write(f"title={ch['title']}\n\n")
 
 
-def get_loudness(video_path: str) -> dict:
+def get_loudness(video_path: str) -> dict[str, float]:
     """Analyze audio loudness (LUFS, true peak, LRA).
 
     Uses FFmpeg's loudnorm filter in analysis mode to measure:

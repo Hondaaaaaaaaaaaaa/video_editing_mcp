@@ -1,0 +1,26 @@
+# Advanced Audio Features Dependencies
+# These are optional dependencies for advanced audio editing capabilities
+
+# Voice isolation using Demucs neural network (Facebook/Meta)
+# Requires PyTorch - GPU recommended for performance
+demucs>=4.0.0
+
+# VST3/VST2 plugin support (Spotify's Pedalboard)
+pedalboard>=0.9.0
+
+# Audio analysis (pitch detection, tempo, beat tracking)
+librosa>=0.10.0
+
+# Audio file I/O
+soundfile>=0.12.0
+
+# NumPy for audio arrays (likely already installed)
+numpy>=1.24.0
+
+# Voice Activity Detection (VAD) - for smart silence removal
+# Silero VAD (most accurate - requires PyTorch which is included with demucs)
+# torch>=2.0.0  # Already included if using demucs
+torchaudio>=2.0.0
+
+# WebRTC VAD (faster alternative)
+webrtcvad>=2.0.10
