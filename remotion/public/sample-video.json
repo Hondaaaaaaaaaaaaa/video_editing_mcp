@@ -1,0 +1,14 @@
+[
+  { "text": " Welcome", "startMs": 0, "endMs": 480, "timestampMs": 240, "confidence": 1 },
+  { "text": " to", "startMs": 480, "endMs": 700, "timestampMs": 590, "confidence": 1 },
+  { "text": " the", "startMs": 700, "endMs": 880, "timestampMs": 790, "confidence": 1 },
+  { "text": " Remotion", "startMs": 880, "endMs": 1500, "timestampMs": 1190, "confidence": 1 },
+  { "text": " captions", "startMs": 1500, "endMs": 2100, "timestampMs": 1800, "confidence": 1 },
+  { "text": " demo.", "startMs": 2100, "endMs": 2600, "timestampMs": 2350, "confidence": 1 },
+  { "text": " Swap", "startMs": 2800, "endMs": 3200, "timestampMs": 3000, "confidence": 1 },
+  { "text": " between", "startMs": 3200, "endMs": 3650, "timestampMs": 3425, "confidence": 1 },
+  { "text": " styles", "startMs": 3650, "endMs": 4200, "timestampMs": 3925, "confidence": 1 },
+  { "text": " in", "startMs": 4200, "endMs": 4380, "timestampMs": 4290, "confidence": 1 },
+  { "text": " one", "startMs": 4380, "endMs": 4700, "timestampMs": 4540, "confidence": 1 },
+  { "text": " click.", "startMs": 4700, "endMs": 5200, "timestampMs": 4950, "confidence": 1 }
+]
