@@ -1,20 +1,54 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { z } from "zod";
+import { zColor } from "@remotion/zod-types";
 import { fitText } from "@remotion/layout-utils";
 import type { CaptionStyleProps } from "./types";
 import { fontFamily } from "../load-font";
+import { captionedVideoSchema } from "../index";
 
 // ---------------------------------------------------------------------------
-// CONFIG — tweak the look & motion of "TheCine" here.
+// User-customizable props (rendered as sliders / color pickers in the Studio
+// right panel). The TheCine composition uses `theCineSchema`; Classic keeps
+// the plain `captionedVideoSchema`.
+// ---------------------------------------------------------------------------
+export const theCineSchema = captionedVideoSchema.extend({
+  glowStrength: z.number().min(0).max(100), // slider
+  glowColor: zColor(), // color picker
+  gradientTop: zColor(),
+  gradientMid: zColor(),
+  gradientBottom: zColor(),
+});
+
+export type TheCineStyle = {
+  glowStrength: number;
+  glowColor: string;
+  gradientTop: string;
+  gradientMid: string;
+  gradientBottom: string;
+};
+
+// Defaults are also used as the context fallback if a TheCine page is ever
+// rendered without a provider (e.g. in isolation / tests).
+export const THE_CINE_DEFAULTS: TheCineStyle = {
+  glowStrength: 30,
+  glowColor: "#ff8a00",
+  gradientTop: "#ffe14d",
+  gradientMid: "#ff8a00",
+  gradientBottom: "#ff3d00",
+};
+
+// The seam that carries the schema props from Root down to the style without
+// touching the shared engine (CaptionedVideo / SubtitlePage).
+const TheCineStyleContext = createContext<TheCineStyle>(THE_CINE_DEFAULTS);
+export const TheCineStyleProvider = TheCineStyleContext.Provider;
+
+// ---------------------------------------------------------------------------
+// CONFIG — motion tuning (not exposed as props).
 // ---------------------------------------------------------------------------
 const SLIDE_DISTANCE = 80; // px a word travels as it slides in / out
 const EASE_DURATION_FRAMES = 8; // length of each slide-in and slide-out, in frames
 const EMPHASIS_SCALE = 1.2; // how much the currently-spoken word grows
-const GRADIENT_TOP = "#ffe14d"; // yellow (top of the text fill)
-const GRADIENT_MID = "#ff8a00"; // orange (middle)
-const GRADIENT_BOTTOM = "#ff3d00"; // red (bottom)
-const GLOW_COLOR = "rgba(255, 138, 0, 0.9)"; // warm orange glow
-const GLOW_STRENGTH = 12; // base glow blur radius in px (grows on the active word)
 
 const DESIRED_FONT_SIZE = 120;
 const FONT_WEIGHT = 800;
@@ -36,9 +70,8 @@ const DIRECTION_CYCLE: SlideDirection[] = ["left", "right", "up", "down"];
  * Decides how a given word slides. Placeholder for now: cycles
  * left → right → up → down by word index, and always slides.
  *
- * This is the single seam to drive motion from real per-word data later —
- * see the note at the bottom of this file. Keep the signature (token, index)
- * so external data can be looked up by either.
+ * This is the single seam to drive motion from real per-word data later.
+ * Keep the signature (token, index) so external data can be looked up by either.
  */
 const getWordSlide = (
   _token: { text: string; fromMs: number; toMs: number },
@@ -57,15 +90,19 @@ const DIRECTION_VECTOR: Record<SlideDirection, { axis: "x" | "y"; sign: number }
 };
 
 /**
- * TheCine style: a warm yellow→orange→red gradient text fill with a strong
- * orange glow. Each word slides in from a direction, holds while spoken
- * (growing + glowing brighter), then slides back out the same way.
+ * TheCine style: a warm gradient text fill with a strong glow. Each word slides
+ * in from a direction, holds while spoken (growing + glowing brighter), then
+ * slides back out the same way. Glow + gradient colors come from props via
+ * TheCineStyleContext.
  */
 export const PageTheCine: React.FC<CaptionStyleProps> = ({ page }) => {
   const frame = useCurrentFrame();
   const { width, fps } = useVideoConfig();
   const timeInMs = (frame / fps) * 1000;
   const easeMs = (EASE_DURATION_FRAMES / fps) * 1000;
+
+  const { glowStrength, glowColor, gradientTop, gradientMid, gradientBottom } =
+    useContext(TheCineStyleContext);
 
   const fittedText = fitText({
     fontFamily,
@@ -148,7 +185,7 @@ export const PageTheCine: React.FC<CaptionStyleProps> = ({ page }) => {
           const ty = axis === "y" ? sign * offset : 0;
 
           // Glow strengthens with emphasis; dark shadow keeps text legible.
-          const glow = GLOW_STRENGTH * (1 + emphasis);
+          const glow = glowStrength * (1 + emphasis);
 
           return (
             <span
@@ -159,14 +196,14 @@ export const PageTheCine: React.FC<CaptionStyleProps> = ({ page }) => {
                 opacity,
                 transform: `translate(${tx}px, ${ty}px) scale(${scale})`,
                 transformOrigin: "center",
-                backgroundImage: `linear-gradient(180deg, ${GRADIENT_TOP} 0%, ${GRADIENT_MID} 50%, ${GRADIENT_BOTTOM} 100%)`,
+                backgroundImage: `linear-gradient(180deg, ${gradientTop} 0%, ${gradientMid} 50%, ${gradientBottom} 100%)`,
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 color: "transparent",
                 // drop-shadow (not text-shadow) so it shows through the
                 // transparent gradient fill: two warm glows + a dark shadow.
-                filter: `drop-shadow(0 0 ${glow}px ${GLOW_COLOR}) drop-shadow(0 0 ${glow * 2}px ${GLOW_COLOR}) drop-shadow(0 4px 6px rgba(0,0,0,0.6))`,
+                filter: `drop-shadow(0 0 ${glow}px ${glowColor}) drop-shadow(0 0 ${glow * 2}px ${glowColor}) drop-shadow(0 4px 6px rgba(0,0,0,0.6))`,
               }}
             >
               {token.text}

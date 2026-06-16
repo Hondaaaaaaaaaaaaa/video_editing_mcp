@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   AbsoluteFill,
-  CalculateMetadataFunction,
   cancelRender,
   continueRender,
   delayRender,
@@ -59,10 +58,15 @@ const fileExists = (src: string): boolean => {
  * Derives the timeline length. Prefers the real video duration, but falls back
  * to the captions JSON (or a constant) so the composition still loads in the
  * Studio before a sample video has been dropped into `public/`.
+ *
+ * Generic over `{ src: string }` so it works for any composition whose props
+ * extend the base schema (e.g. TheCine's extra glow/gradient props).
  */
-export const calculateCaptionedVideoMetadata: CalculateMetadataFunction<
-  z.infer<typeof captionedVideoSchema>
-> = async ({ props }) => {
+export const calculateCaptionedVideoMetadata = async <T extends { src: string }>({
+  props,
+}: {
+  props: T;
+}): Promise<{ fps: number; durationInFrames: number }> => {
   try {
     const metadata = await getVideoMetadata(props.src);
     return {

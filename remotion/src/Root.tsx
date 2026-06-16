@@ -7,8 +7,13 @@ import {
   captionedVideoSchema,
   calculateCaptionedVideoMetadata,
 } from "./CaptionedVideo";
+import { z } from "zod";
 import { PageClassic } from "./CaptionedVideo/styles/PageClassic";
-import { PageTheCine } from "./CaptionedVideo/styles/PageTheCine";
+import {
+  PageTheCine,
+  theCineSchema,
+  TheCineStyleProvider,
+} from "./CaptionedVideo/styles/PageTheCine";
 
 // The video that captions are rendered over. Drop a vertical clip at
 // remotion/public/sample-video.mp4 (and run `node sub.mjs` to caption it).
@@ -20,8 +25,21 @@ const ClassicCaptionedVideo: React.FC<{ src: string }> = (props) => (
   <CaptionedVideo {...props} PageComponent={PageClassic} />
 );
 
-const TheCineCaptionedVideo: React.FC<{ src: string }> = (props) => (
-  <CaptionedVideo {...props} PageComponent={PageTheCine} />
+// TheCine takes extra schema props (glow + gradient) and feeds them to the
+// style via context — the shared engine stays untouched.
+const TheCineCaptionedVideo: React.FC<z.infer<typeof theCineSchema>> = ({
+  src,
+  glowStrength,
+  glowColor,
+  gradientTop,
+  gradientMid,
+  gradientBottom,
+}) => (
+  <TheCineStyleProvider
+    value={{ glowStrength, glowColor, gradientTop, gradientMid, gradientBottom }}
+  >
+    <CaptionedVideo src={src} PageComponent={PageTheCine} />
+  </TheCineStyleProvider>
 );
 
 // Each <Composition> is an entry in the sidebar!
@@ -78,17 +96,24 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{ src: SAMPLE_VIDEO }}
       />
 
-      {/* "TheCine" caption style (starts as a copy of Classic) */}
+      {/* "TheCine" caption style — cinematic gradient + glow (customizable) */}
       <Composition
         id="TheCine"
         component={TheCineCaptionedVideo}
-        schema={captionedVideoSchema}
+        schema={theCineSchema}
         calculateMetadata={calculateCaptionedVideoMetadata}
         fps={30}
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{ src: SAMPLE_VIDEO }}
+        defaultProps={{
+          src: staticFile("sample-video.mp4"),
+          glowStrength: 39,
+          glowColor: "#ff8a00",
+          gradientTop: "#ffd400",
+          gradientMid: "#ff8a00",
+          gradientBottom: "#ff3d00",
+        }}
       />
     </>
   );
