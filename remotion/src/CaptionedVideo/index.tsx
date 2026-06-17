@@ -31,8 +31,10 @@ export type CaptionedVideoProps = z.infer<typeof captionedVideoSchema> & {
 const FPS = 30;
 const FALLBACK_DURATION_IN_SECONDS = 20;
 
-// How long a page of captions stays on screen, and how aggressively words are
-// grouped into pages. ~1200ms shows a short phrase at a time.
+// How aggressively words are grouped into a single caption page. ~1200ms puts
+// a short phrase on screen at a time. NOTE: this only controls *grouping* — how
+// long each page stays visible is driven by the next page's start (see below),
+// so there are no blank gaps between pages.
 const SWITCH_CAPTIONS_EVERY_MS = 1200;
 
 const toCaptionsFileName = (src: string): string =>
@@ -99,7 +101,7 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
 }) => {
   const [subtitles, setSubtitles] = useState<Caption[]>([]);
   const [handle] = useState(() => delayRender("Loading captions"));
-  const { fps } = useVideoConfig();
+  const { fps, durationInFrames: compositionDurationInFrames } = useVideoConfig();
 
   const subtitlesFile = useMemo(() => toCaptionsFileName(src), [src]);
 
@@ -155,10 +157,15 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
       {pages.map((page, index) => {
         const next = pages[index + 1] ?? null;
         const startFrame = (page.startMs / 1000) * fps;
-        const endFrame = Math.min(
-          next ? (next.startMs / 1000) * fps : Infinity,
-          startFrame + (SWITCH_CAPTIONS_EVERY_MS / 1000) * fps,
-        );
+        // Hold each page until the NEXT page begins (the last page runs to the
+        // end of the composition). The previous code capped every page at
+        // `startFrame + SWITCH_CAPTIONS_EVERY_MS`, so whenever consecutive pages
+        // started more than ~1200ms apart the caption vanished and left a blank
+        // gap until the next one. Anchoring endFrame to the next start makes the
+        // next page appear exactly as the previous ends — continuous, no gap.
+        const endFrame = next
+          ? (next.startMs / 1000) * fps
+          : compositionDurationInFrames;
         const durationInFrames = endFrame - startFrame;
         if (durationInFrames <= 0) {
           return null;

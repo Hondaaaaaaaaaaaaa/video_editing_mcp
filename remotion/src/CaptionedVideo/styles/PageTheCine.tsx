@@ -4,8 +4,20 @@ import { z } from "zod";
 import { zColor } from "@remotion/zod-types";
 import { fitText } from "@remotion/layout-utils";
 import type { CaptionStyleProps } from "./types";
-import { fontFamily } from "../load-font";
 import { captionedVideoSchema } from "../index";
+import {
+  textEffectsSchema,
+  textStrokeCss,
+  dropShadowCss,
+  TEXT_EFFECTS_DEFAULTS,
+  type TextEffects,
+} from "./text-effects";
+import {
+  fontFamilySchema,
+  FONT_DEFAULTS,
+  resolveFontFamily,
+  type FontSelection,
+} from "./fonts";
 
 // ---------------------------------------------------------------------------
 // User-customizable props (rendered as sliders / color pickers in the Studio
@@ -20,9 +32,22 @@ export const theCineSchema = captionedVideoSchema.extend({
   slideDurationFrames: z.number().min(1).max(30).step(1), // slide-in/out length -> slider
   emphasisScale: z.number().min(1).max(2).step(0.05), // spoken-word grow -> slider
   glowColor: zColor(), // color picker
-  gradientTop: zColor(),
-  gradientMid: zColor(),
-  gradientBottom: zColor(),
+
+  // --- Vertical text gradient (180deg, top -> bottom) ---
+  // Two required stops (top + bottom) plus an OPTIONAL middle stop. Each stop
+  // has a color picker and a 0–100 position controlling WHERE that color sits in
+  // the text height, so the user can make one color dominate (e.g. top at 0,
+  // bottom at 70). The CSS is built dynamically from the enabled stops below.
+  gradientTopColor: zColor(),
+  gradientTopPosition: z.number().min(0).max(100).step(1), // where the top color sits
+  gradientBottomColor: zColor(),
+  gradientBottomPosition: z.number().min(0).max(100).step(1), // where the bottom color sits
+  gradientMidEnabled: z.boolean(), // toggle the optional 3rd stop (default OFF)
+  gradientMidColor: zColor(),
+  gradientMidPosition: z.number().min(0).max(100).step(1), // where the middle color sits
+
+  ...textEffectsSchema, // shared shadow + stroke
+  ...fontFamilySchema, // shared font dropdown
 });
 
 export type TheCineStyle = {
@@ -31,22 +56,51 @@ export type TheCineStyle = {
   slideDurationFrames: number;
   emphasisScale: number;
   glowColor: string;
-  gradientTop: string;
-  gradientMid: string;
-  gradientBottom: string;
-};
+  gradientTopColor: string;
+  gradientTopPosition: number;
+  gradientBottomColor: string;
+  gradientBottomPosition: number;
+  gradientMidEnabled: boolean;
+  gradientMidColor: string;
+  gradientMidPosition: number;
+} & TextEffects &
+  FontSelection;
 
 // Defaults are also used as the context fallback if a TheCine page is ever
-// rendered without a provider (e.g. in isolation / tests).
+// rendered without a provider (e.g. in isolation / tests). Default = TWO stops
+// (top at 0%, bottom at 100%); the middle stop is OFF until the user enables it.
 export const THE_CINE_DEFAULTS: TheCineStyle = {
   glowStrength: 30,
   slideDistance: 80,
   slideDurationFrames: 8,
   emphasisScale: 1.2,
   glowColor: "#ff8a00",
-  gradientTop: "#ffe14d",
-  gradientMid: "#ff8a00",
-  gradientBottom: "#ff3d00",
+  gradientTopColor: "#ffe14d",
+  gradientTopPosition: 0,
+  gradientBottomColor: "#ff3d00",
+  gradientBottomPosition: 100,
+  gradientMidEnabled: false,
+  gradientMidColor: "#ff8a00",
+  gradientMidPosition: 50,
+  ...TEXT_EFFECTS_DEFAULTS,
+  ...FONT_DEFAULTS,
+};
+
+/**
+ * Builds the vertical text gradient CSS from the enabled stops + positions.
+ * Always includes top + bottom; includes the middle stop only when toggled on.
+ * Stops are ordered top -> middle -> bottom to match the 180deg direction.
+ */
+const buildGradientCss = (s: TheCineStyle): string => {
+  const stops: { color: string; position: number }[] = [
+    { color: s.gradientTopColor, position: s.gradientTopPosition },
+    ...(s.gradientMidEnabled
+      ? [{ color: s.gradientMidColor, position: s.gradientMidPosition }]
+      : []),
+    { color: s.gradientBottomColor, position: s.gradientBottomPosition },
+  ];
+  const list = stops.map((stop) => `${stop.color} ${stop.position}%`).join(", ");
+  return `linear-gradient(180deg, ${list})`;
 };
 
 // The seam that carries the schema props from Root down to the style without
@@ -108,18 +162,26 @@ export const PageTheCine: React.FC<CaptionStyleProps> = ({ page }) => {
   const { width, fps } = useVideoConfig();
   const timeInMs = (frame / fps) * 1000;
 
+  const style = useContext(TheCineStyleContext);
   const {
     glowStrength,
     slideDistance,
     slideDurationFrames,
     emphasisScale,
     glowColor,
-    gradientTop,
-    gradientMid,
-    gradientBottom,
-  } = useContext(TheCineStyleContext);
+  } = style;
+
+  const fontFamily = resolveFontFamily(style.fontFamily);
+  // Vertical text gradient, built from the enabled stops + their positions.
+  const gradientCss = buildGradientCss(style);
 
   const easeMs = (slideDurationFrames / fps) * 1000;
+
+  // Gradient text has a transparent fill, so text-shadow won't render — the
+  // shadow is applied as a drop-shadow in each word's filter chain instead.
+  // The stroke is an inherited property, so it's set once on the container.
+  const stroke = textStrokeCss(style);
+  const shadowFilter = dropShadowCss(style);
 
   const fittedText = fitText({
     fontFamily,
@@ -147,6 +209,9 @@ export const PageTheCine: React.FC<CaptionStyleProps> = ({ page }) => {
           textAlign: "center",
           fontFamily,
           fontWeight: FONT_WEIGHT,
+          // Stroke is inherited by the gradient word spans below.
+          WebkitTextStroke: stroke,
+          paintOrder: stroke ? "stroke" : undefined,
         }}
       >
         {page.tokens.map((token, index) => {
@@ -213,14 +278,16 @@ export const PageTheCine: React.FC<CaptionStyleProps> = ({ page }) => {
                 opacity,
                 transform: `translate(${tx}px, ${ty}px) scale(${scale})`,
                 transformOrigin: "center",
-                backgroundImage: `linear-gradient(180deg, ${gradientTop} 0%, ${gradientMid} 50%, ${gradientBottom} 100%)`,
+                backgroundImage: gradientCss,
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 color: "transparent",
                 // drop-shadow (not text-shadow) so it shows through the
-                // transparent gradient fill: two warm glows + a dark shadow.
-                filter: `drop-shadow(0 0 ${glow}px ${glowColor}) drop-shadow(0 0 ${glow * 2}px ${glowColor}) drop-shadow(0 4px 6px rgba(0,0,0,0.6))`,
+                // transparent gradient fill: two warm glows + the customizable
+                // drop shadow (empty string when the user disables it).
+                filter:
+                  `drop-shadow(0 0 ${glow}px ${glowColor}) drop-shadow(0 0 ${glow * 2}px ${glowColor}) ${shadowFilter}`.trim(),
               }}
             >
               {token.text}

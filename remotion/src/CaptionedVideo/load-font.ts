@@ -1,15 +1,12 @@
-import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
+// Font loading now lives in styles/fonts.ts, which loads every selectable
+// caption font (a small set of Google Fonts). This module stays as the engine's
+// entry point: it awaits ALL of them so whichever font is picked in Studio is
+// ready before the first frame renders, and still exposes the default family
+// for any code that needs a font without a prop.
+import { loadFonts, resolveFontFamily, FONT_FAMILY_DEFAULT } from "./styles/fonts";
 
-// A heavy weight reads well as a TikTok-style caption. Using a Google Font
-// means we don't have to ship a binary .ttf in the repo.
-const loaded = loadInter("normal", {
-  weights: ["700", "800"],
-  subsets: ["latin"],
-});
+// Default caption font (Inter) as a ready-to-use CSS font-family string.
+export const fontFamily = resolveFontFamily(FONT_FAMILY_DEFAULT);
 
-export const fontFamily = loaded.fontFamily;
-
-// Awaited inside delayRender() so renders wait for the font to be ready.
-export const loadFont = async (): Promise<void> => {
-  await loaded.waitUntilDone();
-};
+// Awaited inside delayRender() in CaptionedVideo so renders wait for fonts.
+export const loadFont = loadFonts;

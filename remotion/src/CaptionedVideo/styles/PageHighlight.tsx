@@ -5,8 +5,19 @@ import { z } from "zod";
 import { zColor } from "@remotion/zod-types";
 import { fitText } from "@remotion/layout-utils";
 import type { CaptionStyleProps } from "./types";
-import { fontFamily } from "../load-font";
 import { captionedVideoSchema } from "../index";
+import {
+  textEffectsSchema,
+  textEffectStyle,
+  TEXT_EFFECTS_DEFAULTS,
+  type TextEffects,
+} from "./text-effects";
+import {
+  fontFamilySchema,
+  FONT_DEFAULTS,
+  resolveFontFamily,
+  type FontSelection,
+} from "./fonts";
 
 // ---------------------------------------------------------------------------
 // User-customizable props (rendered as a dropdown + color pickers + slider in
@@ -19,6 +30,8 @@ export const highlightSchema = captionedVideoSchema.extend({
   highlightTextColor: zColor(), // spoken-word text color (text / both modes)
   boxColor: zColor(), // spoken-word background box (box / both modes)
   boxPaddingPx: z.number().min(0).max(60).step(1), // box size around the word -> slider
+  ...textEffectsSchema, // shared shadow + stroke
+  ...fontFamilySchema, // shared font dropdown
 });
 
 export type HighlightMode = "text" | "box" | "both";
@@ -29,7 +42,8 @@ export type HighlightStyle = {
   highlightTextColor: string;
   boxColor: string;
   boxPaddingPx: number;
-};
+} & TextEffects &
+  FontSelection;
 
 // Defaults are also the context fallback if a Highlight page is ever rendered
 // without a provider (e.g. in isolation / tests).
@@ -39,6 +53,8 @@ export const HIGHLIGHT_DEFAULTS: HighlightStyle = {
   highlightTextColor: "#39E508",
   boxColor: "#39E508",
   boxPaddingPx: 12,
+  ...TEXT_EFFECTS_DEFAULTS,
+  ...FONT_DEFAULTS,
 };
 
 // Carries the schema props from Root down to the style without touching the
@@ -51,7 +67,6 @@ export const HighlightStyleProvider = HighlightStyleContext.Provider;
 // ---------------------------------------------------------------------------
 const DESIRED_FONT_SIZE = 120;
 const FONT_WEIGHT = 800;
-const STROKE_COLOR = "black";
 const POP_SCALE = 1.12; // how much the spoken word pops
 
 /**
@@ -65,8 +80,9 @@ export const PageHighlight: React.FC<CaptionStyleProps> = ({ enterProgress, page
   const { width, fps } = useVideoConfig();
   const timeInMs = (frame / fps) * 1000;
 
-  const { highlightMode, baseTextColor, highlightTextColor, boxColor, boxPaddingPx } =
-    useContext(HighlightStyleContext);
+  const style = useContext(HighlightStyleContext);
+  const { highlightMode, baseTextColor, highlightTextColor, boxColor, boxPaddingPx } = style;
+  const fontFamily = resolveFontFamily(style.fontFamily);
 
   const showText = highlightMode === "text" || highlightMode === "both";
   const showBox = highlightMode === "box" || highlightMode === "both";
@@ -80,7 +96,6 @@ export const PageHighlight: React.FC<CaptionStyleProps> = ({ enterProgress, page
   });
 
   const fontSize = Math.min(DESIRED_FONT_SIZE, fittedText.fontSize);
-  const strokeWidth = Math.max(2, Math.round(fontSize / 14));
 
   return (
     <AbsoluteFill
@@ -100,6 +115,8 @@ export const PageHighlight: React.FC<CaptionStyleProps> = ({ enterProgress, page
           fontFamily,
           fontWeight: FONT_WEIGHT,
           textTransform: "uppercase",
+          // Shadow + stroke (inherited by the word spans below).
+          ...textEffectStyle(style),
           // Whole-page pop-in (scale + slide up) on enter.
           transform: makeTransform([
             scale(interpolate(enterProgress, [0, 1], [0.7, 1])),
@@ -123,8 +140,6 @@ export const PageHighlight: React.FC<CaptionStyleProps> = ({ enterProgress, page
                 display: "inline-block",
                 whiteSpace: "pre",
                 color: textColor,
-                WebkitTextStroke: `${strokeWidth}px ${STROKE_COLOR}`,
-                paintOrder: "stroke",
                 // Constant padding so adding/removing the box never shifts the
                 // layout; the background just appears for the spoken word.
                 padding: `0 ${boxPaddingPx}px`,

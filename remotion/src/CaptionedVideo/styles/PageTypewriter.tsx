@@ -4,8 +4,19 @@ import { z } from "zod";
 import { zColor } from "@remotion/zod-types";
 import { fitText } from "@remotion/layout-utils";
 import type { CaptionStyleProps } from "./types";
-import { fontFamily } from "../load-font";
 import { captionedVideoSchema } from "../index";
+import {
+  textEffectsSchema,
+  textEffectStyle,
+  TEXT_EFFECTS_DEFAULTS,
+  type TextEffects,
+} from "./text-effects";
+import {
+  fontFamilySchema,
+  FONT_DEFAULTS,
+  resolveFontFamily,
+  type FontSelection,
+} from "./fonts";
 
 // ---------------------------------------------------------------------------
 // User-customizable props. These are a frame-based reimplementation of the
@@ -38,8 +49,12 @@ export const typewriterSchema = captionedVideoSchema.extend({
   variableSpeedMin: z.number().min(10).max(400).step(5), // ms/char fastest
   variableSpeedMax: z.number().min(10).max(400).step(5), // ms/char slowest
 
-  // Cycled per word (sentence-ish). Empty -> plain white. Each entry is a
-  // color picker in Studio.
+  // Base text color for EVERY word. Default white. (Studio color picker.)
+  baseTextColor: zColor(),
+
+  // OPTIONAL per-word accent cycling. When non-empty, words cycle through these
+  // colors instead of `baseTextColor`. Empty (the default) -> every word uses
+  // `baseTextColor` (i.e. plain white). Each entry is a color picker in Studio.
   textColors: z.array(zColor()),
 
   // How each individual letter eases in once it appears (dropdown), and how
@@ -48,6 +63,11 @@ export const typewriterSchema = captionedVideoSchema.extend({
   // "bouncy" (ignored for "linear").
   easing: z.enum(["linear", "smooth", "bouncy"]),
   easingSpeed: z.number().min(1).max(6).step(0.1),
+
+  // Shared shadow + stroke (sliders / pickers / toggles).
+  ...textEffectsSchema,
+  // Shared font dropdown.
+  ...fontFamilySchema,
 });
 
 export type TypewriterEasing = "linear" | "smooth" | "bouncy";
@@ -62,10 +82,12 @@ export type TypewriterStyle = {
   variableSpeed: boolean;
   variableSpeedMin: number;
   variableSpeedMax: number;
+  baseTextColor: string;
   textColors: string[];
   easing: TypewriterEasing;
   easingSpeed: number;
-};
+} & TextEffects &
+  FontSelection;
 
 // Defaults double as the context fallback if a page is ever rendered without a
 // provider (isolation / tests) and as Root.tsx's defaultProps.
@@ -79,9 +101,12 @@ export const TYPEWRITER_DEFAULTS: TypewriterStyle = {
   variableSpeed: false,
   variableSpeedMin: 40,
   variableSpeedMax: 120,
-  textColors: ["#ffffff", "#ffd400", "#ff8a00"],
+  baseTextColor: "#ffffff",
+  textColors: [],
   easing: "linear",
   easingSpeed: 3,
+  ...TEXT_EFFECTS_DEFAULTS,
+  ...FONT_DEFAULTS,
 };
 
 // Carries the schema props from Root down to the style without touching the
@@ -132,9 +157,14 @@ const hash01 = (n: number): number => {
  */
 export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
   const frame = useCurrentFrame();
-  const { width, fps } = useVideoConfig();
+  const { width, fps, durationInFrames } = useVideoConfig();
   const timeInMs = (frame / fps) * 1000;
+  // This page renders inside a <Sequence>, so `durationInFrames` is the page's
+  // own on-screen window (not the whole composition). We use it to keep all
+  // typing inside that window so no word can be cut off — see the fit logic.
+  const pageDurationMs = (durationInFrames / fps) * 1000;
 
+  const style = useContext(TypewriterStyleContext);
   const {
     typingSpeed,
     initialDelay,
@@ -145,10 +175,12 @@ export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
     variableSpeed,
     variableSpeedMin,
     variableSpeedMax,
+    baseTextColor,
     textColors,
     easing,
     easingSpeed,
-  } = useContext(TypewriterStyleContext);
+  } = style;
+  const fontFamily = resolveFontFamily(style.fontFamily);
 
   const easingFn = makeEasing(easing, easingSpeed);
 
@@ -174,37 +206,58 @@ export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
   });
   const fontSize = Math.min(DESIRED_FONT_SIZE, fittedText.fontSize);
 
-  // Per-word reveal: the word's last letter lands ~when it's spoken (relEnd),
-  // each earlier letter stepping back by that letter's own delay. `offset` is
-  // the word's first char index within the page so the cursor can track the
-  // single furthest-typed letter.
+  // Per-word reveal scheduled FORWARD from when each word is first spoken
+  // (relStart), so the word's first letter lands in sync with the audio and
+  // each later letter steps forward by its own delay. Anchoring forward (rather
+  // than backward from the spoken END) is what guarantees a word's reveal
+  // begins inside the page's display window — a word can be spoken right up to
+  // the page boundary, but its END often falls past it. `offset` is the word's
+  // first char index within the page so the cursor can track the furthest letter.
   let acc = 0;
   const tokenInfo = page.tokens.map((token, ti) => {
-    const relStart = token.fromMs - page.startMs;
-    const relEnd = Math.max(token.toMs - page.startMs, relStart + 1);
+    const relStart = Math.max(0, token.fromMs - page.startMs);
     const offset = acc;
-    const n = token.text.length;
+    const chars = token.text.split("");
+    const n = chars.length;
 
-    // Suffix-sum of delays from the end of the word so letters land in order.
+    // Prefix-sum of delays from the word's first letter, so letters appear
+    // left-to-right starting at relStart.
     const appear: number[] = new Array<number>(n);
-    let suffix = 0;
-    for (let ci = n - 1; ci >= 0; ci--) {
-      suffix += charDelayMs(offset + ci);
-      appear[ci] = relEnd - suffix;
+    let within = 0;
+    for (let ci = 0; ci < n; ci++) {
+      appear[ci] = relStart + within;
+      within += charDelayMs(offset + ci);
     }
 
     acc += n;
-    const color = textColors.length ? textColors[ti % textColors.length] : "white";
-    return { token, offset, appear, color };
+    const color = textColors.length ? textColors[ti % textColors.length] : baseTextColor;
+    return { token, chars, offset, appear, color };
   });
 
   const totalChars = acc;
+
+  // When would the last letter of the page naturally finish, unconstrained?
+  let rawEnd = 0;
+  for (const { offset, appear } of tokenInfo) {
+    for (let ci = 0; ci < appear.length; ci++) {
+      rawEnd = Math.max(rawEnd, appear[ci] + Math.max(60, charDelayMs(offset + ci)));
+    }
+  }
+
+  // Compress the whole schedule by `fit` so every letter is typed within the
+  // page's visible window (reserving a little rest time at the end for
+  // readability). If the natural schedule already fits, `fit` === 1 and the
+  // audio-synced timing is left untouched; only over-full pages get squeezed.
+  // This is the guarantee that NO word/letter is ever skipped.
+  const REST_FRACTION = 0.12;
+  const typeBudgetMs = Math.max(1, (pageDurationMs - initialDelay) * (1 - REST_FRACTION));
+  const fit = rawEnd > typeBudgetMs ? typeBudgetMs / rawEnd : 1;
 
   // Index of the furthest letter that has started appearing (-1 = none yet).
   let lastRevealed = -1;
   for (const { offset, appear } of tokenInfo) {
     for (let ci = 0; ci < appear.length; ci++) {
-      if (t >= appear[ci]) {
+      if (t >= appear[ci] * fit) {
         lastRevealed = Math.max(lastRevealed, offset + ci);
       }
     }
@@ -254,21 +307,24 @@ export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
           textAlign: "center",
           fontFamily,
           fontWeight: FONT_WEIGHT,
-          color: "white",
-          textShadow: "0 4px 14px rgba(0,0,0,0.7)",
+          color: baseTextColor,
+          // Shadow + stroke (inherited by the letter spans + cursor below).
+          ...textEffectStyle(style),
         }}
       >
         {/* Cursor sits at the very start until the first letter shows. */}
         {lastRevealed === -1
-          ? renderCursor("cursor-start", tokenInfo[0]?.color ?? "white")
+          ? renderCursor("cursor-start", tokenInfo[0]?.color ?? baseTextColor)
           : null}
 
-        {tokenInfo.map(({ token, offset, appear, color }, ti) => (
+        {tokenInfo.map(({ chars, offset, appear, color }, ti) => (
           // Whole word is an atomic inline-block so it never breaks mid-word.
           <span key={ti} style={{ display: "inline-block", whiteSpace: "pre", color }}>
-            {token.text.split("").map((char, ci) => {
-              const appearStart = appear[ci];
-              const appearMs = Math.max(60, charDelayMs(offset + ci));
+            {chars.map((char, ci) => {
+              // Same `fit` compression as the reveal check, so the rendered fade
+              // stays inside the page window and every letter completes on time.
+              const appearStart = appear[ci] * fit;
+              const appearMs = Math.max(40, charDelayMs(offset + ci) * fit);
               const eased = interpolate(t, [appearStart, appearStart + appearMs], [0, 1], {
                 extrapolateLeft: "clamp",
                 extrapolateRight: "clamp",

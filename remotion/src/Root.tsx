@@ -4,15 +4,18 @@ import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import {
   CaptionedVideo,
-  captionedVideoSchema,
   calculateCaptionedVideoMetadata,
 } from "./CaptionedVideo";
 import { z } from "zod";
-import { PageClassic } from "./CaptionedVideo/styles/PageClassic";
+import {
+  PageClassic,
+  classicSchema,
+  CLASSIC_DEFAULTS,
+  ClassicStyleProvider,
+} from "./CaptionedVideo/styles/PageClassic";
 import {
   PageTheCine,
   theCineSchema,
-  THE_CINE_DEFAULTS,
   TheCineStyleProvider,
 } from "./CaptionedVideo/styles/PageTheCine";
 import {
@@ -32,8 +35,13 @@ const SAMPLE_VIDEO = staticFile("sample-video.mp4");
 
 // Thin wrappers bind a caption *style* to the shared CaptionedVideo
 // composition. Same video + captions, different look per composition.
-const ClassicCaptionedVideo: React.FC<{ src: string }> = (props) => (
-  <CaptionedVideo {...props} PageComponent={PageClassic} />
+const ClassicCaptionedVideo: React.FC<z.infer<typeof classicSchema>> = ({
+  src,
+  ...style
+}) => (
+  <ClassicStyleProvider value={style}>
+    <CaptionedVideo src={src} PageComponent={PageClassic} />
+  </ClassicStyleProvider>
 );
 
 // TheCine takes extra schema props (glow + gradient) and feeds them to the
@@ -60,15 +68,9 @@ const TypewriterCaptionedVideo: React.FC<z.infer<typeof typewriterSchema>> = ({
 // Highlight feeds its mode + colors + box padding to the style via context.
 const HighlightCaptionedVideo: React.FC<z.infer<typeof highlightSchema>> = ({
   src,
-  highlightMode,
-  baseTextColor,
-  highlightTextColor,
-  boxColor,
-  boxPaddingPx,
+  ...style
 }) => (
-  <HighlightStyleProvider
-    value={{ highlightMode, baseTextColor, highlightTextColor, boxColor, boxPaddingPx }}
-  >
+  <HighlightStyleProvider value={style}>
     <CaptionedVideo src={src} PageComponent={PageHighlight} />
   </HighlightStyleProvider>
 );
@@ -118,13 +120,13 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Classic"
         component={ClassicCaptionedVideo}
-        schema={captionedVideoSchema}
+        schema={classicSchema}
         calculateMetadata={calculateCaptionedVideoMetadata}
         fps={30}
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{ src: SAMPLE_VIDEO }}
+        defaultProps={{ src: SAMPLE_VIDEO, ...CLASSIC_DEFAULTS }}
       />
 
       {/* "TheCine" caption style — cinematic gradient + glow (customizable) */}
@@ -138,13 +140,26 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{
-          ...THE_CINE_DEFAULTS,
-          src: SAMPLE_VIDEO,
-          glowStrength: 39,
+          glowStrength: 36,
+          slideDistance: 300,
+          slideDurationFrames: 8,
+          emphasisScale: 1.5,
           glowColor: "#ff8a00",
-          gradientTop: "#ffd400",
-          gradientMid: "#ff8a00",
-          gradientBottom: "#ff3d00",
+          gradientTopColor: "#ffd400",
+          gradientTopPosition: 0,
+          gradientBottomColor: "#ff3d00",
+          gradientBottomPosition: 100,
+          gradientMidEnabled: false,
+          gradientMidColor: "#ff8a00",
+          gradientMidPosition: 50,
+          shadowEnabled: true,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowBlur: 8,
+          strokeEnabled: true,
+          strokeColor: "#000000",
+          strokeWidth: 0,
+          fontFamily: "Bebas Neue" as const,
+          src: staticFile("sample-video.mp4"),
         }}
       />
 
@@ -159,7 +174,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{
-          src: SAMPLE_VIDEO,
+          src: staticFile("sample-video.mp4"),
           typingSpeed: 60,
           initialDelay: 0,
           showCursor: true,
@@ -169,9 +184,17 @@ export const RemotionRoot: React.FC = () => {
           variableSpeed: false,
           variableSpeedMin: 40,
           variableSpeedMax: 120,
-          textColors: ["#ffffff", "#ffd400", "#ff8a00"],
+          baseTextColor: "#ffffff",
+          textColors: [],
           easing: "linear" as const,
-          easingSpeed: 1,
+          easingSpeed: 6,
+          fontFamily: "Montserrat" as const,
+          shadowEnabled: true,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowBlur: 13,
+          strokeEnabled: true,
+          strokeColor: "#000000",
+          strokeWidth: 0,
         }}
       />
 
@@ -192,6 +215,13 @@ export const RemotionRoot: React.FC = () => {
           highlightTextColor: "#39E508",
           boxColor: "#39e508",
           boxPaddingPx: 22,
+          fontFamily: "Inter" as const,
+          shadowEnabled: true,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowBlur: 8,
+          strokeEnabled: true,
+          strokeColor: "#000000",
+          strokeWidth: 2,
         }}
       />
     </>
