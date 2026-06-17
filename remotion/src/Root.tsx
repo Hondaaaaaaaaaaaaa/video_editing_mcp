@@ -12,8 +12,19 @@ import { PageClassic } from "./CaptionedVideo/styles/PageClassic";
 import {
   PageTheCine,
   theCineSchema,
+  THE_CINE_DEFAULTS,
   TheCineStyleProvider,
 } from "./CaptionedVideo/styles/PageTheCine";
+import {
+  PageTypewriter,
+  typewriterSchema,
+  TypewriterStyleProvider,
+} from "./CaptionedVideo/styles/PageTypewriter";
+import {
+  PageHighlight,
+  highlightSchema,
+  HighlightStyleProvider,
+} from "./CaptionedVideo/styles/PageHighlight";
 
 // The video that captions are rendered over. Drop a vertical clip at
 // remotion/public/sample-video.mp4 (and run `node sub.mjs` to caption it).
@@ -29,17 +40,37 @@ const ClassicCaptionedVideo: React.FC<{ src: string }> = (props) => (
 // style via context — the shared engine stays untouched.
 const TheCineCaptionedVideo: React.FC<z.infer<typeof theCineSchema>> = ({
   src,
-  glowStrength,
-  glowColor,
-  gradientTop,
-  gradientMid,
-  gradientBottom,
+  ...style
 }) => (
-  <TheCineStyleProvider
-    value={{ glowStrength, glowColor, gradientTop, gradientMid, gradientBottom }}
-  >
+  <TheCineStyleProvider value={style}>
     <CaptionedVideo src={src} PageComponent={PageTheCine} />
   </TheCineStyleProvider>
+);
+
+// Typewriter feeds all its typing/cursor/color props to the style via context.
+const TypewriterCaptionedVideo: React.FC<z.infer<typeof typewriterSchema>> = ({
+  src,
+  ...style
+}) => (
+  <TypewriterStyleProvider value={style}>
+    <CaptionedVideo src={src} PageComponent={PageTypewriter} />
+  </TypewriterStyleProvider>
+);
+
+// Highlight feeds its mode + colors + box padding to the style via context.
+const HighlightCaptionedVideo: React.FC<z.infer<typeof highlightSchema>> = ({
+  src,
+  highlightMode,
+  baseTextColor,
+  highlightTextColor,
+  boxColor,
+  boxPaddingPx,
+}) => (
+  <HighlightStyleProvider
+    value={{ highlightMode, baseTextColor, highlightTextColor, boxColor, boxPaddingPx }}
+  >
+    <CaptionedVideo src={src} PageComponent={PageHighlight} />
+  </HighlightStyleProvider>
 );
 
 // Each <Composition> is an entry in the sidebar!
@@ -107,12 +138,60 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{
-          src: staticFile("sample-video.mp4"),
+          ...THE_CINE_DEFAULTS,
+          src: SAMPLE_VIDEO,
           glowStrength: 39,
           glowColor: "#ff8a00",
           gradientTop: "#ffd400",
           gradientMid: "#ff8a00",
           gradientBottom: "#ff3d00",
+        }}
+      />
+
+      {/* "Typewriter" caption style — letter-by-letter typing (customizable) */}
+      <Composition
+        id="Typewriter"
+        component={TypewriterCaptionedVideo}
+        schema={typewriterSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          src: SAMPLE_VIDEO,
+          typingSpeed: 60,
+          initialDelay: 0,
+          showCursor: true,
+          cursorCharacter: "_",
+          cursorBlinkDuration: 530,
+          hideCursorWhileTyping: false,
+          variableSpeed: false,
+          variableSpeedMin: 40,
+          variableSpeedMax: 120,
+          textColors: ["#ffffff", "#ffd400", "#ff8a00"],
+          easing: "linear" as const,
+          easingSpeed: 1,
+        }}
+      />
+
+      {/* "Highlight" caption style — word-by-word text/box highlight (customizable) */}
+      <Composition
+        id="Highlight"
+        component={HighlightCaptionedVideo}
+        schema={highlightSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          src: staticFile("sample-video.mp4"),
+          highlightMode: "text" as const,
+          baseTextColor: "white",
+          highlightTextColor: "#39E508",
+          boxColor: "#39e508",
+          boxPaddingPx: 22,
         }}
       />
     </>

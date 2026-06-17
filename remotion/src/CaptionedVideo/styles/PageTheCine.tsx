@@ -12,8 +12,13 @@ import { captionedVideoSchema } from "../index";
 // right panel). The TheCine composition uses `theCineSchema`; Classic keeps
 // the plain `captionedVideoSchema`.
 // ---------------------------------------------------------------------------
+// Every numeric prop has .min()/.max() (so Studio renders a slider, not a plain
+// number field) plus .step() for sensible granularity.
 export const theCineSchema = captionedVideoSchema.extend({
-  glowStrength: z.number().min(0).max(100), // slider
+  glowStrength: z.number().min(0).max(100).step(1), // glow radius -> slider
+  slideDistance: z.number().min(0).max(300).step(5), // px a word travels -> slider
+  slideDurationFrames: z.number().min(1).max(30).step(1), // slide-in/out length -> slider
+  emphasisScale: z.number().min(1).max(2).step(0.05), // spoken-word grow -> slider
   glowColor: zColor(), // color picker
   gradientTop: zColor(),
   gradientMid: zColor(),
@@ -22,6 +27,9 @@ export const theCineSchema = captionedVideoSchema.extend({
 
 export type TheCineStyle = {
   glowStrength: number;
+  slideDistance: number;
+  slideDurationFrames: number;
+  emphasisScale: number;
   glowColor: string;
   gradientTop: string;
   gradientMid: string;
@@ -32,6 +40,9 @@ export type TheCineStyle = {
 // rendered without a provider (e.g. in isolation / tests).
 export const THE_CINE_DEFAULTS: TheCineStyle = {
   glowStrength: 30,
+  slideDistance: 80,
+  slideDurationFrames: 8,
+  emphasisScale: 1.2,
   glowColor: "#ff8a00",
   gradientTop: "#ffe14d",
   gradientMid: "#ff8a00",
@@ -44,12 +55,9 @@ const TheCineStyleContext = createContext<TheCineStyle>(THE_CINE_DEFAULTS);
 export const TheCineStyleProvider = TheCineStyleContext.Provider;
 
 // ---------------------------------------------------------------------------
-// CONFIG — motion tuning (not exposed as props).
+// CONFIG — non-prop tuning. (Slide distance, slide duration and emphasis scale
+// are now props; see theCineSchema.)
 // ---------------------------------------------------------------------------
-const SLIDE_DISTANCE = 80; // px a word travels as it slides in / out
-const EASE_DURATION_FRAMES = 8; // length of each slide-in and slide-out, in frames
-const EMPHASIS_SCALE = 1.2; // how much the currently-spoken word grows
-
 const DESIRED_FONT_SIZE = 120;
 const FONT_WEIGHT = 800;
 
@@ -99,10 +107,19 @@ export const PageTheCine: React.FC<CaptionStyleProps> = ({ page }) => {
   const frame = useCurrentFrame();
   const { width, fps } = useVideoConfig();
   const timeInMs = (frame / fps) * 1000;
-  const easeMs = (EASE_DURATION_FRAMES / fps) * 1000;
 
-  const { glowStrength, glowColor, gradientTop, gradientMid, gradientBottom } =
-    useContext(TheCineStyleContext);
+  const {
+    glowStrength,
+    slideDistance,
+    slideDurationFrames,
+    emphasisScale,
+    glowColor,
+    gradientTop,
+    gradientMid,
+    gradientBottom,
+  } = useContext(TheCineStyleContext);
+
+  const easeMs = (slideDurationFrames / fps) * 1000;
 
   const fittedText = fitText({
     fontFamily,
@@ -174,12 +191,12 @@ export const PageTheCine: React.FC<CaptionStyleProps> = ({ page }) => {
                   [0, 1, 0],
                   { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
                 );
-          const scale = 1 + (EMPHASIS_SCALE - 1) * emphasis;
+          const scale = 1 + (emphasisScale - 1) * emphasis;
 
           // Travel: starts offset (in its direction), reaches 0 while spoken,
           // then returns offset the SAME direction on the way out.
           const { slide, direction } = getWordSlide(token, index);
-          const offset = slide ? SLIDE_DISTANCE * (1 - slideIn + slideOut) : 0;
+          const offset = slide ? slideDistance * (1 - slideIn + slideOut) : 0;
           const { axis, sign } = DIRECTION_VECTOR[direction];
           const tx = axis === "x" ? sign * offset : 0;
           const ty = axis === "y" ? sign * offset : 0;
