@@ -14,10 +14,10 @@ import {
   ClassicStyleProvider,
 } from "./CaptionedVideo/styles/PageClassic";
 import {
-  PageTheCine,
-  theCineSchema,
-  TheCineStyleProvider,
-} from "./CaptionedVideo/styles/PageTheCine";
+  PageShiny,
+  shinySchema,
+  ShinyStyleProvider,
+} from "./CaptionedVideo/styles/PageShiny";
 import {
   PageTypewriter,
   typewriterSchema,
@@ -44,15 +44,15 @@ const ClassicCaptionedVideo: React.FC<z.infer<typeof classicSchema>> = ({
   </ClassicStyleProvider>
 );
 
-// TheCine takes extra schema props (glow + gradient) and feeds them to the
+// Shiny takes extra schema props (glow + gradient) and feeds them to the
 // style via context — the shared engine stays untouched.
-const TheCineCaptionedVideo: React.FC<z.infer<typeof theCineSchema>> = ({
+const ShinyCaptionedVideo: React.FC<z.infer<typeof shinySchema>> = ({
   src,
   ...style
 }) => (
-  <TheCineStyleProvider value={style}>
-    <CaptionedVideo src={src} PageComponent={PageTheCine} />
-  </TheCineStyleProvider>
+  <ShinyStyleProvider value={style}>
+    <CaptionedVideo src={src} PageComponent={PageShiny} />
+  </ShinyStyleProvider>
 );
 
 // Typewriter feeds all its typing/cursor/color props to the style via context.
@@ -129,31 +129,61 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{ src: SAMPLE_VIDEO, ...CLASSIC_DEFAULTS }}
       />
 
-      {/* "TheCine" caption style — cinematic gradient + glow (customizable) */}
+      {/* "Shiny" caption style — cinematic gradient + glow (customizable) */}
       <Composition
-        id="TheCine"
-        component={TheCineCaptionedVideo}
-        schema={theCineSchema}
+        id="Shiny"
+        component={ShinyCaptionedVideo}
+        schema={shinySchema}
         calculateMetadata={calculateCaptionedVideoMetadata}
         fps={30}
         durationInFrames={600}
         width={1080}
         height={1920}
         defaultProps={{
-          glowStrength: 36,
-          slideDistance: 300,
+          glowStrength: 2,
+          slideDistance: 255,
           slideDurationFrames: 8,
-          emphasisScale: 1.5,
-          glowColor: "#ff8a00",
-          gradientTopColor: "#ffd400",
+          emphasisScale: 1.4,
+          glowColor: "#000000",
+          emphasisColorEnabled: false,
+          emphasisColor: "#ffffff",
+          gradientAngle: 295,
+          gradientTopColor: "#ff8800",
           gradientTopPosition: 0,
-          gradientBottomColor: "#ff3d00",
+          gradientBottomColor: "#ff6f00",
           gradientBottomPosition: 100,
           gradientMidEnabled: false,
-          gradientMidColor: "#ff8a00",
+          gradientMidColor: "#000000",
           gradientMidPosition: 50,
+          sweep1Enabled: true,
+          sweep1Color: "#ffffff",
+          sweep1Angle: 237,
+          sweep1Width: 6,
+          sweep1Intensity: 70,
+          sweep1PositionX: 61,
+          sweep1PositionY: 41,
+          sweep2Enabled: false,
+          sweep2Color: "#ffffff",
+          sweep2Angle: 160,
+          sweep2Width: 20,
+          sweep2Intensity: 50,
+          sweep2PositionX: 50,
+          sweep2PositionY: 50,
+          sweep3Enabled: false,
+          sweep3Color: "#ffffff",
+          sweep3Angle: 90,
+          sweep3Width: 15,
+          sweep3Intensity: 40,
+          sweep3PositionX: 50,
+          sweep3PositionY: 50,
+          deepGlowEnabled: false,
+          deepGlowRadius: 60,
+          deepGlowBrightness: 70,
+          deepGlowInnerColor: "#fff5e6",
+          deepGlowOuterColor: "#ff8a00",
+          deepGlowChromatic: 0,
           shadowEnabled: true,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowColor: "rgba(112, 88, 88, 0.6)",
           shadowBlur: 8,
           strokeEnabled: true,
           strokeColor: "#000000",

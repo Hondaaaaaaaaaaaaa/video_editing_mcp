@@ -21,7 +21,7 @@ import {
 
 // ---------------------------------------------------------------------------
 // User-customizable props (rendered as a dropdown + color pickers + slider in
-// the Studio right panel). Highlight has its own schema; Classic / TheCine /
+// the Studio right panel). Highlight has its own schema; Classic / Shiny /
 // Typewriter are unaffected.
 // ---------------------------------------------------------------------------
 export const highlightSchema = captionedVideoSchema.extend({

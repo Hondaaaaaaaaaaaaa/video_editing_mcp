@@ -11,7 +11,7 @@ import type { TikTokPage } from "@remotion/captions";
  *     produced by `createTikTokStyleCaptions`.
  *
  * Swapping the look of the captions == swapping which component implements
- * this contract. See PageClassic.tsx / PageTheCine.tsx.
+ * this contract. See PageClassic.tsx / PageShiny.tsx.
  */
 export type CaptionStyleProps = {
   enterProgress: number;

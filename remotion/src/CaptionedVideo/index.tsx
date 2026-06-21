@@ -62,7 +62,7 @@ const fileExists = (src: string): boolean => {
  * Studio before a sample video has been dropped into `public/`.
  *
  * Generic over `{ src: string }` so it works for any composition whose props
- * extend the base schema (e.g. TheCine's extra glow/gradient props).
+ * extend the base schema (e.g. Shiny's extra glow/gradient props).
  */
 export const calculateCaptionedVideoMetadata = async <T extends { src: string }>({
   props,

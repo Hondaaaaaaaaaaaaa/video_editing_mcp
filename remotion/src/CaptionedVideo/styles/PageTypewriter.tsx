@@ -26,7 +26,7 @@ import {
 //
 // Studio renders each prop as a control: number -> slider, boolean -> toggle,
 // string -> text field, zColor() -> color picker, array -> add/remove list.
-// Typewriter has its own schema; Classic / TheCine / Highlight are unaffected.
+// Typewriter has its own schema; Classic / Shiny / Highlight are unaffected.
 // ---------------------------------------------------------------------------
 export const typewriterSchema = captionedVideoSchema.extend({
   // ms per character. Frame-based: drives how far each word's letters step

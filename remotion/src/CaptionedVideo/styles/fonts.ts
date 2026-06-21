@@ -8,7 +8,7 @@ import { z } from "zod";
 // ---------------------------------------------------------------------------
 // Shared font picker for every caption style.
 //
-// One source of truth so Classic / TheCine / Typewriter / Highlight all expose
+// One source of truth so Classic / Shiny / Typewriter / Highlight all expose
 // the same `fontFamily` dropdown (z.enum -> Studio dropdown). Each template
 // spreads `fontFamilySchema` into its schema, adds `FontSelection` to its style
 // type + defaults, and resolves the picked name to a real loaded CSS family via

@@ -5,7 +5,7 @@ import { zColor } from "@remotion/zod-types";
 // ---------------------------------------------------------------------------
 // Shared, customizable text SHADOW + STROKE for every caption style.
 //
-// One source of truth so Classic / TheCine / Typewriter / Highlight all expose
+// One source of truth so Classic / Shiny / Typewriter / Highlight all expose
 // the same controls and behave identically. Each template spreads
 // `textEffectsSchema` into its own schema, includes `TextEffects` in its style
 // type + defaults, and renders with the helpers below.
@@ -57,7 +57,7 @@ export const textStrokeCss = (e: TextEffects): string | undefined =>
 
 /**
  * Equivalent of the shadow as a `drop-shadow(...)` filter token. Needed for
- * gradient/transparent-fill text (e.g. TheCine) where `text-shadow` doesn't
+ * gradient/transparent-fill text (e.g. Shiny) where `text-shadow` doesn't
  * render. Append to an existing `filter` chain. Empty string when disabled.
  */
 export const dropShadowCss = (e: TextEffects): string =>
