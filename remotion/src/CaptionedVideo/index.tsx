@@ -12,7 +12,7 @@ import {
 } from "remotion";
 import { z } from "zod";
 import { getVideoMetadata } from "@remotion/media-utils";
-import { Caption, createTikTokStyleCaptions } from "@remotion/captions";
+import { Caption, createTikTokStyleCaptions, type TikTokPage } from "@remotion/captions";
 import { loadFont } from "./load-font";
 import SubtitlePage from "./SubtitlePage";
 import { NoCaptionFile } from "./NoCaptionFile";
@@ -26,6 +26,11 @@ export type CaptionedVideoProps = z.infer<typeof captionedVideoSchema> & {
   // The active caption style. Not part of the zod schema because React
   // components aren't serializable — it's wired up in Root.tsx instead.
   PageComponent: CaptionStyle;
+  // When true, the style does its OWN grouping from the flat caption stream
+  // (e.g. Shiny kinetic). The engine renders ONE full-timeline surface and
+  // passes all words via the `captions` prop, instead of per-page time
+  // Sequences. Undefined/false = the default per-page (time-based) rendering.
+  singleSurface?: boolean;
 };
 
 const FPS = 30;
@@ -36,6 +41,10 @@ const FALLBACK_DURATION_IN_SECONDS = 20;
 // long each page stays visible is driven by the next page's start (see below),
 // so there are no blank gaps between pages.
 const SWITCH_CAPTIONS_EVERY_MS = 1200;
+
+// Placeholder page for the single-surface (self-grouping) render path: the
+// style ignores `page` and builds its own layout from the `captions` prop.
+const EMPTY_PAGE: TikTokPage = { text: "", startMs: 0, durationMs: 0, tokens: [] };
 
 const toCaptionsFileName = (src: string): string =>
   src
@@ -98,6 +107,7 @@ export const calculateCaptionedVideoMetadata = async <T extends { src: string }>
 export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
   src,
   PageComponent,
+  singleSurface,
 }) => {
   const [subtitles, setSubtitles] = useState<Caption[]>([]);
   const [handle] = useState(() => delayRender("Loading captions"));
@@ -128,6 +138,8 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
     return () => cancel.cancel();
   }, [fetchSubtitles, subtitlesFile]);
 
+  // Time-based pages drive the default per-page rendering. The single-surface
+  // (self-grouping) path ignores these and groups the flat stream itself.
   const { pages } = useMemo(
     () =>
       createTikTokStyleCaptions({
@@ -154,29 +166,41 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
         )}
       </AbsoluteFill>
 
-      {pages.map((page, index) => {
-        const next = pages[index + 1] ?? null;
-        const startFrame = (page.startMs / 1000) * fps;
-        // Hold each page until the NEXT page begins (the last page runs to the
-        // end of the composition). The previous code capped every page at
-        // `startFrame + SWITCH_CAPTIONS_EVERY_MS`, so whenever consecutive pages
-        // started more than ~1200ms apart the caption vanished and left a blank
-        // gap until the next one. Anchoring endFrame to the next start makes the
-        // next page appear exactly as the previous ends — continuous, no gap.
-        const endFrame = next
-          ? (next.startMs / 1000) * fps
-          : compositionDurationInFrames;
-        const durationInFrames = endFrame - startFrame;
-        if (durationInFrames <= 0) {
-          return null;
-        }
+      {singleSurface ? (
+        // SELF-GROUPING (e.g. Shiny kinetic): one full-timeline surface. The
+        // style receives ALL words via `captions` and manages its own blocks +
+        // timing, so useCurrentFrame here is the GLOBAL composition frame.
+        <PageComponent
+          enterProgress={1}
+          page={EMPTY_PAGE}
+          captions={subtitles ?? []}
+        />
+      ) : (
+        pages.map((page, index) => {
+            const next = pages[index + 1] ?? null;
+            const startFrame = (page.startMs / 1000) * fps;
+            // Hold each page until the NEXT page begins (the last page runs to
+            // the end of the composition). Anchoring endFrame to the next start
+            // makes the next page appear exactly as the previous ends — no gap.
+            const endFrame = next
+              ? (next.startMs / 1000) * fps
+              : compositionDurationInFrames;
+            const durationInFrames = endFrame - startFrame;
+            if (durationInFrames <= 0) {
+              return null;
+            }
 
-        return (
-          <Sequence key={index} from={startFrame} durationInFrames={durationInFrames}>
-            <SubtitlePage page={page} PageComponent={PageComponent} />
-          </Sequence>
-        );
-      })}
+            return (
+              <Sequence
+                key={index}
+                from={startFrame}
+                durationInFrames={durationInFrames}
+              >
+                <SubtitlePage page={page} PageComponent={PageComponent} />
+              </Sequence>
+            );
+          })
+        )}
 
       {hasCaptions ? null : <NoCaptionFile />}
     </AbsoluteFill>

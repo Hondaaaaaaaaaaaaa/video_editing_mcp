@@ -51,7 +51,14 @@ const ShinyCaptionedVideo: React.FC<z.infer<typeof shinySchema>> = ({
   ...style
 }) => (
   <ShinyStyleProvider value={style}>
-    <CaptionedVideo src={src} PageComponent={PageShiny} />
+    <CaptionedVideo
+      src={src}
+      PageComponent={PageShiny}
+      // Kinetic mode does its OWN count-based grouping from the flat caption
+      // stream, so it renders as a single full-timeline surface. Single mode
+      // keeps the default per-page (time-based) rendering.
+      singleSurface={style.layoutMode === "kinetic"}
+    />
   </ShinyStyleProvider>
 );
 
@@ -141,13 +148,33 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         defaultProps={{
           src: staticFile("sample-video.mp4"),
+          layoutMode: "kinetic" as const,
+          kinetic: {
+            wordsPerLine: 2,
+            linesPerSegment: 2,
+            lineSpacing: 1.3,
+            positionY: 69,
+            emphasisAlignment: "center" as const,
+            normalAlignment: "alternate" as const,
+          },
           text: {
             fontFamily: "Inter" as const,
+            emphasisFontFamily: "Anton" as const,
             emphasisScale: 1.4,
             emphasisColorEnabled: false,
             emphasisColor: "#ffffff",
           },
-          animation: { slideDistance: 0, slideDurationFrames: 30 },
+          animation: {
+            entranceDirection: "up" as const,
+            entranceDistance: 30,
+            entranceDuration: 30,
+            entranceEasing: "smooth" as const,
+            entranceEasingSpeed: 6,
+            emphasisEntranceDirection: "left" as const,
+            emphasisEntranceDistance: 120,
+            emphasisEntranceEasing: "smooth" as const,
+            emphasisEntranceEasingSpeed: 3,
+          },
           gradient: {
             angle: 295,
             topColor: "#ff8800",
