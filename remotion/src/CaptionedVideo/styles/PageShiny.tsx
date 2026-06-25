@@ -16,181 +16,231 @@ import {
   fontFamilySchema,
   FONT_DEFAULTS,
   resolveFontFamily,
-  type FontSelection,
+  type FontFamilyName,
 } from "./fonts";
 
 // ---------------------------------------------------------------------------
 // User-customizable props (rendered as sliders / color pickers in the Studio
 // right panel). The Shiny composition uses `shinySchema`; Classic keeps
 // the plain `captionedVideoSchema`.
+//
+// Props are organized into NESTED zod objects so Remotion Studio groups them
+// under collapsible headers (text / animation / gradient / glow / deepGlow /
+// sweep1-3 / shadow / stroke) instead of one flat list. `src` stays at the top
+// level. The grouping is purely structural — every prop, value and behavior is
+// identical to the old flat schema.
 // ---------------------------------------------------------------------------
 // Every numeric prop has .min()/.max() (so Studio renders a slider, not a plain
 // number field) plus .step() for sensible granularity.
+
+// One light-sweep slot's schema, reused for sweep1 / sweep2 / sweep3.
+const sweepSchema = z.object({
+  enabled: z.boolean(),
+  color: zColor(),
+  angle: z.number().min(0).max(360).step(1),
+  width: z.number().min(1).max(100).step(1),
+  intensity: z.number().min(0).max(100).step(1),
+  positionX: z.number().min(0).max(100).step(1),
+  positionY: z.number().min(0).max(100).step(1),
+});
+
 export const shinySchema = captionedVideoSchema.extend({
-  glowStrength: z.number().min(0).max(100).step(1), // glow radius -> slider
-  slideDistance: z.number().min(0).max(300).step(5), // px a word travels -> slider
-  slideDurationFrames: z.number().min(1).max(30).step(1), // slide-in/out length -> slider
-  emphasisScale: z.number().min(1).max(2).step(0.05), // spoken-word grow -> slider
-  glowColor: zColor(), // color picker
+  // --- Text (font + per-word emphasis) ---
+  // emphasisScale grows the spoken word; the optional emphasis color fades the
+  // word being spoken to a solid color (over the gradient), then back.
+  text: z.object({
+    fontFamily: fontFamilySchema.fontFamily, // shared font dropdown
+    emphasisScale: z.number().min(1).max(2).step(0.05), // spoken-word grow -> slider
+    emphasisColorEnabled: z.boolean(), // OFF by default
+    emphasisColor: zColor(), // color the spoken word takes
+  }),
 
-  // --- Per-word emphasis color (additive to emphasisScale) ---
-  // When enabled, the word currently being spoken fades to this solid color
-  // (over the gradient) as it's emphasized, then back as it finishes.
-  emphasisColorEnabled: z.boolean(), // OFF by default
-  emphasisColor: zColor(), // color the spoken word takes
+  // --- Per-word slide animation ---
+  animation: z.object({
+    slideDistance: z.number().min(0).max(300).step(5), // px a word travels -> slider
+    slideDurationFrames: z.number().min(1).max(30).step(1), // slide-in/out length -> slider
+  }),
 
-  // --- Text gradient (multi-stop; direction set by gradientAngle) ---
-  // gradientAngle sets the direction (180 = top->bottom, 90 = left->right, ...).
+  // --- Text gradient (multi-stop; direction set by angle) ---
+  // angle sets the direction (180 = top->bottom, 90 = left->right, ...).
   // Two required stops (top + bottom) plus an OPTIONAL middle stop. Each stop
   // has a color picker and a 0–100 position controlling WHERE that color sits
   // along the gradient axis, so the user can make one color dominate (e.g. top
   // at 0, bottom at 70). The CSS is built dynamically from the enabled stops.
-  gradientAngle: z.number().min(0).max(360).step(1), // gradient direction -> slider
-  gradientTopColor: zColor(),
-  gradientTopPosition: z.number().min(0).max(100).step(1), // where the top color sits
-  gradientBottomColor: zColor(),
-  gradientBottomPosition: z.number().min(0).max(100).step(1), // where the bottom color sits
-  gradientMidEnabled: z.boolean(), // toggle the optional 3rd stop (default OFF)
-  gradientMidColor: zColor(),
-  gradientMidPosition: z.number().min(0).max(100).step(1), // where the middle color sits
+  gradient: z.object({
+    angle: z.number().min(0).max(360).step(1), // gradient direction -> slider
+    topColor: zColor(),
+    topPosition: z.number().min(0).max(100).step(1), // where the top color sits
+    midEnabled: z.boolean(), // toggle the optional 3rd stop (default OFF)
+    midColor: zColor(),
+    midPosition: z.number().min(0).max(100).step(1), // where the middle color sits
+    bottomColor: zColor(),
+    bottomPosition: z.number().min(0).max(100).step(1), // where the bottom color sits
+  }),
 
-  // --- Light sweeps (up to THREE glossy shine bands clipped to the text) ---
-  // Each slot is a bright gradient band layered ON TOP of the fill gradient,
-  // independently toggled / angled / positioned. All enabled slots render
-  // layered. Purely additive — the glow + gradient stay intact. sweep1 is on by
-  // default (the original sweep); sweep2 + sweep3 default off.
-  sweep1Enabled: z.boolean(),
-  sweep1Color: zColor(),
-  sweep1Angle: z.number().min(0).max(360).step(1),
-  sweep1Width: z.number().min(1).max(100).step(1),
-  sweep1Intensity: z.number().min(0).max(100).step(1),
-  sweep1PositionX: z.number().min(0).max(100).step(1),
-  sweep1PositionY: z.number().min(0).max(100).step(1),
-  sweep2Enabled: z.boolean(),
-  sweep2Color: zColor(),
-  sweep2Angle: z.number().min(0).max(360).step(1),
-  sweep2Width: z.number().min(1).max(100).step(1),
-  sweep2Intensity: z.number().min(0).max(100).step(1),
-  sweep2PositionX: z.number().min(0).max(100).step(1),
-  sweep2PositionY: z.number().min(0).max(100).step(1),
-  sweep3Enabled: z.boolean(),
-  sweep3Color: zColor(),
-  sweep3Angle: z.number().min(0).max(360).step(1),
-  sweep3Width: z.number().min(1).max(100).step(1),
-  sweep3Intensity: z.number().min(0).max(100).step(1),
-  sweep3PositionX: z.number().min(0).max(100).step(1),
-  sweep3PositionY: z.number().min(0).max(100).step(1),
+  // --- Glow ---
+  glow: z.object({
+    strength: z.number().min(0).max(100).step(1), // glow radius -> slider
+    color: zColor(), // color picker
+  }),
 
   // --- Deep Glow (After Effects "Deep Glow" plugin look) ---
   // A separate, physically-inspired bloom built from MANY layered drop-shadows
   // at increasing radii with inverse-square-falloff opacity (soft multi-radius
   // bloom, not a flat halo). Inner stops use the inner color, outer stops fade
   // to the outer color. Independent of the existing glow above — additive.
-  deepGlowEnabled: z.boolean(), // OFF by default; extra glow option
-  deepGlowRadius: z.number().min(0).max(150).step(1), // overall bloom reach -> slider
-  deepGlowBrightness: z.number().min(0).max(100).step(1), // bloom intensity -> slider
-  deepGlowInnerColor: zColor(), // color near the text (hot core)
-  deepGlowOuterColor: zColor(), // color of the outer falloff
-  deepGlowChromatic: z.number().min(0).max(20).step(1), // chromatic aberration px -> slider
+  deepGlow: z.object({
+    enabled: z.boolean(), // OFF by default; extra glow option
+    radius: z.number().min(0).max(150).step(1), // overall bloom reach -> slider
+    brightness: z.number().min(0).max(100).step(1), // bloom intensity -> slider
+    innerColor: zColor(), // color near the text (hot core)
+    outerColor: zColor(), // color of the outer falloff
+    chromatic: z.number().min(0).max(20).step(1), // chromatic aberration px -> slider
+  }),
 
-  ...textEffectsSchema, // shared shadow + stroke
-  ...fontFamilySchema, // shared font dropdown
+  // --- Light sweeps (up to THREE glossy shine bands clipped to the text) ---
+  // Each slot is a bright gradient band layered ON TOP of the fill gradient,
+  // independently toggled / angled / positioned. All enabled slots render
+  // layered. Purely additive — the glow + gradient stay intact. sweep1 is on by
+  // default (the original sweep); sweep2 + sweep3 default off.
+  sweep1: sweepSchema,
+  sweep2: sweepSchema,
+  sweep3: sweepSchema,
+
+  // --- Shared shadow + stroke (same field defs as textEffectsSchema, nested) ---
+  shadow: z.object({
+    enabled: textEffectsSchema.shadowEnabled,
+    color: textEffectsSchema.shadowColor,
+    blur: textEffectsSchema.shadowBlur,
+  }),
+  stroke: z.object({
+    enabled: textEffectsSchema.strokeEnabled,
+    color: textEffectsSchema.strokeColor,
+    width: textEffectsSchema.strokeWidth,
+  }),
 });
 
 export type ShinyStyle = {
-  glowStrength: number;
-  slideDistance: number;
-  slideDurationFrames: number;
-  emphasisScale: number;
-  glowColor: string;
-  emphasisColorEnabled: boolean;
-  emphasisColor: string;
-  gradientAngle: number;
-  gradientTopColor: string;
-  gradientTopPosition: number;
-  gradientBottomColor: string;
-  gradientBottomPosition: number;
-  gradientMidEnabled: boolean;
-  gradientMidColor: string;
-  gradientMidPosition: number;
-  sweep1Enabled: boolean;
-  sweep1Color: string;
-  sweep1Angle: number;
-  sweep1Width: number;
-  sweep1Intensity: number;
-  sweep1PositionX: number;
-  sweep1PositionY: number;
-  sweep2Enabled: boolean;
-  sweep2Color: string;
-  sweep2Angle: number;
-  sweep2Width: number;
-  sweep2Intensity: number;
-  sweep2PositionX: number;
-  sweep2PositionY: number;
-  sweep3Enabled: boolean;
-  sweep3Color: string;
-  sweep3Angle: number;
-  sweep3Width: number;
-  sweep3Intensity: number;
-  sweep3PositionX: number;
-  sweep3PositionY: number;
-  deepGlowEnabled: boolean;
-  deepGlowRadius: number;
-  deepGlowBrightness: number;
-  deepGlowInnerColor: string;
-  deepGlowOuterColor: string;
-  deepGlowChromatic: number;
-} & TextEffects &
-  FontSelection;
+  text: {
+    fontFamily: FontFamilyName;
+    emphasisScale: number;
+    emphasisColorEnabled: boolean;
+    emphasisColor: string;
+  };
+  animation: {
+    slideDistance: number;
+    slideDurationFrames: number;
+  };
+  gradient: {
+    angle: number;
+    topColor: string;
+    topPosition: number;
+    midEnabled: boolean;
+    midColor: string;
+    midPosition: number;
+    bottomColor: string;
+    bottomPosition: number;
+  };
+  glow: {
+    strength: number;
+    color: string;
+  };
+  deepGlow: {
+    enabled: boolean;
+    radius: number;
+    brightness: number;
+    innerColor: string;
+    outerColor: string;
+    chromatic: number;
+  };
+  sweep1: SweepSlot;
+  sweep2: SweepSlot;
+  sweep3: SweepSlot;
+  shadow: {
+    enabled: boolean;
+    color: string;
+    blur: number;
+  };
+  stroke: {
+    enabled: boolean;
+    color: string;
+    width: number;
+  };
+};
 
 // Defaults are also used as the context fallback if a Shiny page is ever
 // rendered without a provider (e.g. in isolation / tests). Default = TWO stops
 // (top at 0%, bottom at 100%); the middle stop is OFF until the user enables it.
 export const SHINY_DEFAULTS: ShinyStyle = {
-  glowStrength: 30,
-  slideDistance: 80,
-  slideDurationFrames: 8,
-  emphasisScale: 1.2,
-  glowColor: "#ff8a00",
-  emphasisColorEnabled: false,
-  emphasisColor: "#ffffff",
-  gradientAngle: 180,
-  gradientTopColor: "#ffe14d",
-  gradientTopPosition: 0,
-  gradientBottomColor: "#ff3d00",
-  gradientBottomPosition: 100,
-  gradientMidEnabled: false,
-  gradientMidColor: "#ff8a00",
-  gradientMidPosition: 50,
-  sweep1Enabled: true,
-  sweep1Color: "#ffffff",
-  sweep1Angle: 20,
-  sweep1Width: 30,
-  sweep1Intensity: 70,
-  sweep1PositionX: 50,
-  sweep1PositionY: 50,
-  sweep2Enabled: false,
-  sweep2Color: "#ffffff",
-  sweep2Angle: 160,
-  sweep2Width: 20,
-  sweep2Intensity: 50,
-  sweep2PositionX: 50,
-  sweep2PositionY: 50,
-  sweep3Enabled: false,
-  sweep3Color: "#ffffff",
-  sweep3Angle: 90,
-  sweep3Width: 15,
-  sweep3Intensity: 40,
-  sweep3PositionX: 50,
-  sweep3PositionY: 50,
-  deepGlowEnabled: false,
-  deepGlowRadius: 60,
-  deepGlowBrightness: 70,
-  deepGlowInnerColor: "#fff5e6",
-  deepGlowOuterColor: "#ff8a00",
-  deepGlowChromatic: 0,
-  ...TEXT_EFFECTS_DEFAULTS,
-  ...FONT_DEFAULTS,
+  text: {
+    fontFamily: FONT_DEFAULTS.fontFamily,
+    emphasisScale: 1.2,
+    emphasisColorEnabled: false,
+    emphasisColor: "#ffffff",
+  },
+  animation: {
+    slideDistance: 80,
+    slideDurationFrames: 8,
+  },
+  gradient: {
+    angle: 180,
+    topColor: "#ffe14d",
+    topPosition: 0,
+    midEnabled: false,
+    midColor: "#ff8a00",
+    midPosition: 50,
+    bottomColor: "#ff3d00",
+    bottomPosition: 100,
+  },
+  glow: {
+    strength: 30,
+    color: "#ff8a00",
+  },
+  deepGlow: {
+    enabled: false,
+    radius: 60,
+    brightness: 70,
+    innerColor: "#fff5e6",
+    outerColor: "#ff8a00",
+    chromatic: 0,
+  },
+  sweep1: {
+    enabled: true,
+    color: "#ffffff",
+    angle: 20,
+    width: 30,
+    intensity: 70,
+    positionX: 50,
+    positionY: 50,
+  },
+  sweep2: {
+    enabled: false,
+    color: "#ffffff",
+    angle: 160,
+    width: 20,
+    intensity: 50,
+    positionX: 50,
+    positionY: 50,
+  },
+  sweep3: {
+    enabled: false,
+    color: "#ffffff",
+    angle: 90,
+    width: 15,
+    intensity: 40,
+    positionX: 50,
+    positionY: 50,
+  },
+  shadow: {
+    enabled: TEXT_EFFECTS_DEFAULTS.shadowEnabled,
+    color: TEXT_EFFECTS_DEFAULTS.shadowColor,
+    blur: TEXT_EFFECTS_DEFAULTS.shadowBlur,
+  },
+  stroke: {
+    enabled: TEXT_EFFECTS_DEFAULTS.strokeEnabled,
+    color: TEXT_EFFECTS_DEFAULTS.strokeColor,
+    width: TEXT_EFFECTS_DEFAULTS.strokeWidth,
+  },
 };
 
 /**
@@ -200,21 +250,22 @@ export const SHINY_DEFAULTS: ShinyStyle = {
  * Stops are ordered top -> middle -> bottom along the gradient axis.
  */
 const buildGradientCss = (s: ShinyStyle): string => {
+  const g = s.gradient;
   const stops: { color: string; position: number }[] = [
-    { color: s.gradientTopColor, position: s.gradientTopPosition },
-    ...(s.gradientMidEnabled
-      ? [{ color: s.gradientMidColor, position: s.gradientMidPosition }]
+    { color: g.topColor, position: g.topPosition },
+    ...(g.midEnabled
+      ? [{ color: g.midColor, position: g.midPosition }]
       : []),
-    { color: s.gradientBottomColor, position: s.gradientBottomPosition },
+    { color: g.bottomColor, position: g.bottomPosition },
   ];
   const list = stops.map((stop) => `${stop.color} ${stop.position}%`).join(", ");
-  return `linear-gradient(${s.gradientAngle}deg, ${list})`;
+  return `linear-gradient(${g.angle}deg, ${list})`;
 };
 
 const clamp = (v: number, lo: number, hi: number): number =>
   Math.max(lo, Math.min(hi, v));
 
-// One light-sweep slot's settings (extracted from the flat sweepN* props).
+// One light-sweep slot's settings (matches the nested sweep group shape).
 type SweepSlot = {
   enabled: boolean;
   color: string;
@@ -225,36 +276,8 @@ type SweepSlot = {
   positionY: number;
 };
 
-// Pulls the three sweep slots out of the flat style props, in render order.
-const getSweepSlots = (s: ShinyStyle): SweepSlot[] => [
-  {
-    enabled: s.sweep1Enabled,
-    color: s.sweep1Color,
-    angle: s.sweep1Angle,
-    width: s.sweep1Width,
-    intensity: s.sweep1Intensity,
-    positionX: s.sweep1PositionX,
-    positionY: s.sweep1PositionY,
-  },
-  {
-    enabled: s.sweep2Enabled,
-    color: s.sweep2Color,
-    angle: s.sweep2Angle,
-    width: s.sweep2Width,
-    intensity: s.sweep2Intensity,
-    positionX: s.sweep2PositionX,
-    positionY: s.sweep2PositionY,
-  },
-  {
-    enabled: s.sweep3Enabled,
-    color: s.sweep3Color,
-    angle: s.sweep3Angle,
-    width: s.sweep3Width,
-    intensity: s.sweep3Intensity,
-    positionX: s.sweep3PositionX,
-    positionY: s.sweep3PositionY,
-  },
-];
+// The three sweep slots, in render order. Each group already has SweepSlot shape.
+const getSweepSlots = (s: ShinyStyle): SweepSlot[] => [s.sweep1, s.sweep2, s.sweep3];
 
 /**
  * Builds one glossy light-sweep band as a linear-gradient. The band is a bright
@@ -300,27 +323,28 @@ const DEEP_GLOW_LAYERS = 7;
  * Returns "" when disabled so it contributes nothing to the filter chain.
  */
 const buildDeepGlowCss = (s: ShinyStyle): string => {
-  if (!s.deepGlowEnabled || s.deepGlowRadius <= 0) return "";
-  const intensity = s.deepGlowBrightness / 100;
+  const d = s.deepGlow;
+  if (!d.enabled || d.radius <= 0) return "";
+  const intensity = d.brightness / 100;
   const parts: string[] = [];
 
   for (let i = 0; i < DEEP_GLOW_LAYERS; i++) {
     const t = i / (DEEP_GLOW_LAYERS - 1); // 0 (core) -> 1 (outer edge)
-    const radius = s.deepGlowRadius * (0.12 + 0.88 * t);
+    const radius = d.radius * (0.12 + 0.88 * t);
     // Inverse-square-style falloff: bright core, soft trailing bloom.
     const falloff = 1 / (1 + Math.pow(t * 3, 2));
     const alpha = clamp(intensity * falloff, 0, 1);
     if (alpha <= 0) continue;
-    const blended = `color-mix(in srgb, ${s.deepGlowInnerColor} ${Math.round((1 - t) * 100)}%, ${s.deepGlowOuterColor})`;
+    const blended = `color-mix(in srgb, ${d.innerColor} ${Math.round((1 - t) * 100)}%, ${d.outerColor})`;
     const color = `color-mix(in srgb, ${blended} ${Math.round(alpha * 100)}%, transparent)`;
     parts.push(`drop-shadow(0 0 ${radius.toFixed(1)}px ${color})`);
   }
 
   // Chromatic aberration: split a mid-radius bloom into red/blue fringes that
   // are offset in opposite directions along x, mimicking lens dispersion.
-  const c = s.deepGlowChromatic;
+  const c = d.chromatic;
   if (c > 0) {
-    const r = (s.deepGlowRadius * 0.35).toFixed(1);
+    const r = (d.radius * 0.35).toFixed(1);
     const a = Math.round(clamp(intensity * 0.5, 0, 1) * 100);
     parts.push(`drop-shadow(${c}px 0 ${r}px color-mix(in srgb, #ff0000 ${a}%, transparent))`);
     parts.push(`drop-shadow(${-c}px 0 ${r}px color-mix(in srgb, #00a2ff ${a}%, transparent))`);
@@ -389,15 +413,11 @@ export const PageShiny: React.FC<CaptionStyleProps> = ({ page }) => {
   const timeInMs = (frame / fps) * 1000;
 
   const style = useContext(ShinyStyleContext);
-  const {
-    glowStrength,
-    slideDistance,
-    slideDurationFrames,
-    emphasisScale,
-    glowColor,
-  } = style;
+  const { strength: glowStrength, color: glowColor } = style.glow;
+  const { slideDistance, slideDurationFrames } = style.animation;
+  const { emphasisScale } = style.text;
 
-  const fontFamily = resolveFontFamily(style.fontFamily);
+  const fontFamily = resolveFontFamily(style.text.fontFamily);
   // Vertical text gradient, built from the enabled stops + their positions.
   const gradientCss = buildGradientCss(style);
 
@@ -419,8 +439,18 @@ export const PageShiny: React.FC<CaptionStyleProps> = ({ page }) => {
   // Gradient text has a transparent fill, so text-shadow won't render — the
   // shadow is applied as a drop-shadow in each word's filter chain instead.
   // The stroke is an inherited property, so it's set once on the container.
-  const stroke = textStrokeCss(style);
-  const shadowFilter = dropShadowCss(style);
+  // The shared shadow/stroke helpers take the flat TextEffects shape, so adapt
+  // the nested shadow/stroke groups into it.
+  const textEffects: TextEffects = {
+    shadowEnabled: style.shadow.enabled,
+    shadowColor: style.shadow.color,
+    shadowBlur: style.shadow.blur,
+    strokeEnabled: style.stroke.enabled,
+    strokeColor: style.stroke.color,
+    strokeWidth: style.stroke.width,
+  };
+  const stroke = textStrokeCss(textEffects);
+  const shadowFilter = dropShadowCss(textEffects);
 
   // Deep Glow bloom — constant per word (it's a property of the text, like the
   // AE plugin), so build it once here rather than per token. Empty when disabled.
@@ -518,8 +548,8 @@ export const PageShiny: React.FC<CaptionStyleProps> = ({ page }) => {
           const bgLayers = [...sweepLayers];
           const bgSizes = [...sweepSizes];
           const bgPositions = [...sweepPositions];
-          if (style.emphasisColorEnabled && emphasis > 0) {
-            const ec = `color-mix(in srgb, ${style.emphasisColor} ${Math.round(emphasis * 100)}%, transparent)`;
+          if (style.text.emphasisColorEnabled && emphasis > 0) {
+            const ec = `color-mix(in srgb, ${style.text.emphasisColor} ${Math.round(emphasis * 100)}%, transparent)`;
             bgLayers.push(`linear-gradient(0deg, ${ec}, ${ec})`);
             bgSizes.push("100% 100%");
             bgPositions.push("0% 0%");
