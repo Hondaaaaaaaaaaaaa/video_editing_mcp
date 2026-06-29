@@ -7,6 +7,7 @@ import {
   getStaticFiles,
   OffthreadVideo,
   Sequence,
+  staticFile,
   useVideoConfig,
   watchStaticFile,
 } from "remotion";
@@ -46,6 +47,15 @@ const SWITCH_CAPTIONS_EVERY_MS = 1200;
 // style ignores `page` and builds its own layout from the `captions` prop.
 const EMPTY_PAGE: TikTokPage = { text: "", startMs: 0, durationMs: 0, tokens: [] };
 
+// `src` defaultProps are stored as a PLAIN FILENAME string (e.g.
+// "sample-video.mp4"), not `staticFile("…")` — a function call makes the whole
+// defaultProps object non-static, which blocks Remotion Studio from saving edited
+// props ("Can't save default props for composition …"). So we resolve the bare
+// filename to a real static-file URL HERE instead. An already-resolved URL
+// (http(s)/blob/data, or a leading "/") is passed through untouched.
+const isResolvedUrl = (s: string): boolean => /^(https?:|blob:|data:|\/)/i.test(s);
+export const resolveSrc = (s: string): string => (isResolvedUrl(s) ? s : staticFile(s));
+
 const toCaptionsFileName = (src: string): string =>
   src
     .replace(/\.mp4$/, ".json")
@@ -78,15 +88,16 @@ export const calculateCaptionedVideoMetadata = async <T extends { src: string }>
 }: {
   props: T;
 }): Promise<{ fps: number; durationInFrames: number }> => {
+  const src = resolveSrc(props.src);
   try {
-    const metadata = await getVideoMetadata(props.src);
+    const metadata = await getVideoMetadata(src);
     return {
       fps: FPS,
       durationInFrames: Math.max(1, Math.floor(metadata.durationInSeconds * FPS)),
     };
   } catch {
     try {
-      const res = await fetch(toCaptionsFileName(props.src));
+      const res = await fetch(toCaptionsFileName(src));
       const captions = (await res.json()) as Caption[];
       const lastMs = captions.length
         ? Math.max(...captions.map((c) => c.endMs))
@@ -113,7 +124,9 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
   const [handle] = useState(() => delayRender("Loading captions"));
   const { fps, durationInFrames: compositionDurationInFrames } = useVideoConfig();
 
-  const subtitlesFile = useMemo(() => toCaptionsFileName(src), [src]);
+  // Resolve the bare-filename `src` prop to a real static-file URL (see resolveSrc).
+  const resolvedSrc = useMemo(() => resolveSrc(src), [src]);
+  const subtitlesFile = useMemo(() => toCaptionsFileName(resolvedSrc), [resolvedSrc]);
 
   const fetchSubtitles = useCallback(async () => {
     try {
@@ -149,14 +162,14 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
     [subtitles],
   );
 
-  const hasVideo = fileExists(src);
+  const hasVideo = fileExists(resolvedSrc);
   const hasCaptions = fileExists(subtitlesFile);
 
   return (
     <AbsoluteFill style={{ backgroundColor: "black" }}>
       <AbsoluteFill>
         {hasVideo ? (
-          <OffthreadVideo style={{ objectFit: "cover" }} src={src} />
+          <OffthreadVideo style={{ objectFit: "cover" }} src={resolvedSrc} />
         ) : (
           // Stand-in background so the Studio is usable before a real video
           // is added to public/.

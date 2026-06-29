@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { z } from "zod";
 import { makeTransform, scale, translateY } from "@remotion/animation-utils";
 import { fitText } from "@remotion/layout-utils";
 import type { CaptionStyleProps } from "./types";
@@ -18,15 +19,35 @@ import {
 } from "./fonts";
 
 // Classic customizes the shared font + shadow + stroke (its colors / pop are
-// fixed). These shared props show up as a dropdown / sliders / pickers / toggles.
+// fixed) PLUS the common layout controls (position / size / spacing). These show
+// up as sliders / dropdown / pickers / toggles.
 export const classicSchema = captionedVideoSchema.extend({
+  // --- Layout (position / size / spacing) — shared across all templates ---
+  positionX: z.number().min(0).max(100).step(1), // 0 left, 50 center, 100 right
+  positionY: z.number().min(0).max(100).step(1), // 0 top, 100 bottom
+  captionScale: z.number().min(0.5).max(2).step(0.05), // overall caption size multiplier
+  wordSpacing: z.number().min(0).max(1.5).step(0.05), // extra horizontal gap between words (em)
+  lineSpacing: z.number().min(0.8).max(2.5).step(0.05), // line height (vertical gap)
   ...textEffectsSchema,
   ...fontFamilySchema,
 });
 
-export type ClassicStyle = TextEffects & FontSelection;
+export type ClassicLayout = {
+  positionX: number;
+  positionY: number;
+  captionScale: number;
+  wordSpacing: number;
+  lineSpacing: number;
+};
+
+export type ClassicStyle = ClassicLayout & TextEffects & FontSelection;
 
 export const CLASSIC_DEFAULTS: ClassicStyle = {
+  positionX: 50, // horizontally centered
+  positionY: 78, // lower-center
+  captionScale: 1, // no extra scaling
+  wordSpacing: 0.12, // a touch of breathing room between words (em)
+  lineSpacing: 1.2,
   ...TEXT_EFFECTS_DEFAULTS,
   ...FONT_DEFAULTS,
 };
@@ -51,6 +72,7 @@ export const PageClassic: React.FC<CaptionStyleProps> = ({ enterProgress, page }
   const timeInMs = (frame / fps) * 1000;
 
   const effects = useContext(ClassicStyleContext);
+  const { positionX, positionY, captionScale, wordSpacing, lineSpacing } = effects;
   const fontFamily = resolveFontFamily(effects.fontFamily);
 
   const fittedText = fitText({
@@ -64,31 +86,38 @@ export const PageClassic: React.FC<CaptionStyleProps> = ({ enterProgress, page }
   const fontSize = Math.min(DESIRED_FONT_SIZE, fittedText.fontSize);
 
   return (
-    <AbsoluteFill
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        top: undefined,
-        bottom: 350,
-        height: 200,
-      }}
-    >
+    <AbsoluteFill>
+      {/* Position wrapper: the caption's CENTER sits at (positionX%, positionY%)
+          of the frame; captionScale sizes the whole block. */}
       <div
         style={{
-          fontSize,
-          width: "100%",
-          textAlign: "center",
-          fontFamily,
-          fontWeight: FONT_WEIGHT,
-          textTransform: "uppercase",
-          // Shadow + stroke are inherited by the word spans below.
-          ...textEffectStyle(effects),
-          transform: makeTransform([
-            scale(interpolate(enterProgress, [0, 1], [0.7, 1])),
-            translateY(interpolate(enterProgress, [0, 1], [50, 0])),
-          ]),
+          position: "absolute",
+          left: `${positionX}%`,
+          top: `${positionY}%`,
+          width: "90%",
+          transformOrigin: "center center",
+          transform: `translate(-50%, -50%) scale(${captionScale})`,
         }}
       >
+        <div
+          style={{
+            fontSize,
+            width: "100%",
+            textAlign: "center",
+            fontFamily,
+            fontWeight: FONT_WEIGHT,
+            textTransform: "uppercase",
+            lineHeight: lineSpacing,
+            // Extra horizontal gap added at each space between words.
+            wordSpacing: `${wordSpacing}em`,
+            // Shadow + stroke are inherited by the word spans below.
+            ...textEffectStyle(effects),
+            transform: makeTransform([
+              scale(interpolate(enterProgress, [0, 1], [0.7, 1])),
+              translateY(interpolate(enterProgress, [0, 1], [50, 0])),
+            ]),
+          }}
+        >
         {page.tokens.map((token, index) => {
           const startRelativeToSequence = token.fromMs - page.startMs;
           const endRelativeToSequence = token.toMs - page.startMs;
@@ -110,6 +139,7 @@ export const PageClassic: React.FC<CaptionStyleProps> = ({ enterProgress, page }
             </span>
           );
         })}
+        </div>
       </div>
     </AbsoluteFill>
   );

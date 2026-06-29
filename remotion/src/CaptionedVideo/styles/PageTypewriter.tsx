@@ -64,6 +64,13 @@ export const typewriterSchema = captionedVideoSchema.extend({
   easing: z.enum(["linear", "smooth", "bouncy"]),
   easingSpeed: z.number().min(1).max(6).step(0.1),
 
+  // --- Layout (position / size / spacing) — shared across all templates ---
+  positionX: z.number().min(0).max(100).step(1), // 0 left, 50 center, 100 right
+  positionY: z.number().min(0).max(100).step(1), // 0 top, 100 bottom
+  captionScale: z.number().min(0.5).max(2).step(0.05), // overall caption size multiplier
+  wordSpacing: z.number().min(0).max(1.5).step(0.05), // extra horizontal gap between words (em)
+  lineSpacing: z.number().min(0.8).max(2.5).step(0.05), // line height (vertical gap)
+
   // Shared shadow + stroke (sliders / pickers / toggles).
   ...textEffectsSchema,
   // Shared font dropdown.
@@ -86,6 +93,11 @@ export type TypewriterStyle = {
   textColors: string[];
   easing: TypewriterEasing;
   easingSpeed: number;
+  positionX: number;
+  positionY: number;
+  captionScale: number;
+  wordSpacing: number;
+  lineSpacing: number;
 } & TextEffects &
   FontSelection;
 
@@ -105,6 +117,11 @@ export const TYPEWRITER_DEFAULTS: TypewriterStyle = {
   textColors: [],
   easing: "linear",
   easingSpeed: 3,
+  positionX: 50, // horizontally centered
+  positionY: 78, // lower-center
+  captionScale: 1, // no extra scaling
+  wordSpacing: 0.12, // a touch of breathing room between words (em)
+  lineSpacing: 1.2,
   ...TEXT_EFFECTS_DEFAULTS,
   ...FONT_DEFAULTS,
 };
@@ -179,6 +196,11 @@ export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
     textColors,
     easing,
     easingSpeed,
+    positionX,
+    positionY,
+    captionScale,
+    wordSpacing,
+    lineSpacing,
   } = style;
   const fontFamily = resolveFontFamily(style.fontFamily);
 
@@ -291,27 +313,34 @@ export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
     ) : null;
 
   return (
-    <AbsoluteFill
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        top: undefined,
-        bottom: 350,
-        height: 200,
-      }}
-    >
+    <AbsoluteFill>
+      {/* Position wrapper: the caption's CENTER sits at (positionX%, positionY%)
+          of the frame; captionScale sizes the whole block. */}
       <div
         style={{
-          fontSize,
-          width: "100%",
-          textAlign: "center",
-          fontFamily,
-          fontWeight: FONT_WEIGHT,
-          color: baseTextColor,
-          // Shadow + stroke (inherited by the letter spans + cursor below).
-          ...textEffectStyle(style),
+          position: "absolute",
+          left: `${positionX}%`,
+          top: `${positionY}%`,
+          width: "90%",
+          transformOrigin: "center center",
+          transform: `translate(-50%, -50%) scale(${captionScale})`,
         }}
       >
+        <div
+          style={{
+            fontSize,
+            width: "100%",
+            textAlign: "center",
+            fontFamily,
+            fontWeight: FONT_WEIGHT,
+            color: baseTextColor,
+            lineHeight: lineSpacing,
+            // Extra horizontal gap added at each space between words.
+            wordSpacing: `${wordSpacing}em`,
+            // Shadow + stroke (inherited by the letter spans + cursor below).
+            ...textEffectStyle(style),
+          }}
+        >
         {/* Cursor sits at the very start until the first letter shows. */}
         {lastRevealed === -1
           ? renderCursor("cursor-start", tokenInfo[0]?.color ?? baseTextColor)
@@ -353,6 +382,7 @@ export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
             })}
           </span>
         ))}
+        </div>
       </div>
     </AbsoluteFill>
   );

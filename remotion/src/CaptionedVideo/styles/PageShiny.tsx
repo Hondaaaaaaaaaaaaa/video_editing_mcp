@@ -1,8 +1,15 @@
 import React, { createContext, useContext } from "react";
-import { AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  Easing,
+  interpolate,
+  Sequence,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { z } from "zod";
 import { zColor } from "@remotion/zod-types";
-import { fitText } from "@remotion/layout-utils";
+import { measureText } from "@remotion/layout-utils";
 import type { CaptionStyleProps } from "./types";
 import { captionedVideoSchema } from "../index";
 import {
@@ -33,6 +40,26 @@ import {
 // Every numeric prop has .min()/.max() (so Studio renders a slider, not a plain
 // number field) plus .step() for sensible granularity.
 
+// --- Text gradient (multi-stop; direction set by angle) ---
+// Extracted to its own exported schema so OTHER templates (e.g. Highlight) can
+// reuse the EXACT same gradient controls + buildGradientCss implementation
+// instead of reinventing it. angle sets the direction (180 = top->bottom,
+// 90 = left->right, ...). Two required stops (top + bottom) plus an OPTIONAL
+// middle stop. Each stop has a color picker and a 0–100 position controlling
+// WHERE that color sits along the gradient axis.
+export const gradientSchema = z.object({
+  angle: z.number().min(0).max(360).step(1), // gradient direction -> slider
+  topColor: zColor(),
+  topPosition: z.number().min(0).max(100).step(1), // where the top color sits
+  midEnabled: z.boolean(), // toggle the optional 3rd stop (default OFF)
+  midColor: zColor(),
+  midPosition: z.number().min(0).max(100).step(1), // where the middle color sits
+  bottomColor: zColor(),
+  bottomPosition: z.number().min(0).max(100).step(1), // where the bottom color sits
+});
+
+export type GradientConfig = z.infer<typeof gradientSchema>;
+
 // One light-sweep slot's schema, reused for sweep1 / sweep2 / sweep3.
 const sweepSchema = z.object({
   enabled: z.boolean(),
@@ -44,128 +71,118 @@ const sweepSchema = z.object({
   positionY: z.number().min(0).max(100).step(1),
 });
 
+// Shared enums for the entrance/easing groups (used by both the NORMAL entrance
+// under `animation` and the EMPHASIS entrance under `emphasis`).
+const directionEnum = z.enum(["up", "down", "left", "right"]);
+const easingTypeEnum = z.enum(["smooth", "sharp", "bouncy"]);
+
+// ---------------------------------------------------------------------------
+// SHINY SCHEMA — organized into nested SECTIONS so Studio groups the controls:
+//   layout    — how words are grouped & where the caption block sits
+//   text      — base font + the color of NORMAL words
+//   emphasis  — styling of the rule-emphasized big/shiny words + their entrance
+//   effects   — every visual treatment (gradient/glow/deepGlow/sweeps/stroke/shadow)
+//   animation — the NORMAL-word entrance + easing
+// Every field & behaviour is preserved; only the SHAPE changed for grouped
+// display. (True click-to-expand panels are a future web-UI feature.)
+// ---------------------------------------------------------------------------
 export const shinySchema = captionedVideoSchema.extend({
-  // --- Layout mode (safe additive toggle) ---
-  // "single" = the ORIGINAL Shiny look (one line of words, unchanged).
-  // "kinetic" = NEW multi-line stacked layout (Hormozi / viral-caption style):
-  // words grouped into lines, lines into segments, normal words plain WHITE and
-  // rule-emphasized words wearing Shiny's existing gradient + glow treatment.
-  layoutMode: z.enum(["single", "kinetic"]),
-
-  // --- Kinetic layout controls (only used when layoutMode === "kinetic") ---
-  kinetic: z.object({
-    wordsPerLine: z.number().min(1).max(8).step(1), // words stacked per line -> slider
-    linesPerSegment: z.number().min(1).max(6).step(1), // lines shown at once -> slider
-    lineSpacing: z.number().min(0.8).max(2.5).step(0.05), // vertical line spacing -> slider
+  // === LAYOUT — count-based grouping + placement of the caption block ===
+  layout: z.object({
+    wordsPerLine: z.number().min(1).max(8).step(1), // normal words per offset line
+    linesPerSegment: z.number().min(1).max(6).step(1), // words per segment block
+    captionScale: z.number().min(0.5).max(2).step(0.05), // overall caption size multiplier
+    wordSpacing: z.number().min(0).max(1.5).step(0.05), // extra horizontal gap between words (em)
+    lineSpacing: z.number().min(0.8).max(2.5).step(0.05), // vertical line spacing
+    positionX: z.number().min(0).max(100).step(1), // block horizontal center (0 left, 50 center, 100 right)
     positionY: z.number().min(0).max(100).step(1), // block vertical center (0 top, 100 bottom)
-    // Per-LINE horizontal alignment (the Hormozi stagger). A line that contains
-    // an emphasized word uses `emphasisAlignment`; other lines use
-    // `normalAlignment` ("alternate" = left/right by line index). See
-    // decideLineAlignment.
-    emphasisAlignment: z.enum(["center", "left", "right"]), // emphasized lines -> dropdown
-    normalAlignment: z.enum(["alternate", "left", "right", "center"]), // normal lines -> dropdown
+    // Per-LINE horizontal alignment (the Hormozi stagger). A line holding an
+    // emphasized word uses `emphasisAlignment`; others use `normalAlignment`
+    // ("alternate" = left/right by line index). See decideLineAlignment.
+    emphasisAlignment: z.enum(["center", "left", "right"]),
+    normalAlignment: z.enum(["alternate", "left", "right", "center"]),
   }),
 
-  // --- Text (font + per-word emphasis) ---
-  // `fontFamily` is the BASE font (normal words). In kinetic mode, emphasized
-  // words (see decideEmphasis) instead use `emphasisFontFamily`, render at
-  // `emphasisScale` (bigger), and wear the shiny gradient + glow. The optional
-  // emphasis color fades the spoken word to a solid color over the gradient.
+  // === TEXT — base font + the color of NORMAL (non-emphasized) words ===
   text: z.object({
-    fontFamily: fontFamilySchema.fontFamily, // base font dropdown (normal words)
-    emphasisFontFamily: fontFamilySchema.fontFamily, // font for EMPHASIZED words (kinetic)
-    emphasisScale: z.number().min(1).max(2).step(0.05), // emphasized-word size -> slider
-    emphasisColorEnabled: z.boolean(), // OFF by default
-    emphasisColor: zColor(), // color the spoken word takes
+    fontFamily: fontFamilySchema.fontFamily, // base font (normal words)
+    baseColor: zColor(), // color of normal words
   }),
 
-  // --- Per-word directional ENTRANCE ---
-  // One flexible system covers both subtle "rises" and dramatic "slides": each
-  // word animates IN from `entranceDirection` while fading in, then settles in
-  // place. `entranceDistance` (small = subtle rise, large = big slide) sets how
-  // far it travels; `entranceDuration` its speed; `entranceEasing` /
-  // `entranceEasingSpeed` the curve (reused from the Typewriter template).
-  //
-  // The `entrance*` props drive NORMAL words. In kinetic mode, EMPHASIZED words
-  // get their OWN entrance via the `emphasisEntrance*` props (same controls), so
-  // the two can move differently (e.g. normal words rise gently while emphasized
-  // words slide in bigger from the left). `entranceDuration` (speed) is shared.
+  // === EMPHASIS — GROUP-level styling for every rule-emphasized word ===
+  // (see decideEmphasis). They render bigger (`scale`) in their own `fontFamily`,
+  // wear the gradient + glow (see effects), get the shared X/Y nudge, and have
+  // their OWN directional entrance. `colorEnabled`/`color` optionally fade the
+  // spoken word to a solid color over the gradient.
+  emphasis: z.object({
+    scale: z.number().min(1).max(2.5).step(0.05), // emphasized-word size
+    fontFamily: fontFamilySchema.fontFamily, // font for emphasized words
+    offsetX: z.number().min(-200).max(200).step(1), // nudge emphasized words (px)
+    offsetY: z.number().min(-200).max(200).step(1), // nudge emphasized words (px)
+    colorEnabled: z.boolean(), // OFF by default
+    color: zColor(), // color the spoken word takes
+    entrance: z.object({
+      direction: directionEnum, // where the word comes FROM
+      distance: z.number().min(5).max(300).step(1), // px traveled
+      easing: easingTypeEnum, // curve type
+      easingSpeed: z.number().min(1).max(6).step(0.1), // curve intensity
+    }),
+  }),
+
+  // === EFFECTS — all the visual treatments layered on the (emphasized) text ===
+  effects: z.object({
+    // Multi-stop text gradient (shared gradientSchema). 180 = top->bottom.
+    gradient: gradientSchema,
+    // Warm glow halo.
+    glow: z.object({
+      strength: z.number().min(0).max(100).step(1),
+      color: zColor(),
+    }),
+    // After Effects "Deep Glow" plugin look — a soft multi-radius bloom.
+    deepGlow: z.object({
+      enabled: z.boolean(),
+      radius: z.number().min(0).max(150).step(1),
+      brightness: z.number().min(0).max(100).step(1),
+      innerColor: zColor(),
+      outerColor: zColor(),
+      chromatic: z.number().min(0).max(20).step(1),
+    }),
+    // Up to THREE glossy shine bands clipped to the text (additive).
+    sweep1: sweepSchema,
+    sweep2: sweepSchema,
+    sweep3: sweepSchema,
+    // Outline + drop shadow (same field defs as textEffectsSchema, nested).
+    stroke: z.object({
+      enabled: textEffectsSchema.strokeEnabled,
+      color: textEffectsSchema.strokeColor,
+      width: textEffectsSchema.strokeWidth,
+    }),
+    shadow: z.object({
+      enabled: textEffectsSchema.shadowEnabled,
+      color: textEffectsSchema.shadowColor,
+      blur: textEffectsSchema.shadowBlur,
+    }),
+  }),
+
+  // === ANIMATION — the NORMAL-word directional entrance + its easing ===
+  // (Emphasized words have their OWN entrance under `emphasis`.) `duration` is
+  // the entrance window in frames and is SHARED by both entrances.
   animation: z.object({
-    entranceDirection: z.enum(["up", "down", "left", "right"]), // where the word comes FROM
-    entranceDistance: z.number().min(5).max(300).step(1), // px traveled -> slider
-    entranceDuration: z.number().min(5).max(30).step(1), // entrance length (frames) -> slider
-    entranceEasing: z.enum(["smooth", "sharp", "bouncy"]), // curve type -> dropdown
-    entranceEasingSpeed: z.number().min(1).max(6).step(0.1), // curve intensity -> slider
-    // EMPHASIZED-word entrance (kinetic mode only). Mirrors the props above.
-    emphasisEntranceDirection: z.enum(["up", "down", "left", "right"]),
-    emphasisEntranceDistance: z.number().min(5).max(300).step(1), // px traveled -> slider
-    emphasisEntranceEasing: z.enum(["smooth", "sharp", "bouncy"]), // curve type -> dropdown
-    emphasisEntranceEasingSpeed: z.number().min(1).max(6).step(0.1), // curve intensity -> slider
-  }),
-
-  // --- Text gradient (multi-stop; direction set by angle) ---
-  // angle sets the direction (180 = top->bottom, 90 = left->right, ...).
-  // Two required stops (top + bottom) plus an OPTIONAL middle stop. Each stop
-  // has a color picker and a 0–100 position controlling WHERE that color sits
-  // along the gradient axis, so the user can make one color dominate (e.g. top
-  // at 0, bottom at 70). The CSS is built dynamically from the enabled stops.
-  gradient: z.object({
-    angle: z.number().min(0).max(360).step(1), // gradient direction -> slider
-    topColor: zColor(),
-    topPosition: z.number().min(0).max(100).step(1), // where the top color sits
-    midEnabled: z.boolean(), // toggle the optional 3rd stop (default OFF)
-    midColor: zColor(),
-    midPosition: z.number().min(0).max(100).step(1), // where the middle color sits
-    bottomColor: zColor(),
-    bottomPosition: z.number().min(0).max(100).step(1), // where the bottom color sits
-  }),
-
-  // --- Glow ---
-  glow: z.object({
-    strength: z.number().min(0).max(100).step(1), // glow radius -> slider
-    color: zColor(), // color picker
-  }),
-
-  // --- Deep Glow (After Effects "Deep Glow" plugin look) ---
-  // A separate, physically-inspired bloom built from MANY layered drop-shadows
-  // at increasing radii with inverse-square-falloff opacity (soft multi-radius
-  // bloom, not a flat halo). Inner stops use the inner color, outer stops fade
-  // to the outer color. Independent of the existing glow above — additive.
-  deepGlow: z.object({
-    enabled: z.boolean(), // OFF by default; extra glow option
-    radius: z.number().min(0).max(150).step(1), // overall bloom reach -> slider
-    brightness: z.number().min(0).max(100).step(1), // bloom intensity -> slider
-    innerColor: zColor(), // color near the text (hot core)
-    outerColor: zColor(), // color of the outer falloff
-    chromatic: z.number().min(0).max(20).step(1), // chromatic aberration px -> slider
-  }),
-
-  // --- Light sweeps (up to THREE glossy shine bands clipped to the text) ---
-  // Each slot is a bright gradient band layered ON TOP of the fill gradient,
-  // independently toggled / angled / positioned. All enabled slots render
-  // layered. Purely additive — the glow + gradient stay intact. sweep1 is on by
-  // default (the original sweep); sweep2 + sweep3 default off.
-  sweep1: sweepSchema,
-  sweep2: sweepSchema,
-  sweep3: sweepSchema,
-
-  // --- Shared shadow + stroke (same field defs as textEffectsSchema, nested) ---
-  shadow: z.object({
-    enabled: textEffectsSchema.shadowEnabled,
-    color: textEffectsSchema.shadowColor,
-    blur: textEffectsSchema.shadowBlur,
-  }),
-  stroke: z.object({
-    enabled: textEffectsSchema.strokeEnabled,
-    color: textEffectsSchema.strokeColor,
-    width: textEffectsSchema.strokeWidth,
+    entrance: z.object({
+      direction: directionEnum, // where normal words come FROM
+      distance: z.number().min(5).max(300).step(1), // px traveled
+      duration: z.number().min(5).max(30).step(1), // entrance length (frames) — shared
+    }),
+    easing: z.object({
+      type: easingTypeEnum, // curve type for normal words
+      speed: z.number().min(1).max(6).step(0.1), // curve intensity
+    }),
   }),
 });
 
 // The direction a word comes FROM as it enters, and the easing curve shape.
 export type EntranceDirection = "up" | "down" | "left" | "right";
 export type EntranceEasing = "smooth" | "sharp" | "bouncy";
-export type LayoutMode = "single" | "kinetic";
 
 // Per-line kinetic alignment. A resolved line aligns left/center/right; the
 // emphasis/normal props pick which, with normal supporting "alternate".
@@ -173,68 +190,85 @@ export type LineAlignment = "left" | "center" | "right";
 export type EmphasisAlignment = "center" | "left" | "right";
 export type NormalAlignment = "alternate" | "left" | "right" | "center";
 
+type EntranceGroup = {
+  direction: EntranceDirection;
+  distance: number;
+  easing: EntranceEasing;
+  easingSpeed: number;
+};
+
 export type ShinyStyle = {
-  layoutMode: LayoutMode;
-  kinetic: {
+  layout: {
     wordsPerLine: number;
     linesPerSegment: number;
+    captionScale: number;
+    wordSpacing: number;
     lineSpacing: number;
+    positionX: number;
     positionY: number;
     emphasisAlignment: EmphasisAlignment;
     normalAlignment: NormalAlignment;
   };
   text: {
     fontFamily: FontFamilyName;
-    emphasisFontFamily: FontFamilyName;
-    emphasisScale: number;
-    emphasisColorEnabled: boolean;
-    emphasisColor: string;
+    baseColor: string;
+  };
+  emphasis: {
+    scale: number;
+    fontFamily: FontFamilyName;
+    offsetX: number;
+    offsetY: number;
+    colorEnabled: boolean;
+    color: string;
+    entrance: EntranceGroup;
+  };
+  effects: {
+    gradient: {
+      angle: number;
+      topColor: string;
+      topPosition: number;
+      midEnabled: boolean;
+      midColor: string;
+      midPosition: number;
+      bottomColor: string;
+      bottomPosition: number;
+    };
+    glow: {
+      strength: number;
+      color: string;
+    };
+    deepGlow: {
+      enabled: boolean;
+      radius: number;
+      brightness: number;
+      innerColor: string;
+      outerColor: string;
+      chromatic: number;
+    };
+    sweep1: SweepSlot;
+    sweep2: SweepSlot;
+    sweep3: SweepSlot;
+    stroke: {
+      enabled: boolean;
+      color: string;
+      width: number;
+    };
+    shadow: {
+      enabled: boolean;
+      color: string;
+      blur: number;
+    };
   };
   animation: {
-    entranceDirection: EntranceDirection;
-    entranceDistance: number;
-    entranceDuration: number;
-    entranceEasing: EntranceEasing;
-    entranceEasingSpeed: number;
-    emphasisEntranceDirection: EntranceDirection;
-    emphasisEntranceDistance: number;
-    emphasisEntranceEasing: EntranceEasing;
-    emphasisEntranceEasingSpeed: number;
-  };
-  gradient: {
-    angle: number;
-    topColor: string;
-    topPosition: number;
-    midEnabled: boolean;
-    midColor: string;
-    midPosition: number;
-    bottomColor: string;
-    bottomPosition: number;
-  };
-  glow: {
-    strength: number;
-    color: string;
-  };
-  deepGlow: {
-    enabled: boolean;
-    radius: number;
-    brightness: number;
-    innerColor: string;
-    outerColor: string;
-    chromatic: number;
-  };
-  sweep1: SweepSlot;
-  sweep2: SweepSlot;
-  sweep3: SweepSlot;
-  shadow: {
-    enabled: boolean;
-    color: string;
-    blur: number;
-  };
-  stroke: {
-    enabled: boolean;
-    color: string;
-    width: number;
+    entrance: {
+      direction: EntranceDirection;
+      distance: number;
+      duration: number;
+    };
+    easing: {
+      type: EntranceEasing;
+      speed: number;
+    };
   };
 };
 
@@ -242,91 +276,109 @@ export type ShinyStyle = {
 // rendered without a provider (e.g. in isolation / tests). Default = TWO stops
 // (top at 0%, bottom at 100%); the middle stop is OFF until the user enables it.
 export const SHINY_DEFAULTS: ShinyStyle = {
-  layoutMode: "single",
-  kinetic: {
-    wordsPerLine: 3,
-    linesPerSegment: 4,
-    lineSpacing: 1.1,
-    positionY: 65,
+  layout: {
+    // Hormozi stagger: short 2-word lines keep their words grouped, normal lines
+    // alternate left/right, and any line with the big/shiny (emphasized) word is
+    // centered & prominent.
+    wordsPerLine: 2,
+    linesPerSegment: 3,
+    captionScale: 1, // no extra scaling by default
+    wordSpacing: 0.12, // a touch of breathing room between words (em)
+    lineSpacing: 1.2,
+    positionX: 50, // horizontally centered
+    positionY: 70, // lower-center (leaves room below for the stacked lines)
     emphasisAlignment: "center",
     normalAlignment: "alternate",
   },
   text: {
     fontFamily: FONT_DEFAULTS.fontFamily,
-    emphasisFontFamily: FONT_DEFAULTS.fontFamily,
-    emphasisScale: 1.4,
-    emphasisColorEnabled: false,
-    emphasisColor: "#ffffff",
+    baseColor: "#ffffff",
+  },
+  emphasis: {
+    scale: 1.4,
+    fontFamily: FONT_DEFAULTS.fontFamily,
+    offsetX: 0,
+    offsetY: 0,
+    colorEnabled: false,
+    color: "#ffffff",
+    entrance: {
+      direction: "up",
+      distance: 50,
+      easing: "smooth",
+      easingSpeed: 3,
+    },
+  },
+  effects: {
+    gradient: {
+      angle: 180,
+      topColor: "#ffe14d",
+      topPosition: 0,
+      midEnabled: false,
+      midColor: "#ff8a00",
+      midPosition: 50,
+      bottomColor: "#ff3d00",
+      bottomPosition: 100,
+    },
+    glow: {
+      strength: 30,
+      color: "#ff8a00",
+    },
+    deepGlow: {
+      enabled: false,
+      radius: 60,
+      brightness: 70,
+      innerColor: "#fff5e6",
+      outerColor: "#ff8a00",
+      chromatic: 0,
+    },
+    sweep1: {
+      enabled: true,
+      color: "#ffffff",
+      angle: 20,
+      width: 30,
+      intensity: 70,
+      positionX: 50,
+      positionY: 50,
+    },
+    sweep2: {
+      enabled: false,
+      color: "#ffffff",
+      angle: 160,
+      width: 20,
+      intensity: 50,
+      positionX: 50,
+      positionY: 50,
+    },
+    sweep3: {
+      enabled: false,
+      color: "#ffffff",
+      angle: 90,
+      width: 15,
+      intensity: 40,
+      positionX: 50,
+      positionY: 50,
+    },
+    stroke: {
+      enabled: TEXT_EFFECTS_DEFAULTS.strokeEnabled,
+      color: TEXT_EFFECTS_DEFAULTS.strokeColor,
+      width: TEXT_EFFECTS_DEFAULTS.strokeWidth,
+    },
+    shadow: {
+      enabled: TEXT_EFFECTS_DEFAULTS.shadowEnabled,
+      color: TEXT_EFFECTS_DEFAULTS.shadowColor,
+      blur: TEXT_EFFECTS_DEFAULTS.shadowBlur,
+    },
   },
   animation: {
-    entranceDirection: "up",
-    entranceDistance: 30,
-    entranceDuration: 12,
-    entranceEasing: "smooth",
-    entranceEasingSpeed: 3,
-    emphasisEntranceDirection: "up",
-    emphasisEntranceDistance: 50,
-    emphasisEntranceEasing: "smooth",
-    emphasisEntranceEasingSpeed: 3,
-  },
-  gradient: {
-    angle: 180,
-    topColor: "#ffe14d",
-    topPosition: 0,
-    midEnabled: false,
-    midColor: "#ff8a00",
-    midPosition: 50,
-    bottomColor: "#ff3d00",
-    bottomPosition: 100,
-  },
-  glow: {
-    strength: 30,
-    color: "#ff8a00",
-  },
-  deepGlow: {
-    enabled: false,
-    radius: 60,
-    brightness: 70,
-    innerColor: "#fff5e6",
-    outerColor: "#ff8a00",
-    chromatic: 0,
-  },
-  sweep1: {
-    enabled: true,
-    color: "#ffffff",
-    angle: 20,
-    width: 30,
-    intensity: 70,
-    positionX: 50,
-    positionY: 50,
-  },
-  sweep2: {
-    enabled: false,
-    color: "#ffffff",
-    angle: 160,
-    width: 20,
-    intensity: 50,
-    positionX: 50,
-    positionY: 50,
-  },
-  sweep3: {
-    enabled: false,
-    color: "#ffffff",
-    angle: 90,
-    width: 15,
-    intensity: 40,
-    positionX: 50,
-    positionY: 50,
-  },
-  shadow: {
-    enabled: TEXT_EFFECTS_DEFAULTS.shadowEnabled,
-    color: TEXT_EFFECTS_DEFAULTS.shadowColor,
-    blur: TEXT_EFFECTS_DEFAULTS.shadowBlur,
-  },
-  stroke: {
-    enabled: TEXT_EFFECTS_DEFAULTS.strokeEnabled,
-    color: TEXT_EFFECTS_DEFAULTS.strokeColor,
-    width: TEXT_EFFECTS_DEFAULTS.strokeWidth,
+    entrance: {
+      direction: "up",
+      distance: 30,
+      duration: 12,
+    },
+    easing: {
+      type: "smooth",
+      speed: 3,
+    },
   },
 };
 
@@ -336,8 +388,7 @@ export const SHINY_DEFAULTS: ShinyStyle = {
  * Always includes top + bottom; includes the middle stop only when toggled on.
  * Stops are ordered top -> middle -> bottom along the gradient axis.
  */
-const buildGradientCss = (s: ShinyStyle): string => {
-  const g = s.gradient;
+export const buildGradientCss = (g: GradientConfig): string => {
   const stops: { color: string; position: number }[] = [
     { color: g.topColor, position: g.topPosition },
     ...(g.midEnabled
@@ -364,7 +415,11 @@ type SweepSlot = {
 };
 
 // The three sweep slots, in render order. Each group already has SweepSlot shape.
-const getSweepSlots = (s: ShinyStyle): SweepSlot[] => [s.sweep1, s.sweep2, s.sweep3];
+const getSweepSlots = (s: ShinyStyle): SweepSlot[] => [
+  s.effects.sweep1,
+  s.effects.sweep2,
+  s.effects.sweep3,
+];
 
 /**
  * Builds one glossy light-sweep band as a linear-gradient. The band is a bright
@@ -410,7 +465,7 @@ const DEEP_GLOW_LAYERS = 7;
  * Returns "" when disabled so it contributes nothing to the filter chain.
  */
 const buildDeepGlowCss = (s: ShinyStyle): string => {
-  const d = s.deepGlow;
+  const d = s.effects.deepGlow;
   if (!d.enabled || d.radius <= 0) return "";
   const intensity = d.brightness / 100;
   const parts: string[] = [];
@@ -479,29 +534,49 @@ type EntranceConfig = {
 
 /**
  * Builds the entrance easing function from the `entranceEasing` TYPE (dropdown)
- * and the `entranceEasingSpeed` SLIDER (curve intensity):
- *   - smooth -> a proper EASE-OUT: fast at the start, decelerating gently into
- *     the resting position (velocity reaches ~0 at the end, so NO abrupt stop).
- *     `Easing.out(Easing.cubic)` is the canonical curve; easingSpeed lets you
- *     dial it (2 = quadratic, 3 = cubic, higher = snappier) but it is FLOORED at
- *     2 so "smooth" can never collapse to linear (which caused the abrupt stop).
- *   - bouncy -> ease-out with a slight overshoot (easingSpeed = overshoot).
- *   - sharp  -> snappy/linear (easingSpeed ignored).
+ * and the `entranceEasingSpeed` SLIDER (curve intensity, 1–6). `easingSpeed` is
+ * normalised to s∈[0,1] and meaningfully reshapes each curve:
+ *
+ *   - smooth -> a proper EASE-OUT that GLIDES. A cubic-bezier whose BOTH control
+ *     points sit at y=1, so the curve lands with ZERO end velocity (a soft stop,
+ *     never an abrupt halt). The motion stays visible across the whole window
+ *     instead of finishing in the first few frames — the old `poly(6)` ease-out
+ *     put 98% of the travel in the first half, which read as "move then STOP".
+ *     easingSpeed blends easeOutQuad (gentle, s=0) -> easeOutCubic (snappier,
+ *     s=1); both decelerate smoothly.
+ *   - sharp  -> snappy/quick: an easeOut-Expo-style bezier (most travel up front)
+ *     that is still soft-landing (no hard linear stop). easingSpeed makes it
+ *     snappier.
+ *   - bouncy -> ease-out with a slight OVERSHOOT past the target, then settles
+ *     back. easingSpeed scales the overshoot amount (1 = subtle, 6 = lively).
  */
 const makeEntranceEasing = (
   type: EntranceEasing,
   easingSpeed: number,
 ): ((input: number) => number) => {
+  const s = clamp((easingSpeed - 1) / 5, 0, 1); // slider 1..6 -> 0..1
   switch (type) {
-    case "smooth":
-      // Ease-OUT (decelerates into place). Floored at 2 so it always curves —
-      // Easing.out(Easing.poly(3)) === Easing.out(Easing.cubic).
-      return Easing.out(Easing.poly(Math.max(2, easingSpeed)));
-    case "bouncy":
-      return Easing.out(Easing.back(easingSpeed));
+    case "smooth": {
+      // Blend easeOutQuad (0.5,1,0.89,1) -> easeOutCubic (0.33,1,0.68,1). Both
+      // control-point y's are 1, so end velocity is 0 (soft landing); motion
+      // stays perceptible through the whole entrance (no abrupt stop).
+      const x1 = 0.5 - 0.17 * s; // 0.50 -> 0.33
+      const x2 = 0.89 - 0.21 * s; // 0.89 -> 0.68
+      return Easing.bezier(x1, 1, x2, 1);
+    }
+    case "bouncy": {
+      // Overshoot past the target then settle. `back` overshoot grows with speed.
+      const overshoot = 1 + s * 2; // 1.0 -> 3.0
+      return Easing.out(Easing.back(overshoot));
+    }
     case "sharp":
-    default:
-      return Easing.linear;
+    default: {
+      // Snappy: easeOut-Expo-style (front-loaded) but still y=1 controls, so it
+      // decelerates into place rather than halting linearly. Snappier with speed.
+      const x1 = 0.16 - 0.06 * s; // 0.16 -> 0.10
+      const x2 = 0.3 - 0.1 * s; // 0.30 -> 0.20
+      return Easing.bezier(x1, 1, x2, 1);
+    }
   }
 };
 
@@ -596,13 +671,24 @@ export type KineticBlock = {
  *
  * Example: wordsPerLine=2, linesPerSegment=3 -> blocks of 3 lines × 2 words.
  */
+// Coerce a count prop to a SAFE integer >= 1. Plain `Math.max(1, Math.floor(v))`
+// is NOT enough: Math.floor(NaN) is NaN and Math.max(1, NaN) is NaN — so a
+// NaN/undefined value (which the Studio produces transiently while you edit a
+// number field) yields wordsPerBlock = NaN, the chunking loop `i += NaN` never
+// runs, ZERO blocks are produced, and the captions DISAPPEAR. Guarding for
+// finiteness fixes that; it also clamps 0 / negative / fractional values to 1.
+const safeCount = (v: number): number => {
+  const n = Math.floor(v);
+  return Number.isFinite(n) && n >= 1 ? n : 1;
+};
+
 export const groupWordsIntoBlocks = (
   words: KineticWord[],
   wordsPerLine: number,
   linesPerSegment: number,
 ): KineticBlock[] => {
-  const perLine = Math.max(1, Math.floor(wordsPerLine));
-  const linesPerBlock = Math.max(1, Math.floor(linesPerSegment));
+  const perLine = safeCount(wordsPerLine);
+  const linesPerBlock = safeCount(linesPerSegment);
   const wordsPerBlock = perLine * linesPerBlock;
 
   const blocks: KineticBlock[] = [];
@@ -628,61 +714,86 @@ export const groupWordsIntoBlocks = (
 };
 
 /**
- * Shiny style: a warm gradient text fill with a strong glow.
- *
- * Two layout modes (prop `layoutMode`):
- *   - "single" (default): the ORIGINAL look — one centered line of words, each
- *     animating IN from `entranceDirection` while fading in, with the per-word
- *     emphasis (glow + optional emphasis color) tracking the spoken timing.
- *   - "kinetic": a multi-line stacked block (Hormozi / viral-caption style).
- *     Normal words are plain WHITE; rule-emphasized words (see decideEmphasis)
- *     reuse the SAME gradient + glow treatment. Words still enter directionally.
- *
- * Glow + gradient colors come from props via ShinyStyleContext.
+ * Re-chops a block's FLAT word list into VISUAL lines for the reference layout
+ * (small / BIG / small, stacked):
+ *   - every EMPHASIZED word (decideEmphasis) gets its OWN line, so it sits
+ *     CENTERED and large, isolated from the smaller normal words;
+ *   - consecutive NORMAL words pack into a line of up to `maxNormalPerLine`, so a
+ *     short normal phrase ("Do not", "them by") stays grouped on one line and is
+ *     offset left/right around the emphasized word.
+ * So a block reads: small phrase (left) / BIG WORD (center) / small phrase
+ * (right), stacked — like "Do not / judge / them by" in the references.
  */
-export const PageShiny: React.FC<CaptionStyleProps> = ({ page, captions = [] }) => {
+export const splitIntoEmphasisLines = (
+  words: KineticWord[],
+  maxNormalPerLine: number,
+): KineticWord[][] => {
+  const perLine = safeCount(maxNormalPerLine);
+  const lines: KineticWord[][] = [];
+  let normalRun: KineticWord[] = [];
+  const flushNormal = () => {
+    if (normalRun.length) {
+      lines.push(normalRun);
+      normalRun = [];
+    }
+  };
+  for (const w of words) {
+    if (decideEmphasis(w.text)) {
+      flushNormal(); // end any pending normal phrase first
+      lines.push([w]); // the emphasized word alone on its own line
+    } else {
+      normalRun.push(w);
+      if (normalRun.length >= perLine) flushNormal();
+    }
+  }
+  flushNormal();
+  return lines;
+};
+
+/**
+ * Renders ONE kinetic segment (block) — a multi-line stacked block
+ * (Hormozi / viral-caption style). This component is mounted INSIDE its own
+ * <Sequence> by PageShiny, so `useCurrentFrame()` here is LOCAL to the segment:
+ * frame 0 is the moment the segment appears on the timeline. Each word then
+ * builds up word-by-word from the block's start, and emphasized words wear the
+ * Shiny gradient + glow. Glow / gradient / etc. come from ShinyStyleContext.
+ */
+const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
   const frame = useCurrentFrame();
   const { width, fps } = useVideoConfig();
-  const timeInMs = (frame / fps) * 1000;
 
   const style = useContext(ShinyStyleContext);
-  // `captions` (the flat word stream) is passed by the engine only in the
-  // single-surface kinetic path; it drives kinetic's own count-based grouping.
-  const { strength: glowStrength, color: glowColor } = style.glow;
-  const {
-    entranceDirection,
-    entranceDistance,
-    entranceDuration,
-    entranceEasing,
-    entranceEasingSpeed,
-    emphasisEntranceDirection,
-    emphasisEntranceDistance,
-    emphasisEntranceEasing,
-    emphasisEntranceEasingSpeed,
-  } = style.animation;
+  const { strength: glowStrength, color: glowColor } = style.effects.glow;
+  // NORMAL-word entrance lives under `animation` (entrance + easing); the
+  // EMPHASIS entrance lives under `emphasis.entrance`. The window length
+  // (`entranceDuration`) is shared and comes from animation.entrance.
+  const { entrance: normalEntranceProps, easing: normalEasing } = style.animation;
+  const emphasisEntranceProps = style.emphasis.entrance;
+  const entranceDuration = normalEntranceProps.duration;
 
   // Entrance config (easing curve + which axis/sign the word enters from +
-  // travel distance). NORMAL words use `normalEntrance`; in kinetic mode the
-  // EMPHASIZED words use `emphasisEntrance` instead, so the two animate
-  // independently. `entranceDuration` (the window) is shared by both.
+  // travel distance). NORMAL words use `normalEntrance`; EMPHASIZED words use
+  // `emphasisEntrance` instead, so the two animate independently.
   const normalEntrance: EntranceConfig = {
-    easingFn: makeEntranceEasing(entranceEasing, entranceEasingSpeed),
-    ...ENTRANCE_VECTOR[entranceDirection],
-    distance: entranceDistance,
+    easingFn: makeEntranceEasing(normalEasing.type, normalEasing.speed),
+    ...ENTRANCE_VECTOR[normalEntranceProps.direction],
+    distance: normalEntranceProps.distance,
   };
   const emphasisEntrance: EntranceConfig = {
-    easingFn: makeEntranceEasing(emphasisEntranceEasing, emphasisEntranceEasingSpeed),
-    ...ENTRANCE_VECTOR[emphasisEntranceDirection],
-    distance: emphasisEntranceDistance,
+    easingFn: makeEntranceEasing(emphasisEntranceProps.easing, emphasisEntranceProps.easingSpeed),
+    ...ENTRANCE_VECTOR[emphasisEntranceProps.direction],
+    distance: emphasisEntranceProps.distance,
   };
 
   const fontFamily = resolveFontFamily(style.text.fontFamily);
-  // Font + scale used by EMPHASIZED words in kinetic mode (normal words use the
-  // base font + scale 1).
-  const emphasisFontFamily = resolveFontFamily(style.text.emphasisFontFamily);
-  const emphasisScale = style.text.emphasisScale;
+  // GROUP-level emphasis controls — shared by every emphasized word (not per
+  // individual word): a different font, a uniform size multiplier, and an X/Y
+  // nudge. Normal words use the base font at scale 1 and no offset.
+  const emphasisFontFamily = resolveFontFamily(style.emphasis.fontFamily);
+  const emphasisScale = style.emphasis.scale;
+  const { offsetX: emphasisOffsetX, offsetY: emphasisOffsetY } = style.emphasis;
   // Vertical text gradient, built from the enabled stops + their positions.
-  const gradientCss = buildGradientCss(style);
+  const gradientCss = buildGradientCss(style.effects.gradient);
 
   // Glossy light sweeps layered ABOVE the gradient (all clipped to text). Each
   // enabled slot is its own background layer; the tile is oversized so
@@ -697,20 +808,18 @@ export const PageShiny: React.FC<CaptionStyleProps> = ({ page, captions = [] }) 
     (slot) => `${slot.positionX}% ${slot.positionY}%`,
   );
 
-  const easeMs = (entranceDuration / fps) * 1000;
-
   // Gradient text has a transparent fill, so text-shadow won't render — the
   // shadow is applied as a drop-shadow in each word's filter chain instead.
   // The stroke is an inherited property, so it's set once on the container.
   // The shared shadow/stroke helpers take the flat TextEffects shape, so adapt
   // the nested shadow/stroke groups into it.
   const textEffects: TextEffects = {
-    shadowEnabled: style.shadow.enabled,
-    shadowColor: style.shadow.color,
-    shadowBlur: style.shadow.blur,
-    strokeEnabled: style.stroke.enabled,
-    strokeColor: style.stroke.color,
-    strokeWidth: style.stroke.width,
+    shadowEnabled: style.effects.shadow.enabled,
+    shadowColor: style.effects.shadow.color,
+    shadowBlur: style.effects.shadow.blur,
+    strokeEnabled: style.effects.stroke.enabled,
+    strokeColor: style.effects.stroke.color,
+    strokeWidth: style.effects.stroke.width,
   };
   const stroke = textStrokeCss(textEffects);
   const shadowFilter = dropShadowCss(textEffects);
@@ -720,60 +829,17 @@ export const PageShiny: React.FC<CaptionStyleProps> = ({ page, captions = [] }) 
   const deepGlowFilter = buildDeepGlowCss(style);
 
   // -------------------------------------------------------------------------
-  // Shared per-word painters (used by BOTH modes so an emphasized word looks
-  // identical everywhere — this is the "reuse the existing Shiny effects" seam).
+  // Shared per-word painters — the "reuse the existing Shiny effects" seam that
+  // gives an emphasized kinetic word its gradient + glow look.
   // -------------------------------------------------------------------------
-  type Token = (typeof page.tokens)[number];
-
-  // Per-word directional entrance (fade-in + travel) from the word's own caption
-  // timing, using the given `cfg` (direction/distance/easing). Returns the
-  // entrance fade-in opacity (no fade-out) and the travel offset, plus the raw
-  // window so single mode can add its spoken-emphasis ramp. Defaults to
-  // `normalEntrance`, so single mode's call site is unchanged.
-  const wordEntrance = (
-    token: Token,
-    fullWindow = false,
-    cfg: EntranceConfig = normalEntrance,
-  ) => {
-    const relStart = token.fromMs - page.startMs;
-    // Guarantee a non-zero window so every inputRange stays valid even for
-    // zero-duration tokens.
-    const relEnd = Math.max(token.toMs - page.startMs, relStart + 1);
-    // SINGLE mode caps the ease at half the word's duration so the fade-out +
-    // emphasis ranges that follow stay strictly increasing. KINETIC words don't
-    // fade out, so they use the FULL entrance duration (`easeMs`) — this is what
-    // lets the ease-out actually play out and settle GENTLY instead of snapping
-    // when a word is short (a ~4-frame window hides the decelerating tail).
-    const safeEase = Math.min(easeMs, (relEnd - relStart) / 2);
-    const entranceWindow = fullWindow ? Math.max(1, easeMs) : safeEase;
-    // 0 (just appearing, fully offset) -> 1 (settled). Eased with the chosen
-    // curve (smooth / sharp / bouncy).
-    const entranceProgress = interpolate(
-      timeInMs,
-      [relStart, relStart + entranceWindow],
-      [0, 1],
-      {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
-        easing: cfg.easingFn,
-      },
-    );
-    // bouncy/back easing can overshoot, so clamp the fade-in to [0,1].
-    const fadeInOpacity = Math.min(1, Math.max(0, entranceProgress));
-    const offset = cfg.distance * (1 - entranceProgress);
-    const tx = cfg.axis === "x" ? cfg.sign * offset : 0;
-    const ty = cfg.axis === "y" ? cfg.sign * offset : 0;
-    return { relStart, relEnd, safeEase, fadeInOpacity, tx, ty };
-  };
-
   // Composes a Shiny word's clipped background layers (sweeps on top, optional
   // emphasis color over the gradient, then the gradient) for a given emphasis.
   const buildShinyBg = (emphasis: number) => {
     const bgLayers = [...sweepLayers];
     const bgSizes = [...sweepSizes];
     const bgPositions = [...sweepPositions];
-    if (style.text.emphasisColorEnabled && emphasis > 0) {
-      const ec = `color-mix(in srgb, ${style.text.emphasisColor} ${Math.round(emphasis * 100)}%, transparent)`;
+    if (style.emphasis.colorEnabled && emphasis > 0) {
+      const ec = `color-mix(in srgb, ${style.emphasis.color} ${Math.round(emphasis * 100)}%, transparent)`;
       bgLayers.push(`linear-gradient(0deg, ${ec}, ${ec})`);
       bgSizes.push("100% 100%");
       bgPositions.push("0% 0%");
@@ -831,223 +897,265 @@ export const PageShiny: React.FC<CaptionStyleProps> = ({ page, captions = [] }) 
     };
   };
 
-  // =========================================================================
-  // KINETIC mode: multi-line stacked block (Hormozi / viral-caption style).
-  // =========================================================================
-  if (style.layoutMode === "kinetic") {
-    const {
-      wordsPerLine,
-      linesPerSegment,
-      lineSpacing,
-      positionY,
-      emphasisAlignment,
-      normalAlignment,
-    } = style.kinetic;
+  // This segment's layout controls + content. The grouping into blocks happens
+  // in PageShiny; this component just paints the ONE block it was handed.
+  const {
+    wordsPerLine,
+    captionScale,
+    wordSpacing,
+    lineSpacing,
+    positionX,
+    positionY,
+    emphasisAlignment,
+    normalAlignment,
+  } = style.layout;
+  const baseColor = style.text.baseColor;
+  // Re-chop the block's flat words so each EMPHASIZED word is isolated on its own
+  // (centered, large) line and normal words pack into short offset lines around
+  // it — the small / BIG / small reference layout.
+  const lines = splitIntoEmphasisLines(block.lines.flat(), wordsPerLine);
+  // Per-line alignment: a line with the emphasized word -> emphasisAlignment
+  // (centered & prominent); each NORMAL line alternates left/right by its OWN
+  // running index, so the normal phrases sit left, right, left … AROUND the
+  // emphasized lines regardless of how many emphasized lines fall between them.
+  let normalLineIdx = 0;
+  const lineAligns: LineAlignment[] = lines.map((line) =>
+    line.some((w) => decideEmphasis(w.text))
+      ? emphasisAlignment
+      : decideLineAlignment(line, normalLineIdx++, emphasisAlignment, normalAlignment),
+  );
+  // First word's startMs — words reveal RELATIVE to this (frame 0 == segment
+  // start, since we're inside the segment's own <Sequence>), so the build-up is
+  // bounded to the segment's window and a word can never be stuck transparent.
+  const blockStartMs = block.startMs;
+  const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
 
-    // Take the FLAT caption stream and chop it strictly BY COUNT into blocks
-    // (STEP 1-3 live in groupWordsIntoBlocks). `timeInMs` here is the GLOBAL
-    // composition time because kinetic renders as one full-timeline surface.
-    const words: KineticWord[] = captions.map((c) => ({
-      text: c.text,
-      fromMs: c.startMs,
-      toMs: c.endMs,
-    }));
-    const blocks = groupWordsIntoBlocks(words, wordsPerLine, linesPerSegment);
+  // ---- SIZE / CONTAINMENT: auto-shrink so the WIDEST line fits 90% width ---
+  // Emphasized words render at `emphasisScale` in `emphasisFontFamily` — often a
+  // wider/heavier face (e.g. Anton) than the base font — so measuring the line
+  // in the base font (as before) UNDER-counts their width and they overflow.
+  // Instead, measure EVERY word in its ACTUAL font at a reference size, scale
+  // the emphasized ones by emphasisScale, and bind the base font size to the
+  // tightest line. This contains emphasized words no matter how big the scale.
+  const REF_SIZE = 100;
+  const availWidth = width * 0.9;
+  const lineMaxSizes = lines.map((ln) => {
+    const lineWidthAtRef = ln.reduce((sum, tk) => {
+      const emph = decideEmphasis(tk.text);
+      const w =
+        measureText({
+          text: tk.text,
+          fontFamily: emph ? emphasisFontFamily : fontFamily,
+          fontSize: REF_SIZE,
+          fontWeight: FONT_WEIGHT,
+        }).width * (emph ? emphasisScale : 1);
+      return sum + w;
+    }, 0);
+    // Reserve the extra word-spacing (CSS word-spacing, applied per space char ≈
+    // once per word) so adding it never pushes the line past availWidth.
+    const wordSpacingAtRef = ln.length * wordSpacing * REF_SIZE;
+    const totalAtRef = lineWidthAtRef + wordSpacingAtRef;
+    // Largest base font size at which this whole line still fits availWidth.
+    return totalAtRef > 0 ? (REF_SIZE * availWidth) / totalAtRef : DESIRED_FONT_SIZE;
+  });
+  const kFontSize = lineMaxSizes.length
+    ? Math.min(DESIRED_FONT_SIZE, ...lineMaxSizes)
+    : DESIRED_FONT_SIZE;
 
-    // Active block: the most recent block that has started. It stays until the
-    // next block's first word starts (blocks swap cleanly, no blank gap); the
-    // last block holds to the end.
-    let active: KineticBlock | null = null;
-    for (const b of blocks) {
-      if (timeInMs >= b.startMs) active = b;
-    }
-    const lines = active ? active.lines : [];
+  // ---- ENTRANCE: reveal each word RELATIVE to its block's start frame ------
+  // The block builds up WORD BY WORD: a word fades + rises in over
+  // `entranceDuration` starting at `startFrame`, then settles at opacity 1 and
+  // STAYS there (interpolate clamps), so it is fully visible for the rest of the
+  // segment. `startFrame` is computed per word from the BLOCK's frame range (see
+  // call site) — NOT each word's absolute startMs — so the entrance window is
+  // always inside the block's own time on screen. That guarantees every word
+  // reaches opacity 1 while its segment is showing; a word can never be stuck
+  // transparent (which is what hid the captions before).
+  const enter = (cfg: EntranceConfig, startFrame: number) => {
+    const progress = interpolate(
+      frame,
+      [startFrame, startFrame + entranceDuration],
+      [0, 1],
+      { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: cfg.easingFn },
+    );
+    const p = Math.min(1, Math.max(0, progress));
+    const offset = cfg.distance * (1 - progress);
+    return {
+      opacity: p,
+      tx: cfg.axis === "x" ? cfg.sign * offset : 0,
+      ty: cfg.axis === "y" ? cfg.sign * offset : 0,
+    };
+  };
 
-    // Size text to the widest line in the block (capped) so the block fits.
-    const widest = lines.reduce((w, ln) => {
-      const t = ln.map((tk) => tk.text).join("");
-      return t.length > w.length ? t : w;
-    }, "");
-    const kFitted = fitText({
-      fontFamily,
-      text: widest || "M",
-      withinWidth: width * 0.9,
-      fontWeight: FONT_WEIGHT,
-    });
-    const kFontSize = Math.min(DESIRED_FONT_SIZE, kFitted.fontSize);
-
-    return (
-      <AbsoluteFill>
-        <div
-          style={{
-            position: "absolute",
-            // 90%-wide block, centered, matching fitText's withinWidth so the
-            // widest line just fits. Lines STRETCH to this width so per-line
-            // justify-content can offset them left/right (the Hormozi stagger).
-            left: "5%",
-            right: "5%",
-            top: `${positionY}%`,
-            transform: "translateY(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "stretch",
-            fontSize: kFontSize,
-            fontFamily,
-            fontWeight: FONT_WEIGHT,
-            // Stroke is inherited by the word spans below; each span also sets
-            // paint-order so the stroke sits BEHIND its gradient/white fill.
-            WebkitTextStroke: stroke,
-            paintOrder: stroke ? "stroke fill" : undefined,
-          }}
-        >
-          {lines.map((line, li) => (
-            <div
-              key={li}
-              style={{
-                display: "flex",
-                // Per-line alignment (rule-based; swappable for AI).
-                justifyContent:
-                  ALIGN_TO_JUSTIFY[
-                    decideLineAlignment(line, li, emphasisAlignment, normalAlignment)
-                  ],
-                alignItems: "baseline",
-                lineHeight: lineSpacing,
-                whiteSpace: "pre",
-              }}
-            >
-              {line.map((token, wi) => {
-                // THE rule-based decision (swap decideEmphasis for an API later).
-                const emphasized = decideEmphasis(token.text);
-                // EMPHASIZED words get their OWN entrance (emphasisEntrance);
-                // NORMAL words use the standard one. Full window so the ease-out
-                // plays out and settles gently (kinetic words persist).
-                const { fadeInOpacity, tx, ty } = wordEntrance(
-                  token,
-                  true,
-                  emphasized ? emphasisEntrance : normalEntrance,
-                );
-                // EMPHASIZED words: shiny gradient + glow, LARGER (emphasisScale)
-                // and in `emphasisFontFamily`. NORMAL words: white, base font,
-                // normal size.
-                if (emphasized) {
-                  const transform = `translate(${tx}px, ${ty}px) scale(${emphasisScale})`;
-                  return (
-                    <span
-                      key={wi}
-                      style={{
-                        ...shinyWordStyle(1, fadeInOpacity, transform),
-                        fontFamily: emphasisFontFamily,
-                      }}
-                    >
-                      {token.text}
-                    </span>
-                  );
-                }
-                const transform = `translate(${tx}px, ${ty}px)`;
+  return (
+    <AbsoluteFill>
+      <div
+        style={{
+          position: "absolute",
+          // 90%-wide block whose CENTER sits at (positionX%, positionY%) of the
+          // frame (translate(-50%,-50%) re-centers it there). captionScale sizes
+          // the whole block. Lines STRETCH to the block width so per-line
+          // justify-content can offset them left/right (the Hormozi stagger).
+          left: `${positionX}%`,
+          width: "90%",
+          top: `${positionY}%`,
+          transformOrigin: "center center",
+          transform: `translate(-50%, -50%) scale(${captionScale})`,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "stretch",
+          fontFamily,
+          fontWeight: FONT_WEIGHT,
+          // Extra horizontal gap added at each space character between words.
+          wordSpacing: `${wordSpacing}em`,
+          // Stroke is inherited by the word spans below; each span also sets
+          // paint-order so the stroke sits BEHIND its gradient/white fill.
+          WebkitTextStroke: stroke,
+          paintOrder: stroke ? "stroke fill" : undefined,
+        }}
+      >
+        {lines.map((line, li) => (
+          <div
+            key={li}
+            style={{
+              display: "flex",
+              // Per-line alignment (emphasized -> centered; normal -> alternating
+              // left/right by normal-line index; see lineAligns above).
+              justifyContent: ALIGN_TO_JUSTIFY[lineAligns[li]],
+              // Center the words on the row so a big (emphasized) word and the
+              // small (normal) words share a common vertical CENTER instead of a
+              // shared baseline (baseline made big words ride up into the line
+              // above). The row's height tracks its TALLEST word, because each
+              // span's line box = its own fontSize x lineSpacing — emphasized
+              // words are bigger, so the row grows to fit them and adjacent
+              // lines never collide. This is the "line height adapts to the
+              // biggest word" rule.
+              alignItems: "center",
+              lineHeight: lineSpacing,
+              whiteSpace: "pre",
+            }}
+          >
+            {line.map((token, wi) => {
+              // THE rule-based decision (swap decideEmphasis for an API later).
+              const emphasized = decideEmphasis(token.text);
+              // Reveal this word offset by how far INTO the segment it is spoken
+              // (token.fromMs - blockStartMs). Since we're inside this segment's
+              // <Sequence>, local frame 0 is the segment's start, so the first
+              // word reveals immediately and later words build up word-by-word —
+              // always reaching opacity 1 within the segment (never stuck hidden).
+              // EMPHASIZED words use emphasisEntrance; NORMAL words the standard one.
+              const wordStartFrame = Math.max(0, msToFrame(token.fromMs - blockStartMs));
+              const { opacity, tx, ty } = enter(
+                emphasized ? emphasisEntrance : normalEntrance,
+                wordStartFrame,
+              );
+              const transform = `translate(${tx}px, ${ty}px)`;
+              // EMPHASIZED words: shiny gradient + glow, BIGGER via a real
+              // fontSize (kFontSize x emphasisScale) — NOT transform: scale, so
+              // the word takes real layout space and its line box grows with it
+              // (no overlap). Rendered in emphasisFontFamily, with the shared
+              // group-level X/Y nudge applied ON TOP of the entrance travel.
+              if (emphasized) {
+                const emphasisTransform = `translate(${tx + emphasisOffsetX}px, ${ty + emphasisOffsetY}px)`;
                 return (
                   <span
                     key={wi}
                     style={{
-                      display: "inline-block",
-                      whiteSpace: "pre",
-                      opacity: fadeInOpacity,
-                      transform,
-                      color: "#ffffff",
-                      WebkitTextFillColor: "#ffffff",
-                      // Stroke painted behind the white fill (clean outline).
-                      WebkitTextStroke: stroke,
-                      paintOrder: stroke ? "stroke fill" : undefined,
-                      filter: shadowFilter || undefined,
+                      ...shinyWordStyle(1, opacity, emphasisTransform),
+                      fontSize: kFontSize * emphasisScale,
+                      fontFamily: emphasisFontFamily,
                     }}
                   >
                     {token.text}
                   </span>
                 );
-              })}
-            </div>
-          ))}
-        </div>
-      </AbsoluteFill>
-    );
-  }
+              }
+              // NORMAL words: baseColor fill, base font, base (small) size.
+              return (
+                <span
+                  key={wi}
+                  style={{
+                    display: "inline-block",
+                    whiteSpace: "pre",
+                    fontSize: kFontSize,
+                    opacity,
+                    transform,
+                    color: baseColor,
+                    WebkitTextFillColor: baseColor,
+                    // Stroke painted behind the fill (clean outline).
+                    WebkitTextStroke: stroke,
+                    paintOrder: stroke ? "stroke fill" : undefined,
+                    filter: shadowFilter || undefined,
+                  }}
+                >
+                  {token.text}
+                </span>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </AbsoluteFill>
+  );
+};
 
-  // =========================================================================
-  // SINGLE mode (default): the ORIGINAL one-line Shiny look — unchanged.
-  // =========================================================================
-  const fittedText = fitText({
-    fontFamily,
-    text: page.text,
-    withinWidth: width * 0.9,
-    fontWeight: FONT_WEIGHT,
-  });
+/**
+ * Shiny style: a warm gradient text fill with a strong glow.
+ *
+ * A single KINETIC layout — a multi-line stacked block (Hormozi / viral-caption
+ * style). The flat caption stream is grouped BY COUNT (wordsPerLine x
+ * linesPerSegment) into blocks, and EACH block is wrapped in its OWN <Sequence>
+ * (from = the block's start frame, durationInFrames = until the next block, last
+ * runs to the composition end). This makes every segment a SEPARATE block on the
+ * Studio timeline — the same structure the engine uses for the per-page styles
+ * (Typewriter etc.) — instead of one continuous element. Each <ShinySegment>
+ * then renders with its OWN Sequence-local clock.
+ *
+ * Glow + gradient colors come from props via ShinyStyleContext.
+ */
+export const PageShiny: React.FC<CaptionStyleProps> = ({ captions = [] }) => {
+  const { fps, durationInFrames } = useVideoConfig();
+  const style = useContext(ShinyStyleContext);
+  const { wordsPerLine, linesPerSegment } = style.layout;
 
-  const fontSize = Math.min(DESIRED_FONT_SIZE, fittedText.fontSize);
+  // Take the FLAT caption stream and chop it strictly BY COUNT into blocks
+  // (STEP 1-3 live in groupWordsIntoBlocks) — never the time-based
+  // createTikTokStyleCaptions grouping.
+  const words: KineticWord[] = captions.map((c) => ({
+    text: c.text,
+    fromMs: c.startMs,
+    toMs: c.endMs,
+  }));
+  const blocks = groupWordsIntoBlocks(words, wordsPerLine, linesPerSegment);
+
+  // A block appears at its first word's start (startMs) and holds until the NEXT
+  // block begins; the last block runs to the composition end. The first block is
+  // pulled back to frame 0 so the screen is never blank before the first word.
+  // durationInFrames is forced >= 1 so a Sequence is never zero/negative length.
+  const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
 
   return (
-    <AbsoluteFill
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        top: undefined,
-        bottom: 350,
-        height: 200,
-      }}
-    >
-      <div
-        style={{
-          fontSize,
-          width: "100%",
-          textAlign: "center",
-          fontFamily,
-          fontWeight: FONT_WEIGHT,
-          // Stroke is inherited by the gradient word spans below; each span also
-          // sets paint-order so the stroke sits BEHIND its gradient fill.
-          WebkitTextStroke: stroke,
-          paintOrder: stroke ? "stroke fill" : undefined,
-        }}
-      >
-        {page.tokens.map((token, index) => {
-          const { relStart, relEnd, safeEase, fadeInOpacity, tx, ty } = wordEntrance(token);
-
-          // Fade out at the end so the word leaves cleanly (linear, no travel).
-          const fadeOut = interpolate(timeInMs, [relEnd, relEnd + safeEase], [0, 1], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-            easing: Easing.in(Easing.cubic),
-          });
-          // Visible only between entrance and fade-out.
-          const opacity = fadeInOpacity * (1 - fadeOut);
-
-          // Emphasis ramps up while the word is being spoken, down at the edges.
-          // With a plateau when the word is long enough, otherwise a triangle
-          // (peaks at the midpoint) so the inputRange never collides. Emphasis
-          // drives ONLY the glow + optional emphasis color — there is no
-          // scale/grow on words (the entrance is purely directional + fade).
-          const emphasisIn = relStart + safeEase;
-          const emphasisOut = relEnd - safeEase;
-          const emphasis =
-            emphasisIn < emphasisOut
-              ? interpolate(timeInMs, [relStart, emphasisIn, emphasisOut, relEnd], [0, 1, 1, 0], {
-                  extrapolateLeft: "clamp",
-                  extrapolateRight: "clamp",
-                })
-              : interpolate(
-                  timeInMs,
-                  [relStart, (relStart + relEnd) / 2, relEnd],
-                  [0, 1, 0],
-                  { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
-                );
-
-          return (
-            <span
-              key={index}
-              style={shinyWordStyle(emphasis, opacity, `translate(${tx}px, ${ty}px)`)}
-            >
-              {token.text}
-            </span>
-          );
-        })}
-      </div>
+    // zIndex guarantees the whole caption layer sits ABOVE the video AbsoluteFill
+    // (it's a sibling rendered after the video, but an explicit z-index makes the
+    // stacking unambiguous across renderers).
+    <AbsoluteFill style={{ zIndex: 10 }}>
+      {blocks.map((block, i) => {
+        const startFrame = i === 0 ? 0 : msToFrame(block.startMs);
+        const next = blocks[i + 1];
+        const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
+        const segDurationInFrames = Math.max(1, endFrame - startFrame);
+        return (
+          <Sequence
+            key={i}
+            from={startFrame}
+            durationInFrames={segDurationInFrames}
+            // Shows as the block's label on the Studio timeline.
+            name={`Segment ${i + 1}`}
+          >
+            <ShinySegment block={block} />
+          </Sequence>
+        );
+      })}
     </AbsoluteFill>
   );
 };

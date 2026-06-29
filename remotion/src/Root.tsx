@@ -1,5 +1,5 @@
 import "./index.css";
-import { Composition, staticFile } from "remotion";
+import { Composition } from "remotion";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import {
@@ -29,9 +29,12 @@ import {
   HighlightStyleProvider,
 } from "./CaptionedVideo/styles/PageHighlight";
 
-// The video that captions are rendered over. Drop a vertical clip at
-// remotion/public/sample-video.mp4 (and run `node sub.mjs` to caption it).
-const SAMPLE_VIDEO = staticFile("sample-video.mp4");
+// The video that captions are rendered over (a vertical clip at
+// remotion/public/sample-video.mp4). Stored as a PLAIN FILENAME — not
+// staticFile("…") — so every composition's defaultProps stay a fully static
+// object literal that Remotion Studio can SAVE (a function call would block
+// "save default props"). CaptionedVideo resolves the filename via staticFile().
+const SAMPLE_VIDEO = "sample-video.mp4";
 
 // Thin wrappers bind a caption *style* to the shared CaptionedVideo
 // composition. Same video + captions, different look per composition.
@@ -54,10 +57,10 @@ const ShinyCaptionedVideo: React.FC<z.infer<typeof shinySchema>> = ({
     <CaptionedVideo
       src={src}
       PageComponent={PageShiny}
-      // Kinetic mode does its OWN count-based grouping from the flat caption
-      // stream, so it renders as a single full-timeline surface. Single mode
-      // keeps the default per-page (time-based) rendering.
-      singleSurface={style.layoutMode === "kinetic"}
+      // Shiny is kinetic-only: it does its OWN count-based grouping from the
+      // flat caption stream, so it always renders as a single full-timeline
+      // surface (not the default per-page time-based rendering).
+      singleSurface
     />
   </ShinyStyleProvider>
 );
@@ -72,13 +75,16 @@ const TypewriterCaptionedVideo: React.FC<z.infer<typeof typewriterSchema>> = ({
   </TypewriterStyleProvider>
 );
 
-// Highlight feeds its mode + colors + box padding to the style via context.
+// Highlight uses Shiny's kinetic LAYOUT, so (like Shiny) it does its own
+// count-based grouping from the flat caption stream and renders as a single
+// full-timeline surface. Its layout/color/gradient/glow/pop/wiggle props feed
+// the style via context.
 const HighlightCaptionedVideo: React.FC<z.infer<typeof highlightSchema>> = ({
   src,
   ...style
 }) => (
   <HighlightStyleProvider value={style}>
-    <CaptionedVideo src={src} PageComponent={PageHighlight} />
+    <CaptionedVideo src={src} PageComponent={PageHighlight} singleSurface />
   </HighlightStyleProvider>
 );
 
@@ -147,82 +153,102 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{
-          src: staticFile("sample-video.mp4"),
-          layoutMode: "kinetic" as const,
-          kinetic: {
+          src: "sample-video.mp4",
+          // === LAYOUT ===
+          layout: {
             wordsPerLine: 2,
-            linesPerSegment: 2,
-            lineSpacing: 1.3,
-            positionY: 69,
+            linesPerSegment: 3,
+            captionScale: 1,
+            wordSpacing: 0.12,
+            lineSpacing: 1.1,
+            positionX: 50,
+            positionY: 84,
             emphasisAlignment: "center" as const,
             normalAlignment: "alternate" as const,
           },
+          // === TEXT (normal words) ===
           text: {
             fontFamily: "Inter" as const,
-            emphasisFontFamily: "Anton" as const,
-            emphasisScale: 1.4,
-            emphasisColorEnabled: false,
-            emphasisColor: "#ffffff",
+            baseColor: "#ffffff",
           },
+          // === EMPHASIS (big/shiny words) ===
+          emphasis: {
+            scale: 1.4,
+            fontFamily: "Anton" as const,
+            offsetX: 0,
+            offsetY: 0,
+            colorEnabled: false,
+            color: "#ffffff",
+            entrance: {
+              direction: "left" as const,
+              distance: 29,
+              easing: "smooth" as const,
+              easingSpeed: 3,
+            },
+          },
+          // === EFFECTS ===
+          effects: {
+            gradient: {
+              angle: 295,
+              topColor: "#ff8800",
+              topPosition: 0,
+              midEnabled: false,
+              midColor: "#000000",
+              midPosition: 50,
+              bottomColor: "#ff8800",
+              bottomPosition: 100,
+            },
+            glow: { strength: 0, color: "#ff8800" },
+            deepGlow: {
+              enabled: true,
+              radius: 23,
+              brightness: 36,
+              innerColor: "#ff8a00",
+              outerColor: "#ff8a00",
+              chromatic: 0,
+            },
+            sweep1: {
+              enabled: false,
+              color: "#ffffff",
+              angle: 150,
+              width: 6,
+              intensity: 17,
+              positionX: 61,
+              positionY: 41,
+            },
+            sweep2: {
+              enabled: true,
+              color: "#e8ff00",
+              angle: 160,
+              width: 1,
+              intensity: 50,
+              positionX: 32,
+              positionY: 50,
+            },
+            sweep3: {
+              enabled: true,
+              color: "#ffffff",
+              angle: 163,
+              width: 1,
+              intensity: 40,
+              positionX: 58,
+              positionY: 57,
+            },
+            stroke: { enabled: true, color: "#000000", width: 0 },
+            shadow: { enabled: false, color: "rgba(0, 0, 0, 0.6)", blur: 0 },
+          },
+          // === ANIMATION (normal-word entrance + easing) ===
           animation: {
-            entranceDirection: "up" as const,
-            entranceDistance: 30,
-            entranceDuration: 30,
-            entranceEasing: "smooth" as const,
-            entranceEasingSpeed: 6,
-            emphasisEntranceDirection: "left" as const,
-            emphasisEntranceDistance: 120,
-            emphasisEntranceEasing: "smooth" as const,
-            emphasisEntranceEasingSpeed: 3,
+            entrance: {
+              direction: "up" as const,
+              distance: 63,
+              duration: 13,
+            },
+            easing: {
+              type: "smooth" as const,
+              speed: 1,
+            },
           },
-          gradient: {
-            angle: 295,
-            topColor: "#ff8800",
-            topPosition: 0,
-            midEnabled: false,
-            midColor: "#000000",
-            midPosition: 50,
-            bottomColor: "#ff8800",
-            bottomPosition: 100,
-          },
-          glow: { strength: 0, color: "#ff8800" },
-          deepGlow: {
-            enabled: true,
-            radius: 23,
-            brightness: 36,
-            innerColor: "#ff8a00",
-            outerColor: "#ff8a00",
-            chromatic: 0,
-          },
-          sweep1: {
-            enabled: false,
-            color: "#ffffff",
-            angle: 150,
-            width: 6,
-            intensity: 17,
-            positionX: 61,
-            positionY: 41,
-          },
-          sweep2: {
-            enabled: true,
-            color: "#e8ff00",
-            angle: 160,
-            width: 1,
-            intensity: 50,
-            positionX: 32,
-            positionY: 50,
-          },
-          sweep3: {
-            enabled: true,
-            color: "#ffffff",
-            angle: 163,
-            width: 1,
-            intensity: 40,
-            positionX: 58,
-            positionY: 57,
-          },
-          shadow: { enabled: false, color: "rgba(0, 0, 0, 0.6)", blur: 0 },
-          stroke: { enabled: true, color: "#000000", width: 0 },
         }}
       />
 
@@ -237,7 +263,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{
-          src: staticFile("sample-video.mp4"),
+          src: "sample-video.mp4",
           typingSpeed: 60,
           initialDelay: 0,
           showCursor: true,
@@ -258,10 +284,18 @@ export const RemotionRoot: React.FC = () => {
           strokeEnabled: true,
           strokeColor: "#000000",
           strokeWidth: 0,
+          positionX: 50,
+          positionY: 78,
+          captionScale: 1,
+          wordSpacing: 0.12,
+          lineSpacing: 1.2,
         }}
       />
 
-      {/* "Highlight" caption style — word-by-word text/box highlight (customizable) */}
+      {/* "Highlight" caption style — Shiny's kinetic LAYOUT (wordsPerLine /
+          linesPerSegment / even spacing / auto-fit font) with a word-by-word
+          color/gradient highlight + glow, PLUS independent POP (active-word
+          spring) and WIGGLE (block sway) toggles. */}
       <Composition
         id="Highlight"
         component={HighlightCaptionedVideo}
@@ -272,19 +306,39 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{
-          src: staticFile("sample-video.mp4"),
-          highlightMode: "text" as const,
-          baseTextColor: "white",
-          highlightTextColor: "#39E508",
-          boxColor: "#39e508",
-          boxPaddingPx: 22,
-          fontFamily: "Inter" as const,
-          shadowEnabled: true,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowBlur: 8,
-          strokeEnabled: true,
-          strokeColor: "#000000",
-          strokeWidth: 2,
+          src: "sample-video.mp4",
+          layout: {
+            wordsPerLine: 3,
+            linesPerSegment: 1,
+            fontSize: 120,
+            captionScale: 1,
+            wordSpacing: 0.28,
+            lineSpacing: 1.25,
+            positionX: 50,
+            positionY: 79,
+            alignment: "center" as const,
+          },
+          text: {
+            fontFamily: "Inter" as const,
+            baseTextColor: "#FFFFFF",
+            highlightColor: "#56ff00",
+          },
+          gradient: {
+            enabled: false,
+            angle: 180,
+            topColor: "#ffe14d",
+            topPosition: 0,
+            midEnabled: false,
+            midColor: "#ff8a00",
+            midPosition: 50,
+            bottomColor: "#ff3d00",
+            bottomPosition: 100,
+          },
+          glow: { enabled: true, color: "rgba(0, 255, 43, 0.38)", size: 30 },
+          pop: { enabled: true, speed: 130, intensity: 1.2 },
+          wiggle: { enabled: false, strength: 14, speed: 0.2 },
+          shadow: { enabled: true, color: "rgba(0, 0, 0, 0.6)", blur: 8 },
+          stroke: { enabled: true, color: "#000000", width: 1 },
         }}
       />
     </>
