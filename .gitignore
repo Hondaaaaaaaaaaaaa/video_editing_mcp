@@ -74,3 +74,6 @@ render/
 
 # FFmpeg binaries (download separately)
 bin/
+
+# Personal Claude Code overrides (not shared)
+.claude/settings.local.json

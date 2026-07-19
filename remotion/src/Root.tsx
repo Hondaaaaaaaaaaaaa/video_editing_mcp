@@ -28,6 +28,11 @@ import {
   highlightSchema,
   HighlightStyleProvider,
 } from "./CaptionedVideo/styles/PageHighlight";
+import {
+  PageHormozi,
+  hormoziSchema,
+  HormoziStyleProvider,
+} from "./CaptionedVideo/styles/PageHormozi";
 
 // The video that captions are rendered over (a vertical clip at
 // remotion/public/sample-video.mp4). Stored as a PLAIN FILENAME — not
@@ -86,6 +91,18 @@ const HighlightCaptionedVideo: React.FC<z.infer<typeof highlightSchema>> = ({
   <HighlightStyleProvider value={style}>
     <CaptionedVideo src={src} PageComponent={PageHighlight} singleSurface />
   </HighlightStyleProvider>
+);
+
+// Hormozi is kinetic-only like Shiny: it does its OWN count-based grouping into
+// two-line blocks and alternates which line wears the accent color, so it renders
+// as a single full-timeline surface.
+const HormoziCaptionedVideo: React.FC<z.infer<typeof hormoziSchema>> = ({
+  src,
+  ...style
+}) => (
+  <HormoziStyleProvider value={style}>
+    <CaptionedVideo src={src} PageComponent={PageHormozi} singleSurface />
+  </HormoziStyleProvider>
 );
 
 // Each <Composition> is an entry in the sidebar!
@@ -339,6 +356,105 @@ export const RemotionRoot: React.FC = () => {
           wiggle: { enabled: false, strength: 14, speed: 0.2 },
           shadow: { enabled: true, color: "rgba(0, 0, 0, 0.6)", blur: 8 },
           stroke: { enabled: true, color: "#000000", width: 1 },
+        }}
+      />
+
+      {/* "Hormozi" caption style — the viral Alex Hormozi look: two stacked
+          phrases where ONE line is white and the other is an accent color
+          (yellow), and the accent line ALTERNATES top->bottom block by block
+          (color "changes from sentence to sentence"). All Shiny effects
+          (gradient/glow/deepGlow/sweep/stroke/shadow) are opt-in. */}
+      <Composition
+        id="Hormozi"
+        component={HormoziCaptionedVideo}
+        schema={hormoziSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          src: "sample-video.mp4",
+          layout: {
+            wordsPerLine: 3,
+            captionScale: 1,
+            wordSpacing: 0.12,
+            lineSpacing: 1.15,
+            positionX: 50,
+            positionY: 78,
+            alignment: "center" as const,
+          },
+          text: {
+            fontFamily: "Anton" as const,
+            baseColor: "#ffffff",
+            accentColor: "#ffd400",
+          },
+          colorFlow: {
+            accentStart: "top" as const,
+            alternate: true,
+          },
+          animation: {
+            entrance: {
+              direction: "up" as const,
+              distance: 28,
+              duration: 10,
+            },
+            easing: {
+              type: "smooth" as const,
+              speed: 3,
+            },
+          },
+          effects: {
+            gradient: {
+              enabled: false,
+              angle: 180,
+              topColor: "#ffe14d",
+              topPosition: 0,
+              midEnabled: false,
+              midColor: "#ff8a00",
+              midPosition: 50,
+              bottomColor: "#ff3d00",
+              bottomPosition: 100,
+            },
+            glow: { strength: 0, color: "#ffd400" },
+            deepGlow: {
+              enabled: false,
+              radius: 60,
+              brightness: 70,
+              innerColor: "#fff5e6",
+              outerColor: "#ffd400",
+              chromatic: 0,
+            },
+            sweep1: {
+              enabled: false,
+              color: "#ffffff",
+              angle: 20,
+              width: 30,
+              intensity: 70,
+              positionX: 50,
+              positionY: 50,
+            },
+            sweep2: {
+              enabled: false,
+              color: "#ffffff",
+              angle: 160,
+              width: 20,
+              intensity: 50,
+              positionX: 50,
+              positionY: 50,
+            },
+            sweep3: {
+              enabled: false,
+              color: "#ffffff",
+              angle: 90,
+              width: 15,
+              intensity: 40,
+              positionX: 50,
+              positionY: 50,
+            },
+            stroke: { enabled: true, color: "#000000", width: 8 },
+            shadow: { enabled: true, color: "rgba(0, 0, 0, 0.65)", blur: 8 },
+          },
         }}
       />
     </>

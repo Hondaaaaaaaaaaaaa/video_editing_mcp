@@ -61,7 +61,9 @@ export const gradientSchema = z.object({
 export type GradientConfig = z.infer<typeof gradientSchema>;
 
 // One light-sweep slot's schema, reused for sweep1 / sweep2 / sweep3.
-const sweepSchema = z.object({
+// Exported so OTHER templates (e.g. Hormozi) can offer the EXACT same sweep
+// controls + buildSweepCss implementation instead of reinventing them.
+export const sweepSchema = z.object({
   enabled: z.boolean(),
   color: zColor(),
   angle: z.number().min(0).max(360).step(1),
@@ -72,9 +74,29 @@ const sweepSchema = z.object({
 });
 
 // Shared enums for the entrance/easing groups (used by both the NORMAL entrance
-// under `animation` and the EMPHASIS entrance under `emphasis`).
-const directionEnum = z.enum(["up", "down", "left", "right"]);
-const easingTypeEnum = z.enum(["smooth", "sharp", "bouncy"]);
+// under `animation` and the EMPHASIS entrance under `emphasis`). Exported so
+// other templates reuse the identical direction/easing dropdowns.
+export const directionEnum = z.enum(["up", "down", "left", "right"]);
+export const easingTypeEnum = z.enum(["smooth", "sharp", "bouncy"]);
+
+// --- Warm glow halo + AE "Deep Glow" bloom, extracted to standalone exported
+// schemas so other templates (e.g. Hormozi) expose the identical controls and
+// feed the SAME buildDeepGlowCss implementation. ---
+export const glowSchema = z.object({
+  strength: z.number().min(0).max(100).step(1),
+  color: zColor(),
+});
+
+export const deepGlowSchema = z.object({
+  enabled: z.boolean(),
+  radius: z.number().min(0).max(150).step(1),
+  brightness: z.number().min(0).max(100).step(1),
+  innerColor: zColor(),
+  outerColor: zColor(),
+  chromatic: z.number().min(0).max(20).step(1),
+});
+
+export type DeepGlowConfig = z.infer<typeof deepGlowSchema>;
 
 // ---------------------------------------------------------------------------
 // SHINY SCHEMA — organized into nested SECTIONS so Studio groups the controls:
@@ -134,19 +156,9 @@ export const shinySchema = captionedVideoSchema.extend({
     // Multi-stop text gradient (shared gradientSchema). 180 = top->bottom.
     gradient: gradientSchema,
     // Warm glow halo.
-    glow: z.object({
-      strength: z.number().min(0).max(100).step(1),
-      color: zColor(),
-    }),
+    glow: glowSchema,
     // After Effects "Deep Glow" plugin look — a soft multi-radius bloom.
-    deepGlow: z.object({
-      enabled: z.boolean(),
-      radius: z.number().min(0).max(150).step(1),
-      brightness: z.number().min(0).max(100).step(1),
-      innerColor: zColor(),
-      outerColor: zColor(),
-      chromatic: z.number().min(0).max(20).step(1),
-    }),
+    deepGlow: deepGlowSchema,
     // Up to THREE glossy shine bands clipped to the text (additive).
     sweep1: sweepSchema,
     sweep2: sweepSchema,
@@ -404,7 +416,7 @@ const clamp = (v: number, lo: number, hi: number): number =>
   Math.max(lo, Math.min(hi, v));
 
 // One light-sweep slot's settings (matches the nested sweep group shape).
-type SweepSlot = {
+export type SweepSlot = {
   enabled: boolean;
   color: string;
   angle: number;
@@ -431,7 +443,7 @@ const getSweepSlots = (s: ShinyStyle): SweepSlot[] => [
  * reads as a metallic shine. Horizontal/vertical placement is done with
  * background-position over an oversized background-size (see component).
  */
-const buildSweepCss = (slot: SweepSlot): string => {
+export const buildSweepCss = (slot: SweepSlot): string => {
   const half = Math.max(1, slot.width / 2);
   const core = 50;
   const a = clamp(core - half, 0, 100); // outer transparent edge
@@ -463,9 +475,10 @@ const DEEP_GLOW_LAYERS = 7;
  *   - `deepGlowChromatic` > 0 adds offset red/blue fringe shadows (lens-style
  *     chromatic aberration on the bloom)
  * Returns "" when disabled so it contributes nothing to the filter chain.
+ * Takes the deepGlow config directly (not the whole style) so any template can
+ * reuse it.
  */
-const buildDeepGlowCss = (s: ShinyStyle): string => {
-  const d = s.effects.deepGlow;
+export const buildDeepGlowCss = (d: DeepGlowConfig): string => {
   if (!d.enabled || d.radius <= 0) return "";
   const intensity = d.brightness / 100;
   const parts: string[] = [];
@@ -516,7 +529,7 @@ const FONT_WEIGHT = 800;
 //   down  -> starts ABOVE  (y -)  dropping down into place
 //   left  -> starts RIGHT  (x +)  sliding left into place
 //   right -> starts LEFT   (x -)  sliding right into place
-const ENTRANCE_VECTOR: Record<EntranceDirection, { axis: "x" | "y"; sign: number }> = {
+export const ENTRANCE_VECTOR: Record<EntranceDirection, { axis: "x" | "y"; sign: number }> = {
   up: { axis: "y", sign: 1 },
   down: { axis: "y", sign: -1 },
   left: { axis: "x", sign: 1 },
@@ -525,7 +538,7 @@ const ENTRANCE_VECTOR: Record<EntranceDirection, { axis: "x" | "y"; sign: number
 
 // A resolved entrance: which easing curve, which axis/sign the word enters from,
 // and how far it travels. Normal and emphasized words each get their own.
-type EntranceConfig = {
+export type EntranceConfig = {
   easingFn: (input: number) => number;
   axis: "x" | "y";
   sign: number;
@@ -550,7 +563,7 @@ type EntranceConfig = {
  *   - bouncy -> ease-out with a slight OVERSHOOT past the target, then settles
  *     back. easingSpeed scales the overshoot amount (1 = subtle, 6 = lively).
  */
-const makeEntranceEasing = (
+export const makeEntranceEasing = (
   type: EntranceEasing,
   easingSpeed: number,
 ): ((input: number) => number) => {
@@ -826,7 +839,7 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
 
   // Deep Glow bloom — constant per word (it's a property of the text, like the
   // AE plugin), so build it once here rather than per token. Empty when disabled.
-  const deepGlowFilter = buildDeepGlowCss(style);
+  const deepGlowFilter = buildDeepGlowCss(style.effects.deepGlow);
 
   // -------------------------------------------------------------------------
   // Shared per-word painters — the "reuse the existing Shiny effects" seam that
