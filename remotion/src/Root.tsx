@@ -376,33 +376,17 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{
           src: "sample-video.mp4",
           layout: {
-            wordsPerLine: 3,
             captionScale: 1,
-            wordSpacing: 0.12,
+            wordSpacing: 0.2,
             lineSpacing: 1.15,
             positionX: 50,
             positionY: 78,
             alignment: "center" as const,
           },
           text: {
-            fontFamily: "Anton" as const,
+            fontFamily: "Montserrat" as const,
             baseColor: "#ffffff",
             accentColor: "#ffd400",
-          },
-          colorFlow: {
-            accentStart: "top" as const,
-            alternate: true,
-          },
-          animation: {
-            entrance: {
-              direction: "up" as const,
-              distance: 28,
-              duration: 10,
-            },
-            easing: {
-              type: "smooth" as const,
-              speed: 3,
-            },
           },
           effects: {
             gradient: {
@@ -452,7 +436,7 @@ export const RemotionRoot: React.FC = () => {
               positionX: 50,
               positionY: 50,
             },
-            stroke: { enabled: true, color: "#000000", width: 8 },
+            stroke: { enabled: true, color: "#000000", width: 6 },
             shadow: { enabled: true, color: "rgba(0, 0, 0, 0.65)", blur: 8 },
           },
         }}

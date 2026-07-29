@@ -19,6 +19,7 @@ import {
   gradientSchema,
   buildGradientCss,
   groupWordsIntoBlocks,
+  enrichedToBlocks,
   type KineticWord,
   type KineticBlock,
 } from "./PageShiny";
@@ -492,7 +493,7 @@ const HighlightSegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
  * clock. Root passes `singleSurface`, so the style receives the whole stream via
  * `captions` and does its own count-based grouping.
  */
-export const PageHighlight: React.FC<CaptionStyleProps> = ({ captions = [] }) => {
+export const PageHighlight: React.FC<CaptionStyleProps> = ({ captions = [], segments }) => {
   const { fps, durationInFrames } = useVideoConfig();
   const style = useContext(HighlightStyleContext);
   const { wordsPerLine, linesPerSegment } = style.layout;
@@ -505,7 +506,11 @@ export const PageHighlight: React.FC<CaptionStyleProps> = ({ captions = [] }) =>
     fromMs: c.startMs,
     toMs: c.endMs,
   }));
-  const blocks = groupWordsIntoBlocks(words, wordsPerLine, linesPerSegment);
+  // Prefer Claude's semantic segments when an enriched file exists.
+  const blocks =
+    segments && segments.length
+      ? enrichedToBlocks(segments)
+      : groupWordsIntoBlocks(words, wordsPerLine, linesPerSegment);
 
   // A block appears at its first word's start and holds until the NEXT block
   // begins; the last runs to the composition end. The first block is pulled back

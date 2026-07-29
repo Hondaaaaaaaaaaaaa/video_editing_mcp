@@ -10,7 +10,7 @@ import {
 import { z } from "zod";
 import { zColor } from "@remotion/zod-types";
 import { measureText } from "@remotion/layout-utils";
-import type { CaptionStyleProps } from "./types";
+import type { CaptionStyleProps, EnrichedSegment } from "./types";
 import { captionedVideoSchema } from "../index";
 import {
   textEffectsSchema,
@@ -620,6 +620,14 @@ export const decideEmphasis = (rawWord: string): boolean => {
   return false;
 };
 
+/**
+ * Whether a word is emphasized: prefer Claude's explicit `emphasis` flag (from
+ * enriched segments — the ONLY thing that works for Arabic, where the regex
+ * above is dead), else fall back to the rule-based `decideEmphasis`.
+ */
+export const wordIsEmphasized = (w: { text: string; emphasis?: boolean }): boolean =>
+  w.emphasis ?? wordIsEmphasized(w);
+
 // ---------------------------------------------------------------------------
 // PER-LINE ALIGNMENT (kinetic mode) — RULE-BASED, separated for an AI swap.
 // ---------------------------------------------------------------------------
@@ -640,7 +648,7 @@ export const decideLineAlignment = (
   normalAlignment: NormalAlignment,
 ): LineAlignment => {
   // Emphasized line (any emphasized word) -> emphasisAlignment.
-  if (lineWords.some((w) => decideEmphasis(w.text))) {
+  if (lineWords.some((w) => wordIsEmphasized(w))) {
     return emphasisAlignment;
   }
   // Normal line -> normalAlignment ("alternate" staggers left/right by index).
@@ -663,7 +671,14 @@ const ALIGN_TO_JUSTIFY: Record<LineAlignment, "flex-start" | "center" | "flex-en
 // (This is the function that makes wordsPerLine / linesPerSegment matter. It
 // does NOT use the time-based createTikTokStyleCaptions grouping at all.)
 // ---------------------------------------------------------------------------
-export type KineticWord = { text: string; fromMs: number; toMs: number };
+export type KineticWord = {
+  text: string;
+  fromMs: number;
+  toMs: number;
+  // Claude's emphasis flag when the block came from enriched segments; falls
+  // back to the regex `decideEmphasis` when undefined.
+  emphasis?: boolean;
+};
 export type KineticBlock = {
   /** The block's words, already chopped into lines of `wordsPerLine`. */
   lines: KineticWord[][];
@@ -727,6 +742,53 @@ export const groupWordsIntoBlocks = (
 };
 
 /**
+ * Builds kinetic BLOCKS from Claude's enriched SEGMENTS — the meaning-based
+ * alternative to the count-based `groupWordsIntoBlocks`. Each segment becomes
+ * one block; Claude's lines are kept as-is; each word carries its emphasis flag
+ * and original timing. This is what makes every kinetic template group by
+ * meaning (and emphasize the right words) once an `.enriched.json` exists.
+ */
+export const enrichedToBlocks = (segments: EnrichedSegment[]): KineticBlock[] =>
+  segments
+    .map((seg) => {
+      const lines: KineticWord[][] = (seg.lines ?? []).map((line) =>
+        (line.words ?? []).map((w) => ({
+          text: w.text,
+          fromMs: w.startMs,
+          toMs: w.endMs,
+          emphasis: w.emphasis,
+        })),
+      );
+      const flat = lines.flat();
+      return {
+        lines,
+        startMs: flat[0]?.fromMs ?? 0,
+        endMs: flat[flat.length - 1]?.toMs ?? 0,
+      };
+    })
+    .filter((b) => b.lines.some((l) => l.length > 0));
+
+/**
+ * Flattens Claude's enriched segments into a single, in-order stream of CORRECTED
+ * words (spelling/punctuation fixed) carrying their emphasis flag + timing —
+ * DROPPING Claude's line boundaries. Use this when a template wants Claude's
+ * *content* (words + emphasis) but insists on doing its OWN visual line layout
+ * (e.g. Hormozi's fixed two-line split). Layout stays the template's job; only
+ * the words come from Claude.
+ */
+export const enrichedToWords = (segments: EnrichedSegment[]): KineticWord[] =>
+  segments.flatMap((seg) =>
+    (seg.lines ?? []).flatMap((line) =>
+      (line.words ?? []).map((w) => ({
+        text: w.text,
+        fromMs: w.startMs,
+        toMs: w.endMs,
+        emphasis: w.emphasis,
+      })),
+    ),
+  );
+
+/**
  * Re-chops a block's FLAT word list into VISUAL lines for the reference layout
  * (small / BIG / small, stacked):
  *   - every EMPHASIZED word (decideEmphasis) gets its OWN line, so it sits
@@ -751,7 +813,7 @@ export const splitIntoEmphasisLines = (
     }
   };
   for (const w of words) {
-    if (decideEmphasis(w.text)) {
+    if (wordIsEmphasized(w)) {
       flushNormal(); // end any pending normal phrase first
       lines.push([w]); // the emphasized word alone on its own line
     } else {
@@ -933,7 +995,7 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
   // emphasized lines regardless of how many emphasized lines fall between them.
   let normalLineIdx = 0;
   const lineAligns: LineAlignment[] = lines.map((line) =>
-    line.some((w) => decideEmphasis(w.text))
+    line.some((w) => wordIsEmphasized(w))
       ? emphasisAlignment
       : decideLineAlignment(line, normalLineIdx++, emphasisAlignment, normalAlignment),
   );
@@ -954,7 +1016,7 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
   const availWidth = width * 0.9;
   const lineMaxSizes = lines.map((ln) => {
     const lineWidthAtRef = ln.reduce((sum, tk) => {
-      const emph = decideEmphasis(tk.text);
+      const emph = wordIsEmphasized(tk);
       const w =
         measureText({
           text: tk.text,
@@ -1050,7 +1112,7 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
           >
             {line.map((token, wi) => {
               // THE rule-based decision (swap decideEmphasis for an API later).
-              const emphasized = decideEmphasis(token.text);
+              const emphasized = wordIsEmphasized(token);
               // Reveal this word offset by how far INTO the segment it is spoken
               // (token.fromMs - blockStartMs). Since we're inside this segment's
               // <Sequence>, local frame 0 is the segment's start, so the first
@@ -1126,20 +1188,22 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
  *
  * Glow + gradient colors come from props via ShinyStyleContext.
  */
-export const PageShiny: React.FC<CaptionStyleProps> = ({ captions = [] }) => {
+export const PageShiny: React.FC<CaptionStyleProps> = ({ captions = [], segments }) => {
   const { fps, durationInFrames } = useVideoConfig();
   const style = useContext(ShinyStyleContext);
   const { wordsPerLine, linesPerSegment } = style.layout;
 
-  // Take the FLAT caption stream and chop it strictly BY COUNT into blocks
-  // (STEP 1-3 live in groupWordsIntoBlocks) — never the time-based
-  // createTikTokStyleCaptions grouping.
+  // Prefer Claude's semantic segments (with real emphasis) when an enriched
+  // file exists; otherwise chop the flat stream BY COUNT.
   const words: KineticWord[] = captions.map((c) => ({
     text: c.text,
     fromMs: c.startMs,
     toMs: c.endMs,
   }));
-  const blocks = groupWordsIntoBlocks(words, wordsPerLine, linesPerSegment);
+  const blocks =
+    segments && segments.length
+      ? enrichedToBlocks(segments)
+      : groupWordsIntoBlocks(words, wordsPerLine, linesPerSegment);
 
   // A block appears at its first word's start (startMs) and holds until the NEXT
   // block begins; the last block runs to the composition end. The first block is

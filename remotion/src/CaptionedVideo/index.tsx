@@ -17,7 +17,7 @@ import { Caption, createTikTokStyleCaptions, type TikTokPage } from "@remotion/c
 import { loadFont } from "./load-font";
 import SubtitlePage from "./SubtitlePage";
 import { NoCaptionFile } from "./NoCaptionFile";
-import type { CaptionStyle } from "./styles/types";
+import type { CaptionStyle, EnrichedSegment } from "./styles/types";
 
 export const captionedVideoSchema = z.object({
   src: z.string(),
@@ -121,35 +121,72 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
   singleSurface,
 }) => {
   const [subtitles, setSubtitles] = useState<Caption[]>([]);
+  // Claude's semantic segments (from the enriched sidecar), passed to kinetic
+  // templates so they group by meaning + use real emphasis. Undefined = raw.
+  const [enrichedSegments, setEnrichedSegments] = useState<EnrichedSegment[]>();
   const [handle] = useState(() => delayRender("Loading captions"));
   const { fps, durationInFrames: compositionDurationInFrames } = useVideoConfig();
 
   // Resolve the bare-filename `src` prop to a real static-file URL (see resolveSrc).
   const resolvedSrc = useMemo(() => resolveSrc(src), [src]);
   const subtitlesFile = useMemo(() => toCaptionsFileName(resolvedSrc), [resolvedSrc]);
+  // The Claude-enriched sidecar (corrected spelling + Arabic punctuation +
+  // semantic segments), written by enrich.mjs next to the raw ASR json.
+  const enrichedFile = useMemo(
+    () => subtitlesFile.replace(/\.json$/i, ".enriched.json"),
+    [subtitlesFile],
+  );
 
   const fetchSubtitles = useCallback(async () => {
     try {
       await loadFont();
+      // Prefer the enriched captions (corrected + segmented) when present;
+      // flatten the segment/line/word tree back into the flat Caption[] the
+      // engine and templates consume. Fall back to the raw ASR json.
+      const enrichedRes = await fetch(enrichedFile);
+      if (enrichedRes.ok) {
+        const enriched = (await enrichedRes.json()) as { segments?: EnrichedSegment[] };
+        const segs = enriched.segments ?? [];
+        const captions: Caption[] = segs
+          .flatMap((s) => s.lines ?? [])
+          .flatMap((l) => l.words ?? [])
+          .map((w) => ({
+            text: w.text,
+            startMs: w.startMs,
+            endMs: w.endMs,
+            timestampMs: Math.round((w.startMs + w.endMs) / 2),
+            confidence: null,
+          }));
+        setEnrichedSegments(segs);
+        setSubtitles(captions);
+        continueRender(handle);
+        return;
+      }
       const res = await fetch(subtitlesFile);
       if (!res.ok) {
+        setEnrichedSegments(undefined);
         setSubtitles([]);
         continueRender(handle);
         return;
       }
       const data = (await res.json()) as Caption[];
+      setEnrichedSegments(undefined);
       setSubtitles(data);
       continueRender(handle);
     } catch (e) {
       cancelRender(e);
     }
-  }, [handle, subtitlesFile]);
+  }, [handle, subtitlesFile, enrichedFile]);
 
   useEffect(() => {
     fetchSubtitles();
-    const cancel = watchStaticFile(subtitlesFile, fetchSubtitles);
-    return () => cancel.cancel();
-  }, [fetchSubtitles, subtitlesFile]);
+    const cancelRaw = watchStaticFile(subtitlesFile, fetchSubtitles);
+    const cancelEnriched = watchStaticFile(enrichedFile, fetchSubtitles);
+    return () => {
+      cancelRaw.cancel();
+      cancelEnriched.cancel();
+    };
+  }, [fetchSubtitles, subtitlesFile, enrichedFile]);
 
   // Time-based pages drive the default per-page rendering. The single-surface
   // (self-grouping) path ignores these and groups the flat stream itself.
@@ -187,6 +224,7 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
           enterProgress={1}
           page={EMPTY_PAGE}
           captions={subtitles ?? []}
+          segments={enrichedSegments}
         />
       ) : (
         pages.map((page, index) => {

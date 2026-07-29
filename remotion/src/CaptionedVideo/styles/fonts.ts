@@ -3,6 +3,7 @@ import { loadFont as loadMontserrat } from "@remotion/google-fonts/Montserrat";
 import { loadFont as loadPoppins } from "@remotion/google-fonts/Poppins";
 import { loadFont as loadBebasNeue } from "@remotion/google-fonts/BebasNeue";
 import { loadFont as loadAnton } from "@remotion/google-fonts/Anton";
+import { staticFile } from "remotion";
 import { z } from "zod";
 
 // ---------------------------------------------------------------------------
@@ -26,6 +27,7 @@ export const FONT_FAMILIES = [
   "Poppins",
   "Bebas Neue",
   "Anton",
+  "Kufyan Arabic",
 ] as const;
 export type FontFamilyName = (typeof FONT_FAMILIES)[number];
 
@@ -42,6 +44,25 @@ const poppins = loadPoppins("normal", { weights: ["700", "800"], subsets: ["lati
 const bebasNeue = loadBebasNeue("normal", { weights: ["400"], subsets: ["latin"] });
 const anton = loadAnton("normal", { weights: ["400"], subsets: ["latin"] });
 
+// --- Local Arabic font (shipped in public/fonts, not a Google Font) ---------
+// Kufyan Arabic — a Kufi display face for Arabic captions. Loaded via the native
+// FontFace API (no @remotion/fonts dependency). The `staticFile` URL is resolved
+// at module load; the actual load is async and awaited in loadFonts(). Guarded
+// for the Node/SSR pass where `document` doesn't exist.
+const KUFYAN_ARABIC_FAMILY = "Kufyan Arabic";
+const kufyanArabicUrl = staticFile("fonts/KufyanArabic-Medium.ttf");
+let kufyanArabicPromise: Promise<void> | null = null;
+const loadKufyanArabic = (): Promise<void> => {
+  if (typeof document === "undefined") return Promise.resolve();
+  if (!kufyanArabicPromise) {
+    const face = new FontFace(KUFYAN_ARABIC_FAMILY, `url(${kufyanArabicUrl})`);
+    kufyanArabicPromise = face.load().then((loaded) => {
+      document.fonts.add(loaded);
+    });
+  }
+  return kufyanArabicPromise;
+};
+
 // The actual CSS font-family string for each option, keyed by display name.
 const FAMILY_BY_NAME: Record<FontFamilyName, string> = {
   Inter: inter.fontFamily,
@@ -49,6 +70,7 @@ const FAMILY_BY_NAME: Record<FontFamilyName, string> = {
   Poppins: poppins.fontFamily,
   "Bebas Neue": bebasNeue.fontFamily,
   Anton: anton.fontFamily,
+  "Kufyan Arabic": KUFYAN_ARABIC_FAMILY,
 };
 
 // Resolve a dropdown selection to its loaded CSS font-family (falls back to the
@@ -75,7 +97,8 @@ export const FONT_DEFAULTS: FontSelection = {
 // selectable font to be ready — switching fonts in Studio won't flash
 // unstyled text.
 export const loadFonts = async (): Promise<void> => {
-  await Promise.all(
-    [inter, montserrat, poppins, bebasNeue, anton].map((h) => h.waitUntilDone()),
-  );
+  await Promise.all([
+    ...[inter, montserrat, poppins, bebasNeue, anton].map((h) => h.waitUntilDone()),
+    loadKufyanArabic(),
+  ]);
 };

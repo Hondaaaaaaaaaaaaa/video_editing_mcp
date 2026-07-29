@@ -40,6 +40,8 @@
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
     "sub": "node sub.mjs",
+    "transcribe": "node transcribe.mjs",
+    "enrich": "node enrich.mjs",
     "lint": "eslint src && tsc"
   },
   "sideEffects": [
