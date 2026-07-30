@@ -1,0 +1,918 @@
+{
+  "language": "en",
+  "segments": [
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "This",
+              "emphasis": false,
+              "startMs": 159,
+              "endMs": 340
+            },
+            {
+              "text": "AI",
+              "emphasis": false,
+              "startMs": 479,
+              "endMs": 839
+            },
+            {
+              "text": "is",
+              "emphasis": false,
+              "startMs": 899,
+              "endMs": 979
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "incredibly",
+              "emphasis": false,
+              "startMs": 1019,
+              "endMs": 1599
+            },
+            {
+              "text": "valuable.",
+              "emphasis": true,
+              "startMs": 1699,
+              "endMs": 2099
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "Not",
+              "emphasis": false,
+              "startMs": 2419,
+              "endMs": 2619
+            },
+            {
+              "text": "only",
+              "emphasis": false,
+              "startMs": 2700,
+              "endMs": 2879
+            },
+            {
+              "text": "can",
+              "emphasis": false,
+              "startMs": 2980,
+              "endMs": 3099
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "you",
+              "emphasis": false,
+              "startMs": 3159,
+              "endMs": 3319
+            },
+            {
+              "text": "make",
+              "emphasis": false,
+              "startMs": 3379,
+              "endMs": 3559
+            },
+            {
+              "text": "it",
+              "emphasis": false,
+              "startMs": 3619,
+              "endMs": 3799
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "make",
+              "emphasis": false,
+              "startMs": 3959,
+              "endMs": 4119
+            },
+            {
+              "text": "your",
+              "emphasis": false,
+              "startMs": 4179,
+              "endMs": 4259
+            },
+            {
+              "text": "work",
+              "emphasis": false,
+              "startMs": 4319,
+              "endMs": 4559
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "easier,",
+              "emphasis": true,
+              "startMs": 4639,
+              "endMs": 4940
+            },
+            {
+              "text": "but",
+              "emphasis": false,
+              "startMs": 5199,
+              "endMs": 5279
+            },
+            {
+              "text": "you",
+              "emphasis": false,
+              "startMs": 5319,
+              "endMs": 5380
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "can",
+              "emphasis": false,
+              "startMs": 5420,
+              "endMs": 5559
+            },
+            {
+              "text": "also",
+              "emphasis": false,
+              "startMs": 5659,
+              "endMs": 5899
+            },
+            {
+              "text": "make",
+              "emphasis": false,
+              "startMs": 6019,
+              "endMs": 6119
+            },
+            {
+              "text": "it",
+              "emphasis": false,
+              "startMs": 6179,
+              "endMs": 6319
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "100",
+              "emphasis": true,
+              "startMs": 6559,
+              "endMs": 6899
+            },
+            {
+              "text": "times",
+              "emphasis": false,
+              "startMs": 6940,
+              "endMs": 7279
+            },
+            {
+              "text": "better,",
+              "emphasis": false,
+              "startMs": 7379,
+              "endMs": 7559
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "which",
+              "emphasis": false,
+              "startMs": 7859,
+              "endMs": 7980
+            },
+            {
+              "text": "of",
+              "emphasis": false,
+              "startMs": 8039,
+              "endMs": 8139
+            },
+            {
+              "text": "course",
+              "emphasis": false,
+              "startMs": 8179,
+              "endMs": 8519
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "will",
+              "emphasis": false,
+              "startMs": 8859,
+              "endMs": 8980
+            },
+            {
+              "text": "make",
+              "emphasis": false,
+              "startMs": 9019,
+              "endMs": 9139
+            },
+            {
+              "text": "you",
+              "emphasis": false,
+              "startMs": 9179,
+              "endMs": 9260
+            },
+            {
+              "text": "more",
+              "emphasis": false,
+              "startMs": 9300,
+              "endMs": 9439
+            },
+            {
+              "text": "money.",
+              "emphasis": true,
+              "startMs": 9500,
+              "endMs": 9739
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "So",
+              "emphasis": false,
+              "startMs": 10039,
+              "endMs": 10099
+            },
+            {
+              "text": "let",
+              "emphasis": false,
+              "startMs": 10139,
+              "endMs": 10199
+            },
+            {
+              "text": "me",
+              "emphasis": false,
+              "startMs": 10239,
+              "endMs": 10279
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "explain",
+              "emphasis": false,
+              "startMs": 10340,
+              "endMs": 10600
+            },
+            {
+              "text": "how",
+              "emphasis": false,
+              "startMs": 10659,
+              "endMs": 10739
+            },
+            {
+              "text": "it",
+              "emphasis": false,
+              "startMs": 10779,
+              "endMs": 10840
+            },
+            {
+              "text": "works.",
+              "emphasis": false,
+              "startMs": 10899,
+              "endMs": 11179
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "Adobe",
+              "emphasis": false,
+              "startMs": 11500,
+              "endMs": 11800
+            },
+            {
+              "text": "Firefly",
+              "emphasis": true,
+              "startMs": 11920,
+              "endMs": 12479
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "is",
+              "emphasis": false,
+              "startMs": 12559,
+              "endMs": 12639
+            },
+            {
+              "text": "one",
+              "emphasis": false,
+              "startMs": 12719,
+              "endMs": 12779
+            },
+            {
+              "text": "of",
+              "emphasis": false,
+              "startMs": 12799,
+              "endMs": 12840
+            },
+            {
+              "text": "the",
+              "emphasis": false,
+              "startMs": 12880,
+              "endMs": 13019
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "craziest",
+              "emphasis": true,
+              "startMs": 13179,
+              "endMs": 13899
+            },
+            {
+              "text": "AI",
+              "emphasis": false,
+              "startMs": 14019,
+              "endMs": 14219
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "tools",
+              "emphasis": false,
+              "startMs": 14380,
+              "endMs": 14739
+            },
+            {
+              "text": "yet.",
+              "emphasis": false,
+              "startMs": 15039,
+              "endMs": 15239
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "Firefly",
+              "emphasis": false,
+              "startMs": 15599,
+              "endMs": 16100
+            },
+            {
+              "text": "is",
+              "emphasis": false,
+              "startMs": 16159,
+              "endMs": 16239
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "a",
+              "emphasis": false,
+              "startMs": 16279,
+              "endMs": 16399
+            },
+            {
+              "text": "generative,",
+              "emphasis": true,
+              "startMs": 16479,
+              "endMs": 16999
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "AI-powered",
+              "emphasis": true,
+              "startMs": 17139,
+              "endMs": 17779
+            },
+            {
+              "text": "content",
+              "emphasis": false,
+              "startMs": 17879,
+              "endMs": 18260
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "creation",
+              "emphasis": false,
+              "startMs": 18319,
+              "endMs": 18719
+            },
+            {
+              "text": "tool.",
+              "emphasis": false,
+              "startMs": 18779,
+              "endMs": 18999
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "That",
+              "emphasis": false,
+              "startMs": 19260,
+              "endMs": 19340
+            },
+            {
+              "text": "means",
+              "emphasis": false,
+              "startMs": 19399,
+              "endMs": 19579
+            },
+            {
+              "text": "it",
+              "emphasis": false,
+              "startMs": 19639,
+              "endMs": 19699
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "can",
+              "emphasis": false,
+              "startMs": 19739,
+              "endMs": 20020
+            },
+            {
+              "text": "simply",
+              "emphasis": false,
+              "startMs": 20079,
+              "endMs": 20539
+            },
+            {
+              "text": "create",
+              "emphasis": false,
+              "startMs": 20619,
+              "endMs": 20939
+            },
+            {
+              "text": "things.",
+              "emphasis": false,
+              "startMs": 20979,
+              "endMs": 21279
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "It",
+              "emphasis": false,
+              "startMs": 21459,
+              "endMs": 21520
+            },
+            {
+              "text": "can",
+              "emphasis": false,
+              "startMs": 21559,
+              "endMs": 21659
+            },
+            {
+              "text": "do",
+              "emphasis": false,
+              "startMs": 21719,
+              "endMs": 21799
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "things",
+              "emphasis": false,
+              "startMs": 21879,
+              "endMs": 22079
+            },
+            {
+              "text": "that",
+              "emphasis": false,
+              "startMs": 22119,
+              "endMs": 22180
+            },
+            {
+              "text": "would",
+              "emphasis": false,
+              "startMs": 22219,
+              "endMs": 22459
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "otherwise",
+              "emphasis": false,
+              "startMs": 22559,
+              "endMs": 22979
+            },
+            {
+              "text": "be",
+              "emphasis": false,
+              "startMs": 23059,
+              "endMs": 23139
+            },
+            {
+              "text": "impossible",
+              "emphasis": true,
+              "startMs": 23180,
+              "endMs": 24000
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "or",
+              "emphasis": false,
+              "startMs": 24059,
+              "endMs": 24119
+            },
+            {
+              "text": "would",
+              "emphasis": false,
+              "startMs": 24159,
+              "endMs": 24260
+            },
+            {
+              "text": "have",
+              "emphasis": false,
+              "startMs": 24279,
+              "endMs": 24379
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "taken",
+              "emphasis": false,
+              "startMs": 24420,
+              "endMs": 24639
+            },
+            {
+              "text": "a",
+              "emphasis": false,
+              "startMs": 24760,
+              "endMs": 24920
+            },
+            {
+              "text": "Photoshop",
+              "emphasis": true,
+              "startMs": 25019,
+              "endMs": 25519
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "expert",
+              "emphasis": false,
+              "startMs": 25579,
+              "endMs": 25919
+            },
+            {
+              "text": "to",
+              "emphasis": false,
+              "startMs": 25979,
+              "endMs": 26079
+            },
+            {
+              "text": "do.",
+              "emphasis": false,
+              "startMs": 26139,
+              "endMs": 26340
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "Even",
+              "emphasis": false,
+              "startMs": 26639,
+              "endMs": 26819
+            },
+            {
+              "text": "then,",
+              "emphasis": false,
+              "startMs": 26859,
+              "endMs": 27119
+            },
+            {
+              "text": "Firefly",
+              "emphasis": false,
+              "startMs": 27639,
+              "endMs": 28039
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "does",
+              "emphasis": false,
+              "startMs": 28099,
+              "endMs": 28259
+            },
+            {
+              "text": "it",
+              "emphasis": false,
+              "startMs": 28280,
+              "endMs": 28299
+            },
+            {
+              "text": "in",
+              "emphasis": false,
+              "startMs": 28299,
+              "endMs": 28399
+            },
+            {
+              "text": "a",
+              "emphasis": false,
+              "startMs": 28420,
+              "endMs": 28439
+            },
+            {
+              "text": "way",
+              "emphasis": false,
+              "startMs": 28519,
+              "endMs": 28619
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "that",
+              "emphasis": false,
+              "startMs": 28659,
+              "endMs": 28739
+            },
+            {
+              "text": "looks",
+              "emphasis": false,
+              "startMs": 28779,
+              "endMs": 28959
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "completely",
+              "emphasis": false,
+              "startMs": 29000,
+              "endMs": 29519
+            },
+            {
+              "text": "natural.",
+              "emphasis": true,
+              "startMs": 29579,
+              "endMs": 30019
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "So",
+              "emphasis": false,
+              "startMs": 30279,
+              "endMs": 30340
+            },
+            {
+              "text": "if",
+              "emphasis": false,
+              "startMs": 30379,
+              "endMs": 30479
+            },
+            {
+              "text": "you",
+              "emphasis": false,
+              "startMs": 30539,
+              "endMs": 30639
+            },
+            {
+              "text": "work",
+              "emphasis": false,
+              "startMs": 30699,
+              "endMs": 30879
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "with",
+              "emphasis": false,
+              "startMs": 30939,
+              "endMs": 31179
+            },
+            {
+              "text": "any",
+              "emphasis": false,
+              "startMs": 31279,
+              "endMs": 31539
+            },
+            {
+              "text": "sort",
+              "emphasis": false,
+              "startMs": 31599,
+              "endMs": 31979
+            },
+            {
+              "text": "of",
+              "emphasis": false,
+              "startMs": 32020,
+              "endMs": 32139
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "content",
+              "emphasis": false,
+              "startMs": 32219,
+              "endMs": 32559
+            },
+            {
+              "text": "creation,",
+              "emphasis": false,
+              "startMs": 32619,
+              "endMs": 33000
+            },
+            {
+              "text": "Firefly",
+              "emphasis": false,
+              "startMs": 33360,
+              "endMs": 33819
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "will",
+              "emphasis": false,
+              "startMs": 33880,
+              "endMs": 33979
+            },
+            {
+              "text": "be",
+              "emphasis": false,
+              "startMs": 34040,
+              "endMs": 34159
+            },
+            {
+              "text": "a",
+              "emphasis": false,
+              "startMs": 34259,
+              "endMs": 34319
+            },
+            {
+              "text": "must-have",
+              "emphasis": true,
+              "startMs": 34459,
+              "endMs": 34959
+            },
+            {
+              "text": "tool.",
+              "emphasis": false,
+              "startMs": 35079,
+              "endMs": 35319
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "translation": "هذا الذكاء الاصطناعي له قيمة كبيرة جدًا. ليس فقط يمكنك أن تجعل عملك أسهل، بل يمكنك أيضًا أن تجعله أفضل بمئة مرة، وهو ما سيجعلك بالطبع تكسب أموالًا أكثر. لذا دعني أشرح لك كيف يعمل. أدوبي فايرفلاي هو واحد من أروع أدوات الذكاء الاصطناعي حتى الآن. فايرفلاي هي أداة توليدية لإنشاء المحتوى بالذكاء الاصطناعي. هذا يعني أنها يمكنها ببساطة إنشاء أشياء. يمكنها فعل أشياء كانت ستكون مستحيلة لولا ذلك، أو كانت تتطلب خبيرًا في الفوتوشوب للقيام بها. وحتى في تلك الحالة، تقوم فايرفلاي بذلك بطريقة تبدو طبيعية تمامًا. لذا إذا كنت تعمل في أي نوع من إنشاء المحتوى، فستكون فايرفلاي أداة لا غنى عنها."
+}

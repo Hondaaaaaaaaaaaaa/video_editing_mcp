@@ -33,6 +33,12 @@ import {
   hormoziSchema,
   HormoziStyleProvider,
 } from "./CaptionedVideo/styles/PageHormozi";
+import {
+  PageGadzhi,
+  gadzhiSchema,
+  GadzhiStyleProvider,
+  GADZHI_DEFAULTS,
+} from "./CaptionedVideo/styles/PageGadzhi";
 
 // The video that captions are rendered over (a vertical clip at
 // remotion/public/sample-video.mp4). Stored as a PLAIN FILENAME — not
@@ -103,6 +109,18 @@ const HormoziCaptionedVideo: React.FC<z.infer<typeof hormoziSchema>> = ({
   <HormoziStyleProvider value={style}>
     <CaptionedVideo src={src} PageComponent={PageHormozi} singleSurface />
   </HormoziStyleProvider>
+);
+
+// Gadzhi renders the whole timeline itself too: it reads the caption document's
+// segments directly and needs every caption at once to pick ONE font size for
+// the video, so it can only work as a single surface.
+const GadzhiCaptionedVideo: React.FC<z.infer<typeof gadzhiSchema>> = ({
+  src,
+  ...style
+}) => (
+  <GadzhiStyleProvider value={style}>
+    <CaptionedVideo src={src} PageComponent={PageGadzhi} singleSurface />
+  </GadzhiStyleProvider>
 );
 
 // Each <Composition> is an entry in the sidebar!
@@ -329,7 +347,7 @@ export const RemotionRoot: React.FC = () => {
             linesPerSegment: 1,
             fontSize: 120,
             captionScale: 1,
-            wordSpacing: 0.28,
+            wordSpacing: 0,
             lineSpacing: 1.25,
             positionX: 50,
             positionY: 79,
@@ -439,6 +457,29 @@ export const RemotionRoot: React.FC = () => {
             stroke: { enabled: true, color: "#000000", width: 6 },
             shadow: { enabled: true, color: "rgba(0, 0, 0, 0.65)", blur: 8 },
           },
+        }}
+      />
+
+      {/* "Gadzhi" caption style — the clean podcast look reverse-engineered from
+          the reference clip: two stacked lines, NO accent color at all. The
+          spoken line is bold and opaque, the other is the same white in a thin
+          weight at lower opacity, and the bold steps top->bottom in time with
+          the speech. Text never moves or resizes; each caption just fades in. */}
+      <Composition
+        id="Gadzhi"
+        component={GadzhiCaptionedVideo}
+        schema={gadzhiSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          // sample-video.mp4 like every other composition — the reference clip
+          // the look was derived from (gadzhi.mp4) is local-only, as all the
+          // reference media in public/ is.
+          src: "sample-video.mp4",
+          ...GADZHI_DEFAULTS,
         }}
       />
     </>

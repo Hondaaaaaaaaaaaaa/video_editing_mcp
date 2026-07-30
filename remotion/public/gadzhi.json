@@ -1,0 +1,772 @@
+[
+  {
+    "text": "This",
+    "startMs": 159,
+    "endMs": 340,
+    "timestampMs": 250,
+    "confidence": null
+  },
+  {
+    "text": "AI",
+    "startMs": 479,
+    "endMs": 839,
+    "timestampMs": 659,
+    "confidence": null
+  },
+  {
+    "text": "is",
+    "startMs": 899,
+    "endMs": 979,
+    "timestampMs": 939,
+    "confidence": null
+  },
+  {
+    "text": "incredibly",
+    "startMs": 1019,
+    "endMs": 1599,
+    "timestampMs": 1309,
+    "confidence": null
+  },
+  {
+    "text": "valuable.",
+    "startMs": 1699,
+    "endMs": 2099,
+    "timestampMs": 1899,
+    "confidence": null
+  },
+  {
+    "text": "Not",
+    "startMs": 2419,
+    "endMs": 2619,
+    "timestampMs": 2519,
+    "confidence": null
+  },
+  {
+    "text": "only",
+    "startMs": 2700,
+    "endMs": 2879,
+    "timestampMs": 2790,
+    "confidence": null
+  },
+  {
+    "text": "can",
+    "startMs": 2980,
+    "endMs": 3099,
+    "timestampMs": 3040,
+    "confidence": null
+  },
+  {
+    "text": "you",
+    "startMs": 3159,
+    "endMs": 3319,
+    "timestampMs": 3239,
+    "confidence": null
+  },
+  {
+    "text": "make",
+    "startMs": 3379,
+    "endMs": 3559,
+    "timestampMs": 3469,
+    "confidence": null
+  },
+  {
+    "text": "it",
+    "startMs": 3619,
+    "endMs": 3799,
+    "timestampMs": 3709,
+    "confidence": null
+  },
+  {
+    "text": "make",
+    "startMs": 3959,
+    "endMs": 4119,
+    "timestampMs": 4039,
+    "confidence": null
+  },
+  {
+    "text": "your",
+    "startMs": 4179,
+    "endMs": 4259,
+    "timestampMs": 4219,
+    "confidence": null
+  },
+  {
+    "text": "work",
+    "startMs": 4319,
+    "endMs": 4559,
+    "timestampMs": 4439,
+    "confidence": null
+  },
+  {
+    "text": "easier,",
+    "startMs": 4639,
+    "endMs": 4940,
+    "timestampMs": 4790,
+    "confidence": null
+  },
+  {
+    "text": "but",
+    "startMs": 5199,
+    "endMs": 5279,
+    "timestampMs": 5239,
+    "confidence": null
+  },
+  {
+    "text": "you",
+    "startMs": 5319,
+    "endMs": 5380,
+    "timestampMs": 5350,
+    "confidence": null
+  },
+  {
+    "text": "can",
+    "startMs": 5420,
+    "endMs": 5559,
+    "timestampMs": 5490,
+    "confidence": null
+  },
+  {
+    "text": "also",
+    "startMs": 5659,
+    "endMs": 5899,
+    "timestampMs": 5779,
+    "confidence": null
+  },
+  {
+    "text": "make",
+    "startMs": 6019,
+    "endMs": 6119,
+    "timestampMs": 6069,
+    "confidence": null
+  },
+  {
+    "text": "it",
+    "startMs": 6179,
+    "endMs": 6319,
+    "timestampMs": 6249,
+    "confidence": null
+  },
+  {
+    "text": "100",
+    "startMs": 6559,
+    "endMs": 6899,
+    "timestampMs": 6729,
+    "confidence": null
+  },
+  {
+    "text": "times",
+    "startMs": 6940,
+    "endMs": 7279,
+    "timestampMs": 7110,
+    "confidence": null
+  },
+  {
+    "text": "better,",
+    "startMs": 7379,
+    "endMs": 7559,
+    "timestampMs": 7469,
+    "confidence": null
+  },
+  {
+    "text": "which",
+    "startMs": 7859,
+    "endMs": 7980,
+    "timestampMs": 7920,
+    "confidence": null
+  },
+  {
+    "text": "of",
+    "startMs": 8039,
+    "endMs": 8139,
+    "timestampMs": 8089,
+    "confidence": null
+  },
+  {
+    "text": "course",
+    "startMs": 8179,
+    "endMs": 8519,
+    "timestampMs": 8349,
+    "confidence": null
+  },
+  {
+    "text": "will",
+    "startMs": 8859,
+    "endMs": 8980,
+    "timestampMs": 8920,
+    "confidence": null
+  },
+  {
+    "text": "make",
+    "startMs": 9019,
+    "endMs": 9139,
+    "timestampMs": 9079,
+    "confidence": null
+  },
+  {
+    "text": "you",
+    "startMs": 9179,
+    "endMs": 9260,
+    "timestampMs": 9220,
+    "confidence": null
+  },
+  {
+    "text": "more",
+    "startMs": 9300,
+    "endMs": 9439,
+    "timestampMs": 9370,
+    "confidence": null
+  },
+  {
+    "text": "money.",
+    "startMs": 9500,
+    "endMs": 9739,
+    "timestampMs": 9620,
+    "confidence": null
+  },
+  {
+    "text": "So",
+    "startMs": 10039,
+    "endMs": 10099,
+    "timestampMs": 10069,
+    "confidence": null
+  },
+  {
+    "text": "let",
+    "startMs": 10139,
+    "endMs": 10199,
+    "timestampMs": 10169,
+    "confidence": null
+  },
+  {
+    "text": "me",
+    "startMs": 10239,
+    "endMs": 10279,
+    "timestampMs": 10259,
+    "confidence": null
+  },
+  {
+    "text": "explain",
+    "startMs": 10340,
+    "endMs": 10600,
+    "timestampMs": 10470,
+    "confidence": null
+  },
+  {
+    "text": "how",
+    "startMs": 10659,
+    "endMs": 10739,
+    "timestampMs": 10699,
+    "confidence": null
+  },
+  {
+    "text": "it",
+    "startMs": 10779,
+    "endMs": 10840,
+    "timestampMs": 10810,
+    "confidence": null
+  },
+  {
+    "text": "works.",
+    "startMs": 10899,
+    "endMs": 11179,
+    "timestampMs": 11039,
+    "confidence": null
+  },
+  {
+    "text": "Adobe",
+    "startMs": 11500,
+    "endMs": 11800,
+    "timestampMs": 11650,
+    "confidence": null
+  },
+  {
+    "text": "Firefly",
+    "startMs": 11920,
+    "endMs": 12479,
+    "timestampMs": 12200,
+    "confidence": null
+  },
+  {
+    "text": "is",
+    "startMs": 12559,
+    "endMs": 12639,
+    "timestampMs": 12599,
+    "confidence": null
+  },
+  {
+    "text": "one",
+    "startMs": 12719,
+    "endMs": 12779,
+    "timestampMs": 12749,
+    "confidence": null
+  },
+  {
+    "text": "of",
+    "startMs": 12799,
+    "endMs": 12840,
+    "timestampMs": 12820,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 12880,
+    "endMs": 13019,
+    "timestampMs": 12950,
+    "confidence": null
+  },
+  {
+    "text": "craziest",
+    "startMs": 13179,
+    "endMs": 13899,
+    "timestampMs": 13539,
+    "confidence": null
+  },
+  {
+    "text": "AI",
+    "startMs": 14019,
+    "endMs": 14219,
+    "timestampMs": 14119,
+    "confidence": null
+  },
+  {
+    "text": "tools",
+    "startMs": 14380,
+    "endMs": 14739,
+    "timestampMs": 14560,
+    "confidence": null
+  },
+  {
+    "text": "yet.",
+    "startMs": 15039,
+    "endMs": 15239,
+    "timestampMs": 15139,
+    "confidence": null
+  },
+  {
+    "text": "Firefly",
+    "startMs": 15599,
+    "endMs": 16100,
+    "timestampMs": 15850,
+    "confidence": null
+  },
+  {
+    "text": "is",
+    "startMs": 16159,
+    "endMs": 16239,
+    "timestampMs": 16199,
+    "confidence": null
+  },
+  {
+    "text": "a",
+    "startMs": 16279,
+    "endMs": 16399,
+    "timestampMs": 16339,
+    "confidence": null
+  },
+  {
+    "text": "generative",
+    "startMs": 16479,
+    "endMs": 16999,
+    "timestampMs": 16739,
+    "confidence": null
+  },
+  {
+    "text": "AI-powered",
+    "startMs": 17139,
+    "endMs": 17779,
+    "timestampMs": 17459,
+    "confidence": null
+  },
+  {
+    "text": "content",
+    "startMs": 17879,
+    "endMs": 18260,
+    "timestampMs": 18070,
+    "confidence": null
+  },
+  {
+    "text": "creation",
+    "startMs": 18319,
+    "endMs": 18719,
+    "timestampMs": 18519,
+    "confidence": null
+  },
+  {
+    "text": "tool.",
+    "startMs": 18779,
+    "endMs": 18999,
+    "timestampMs": 18889,
+    "confidence": null
+  },
+  {
+    "text": "That",
+    "startMs": 19260,
+    "endMs": 19340,
+    "timestampMs": 19300,
+    "confidence": null
+  },
+  {
+    "text": "means",
+    "startMs": 19399,
+    "endMs": 19579,
+    "timestampMs": 19489,
+    "confidence": null
+  },
+  {
+    "text": "it",
+    "startMs": 19639,
+    "endMs": 19699,
+    "timestampMs": 19669,
+    "confidence": null
+  },
+  {
+    "text": "can",
+    "startMs": 19739,
+    "endMs": 20020,
+    "timestampMs": 19880,
+    "confidence": null
+  },
+  {
+    "text": "simply",
+    "startMs": 20079,
+    "endMs": 20539,
+    "timestampMs": 20309,
+    "confidence": null
+  },
+  {
+    "text": "create",
+    "startMs": 20619,
+    "endMs": 20939,
+    "timestampMs": 20779,
+    "confidence": null
+  },
+  {
+    "text": "things.",
+    "startMs": 20979,
+    "endMs": 21279,
+    "timestampMs": 21129,
+    "confidence": null
+  },
+  {
+    "text": "It",
+    "startMs": 21459,
+    "endMs": 21520,
+    "timestampMs": 21490,
+    "confidence": null
+  },
+  {
+    "text": "can",
+    "startMs": 21559,
+    "endMs": 21659,
+    "timestampMs": 21609,
+    "confidence": null
+  },
+  {
+    "text": "do",
+    "startMs": 21719,
+    "endMs": 21799,
+    "timestampMs": 21759,
+    "confidence": null
+  },
+  {
+    "text": "things",
+    "startMs": 21879,
+    "endMs": 22079,
+    "timestampMs": 21979,
+    "confidence": null
+  },
+  {
+    "text": "that",
+    "startMs": 22119,
+    "endMs": 22180,
+    "timestampMs": 22150,
+    "confidence": null
+  },
+  {
+    "text": "would",
+    "startMs": 22219,
+    "endMs": 22459,
+    "timestampMs": 22339,
+    "confidence": null
+  },
+  {
+    "text": "otherwise",
+    "startMs": 22559,
+    "endMs": 22979,
+    "timestampMs": 22769,
+    "confidence": null
+  },
+  {
+    "text": "be",
+    "startMs": 23059,
+    "endMs": 23139,
+    "timestampMs": 23099,
+    "confidence": null
+  },
+  {
+    "text": "impossible",
+    "startMs": 23180,
+    "endMs": 24000,
+    "timestampMs": 23590,
+    "confidence": null
+  },
+  {
+    "text": "or",
+    "startMs": 24059,
+    "endMs": 24119,
+    "timestampMs": 24089,
+    "confidence": null
+  },
+  {
+    "text": "would",
+    "startMs": 24159,
+    "endMs": 24260,
+    "timestampMs": 24210,
+    "confidence": null
+  },
+  {
+    "text": "have",
+    "startMs": 24279,
+    "endMs": 24379,
+    "timestampMs": 24329,
+    "confidence": null
+  },
+  {
+    "text": "taken",
+    "startMs": 24420,
+    "endMs": 24639,
+    "timestampMs": 24530,
+    "confidence": null
+  },
+  {
+    "text": "a",
+    "startMs": 24760,
+    "endMs": 24920,
+    "timestampMs": 24840,
+    "confidence": null
+  },
+  {
+    "text": "Photoshop",
+    "startMs": 25019,
+    "endMs": 25519,
+    "timestampMs": 25269,
+    "confidence": null
+  },
+  {
+    "text": "expert",
+    "startMs": 25579,
+    "endMs": 25919,
+    "timestampMs": 25749,
+    "confidence": null
+  },
+  {
+    "text": "to",
+    "startMs": 25979,
+    "endMs": 26079,
+    "timestampMs": 26029,
+    "confidence": null
+  },
+  {
+    "text": "do.",
+    "startMs": 26139,
+    "endMs": 26340,
+    "timestampMs": 26240,
+    "confidence": null
+  },
+  {
+    "text": "Even",
+    "startMs": 26639,
+    "endMs": 26819,
+    "timestampMs": 26729,
+    "confidence": null
+  },
+  {
+    "text": "then,",
+    "startMs": 26859,
+    "endMs": 27119,
+    "timestampMs": 26989,
+    "confidence": null
+  },
+  {
+    "text": "Firefly",
+    "startMs": 27639,
+    "endMs": 28039,
+    "timestampMs": 27839,
+    "confidence": null
+  },
+  {
+    "text": "does",
+    "startMs": 28099,
+    "endMs": 28259,
+    "timestampMs": 28179,
+    "confidence": null
+  },
+  {
+    "text": "it",
+    "startMs": 28280,
+    "endMs": 28299,
+    "timestampMs": 28290,
+    "confidence": null
+  },
+  {
+    "text": "in",
+    "startMs": 28299,
+    "endMs": 28399,
+    "timestampMs": 28349,
+    "confidence": null
+  },
+  {
+    "text": "a",
+    "startMs": 28420,
+    "endMs": 28439,
+    "timestampMs": 28430,
+    "confidence": null
+  },
+  {
+    "text": "way",
+    "startMs": 28519,
+    "endMs": 28619,
+    "timestampMs": 28569,
+    "confidence": null
+  },
+  {
+    "text": "that",
+    "startMs": 28659,
+    "endMs": 28739,
+    "timestampMs": 28699,
+    "confidence": null
+  },
+  {
+    "text": "looks",
+    "startMs": 28779,
+    "endMs": 28959,
+    "timestampMs": 28869,
+    "confidence": null
+  },
+  {
+    "text": "completely",
+    "startMs": 29000,
+    "endMs": 29519,
+    "timestampMs": 29260,
+    "confidence": null
+  },
+  {
+    "text": "natural.",
+    "startMs": 29579,
+    "endMs": 30019,
+    "timestampMs": 29799,
+    "confidence": null
+  },
+  {
+    "text": "So",
+    "startMs": 30279,
+    "endMs": 30340,
+    "timestampMs": 30310,
+    "confidence": null
+  },
+  {
+    "text": "if",
+    "startMs": 30379,
+    "endMs": 30479,
+    "timestampMs": 30429,
+    "confidence": null
+  },
+  {
+    "text": "you",
+    "startMs": 30539,
+    "endMs": 30639,
+    "timestampMs": 30589,
+    "confidence": null
+  },
+  {
+    "text": "work",
+    "startMs": 30699,
+    "endMs": 30879,
+    "timestampMs": 30789,
+    "confidence": null
+  },
+  {
+    "text": "with",
+    "startMs": 30939,
+    "endMs": 31179,
+    "timestampMs": 31059,
+    "confidence": null
+  },
+  {
+    "text": "any",
+    "startMs": 31279,
+    "endMs": 31539,
+    "timestampMs": 31409,
+    "confidence": null
+  },
+  {
+    "text": "sort",
+    "startMs": 31599,
+    "endMs": 31979,
+    "timestampMs": 31789,
+    "confidence": null
+  },
+  {
+    "text": "of",
+    "startMs": 32020,
+    "endMs": 32139,
+    "timestampMs": 32080,
+    "confidence": null
+  },
+  {
+    "text": "content",
+    "startMs": 32219,
+    "endMs": 32559,
+    "timestampMs": 32389,
+    "confidence": null
+  },
+  {
+    "text": "creation,",
+    "startMs": 32619,
+    "endMs": 33000,
+    "timestampMs": 32810,
+    "confidence": null
+  },
+  {
+    "text": "Firefly",
+    "startMs": 33360,
+    "endMs": 33819,
+    "timestampMs": 33590,
+    "confidence": null
+  },
+  {
+    "text": "will",
+    "startMs": 33880,
+    "endMs": 33979,
+    "timestampMs": 33930,
+    "confidence": null
+  },
+  {
+    "text": "be",
+    "startMs": 34040,
+    "endMs": 34159,
+    "timestampMs": 34100,
+    "confidence": null
+  },
+  {
+    "text": "a",
+    "startMs": 34259,
+    "endMs": 34319,
+    "timestampMs": 34289,
+    "confidence": null
+  },
+  {
+    "text": "must-have",
+    "startMs": 34459,
+    "endMs": 34959,
+    "timestampMs": 34709,
+    "confidence": null
+  },
+  {
+    "text": "tool.",
+    "startMs": 35079,
+    "endMs": 35319,
+    "timestampMs": 35199,
+    "confidence": null
+  }
+]

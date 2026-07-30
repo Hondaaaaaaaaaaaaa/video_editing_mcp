@@ -218,6 +218,14 @@ const REF_SIZE = 100; // reference size used for width measuring / auto-fit
 // is just a safety net: pack a plain 3 × 2 grid so something legible shows.
 const FALLBACK_WORDS_PER_LINE = 3;
 
+// The accent color hands off to the next line this many ms BEFORE the timestamp
+// boundary. ASR (Scribe) stretches the last word of a line to swallow the short
+// pause before the next line, so the raw boundary sits AFTER the speaker has
+// actually finished the line — which reads as the highlight "lingering" on the
+// top line. Leading the switch by ~a beat makes the color move the instant the
+// line is effectively done. Tune to taste; 0 = switch exactly on the boundary.
+const SWITCH_LEAD_MS = 130;
+
 // Maps an alignment to the flex justify-content that positions the line's words.
 const ALIGN_TO_JUSTIFY: Record<HormoziAlignment, "flex-start" | "center" | "flex-end"> = {
   left: "flex-start",
@@ -250,17 +258,19 @@ export const decideSentenceSplit = (
 /**
  * Renders ONE Hormozi caption — N stacked lines — inside its own <Sequence>.
  * The text is STILL (all lines appear together and hold), but the HIGHLIGHT
- * (accent color) follows the spoken line: it steps line-by-line (top -> bottom)
- * as each line's first word is spoken. `lineStartFrames[i]` is the local frame
- * at which line i begins; the active line is the LAST one whose start frame has
- * been reached. Works for 1, 2, or 3+ lines — default captions are 2 lines.
+ * (accent color) follows the spoken line: it steps line-by-line (top -> bottom).
+ * `lineSwitchFrames[i]` is the local frame at which the accent LANDS on line i
+ * (line 0 = 0; later lines = when the previous line finishes being spoken); the
+ * active line is the LAST one whose switch frame has been reached. `fontSize` is
+ * computed ONCE for the whole document by the parent so every caption is the
+ * same size. Works for 1, 2, or 3+ lines — default captions are 2 lines.
  */
 const HormoziSegment: React.FC<{
   lines: KineticWord[][];
-  lineStartFrames: number[];
-}> = ({ lines, lineStartFrames }) => {
+  lineSwitchFrames: number[];
+  fontSize: number;
+}> = ({ lines, lineSwitchFrames, fontSize }) => {
   const frame = useCurrentFrame();
-  const { width } = useVideoConfig();
   const style = useContext(HormoziStyleContext);
 
   const {
@@ -275,12 +285,12 @@ const HormoziSegment: React.FC<{
   const { baseColor, accentColor } = style.text;
 
   // Which line is currently spoken -> highlighted. Step through the lines in
-  // order: the active line is the LAST one whose start frame has been reached
+  // order: the active line is the LAST one whose switch frame has been reached
   // (quick, instant switches). Generalizes the old top->bottom 2-line swap to
   // any number of lines.
   let activeLine = 0;
-  for (let i = 0; i < lineStartFrames.length; i++) {
-    if (frame >= lineStartFrames[i]) activeLine = i;
+  for (let i = 0; i < lineSwitchFrames.length; i++) {
+    if (frame >= lineSwitchFrames[i]) activeLine = i;
   }
 
   // ---- Effects (highlighted line only) --------------------------------------
@@ -320,27 +330,9 @@ const HormoziSegment: React.FC<{
     .filter(Boolean)
     .join(" ");
 
-  // ---- AUTO-FIT: shrink so the widest line fits 90% of the frame width -------
-  const availWidth = width * 0.9;
-  const lineMaxSizes = lines.map((ln) => {
-    const lineWidthAtRef = ln.reduce(
-      (sum, tk) =>
-        sum +
-        measureText({
-          text: tk.text,
-          fontFamily,
-          fontSize: REF_SIZE,
-          fontWeight: FONT_WEIGHT,
-        }).width,
-      0,
-    );
-    const wordSpacingAtRef = ln.length * wordSpacing * REF_SIZE;
-    const totalAtRef = lineWidthAtRef + wordSpacingAtRef;
-    return totalAtRef > 0 ? (REF_SIZE * availWidth) / totalAtRef : DESIRED_FONT_SIZE;
-  });
-  const fontSize = lineMaxSizes.length
-    ? Math.min(DESIRED_FONT_SIZE, ...lineMaxSizes)
-    : DESIRED_FONT_SIZE;
+  // NOTE: `fontSize` is computed ONCE for the whole document by PageHormozi and
+  // passed in, so every caption renders at the SAME size (see the uniform
+  // auto-fit in the parent). Nothing per-caption to measure here.
 
   // Builds the clipped background layers for a gradient/sweep highlighted word.
   const buildAccentBg = () => {
@@ -464,7 +456,10 @@ const HormoziSegment: React.FC<{
  * from the top line to the bottom line when the 2nd phrase's first word is said.
  */
 export const PageHormozi: React.FC<CaptionStyleProps> = ({ captions = [], segments }) => {
-  const { fps, durationInFrames } = useVideoConfig();
+  const { fps, durationInFrames, width } = useVideoConfig();
+  const style = useContext(HormoziStyleContext);
+  const fontFamily = resolveFontFamily(style.text.fontFamily);
+  const { wordSpacing } = style.layout;
 
   const hasDoc = Boolean(segments && segments.length);
   // PER-CAPTION model: when a caption DOCUMENT exists (Claude's auto output or
@@ -480,6 +475,28 @@ export const PageHormozi: React.FC<CaptionStyleProps> = ({ captions = [], segmen
       );
   const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
 
+  // ---- UNIFORM AUTO-FIT: ONE font size for the WHOLE document ----------------
+  // Every caption renders at the SAME size so the scale never jumps between
+  // captions. Pick the LARGEST size (capped at DESIRED_FONT_SIZE) at which the
+  // widest line ANYWHERE in the document still fits 90% of the frame width.
+  const availWidth = width * 0.9;
+  let fontSize = DESIRED_FONT_SIZE;
+  for (const block of blocks) {
+    for (const ln of block.lines) {
+      const lineWidthAtRef = ln.reduce(
+        (sum, tk) =>
+          sum +
+          measureText({ text: tk.text, fontFamily, fontSize: REF_SIZE, fontWeight: FONT_WEIGHT })
+            .width,
+        0,
+      );
+      const wordSpacingAtRef = ln.length * wordSpacing * REF_SIZE;
+      const totalAtRef = lineWidthAtRef + wordSpacingAtRef;
+      const fit = totalAtRef > 0 ? (REF_SIZE * availWidth) / totalAtRef : DESIRED_FONT_SIZE;
+      if (fit < fontSize) fontSize = fit;
+    }
+  }
+
   return (
     <AbsoluteFill style={{ zIndex: 10 }}>
       {blocks.map((block, i) => {
@@ -487,11 +504,22 @@ export const PageHormozi: React.FC<CaptionStyleProps> = ({ captions = [], segmen
         const next = blocks[i + 1];
         const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
         const segDurationInFrames = Math.max(1, endFrame - startFrame);
-        // Local frame at which each line's first spoken word begins; the accent
-        // steps through them in order (a default 2-line caption switches once).
-        const lineStartFrames = block.lines.map((ln) =>
-          ln[0] ? Math.max(0, msToFrame(ln[0].fromMs) - startFrame) : 0,
-        );
+        // Local frame at which the accent LANDS on each line. Line 0 = caption
+        // start. Later lines switch the moment the PREVIOUS line finishes being
+        // spoken (its last word's end) — not when this line's first word starts
+        // — so the highlight never lingers on the top line through the pause.
+        // Guarded with min() so it's never LATER than the old first-word timing.
+        const lineSwitchFrames = block.lines.map((ln, li) => {
+          if (li === 0) return 0;
+          const prev = block.lines[li - 1];
+          const prevEndMs = prev.length ? prev[prev.length - 1].toMs : 0;
+          const thisStartMs = ln.length ? ln[0].fromMs : prevEndMs;
+          // Boundary = earlier of {prev line ends, this line starts}, led by
+          // SWITCH_LEAD_MS so the color hands off the instant the line is
+          // effectively done (not after ASR's stretched last word).
+          const boundaryMs = Math.min(prevEndMs, thisStartMs) - SWITCH_LEAD_MS;
+          return Math.max(0, msToFrame(boundaryMs) - startFrame);
+        });
         return (
           <Sequence
             key={i}
@@ -499,7 +527,11 @@ export const PageHormozi: React.FC<CaptionStyleProps> = ({ captions = [], segmen
             durationInFrames={segDurationInFrames}
             name={`Sentence ${i + 1}`}
           >
-            <HormoziSegment lines={block.lines} lineStartFrames={lineStartFrames} />
+            <HormoziSegment
+              lines={block.lines}
+              lineSwitchFrames={lineSwitchFrames}
+              fontSize={fontSize}
+            />
           </Sequence>
         );
       })}

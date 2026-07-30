@@ -38,9 +38,15 @@ export const FONT_FAMILY_DEFAULT: FontFamilyName = "Inter";
 // Inter / Montserrat / Poppins ship 700 + 800, while Bebas Neue + Anton are
 // single-weight (400) display faces that are already bold by design. Options
 // are inlined (not extracted) so the weight literals get contextually typed.
-const inter = loadInter("normal", { weights: ["700", "800"], subsets: ["latin"] });
-const montserrat = loadMontserrat("normal", { weights: ["700", "800"], subsets: ["latin"] });
-const poppins = loadPoppins("normal", { weights: ["700", "800"], subsets: ["latin"] });
+// Montserrat also carries the LIGHT end (200/300): the Gadzhi template pairs a
+// bold spoken line with a thin unspoken one, so both extremes of the family have
+// to be loaded or the browser synthesises a fake thin weight.
+const inter = loadInter("normal", { weights: ["200", "300", "700", "800"], subsets: ["latin"] });
+const montserrat = loadMontserrat("normal", {
+  weights: ["200", "300", "700", "800"],
+  subsets: ["latin"],
+});
+const poppins = loadPoppins("normal", { weights: ["200", "300", "700", "800"], subsets: ["latin"] });
 const bebasNeue = loadBebasNeue("normal", { weights: ["400"], subsets: ["latin"] });
 const anton = loadAnton("normal", { weights: ["400"], subsets: ["latin"] });
 
