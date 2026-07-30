@@ -9,12 +9,6 @@ import {
   ClassicStyleProvider,
 } from "../src/CaptionedVideo/styles/PageClassic";
 import {
-  PageTheCine,
-  theCineSchema,
-  THE_CINE_DEFAULTS,
-  TheCineStyleProvider,
-} from "../src/CaptionedVideo/styles/PageTheCine";
-import {
   PageTypewriter,
   typewriterSchema,
   TYPEWRITER_DEFAULTS,
@@ -55,13 +49,6 @@ export const STYLES: StyleEntry[] = [
     defaults: stripSrc(CLASSIC_DEFAULTS),
     Provider: ClassicStyleProvider as unknown as React.Provider<never>,
     Page: PageClassic,
-  },
-  {
-    id: "TheCine",
-    schema: theCineSchema,
-    defaults: stripSrc(THE_CINE_DEFAULTS),
-    Provider: TheCineStyleProvider as unknown as React.Provider<never>,
-    Page: PageTheCine,
   },
   {
     id: "Typewriter",
