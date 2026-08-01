@@ -37,7 +37,6 @@ import {
   PageGadzhi,
   gadzhiSchema,
   GadzhiStyleProvider,
-  GADZHI_DEFAULTS,
 } from "./CaptionedVideo/styles/PageGadzhi";
 
 // The video that captions are rendered over (a vertical clip at
@@ -475,11 +474,30 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{
-          // sample-video.mp4 like every other composition — the reference clip
-          // the look was derived from (gadzhi.mp4) is local-only, as all the
-          // reference media in public/ is.
           src: "sample-video.mp4",
-          ...GADZHI_DEFAULTS,
+          layout: {
+            fontSizePct: 6.63,
+            captionScale: 1,
+            wordSpacing: 0.27,
+            lineSpacing: 1.19,
+            positionX: 50,
+            positionY: 69,
+            alignment: "center" as const,
+          },
+          text: {
+            activeFont: { family: "Montserrat" as const, custom: "" },
+            inactiveFont: { family: "Montserrat" as const, custom: "" },
+            color: "#ffffff",
+            activeWeight: 700,
+            inactiveWeight: 200,
+            inactiveOpacity: 0.85,
+            capitalizeFirstWord: true,
+          },
+          motion: { fadeInMs: 0 },
+          effects: {
+            stroke: { enabled: false, color: "#000000", width: 4 },
+            shadow: { enabled: true, color: "rgba(0, 0, 0, 0.35)", blur: 12 },
+          },
         }}
       />
     </>

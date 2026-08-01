@@ -1,13 +1,19 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
-import { dirname, resolve, extname, basename, join } from "node:path";
-import { createReadStream, readdirSync, statSync } from "node:fs";
+import { dirname, resolve, extname, basename, join, relative, sep } from "node:path";
+import { createReadStream, readdirSync, statSync, mkdirSync, writeFileSync } from "node:fs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = resolve(here, "../public");
+const FONTS_DIR = resolve(PUBLIC_DIR, "fonts");
+// Client uploads land in their own subfolder so they never mix with the fonts
+// that are checked into the repo.
+const UPLOADS_DIR = resolve(FONTS_DIR, "uploads");
 
 const VIDEO_EXT = [".mp4", ".mov", ".webm", ".mkv"];
+const FONT_EXT = [".ttf", ".otf", ".woff", ".woff2"];
+const MAX_FONT_BYTES = 10 * 1024 * 1024;
 
 const MIME: Record<string, string> = {
   ".mp4": "video/mp4",
@@ -15,6 +21,10 @@ const MIME: Record<string, string> = {
   ".webm": "video/webm",
   ".mkv": "video/x-matroska",
   ".json": "application/json",
+  ".ttf": "font/ttf",
+  ".otf": "font/otf",
+  ".woff": "font/woff",
+  ".woff2": "font/woff2",
 };
 
 /** Every clip URL goes through /api/file?name=… — see the endpoint below. */
@@ -103,6 +113,116 @@ const clipsApi = (): Plugin => ({
 
       res.setHeader("Content-Length", String(size));
       createReadStream(path).pipe(res);
+    });
+
+    // Serve public/fonts ourselves, ahead of Vite's static handler. Vite reads
+    // publicDir once at startup, so a font uploaded mid-session would 404 (and
+    // fall through to index.html) until the server restarted — which would make
+    // an upload look broken in the preview. Reading from disk per request means
+    // a newly uploaded font is usable immediately. `staticFile()` resolves to
+    // this same /fonts/... URL, and Remotion's own server handles it in Studio
+    // and in renders.
+    server.middlewares.use("/fonts", (req, res, next) => {
+      const rel = decodeURIComponent((req.url ?? "/").split("?")[0]).replace(/^\/+/, "");
+      const path = resolve(FONTS_DIR, rel);
+      // resolve() collapses any ../ — reject anything that escaped public/fonts.
+      if (path !== FONTS_DIR && !path.startsWith(FONTS_DIR + sep)) {
+        res.statusCode = 403;
+        res.end("forbidden");
+        return;
+      }
+      let size: number;
+      try {
+        const st = statSync(path);
+        if (!st.isFile()) return next();
+        size = st.size;
+      } catch {
+        return next();
+      }
+      res.setHeader(
+        "Content-Type",
+        MIME[extname(path).toLowerCase()] ?? "application/octet-stream",
+      );
+      res.setHeader("Content-Length", String(size));
+      createReadStream(path).pipe(res);
+    });
+
+    // --- FONTS -------------------------------------------------------------
+    // `GET /api/fonts` lists every font under public/fonts (recursively), so
+    // anything dropped in there — including a whole downloaded family — shows up
+    // in the template's font pickers. Paths are relative to public/fonts, which
+    // is exactly what a FontSlot stores.
+    server.middlewares.use("/api/fonts", (req, res) => {
+      const url = new URL(req.url ?? "/", "http://localhost");
+
+      if (req.method === "POST" && url.pathname.replace(/\/$/, "").endsWith("/upload")) {
+        const raw = basename(url.searchParams.get("name") ?? "");
+        const ext = extname(raw).toLowerCase();
+        if (!FONT_EXT.includes(ext)) {
+          res.statusCode = 400;
+          res.end(JSON.stringify({ error: `unsupported font type "${ext || "?"}"` }));
+          return;
+        }
+        // Keep only characters that are safe in a filename AND a URL.
+        const safe = raw.replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^-+/, "");
+        const chunks: Buffer[] = [];
+        let total = 0;
+        let aborted = false;
+        req.on("data", (c: Buffer) => {
+          if (aborted) return;
+          total += c.length;
+          if (total > MAX_FONT_BYTES) {
+            aborted = true;
+            res.statusCode = 413;
+            res.end(JSON.stringify({ error: "font larger than 10MB" }));
+            req.destroy();
+            return;
+          }
+          chunks.push(c);
+        });
+        req.on("end", () => {
+          if (aborted) return;
+          try {
+            mkdirSync(UPLOADS_DIR, { recursive: true });
+            writeFileSync(join(UPLOADS_DIR, safe), Buffer.concat(chunks));
+            res.setHeader("Content-Type", "application/json");
+            // The path a FontSlot stores: relative to public/fonts, POSIX style.
+            res.end(JSON.stringify({ file: `uploads/${safe}` }));
+          } catch (e) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: String(e) }));
+          }
+        });
+        return;
+      }
+
+      const out: { file: string; label: string }[] = [];
+      const walk = (dir: string) => {
+        let entries: string[];
+        try {
+          entries = readdirSync(dir);
+        } catch {
+          return;
+        }
+        for (const entry of entries) {
+          const full = join(dir, entry);
+          let st;
+          try {
+            st = statSync(full);
+          } catch {
+            continue;
+          }
+          if (st.isDirectory()) walk(full);
+          else if (FONT_EXT.includes(extname(entry).toLowerCase())) {
+            const rel = relative(FONTS_DIR, full).split(sep).join("/");
+            out.push({ file: rel, label: basename(entry, extname(entry)) });
+          }
+        }
+      };
+      walk(FONTS_DIR);
+      out.sort((a, b) => a.file.localeCompare(b.file));
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify(out));
     });
   },
 });

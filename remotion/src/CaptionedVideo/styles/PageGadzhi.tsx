@@ -18,7 +18,14 @@ import {
   dropShadowCss,
   type TextEffects,
 } from "./text-effects";
-import { fontFamilySchema, resolveFontFamily, type FontFamilyName } from "./fonts";
+import {
+  fontSlotSchema,
+  fontSlot,
+  useFontSlot,
+  effectiveWeight,
+  type FontSlot,
+  type ResolvedFont,
+} from "./font-slot";
 // The caption-document -> blocks conversion is shared with the other kinetic
 // templates; only the painting differs here.
 import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./PageShiny";
@@ -35,8 +42,9 @@ import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./Page
 //     colour anywhere in the reference — the only signal is weight + opacity.
 //   * The swap is INSTANT (a single frame, no crossfade) and nothing moves: the
 //     lines never slide, scale, or re-flow.
-//   * A new caption FADES IN over ~5 frames (~0.15s); the outgoing caption is a
-//     hard cut. There is one blank frame between the two.
+//   * In the reference a new caption fades in over ~5 frames (~0.15s), but we
+//     default that OFF (motion.fadeInMs = 0): captions cut straight in, one
+//     after another, with NO animation anywhere in the template.
 //   * The font size is FIXED for the whole video — long captions are not shrunk
 //     to fit, they are split into more captions upstream (see the "gadzhi"
 //     shape in enrich.mjs).
@@ -71,7 +79,12 @@ export const gadzhiSchema = captionedVideoSchema.extend({
 
   // === TEXT — one colour, two weights. That IS the template. ===
   text: z.object({
-    fontFamily: fontFamilySchema.fontFamily,
+    // Two INDEPENDENT font slots, because the two lines are on screen together:
+    // a client can keep Montserrat for both, or upload their own bold face and
+    // their own thin face. A slot holding an uploaded file ignores the weight
+    // below unless that file is a variable font — see effectiveWeight().
+    activeFont: fontSlotSchema, // spoken line
+    inactiveFont: fontSlotSchema, // unspoken line
     color: zColor(), // both lines share it; only weight + opacity differ
     activeWeight: z.number().min(100).max(900).step(100), // spoken line
     inactiveWeight: z.number().min(100).max(900).step(100), // unspoken line
@@ -112,7 +125,8 @@ export type GadzhiStyle = {
     alignment: GadzhiAlignment;
   };
   text: {
-    fontFamily: FontFamilyName;
+    activeFont: FontSlot;
+    inactiveFont: FontSlot;
     color: string;
     activeWeight: number;
     inactiveWeight: number;
@@ -142,7 +156,10 @@ export const GADZHI_DEFAULTS: GadzhiStyle = {
     alignment: "center",
   },
   text: {
-    fontFamily: "Montserrat",
+    // Both default to built-in Montserrat; either can be swapped for an
+    // uploaded file without touching the other.
+    activeFont: fontSlot("Montserrat"),
+    inactiveFont: fontSlot("Montserrat"),
     color: "#ffffff",
     activeWeight: 700, // Montserrat Bold — matched the reference to 0.5%
     inactiveWeight: 200, // ExtraLight — the weight whose size agreed with Bold
@@ -151,7 +168,10 @@ export const GADZHI_DEFAULTS: GadzhiStyle = {
     inactiveOpacity: 0.85,
     capitalizeFirstWord: true,
   },
-  motion: { fadeInMs: 150 }, // ~5 frames at 30fps, as measured
+  // No entrance animation: captions cut straight in, one after another. The
+  // reference clip does fade over ~5 frames, but a hard cut is the look we
+  // want here — raise fadeInMs to bring the fade back.
+  motion: { fadeInMs: 0 },
   effects: {
     // The reference shows no outline and at most a whisper of shadow; both are
     // here for legibility over bright footage rather than to match the clip.
@@ -197,13 +217,14 @@ const GadzhiSegment: React.FC<{
   lineSwitchFrames: number[];
   fontSize: number;
   fadeInFrames: number;
-}> = ({ lines, lineSwitchFrames, fontSize, fadeInFrames }) => {
+  activeFont: ResolvedFont;
+  inactiveFont: ResolvedFont;
+}> = ({ lines, lineSwitchFrames, fontSize, fadeInFrames, activeFont, inactiveFont }) => {
   const frame = useCurrentFrame();
   const style = useContext(GadzhiStyleContext);
 
   const { captionScale, wordSpacing, lineSpacing, positionX, positionY, alignment } =
     style.layout;
-  const fontFamily = resolveFontFamily(style.text.fontFamily);
   const { color, activeWeight, inactiveWeight, inactiveOpacity, capitalizeFirstWord } =
     style.text;
 
@@ -236,23 +257,31 @@ const GadzhiSegment: React.FC<{
   const shadowText = textShadowCss(textEffects);
   const shadowFilter = dropShadowCss(textEffects);
 
-  const lineStyle = (isActive: boolean): React.CSSProperties => ({
-    display: "flex",
-    justifyContent: ALIGN_TO_JUSTIFY[alignment],
-    alignItems: "center",
-    lineHeight: lineSpacing,
-    whiteSpace: "pre",
-    // A real flex gap rather than CSS `word-spacing`: the ASR returns words with
-    // no literal space between them, and a gap also behaves correctly in RTL.
-    columnGap: `${fontSize * wordSpacing}px`,
-    color,
-    fontWeight: isActive ? activeWeight : inactiveWeight,
-    opacity: isActive ? 1 : inactiveOpacity,
-    WebkitTextStroke: stroke,
-    paintOrder: stroke ? "stroke fill" : undefined,
-    textShadow: shadowText,
-    filter: shadowFilter || undefined,
-  });
+  // Each line carries its OWN family + weight: the two slots are independent,
+  // and effectiveWeight() drops the weight number for an uploaded static file
+  // so the browser can't synthesise a fake bold from it.
+  const lineStyle = (isActive: boolean): React.CSSProperties => {
+    const slot = isActive ? activeFont : inactiveFont;
+    return {
+      display: "flex",
+      justifyContent: ALIGN_TO_JUSTIFY[alignment],
+      alignItems: "center",
+      lineHeight: lineSpacing,
+      whiteSpace: "pre",
+      // A real flex gap rather than CSS `word-spacing`: the ASR returns words
+      // with no literal space between them, and a gap also behaves correctly in
+      // RTL.
+      columnGap: `${fontSize * wordSpacing}px`,
+      color,
+      fontFamily: slot.fontFamily,
+      fontWeight: effectiveWeight(slot, isActive ? activeWeight : inactiveWeight),
+      opacity: isActive ? 1 : inactiveOpacity,
+      WebkitTextStroke: stroke,
+      paintOrder: stroke ? "stroke fill" : undefined,
+      textShadow: shadowText,
+      filter: shadowFilter || undefined,
+    };
+  };
 
   return (
     <AbsoluteFill>
@@ -267,7 +296,6 @@ const GadzhiSegment: React.FC<{
           display: "flex",
           flexDirection: "column",
           alignItems: "stretch",
-          fontFamily,
           fontSize,
           opacity: enter,
         }}
@@ -313,26 +341,33 @@ export const PageGadzhi: React.FC<CaptionStyleProps> = ({ captions = [], segment
     [hasDoc, segments, captions],
   );
 
+  // Resolve both slots here, once, rather than per caption: an uploaded font is
+  // fetched and registered a single time, and the delayRender inside the hook
+  // keeps a render from painting before it is ready.
+  const activeFont = useFontSlot(style.text.activeFont);
+  const inactiveFont = useFontSlot(style.text.inactiveFont);
+
   // ONE font size for the entire video. Start from the configured size and only
   // shrink — by a single factor derived from the widest line anywhere in the
   // document — if something would otherwise run off the frame.
-  const fontFamily = resolveFontFamily(style.text.fontFamily);
   const { fontSizePct, wordSpacing } = style.layout;
   const configuredSize = (width * fontSizePct) / 100;
+  const measureFamily = activeFont.fontFamily;
+  const measureWeight = effectiveWeight(activeFont, style.text.activeWeight);
   const fontSize = useMemo(() => {
     const avail = width * FIT_WIDTH_FRACTION;
     let widest = 0;
     for (const block of blocks) {
       for (const line of block.lines) {
-        // Measured at the ACTIVE weight, which is the wider of the two.
+        // Measured at the ACTIVE font/weight, which is the wider of the two.
         const textWidth = line.reduce(
           (sum, tk) =>
             sum +
             measureText({
               text: tk.text,
-              fontFamily,
+              fontFamily: measureFamily,
               fontSize: configuredSize,
-              fontWeight: style.text.activeWeight,
+              fontWeight: measureWeight,
             }).width,
           0,
         );
@@ -342,7 +377,7 @@ export const PageGadzhi: React.FC<CaptionStyleProps> = ({ captions = [], segment
     }
     if (widest <= avail || widest === 0) return configuredSize;
     return configuredSize * Math.max(MIN_FIT_SCALE, avail / widest);
-  }, [blocks, width, fontFamily, configuredSize, wordSpacing, style.text.activeWeight]);
+  }, [blocks, width, measureFamily, measureWeight, configuredSize, wordSpacing]);
 
   const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
   const fadeInFrames = Math.round((style.motion.fadeInMs / 1000) * fps);
@@ -371,6 +406,8 @@ export const PageGadzhi: React.FC<CaptionStyleProps> = ({ captions = [], segment
               lineSwitchFrames={lineSwitchFrames}
               fontSize={fontSize}
               fadeInFrames={fadeInFrames}
+              activeFont={activeFont}
+              inactiveFont={inactiveFont}
             />
           </Sequence>
         );

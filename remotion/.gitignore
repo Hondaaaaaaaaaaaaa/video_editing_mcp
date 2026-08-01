@@ -9,3 +9,8 @@ out
 # Whisper.cpp install + model + temp wav extraction (downloaded on demand by sub.mjs)
 whisper.cpp
 temp
+
+# Client font uploads (written by the playground's /api/fonts/upload) — these are
+# user data, not part of the repo. Fonts checked in on purpose live elsewhere
+# under public/fonts.
+public/fonts/uploads

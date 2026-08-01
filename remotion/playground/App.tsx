@@ -2,12 +2,15 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Player } from "@remotion/player";
 import type { Caption } from "@remotion/captions";
 import { Preview } from "./Preview";
+import { EditorPreview } from "./EditorPreview";
 import { SchemaControls } from "./SchemaControls";
 import { STYLES, STYLE_BY_ID, type StyleProps } from "./styles";
+import type { CaptionDoc } from "../src/CaptionedVideo/styles/types";
 
 const FPS = 30;
 const SRC = "/sample-video.mp4"; // served from ../public by Vite
 const CAPTIONS_URL = "/sample-video.json";
+const DOC_URL = "/sample-video.enriched.json";
 const FALLBACK_FRAMES = 600;
 
 // One independent props bag per style, seeded from each style's own defaults.
@@ -18,6 +21,7 @@ export const App: React.FC = () => {
   const [styleId, setStyleId] = useState<string>(STYLES[0].id);
   const [propsById, setPropsById] = useState<Record<string, StyleProps>>(initialProps);
   const [captions, setCaptions] = useState<Caption[]>([]);
+  const [doc, setDoc] = useState<CaptionDoc | null>(null);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -25,6 +29,12 @@ export const App: React.FC = () => {
       .then((r) => (r.ok ? r.json() : []))
       .then((data: Caption[]) => setCaptions(Array.isArray(data) ? data : []))
       .catch(() => setCaptions([]));
+    // The kinetic templates lay out the caption DOCUMENT themselves rather than
+    // painting a pre-grouped page, so the tuner needs the enriched file too.
+    fetch(DOC_URL)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: CaptionDoc | null) => setDoc(d))
+      .catch(() => setDoc(null));
   }, []);
 
   const durationInFrames = useMemo(() => {
@@ -143,18 +153,43 @@ export const App: React.FC = () => {
           minWidth: 0,
         }}
       >
-        <Player
-          component={Preview}
-          inputProps={inputProps}
-          durationInFrames={durationInFrames}
-          fps={FPS}
-          compositionWidth={1080}
-          compositionHeight={1920}
-          style={{ height: "calc(100vh - 48px)", aspectRatio: "9 / 16", borderRadius: 8 }}
-          controls
-          loop
-          autoPlay
-        />
+        {/* Document-driven templates (Gadzhi / Shiny / Hormozi) render the whole
+            timeline from the caption document; the per-page styles are handed
+            one pre-grouped page at a time. Feeding the wrong one leaves the
+            preview blank, so pick the matching surface. */}
+        {entry?.documentDriven ? (
+          doc ? (
+            <Player
+              component={EditorPreview}
+              inputProps={{ src: SRC, doc, styleId, styleProps }}
+              durationInFrames={durationInFrames}
+              fps={FPS}
+              compositionWidth={1080}
+              compositionHeight={1920}
+              style={{ height: "calc(100vh - 48px)", aspectRatio: "9 / 16", borderRadius: 8 }}
+              controls
+              loop
+              autoPlay
+            />
+          ) : (
+            <span style={{ color: "#5b5b69", fontSize: 13 }}>
+              Loading {DOC_URL} — run the enrich pass if this stays empty.
+            </span>
+          )
+        ) : (
+          <Player
+            component={Preview}
+            inputProps={inputProps}
+            durationInFrames={durationInFrames}
+            fps={FPS}
+            compositionWidth={1080}
+            compositionHeight={1920}
+            style={{ height: "calc(100vh - 48px)", aspectRatio: "9 / 16", borderRadius: 8 }}
+            controls
+            loop
+            autoPlay
+          />
+        )}
       </main>
     </div>
   );

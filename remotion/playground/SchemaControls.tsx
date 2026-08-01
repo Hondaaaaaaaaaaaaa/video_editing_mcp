@@ -1,6 +1,8 @@
 import React from "react";
 import type { z } from "zod";
 import type { StyleProps } from "./styles";
+import { FONT_SLOT_BRAND, type FontSlot } from "../src/CaptionedVideo/styles/font-slot";
+import { FontSlotControl } from "./FontSlotControl";
 
 // ---------------------------------------------------------------------------
 // Generate real HTML controls from a zod object schema. Numbers with
@@ -28,6 +30,7 @@ const numConstraint = (s: any, kind: "min" | "max" | "step"): number | undefined
 };
 
 const isColor = (s: any): boolean => s?.description === "__remotion-color";
+const isFontSlot = (s: any): boolean => s?.description === FONT_SLOT_BRAND;
 const fieldType = (s: any): string => getDef(s)?.type ?? "";
 const enumValues = (s: any): string[] => Object.values(getDef(s)?.entries ?? {}) as string[];
 const objectShape = (s: any): Record<string, any> => {
@@ -89,6 +92,18 @@ const Field: React.FC<{
   onChange: (v: unknown) => void;
 }> = ({ name, schema, value, onChange }) => {
   const type = fieldType(schema);
+
+  // Font slot — branded object; gets its own picker + upload button instead of
+  // the generic object -> {enum select, text box} rendering.
+  if (isFontSlot(schema)) {
+    return (
+      <FontSlotControl
+        label={labelize(name)}
+        value={value as FontSlot | undefined}
+        onChange={onChange}
+      />
+    );
+  }
 
   // Color (zColor) — string with the remotion-color brand.
   if (isColor(schema)) {
@@ -197,6 +212,37 @@ const Field: React.FC<{
           + Add color
         </button>
       </div>
+    );
+  }
+
+  // Nested object -> a titled group that recurses. The sectioned schemas
+  // (layout / text / motion / effects) are objects at the top level, and
+  // without this every section collapsed into one "[object Object]" text box.
+  if (type === "object") {
+    const obj = (value ?? {}) as Record<string, unknown>;
+    const shape = objectShape(schema);
+    return (
+      <fieldset
+        style={{
+          border: "1px solid #23232e",
+          borderRadius: 8,
+          padding: "10px 12px 2px",
+          margin: "0 0 14px",
+        }}
+      >
+        <legend style={{ fontSize: 11, color: "#7dd3fc", padding: "0 6px" }}>
+          {labelize(name)}
+        </legend>
+        {Object.entries(shape).map(([k, sub]) => (
+          <Field
+            key={k}
+            name={k}
+            schema={sub}
+            value={obj[k]}
+            onChange={(v) => onChange({ ...obj, [k]: v })}
+          />
+        ))}
+      </fieldset>
     );
   }
 
