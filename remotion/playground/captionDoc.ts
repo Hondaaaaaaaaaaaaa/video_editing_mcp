@@ -351,6 +351,148 @@ export const moveWordsToPrevSentence = (
   return { doc: { ...doc, segments: clean(segments) }, sel: { s: gs, ...selAddr } };
 };
 
+// ---------------------------------------------------------------------------
+// WORD CONTENT edits — add / edit text / remove / retime a word, and add a whole
+// caption block. These are the "escape hatches" so the user is never stuck with
+// what the ASR produced: a missed word, a mishear, a wrong time, or a whole line
+// that needs to be typed in. New words/blocks get timing interpolated from their
+// neighbours (the timing editor can fine-tune it after).
+// ---------------------------------------------------------------------------
+
+const DEFAULT_WORD_MS = 400;
+
+/** REMOVE the word at (s, l, w); empty lines/captions are cleaned up. */
+export const removeWord = (doc: CaptionDoc, s: number, l: number, w: number): CaptionDoc => {
+  const seg = doc.segments[s];
+  if (!seg?.lines[l]?.words[w]) return doc;
+  const lines = seg.lines.map((line, li) =>
+    li !== l ? line : { ...line, words: line.words.filter((_, wi) => wi !== w) },
+  );
+  return replaceSeg(doc, s, markEdited({ ...seg, lines }));
+};
+
+/** EDIT a word's text (fix a mishear / spelling). Blank text deletes the word. */
+export const editWordText = (
+  doc: CaptionDoc,
+  s: number,
+  l: number,
+  w: number,
+  text: string,
+): CaptionDoc => {
+  const seg = doc.segments[s];
+  if (!seg?.lines[l]?.words[w]) return doc;
+  const t = text.trim();
+  if (!t) return removeWord(doc, s, l, w);
+  const lines = seg.lines.map((line, li) =>
+    li !== l
+      ? line
+      : { ...line, words: line.words.map((word, wi) => (wi !== w ? word : { ...word, text: t })) },
+  );
+  return replaceSeg(doc, s, markEdited({ ...seg, lines }));
+};
+
+/** EDIT a word's start/end time (ms), kept ordered (start < end). */
+export const setWordTime = (
+  doc: CaptionDoc,
+  s: number,
+  l: number,
+  w: number,
+  startMs: number,
+  endMs: number,
+): CaptionDoc => {
+  const seg = doc.segments[s];
+  if (!seg?.lines[l]?.words[w]) return doc;
+  const start = Math.max(0, Math.round(startMs));
+  const end = Math.max(start + 1, Math.round(endMs));
+  const lines = seg.lines.map((line, li) =>
+    li !== l
+      ? line
+      : { ...line, words: line.words.map((wd, wi) => (wi !== w ? wd : { ...wd, startMs: start, endMs: end })) },
+  );
+  return replaceSeg(doc, s, markEdited({ ...seg, lines }));
+};
+
+/**
+ * INSERT a new word next to (s, l, w) on the SAME line (keeps the line layout).
+ * Its timing fills the gap to the neighbour on that side, or a default slice
+ * when there is none. Returns the new word's address so the editor selects it.
+ */
+export const insertWord = (
+  doc: CaptionDoc,
+  s: number,
+  l: number,
+  w: number,
+  where: "before" | "after",
+  text = "word",
+): MoveResult | null => {
+  const seg = doc.segments[s];
+  const line = seg?.lines[l];
+  if (!line) return null;
+  const at = where === "after" ? w + 1 : w;
+  const flat = flattenSeg(seg);
+  const g = globalIndex(seg, l, w) + (where === "after" ? 1 : 0);
+  const prev = flat[g - 1];
+  const next = flat[g];
+  const leftMs = prev ? prev.endMs : next ? Math.max(0, next.startMs - DEFAULT_WORD_MS) : 0;
+  const rightMs = next ? next.startMs : leftMs + DEFAULT_WORD_MS;
+  const newWord: EnrichedWord = {
+    text: text.trim() || "word",
+    startMs: leftMs,
+    endMs: rightMs > leftMs ? rightMs : leftMs + DEFAULT_WORD_MS,
+    emphasis: false,
+  };
+  const words = [...line.words.slice(0, at), newWord, ...line.words.slice(at)];
+  const lines = seg.lines.map((ln, li) => (li === l ? { ...ln, words } : ln));
+  return { doc: replaceSeg(doc, s, markEdited({ ...seg, lines })), sel: { s, l, w: at } };
+};
+
+/**
+ * ADD a new caption block right AFTER segment s (s = -1 inserts at the very
+ * start), built from `text` (space-split into words). Words spread across the
+ * time gap to the next caption; when captions are contiguous it borrows a slice
+ * from the end of the previous caption so the new block never overlaps.
+ */
+export const addCaptionAfter = (
+  doc: CaptionDoc,
+  s: number,
+  text = "New caption",
+): MoveResult | null => {
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  if (!words.length) return null;
+  const segments = [...doc.segments];
+  const prevSeg = segments[s];
+  const nextSeg = segments[s + 1];
+  const prevFlat = prevSeg ? flattenSeg(prevSeg) : [];
+  const nextFlat = nextSeg ? flattenSeg(nextSeg) : [];
+  let leftMs = prevFlat.length ? prevFlat[prevFlat.length - 1].endMs : 0;
+  const rightMs = nextFlat.length ? nextFlat[0].startMs : leftMs + words.length * DEFAULT_WORD_MS;
+
+  if (rightMs - leftMs < 120 && prevSeg && prevFlat.length) {
+    const lastWord = prevFlat[prevFlat.length - 1];
+    const borrow = Math.min(600, Math.max(120, lastWord.endMs - lastWord.startMs - 40));
+    const newPrevEnd = Math.max(lastWord.startMs + 40, leftMs - borrow);
+    const lastLine = prevSeg.lines.length - 1;
+    const pLines = prevSeg.lines.map((ln, li) =>
+      li !== lastLine
+        ? ln
+        : { ...ln, words: ln.words.map((wd, wi) => (wi !== ln.words.length - 1 ? wd : { ...wd, endMs: newPrevEnd })) },
+    );
+    segments[s] = markEdited({ ...prevSeg, lines: pLines });
+    leftMs = newPrevEnd;
+  }
+
+  const span = Math.max(words.length * 80, (rightMs > leftMs ? rightMs : leftMs + words.length * DEFAULT_WORD_MS) - leftMs);
+  const per = span / words.length;
+  const newWords: EnrichedWord[] = words.map((t, i) => ({
+    text: t,
+    startMs: Math.round(leftMs + i * per),
+    endMs: Math.round(leftMs + (i + 1) * per),
+    emphasis: false,
+  }));
+  segments.splice(s + 1, 0, markEdited({ lines: reflowIntoLines(newWords, 2) }));
+  return { doc: { ...doc, segments: clean(segments) }, sel: { s: s + 1, l: 0, w: 0 } };
+};
+
 /** SET LINE COUNT: reflow a caption's words into exactly `n` balanced lines. */
 export const setLineCount = (doc: CaptionDoc, s: number, n: number): CaptionDoc => {
   const seg = doc.segments[s];

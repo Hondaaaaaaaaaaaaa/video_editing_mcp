@@ -5,10 +5,16 @@ import type { CaptionDoc } from "../src/CaptionedVideo/styles/types";
 import { EditorPreview } from "./EditorPreview";
 import { EDITOR_STYLES } from "./styles";
 import {
+  addCaptionAfter,
+  breakLineBefore,
+  editWordText,
+  insertWord,
   mergeCaptionWithNext,
   moveWordsToNextSentence,
   moveWordsToPrevSentence,
+  removeWord,
   setLineCount,
+  setWordTime,
   stepAddress,
   toggleEmphasis,
   withIds,
@@ -69,6 +75,8 @@ export const CaptionEditor: React.FC = () => {
   const [styleId, setStyleId] = useState<string>(EDITOR_STYLES[0]?.id ?? "Hormozi");
   const [size, setSize] = useState(FALLBACK_SIZE);
   const [videoSeconds, setVideoSeconds] = useState<number | null>(null);
+  // Which word is being TEXT-edited inline (an <input> replaces the chip).
+  const [editing, setEditing] = useState<WordAddr | null>(null);
 
   const styleProps = useMemo(
     () => EDITOR_STYLES.find((s) => s.id === styleId)?.defaults ?? {},
@@ -155,6 +163,37 @@ export const CaptionEditor: React.FC = () => {
     [doc, sel, push],
   );
 
+  // Insert a placeholder word after the selection, then immediately open it for
+  // text editing so the user just types the missing word.
+  const addWord = useCallback(() => {
+    if (!doc || !sel) return;
+    const res = insertWord(doc, sel.s, sel.l, sel.w, "after", "");
+    if (res) {
+      push({ doc: res.doc, sel: res.sel });
+      setEditing(res.sel);
+    }
+  }, [doc, sel, push]);
+
+  const delWord = useCallback(() => {
+    if (!doc || !sel) return;
+    push({ doc: removeWord(doc, sel.s, sel.l, sel.w), sel: null });
+  }, [doc, sel, push]);
+
+  const lineBreak = useCallback(() => {
+    if (!doc || !sel || sel.w <= 0) return;
+    push({ doc: breakLineBefore(doc, sel.s, sel.l, sel.w), sel });
+  }, [doc, sel, push]);
+
+  // Commit an inline text edit; empty text deletes the word (handled in the op).
+  const commitEdit = useCallback(
+    (a: WordAddr, text: string) => {
+      if (!doc) return;
+      setEditing(null);
+      push({ doc: editWordText(doc, a.s, a.l, a.w, text), sel: a });
+    },
+    [doc, push],
+  );
+
   // --- keyboard shortcuts -------------------------------------------------
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -201,15 +240,23 @@ export const CaptionEditor: React.FC = () => {
           break;
       }
 
-      if (mod) return; // leave browser/OS combos alone
-      if (e.key.toLowerCase() === "e") {
+      const k = e.key.toLowerCase();
+      if (mod && k === "b") { e.preventDefault(); lineBreak(); return; } // line break
+      if (mod && k === "i") { e.preventDefault(); addWord(); return; }   // insert word
+      if (mod && k === "d") { e.preventDefault(); delWord(); return; }   // delete word
+      if (mod) return; // leave other browser/OS combos alone
+
+      if (k === "e") {
         e.preventDefault();
         apply(toggleEmphasis(doc, sel.s, sel.l, sel.w), sel);
+      } else if (e.key === "Enter" || e.key === "F2") {
+        e.preventDefault();
+        setEditing(sel); // edit the selected word's text
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [doc, sel, apply, select, moveWord, undo, redo]);
+  }, [doc, sel, apply, select, moveWord, addWord, delWord, lineBreak, undo, redo]);
 
   const selWord =
     sel && doc?.segments[sel.s]?.lines[sel.l]?.words[sel.w]
@@ -303,7 +350,11 @@ export const CaptionEditor: React.FC = () => {
           <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginTop: 8 }}>
             <span style={kbd}>← →&nbsp; move to sentence</span>
             <span style={kbd}>alt+← →&nbsp; select</span>
+            <span style={kbd}>dbl-click / ⏎&nbsp; edit text</span>
             <span style={kbd}>E&nbsp; emphasis</span>
+            <span style={kbd}>⌘B&nbsp; line break</span>
+            <span style={kbd}>⌘I&nbsp; add word</span>
+            <span style={kbd}>⌘D&nbsp; delete</span>
             <span style={kbd}>⌘Z&nbsp; undo</span>
           </div>
         </div>
@@ -322,9 +373,6 @@ export const CaptionEditor: React.FC = () => {
         >
           {selWord && doc && sel ? (
             <>
-              <span style={{ fontSize: 11, color: "#6b6b79", marginRight: 4 }}>
-                “{selWord.text}”
-              </span>
               <button
                 type="button"
                 style={btn(false, true)}
@@ -332,7 +380,7 @@ export const CaptionEditor: React.FC = () => {
                 onClick={() => moveWord(-1)}
                 title="Move this word and everything BEFORE it to the end of the previous sentence"
               >
-                ← previous sentence
+                ← prev sentence
               </button>
               <button
                 type="button"
@@ -345,15 +393,50 @@ export const CaptionEditor: React.FC = () => {
               </button>
               <button
                 type="button"
+                style={btn(false, true)}
+                disabled={sel.w <= 0}
+                onClick={lineBreak}
+                title="Break to a new line inside THIS caption, starting at this word (⌘B)"
+              >
+                ↩ line break
+              </button>
+              <button
+                type="button"
                 style={btn(selWord.emphasis)}
                 onClick={() => apply(toggleEmphasis(doc, sel.s, sel.l, sel.w), sel)}
+                title="Highlight this word (E)"
               >
-                ★ Emphasis
+                ★ emphasis
               </button>
+              <button type="button" style={btn()} onClick={() => setEditing(sel)} title="Edit text (double-click / ⏎)">✎ edit</button>
+              <button type="button" style={btn()} onClick={addWord} title="Add a word after this one (⌘I)">＋ word</button>
+              <button type="button" style={btn()} onClick={delWord} title="Delete this word (⌘D)">🗑</button>
+              {/* timing editor — commits once on blur so it's a single undo step.
+                  Keyed by address so it shows the newly-selected word's times. */}
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, marginLeft: 4 }}>
+                <span style={{ fontSize: 10, color: "#5b5b69" }}>ms</span>
+                <input
+                  key={`start-${sel.s}-${sel.l}-${sel.w}`}
+                  type="number"
+                  defaultValue={selWord.startMs}
+                  onBlur={(e) => apply(setWordTime(doc, sel.s, sel.l, sel.w, Number(e.target.value), selWord.endMs), sel)}
+                  style={{ ...select_, width: 74, maxWidth: 74 }}
+                  title="Start (ms) — press Tab/click away to apply"
+                />
+                <span style={{ fontSize: 10, color: "#5b5b69" }}>→</span>
+                <input
+                  key={`end-${sel.s}-${sel.l}-${sel.w}`}
+                  type="number"
+                  defaultValue={selWord.endMs}
+                  onBlur={(e) => apply(setWordTime(doc, sel.s, sel.l, sel.w, selWord.startMs, Number(e.target.value)), sel)}
+                  style={{ ...select_, width: 74, maxWidth: 74 }}
+                  title="End (ms) — press Tab/click away to apply"
+                />
+              </span>
             </>
           ) : (
             <span style={{ fontSize: 11, color: "#5b5b69" }}>
-              Select a word to move it to the next or previous sentence.
+              Select a word to move, edit, retime, add or delete it.
             </span>
           )}
         </div>
@@ -366,6 +449,19 @@ export const CaptionEditor: React.FC = () => {
               transcribe → enrich pass so a matching <code>.enriched.json</code> sits next to
               it, then pick it above.
             </p>
+          ) : null}
+          {doc ? (
+            <button
+              type="button"
+              style={{ ...btn(false, true), width: "100%", marginBottom: 10, padding: "6px" }}
+              onClick={() => {
+                const res = addCaptionAfter(doc, -1);
+                if (res) push({ doc: res.doc, sel: res.sel });
+              }}
+              title="Add a new caption block at the very start"
+            >
+              ＋ Add caption at start
+            </button>
           ) : null}
           {doc?.segments.map((seg, s) => {
             const lineCount = seg.lines.length;
@@ -418,6 +514,17 @@ export const CaptionEditor: React.FC = () => {
                   >
                     ⇊
                   </button>
+                  <button
+                    type="button"
+                    style={btn(false, true)}
+                    onClick={() => {
+                      const res = addCaptionAfter(doc, s);
+                      if (res) push({ doc: res.doc, sel: res.sel });
+                    }}
+                    title="Add a new caption block after this one"
+                  >
+                    ＋
+                  </button>
                 </div>
 
                 {/* lines of word chips */}
@@ -428,12 +535,40 @@ export const CaptionEditor: React.FC = () => {
                   >
                     {line.words.map((word, w) => {
                       const isSel = sel && sel.s === s && sel.l === l && sel.w === w;
+                      const isEditing =
+                        editing && editing.s === s && editing.l === l && editing.w === w;
+                      if (isEditing) {
+                        return (
+                          <input
+                            key={w}
+                            autoFocus
+                            defaultValue={word.text}
+                            dir="auto"
+                            onBlur={(e) => commitEdit({ s, l, w }, e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") (e.target as HTMLInputElement).blur();
+                              if (e.key === "Escape") setEditing(null);
+                            }}
+                            style={{
+                              padding: "3px 7px",
+                              borderRadius: 5,
+                              border: "1px solid #2563eb",
+                              fontSize: 13,
+                              width: `${Math.max(4, word.text.length + 2)}ch`,
+                              background: "#0e1116",
+                              color: "#e7e7ea",
+                            }}
+                          />
+                        );
+                      }
                       return (
                         <button
                           key={w}
                           type="button"
                           onClick={() => select({ s, l, w })}
+                          onDoubleClick={() => setEditing({ s, l, w })}
                           dir="auto"
+                          title="Click to select · double-click to edit text"
                           style={{
                             padding: "3px 7px",
                             borderRadius: 5,
