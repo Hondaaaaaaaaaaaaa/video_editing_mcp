@@ -25,13 +25,13 @@
           "words": [
             {
               "text": "TikTok",
-              "emphasis": false,
+              "emphasis": true,
               "startMs": 980,
               "endMs": 1440
             },
             {
-              "text": "template",
-              "emphasis": true,
+              "text": "template,",
+              "emphasis": false,
               "startMs": 1440,
               "endMs": 1920
             }
@@ -111,12 +111,7 @@
               "emphasis": false,
               "startMs": 5870,
               "endMs": 6790
-            }
-          ]
-        },
-        {
-          "align": "center",
-          "words": [
+            },
             {
               "text": "your",
               "emphasis": false,
@@ -125,16 +120,12 @@
             },
             {
               "text": "audio",
-              "emphasis": true,
+              "emphasis": false,
               "startMs": 7100,
               "endMs": 7520
             }
           ]
-        }
-      ]
-    },
-    {
-      "lines": [
+        },
         {
           "align": "center",
           "words": [
@@ -146,18 +137,13 @@
             },
             {
               "text": "Whisper",
-              "emphasis": false,
+              "emphasis": true,
               "startMs": 8290,
               "endMs": 9160
-            }
-          ]
-        },
-        {
-          "align": "center",
-          "words": [
+            },
             {
               "text": "CPP",
-              "emphasis": true,
+              "emphasis": false,
               "startMs": 9160,
               "endMs": 9580
             }
@@ -181,29 +167,24 @@
               "emphasis": false,
               "startMs": 9900,
               "endMs": 10390
-            }
-          ]
-        },
-        {
-          "align": "center",
-          "words": [
+            },
             {
               "text": "your",
               "emphasis": false,
               "startMs": 10390,
               "endMs": 10740
-            },
-            {
-              "text": "captions",
-              "emphasis": true,
-              "startMs": 10740,
-              "endMs": 11200
             }
           ]
         },
         {
           "align": "center",
           "words": [
+            {
+              "text": "captions",
+              "emphasis": false,
+              "startMs": 10740,
+              "endMs": 11200
+            },
             {
               "text": "with",
               "emphasis": false,
@@ -211,8 +192,8 @@
               "endMs": 11580
             },
             {
-              "text": "React",
-              "emphasis": false,
+              "text": "React.",
+              "emphasis": true,
               "startMs": 11580,
               "endMs": 12040
             }
@@ -247,13 +228,13 @@
             "words": [
               {
                 "text": "TikTok",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 980,
                 "endMs": 1440
               },
               {
-                "text": "template",
-                "emphasis": true,
+                "text": "template,",
+                "emphasis": false,
                 "startMs": 1440,
                 "endMs": 1920
               }
@@ -333,12 +314,7 @@
                 "emphasis": false,
                 "startMs": 5870,
                 "endMs": 6790
-              }
-            ]
-          },
-          {
-            "align": "center",
-            "words": [
+              },
               {
                 "text": "your",
                 "emphasis": false,
@@ -347,16 +323,12 @@
               },
               {
                 "text": "audio",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 7100,
                 "endMs": 7520
               }
             ]
-          }
-        ]
-      },
-      {
-        "lines": [
+          },
           {
             "align": "center",
             "words": [
@@ -368,18 +340,13 @@
               },
               {
                 "text": "Whisper",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 8290,
                 "endMs": 9160
-              }
-            ]
-          },
-          {
-            "align": "center",
-            "words": [
+              },
               {
                 "text": "CPP",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580
               }
@@ -403,29 +370,24 @@
                 "emphasis": false,
                 "startMs": 9900,
                 "endMs": 10390
-              }
-            ]
-          },
-          {
-            "align": "center",
-            "words": [
+              },
               {
                 "text": "your",
                 "emphasis": false,
                 "startMs": 10390,
                 "endMs": 10740
-              },
-              {
-                "text": "captions",
-                "emphasis": true,
-                "startMs": 10740,
-                "endMs": 11200
               }
             ]
           },
           {
             "align": "center",
             "words": [
+              {
+                "text": "captions",
+                "emphasis": false,
+                "startMs": 10740,
+                "endMs": 11200
+              },
               {
                 "text": "with",
                 "emphasis": false,
@@ -433,8 +395,8 @@
                 "endMs": 11580
               },
               {
-                "text": "React",
-                "emphasis": false,
+                "text": "React.",
+                "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040
               }
@@ -460,12 +422,6 @@
                 "emphasis": false,
                 "startMs": 330,
                 "endMs": 980
-              },
-              {
-                "text": "TikTok",
-                "emphasis": true,
-                "startMs": 980,
-                "endMs": 1440
               }
             ]
           },
@@ -473,11 +429,26 @@
             "align": "center",
             "words": [
               {
-                "text": "template,",
+                "text": "TikTok",
                 "emphasis": false,
+                "startMs": 980,
+                "endMs": 1440
+              },
+              {
+                "text": "template,",
+                "emphasis": true,
                 "startMs": 1440,
                 "endMs": 1920
-              },
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "you",
                 "emphasis": false,
@@ -492,22 +463,18 @@
               },
               {
                 "text": "create",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 2500,
                 "endMs": 3090
               }
             ]
-          }
-        ]
-      },
-      {
-        "lines": [
+          },
           {
             "align": "center",
             "words": [
               {
                 "text": "engaging",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870
               },
@@ -516,12 +483,6 @@
                 "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390
-              },
-              {
-                "text": "and",
-                "emphasis": false,
-                "startMs": 4390,
-                "endMs": 4780
               }
             ]
           },
@@ -529,8 +490,14 @@
             "align": "center",
             "words": [
               {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 4390,
+                "endMs": 4780
+              },
+              {
                 "text": "TikToks",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 4780,
                 "endMs": 5720
               }
@@ -554,12 +521,6 @@
                 "emphasis": false,
                 "startMs": 5870,
                 "endMs": 6790
-              },
-              {
-                "text": "your",
-                "emphasis": false,
-                "startMs": 6790,
-                "endMs": 7100
               }
             ]
           },
@@ -567,17 +528,19 @@
             "align": "center",
             "words": [
               {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 6790,
+                "endMs": 7100
+              },
+              {
                 "text": "audio",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 7100,
                 "endMs": 7520
               }
             ]
-          }
-        ]
-      },
-      {
-        "lines": [
+          },
           {
             "align": "center",
             "words": [
@@ -588,19 +551,23 @@
                 "endMs": 8290
               },
               {
-                "text": "Whisper",
-                "emphasis": false,
+                "text": "whisper",
+                "emphasis": true,
                 "startMs": 8290,
                 "endMs": 9160
               },
               {
                 "text": "CPP",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "lines": [
           {
             "align": "center",
             "words": [
@@ -617,11 +584,7 @@
                 "endMs": 10390
               }
             ]
-          }
-        ]
-      },
-      {
-        "lines": [
+          },
           {
             "align": "center",
             "words": [
@@ -633,10 +596,15 @@
               },
               {
                 "text": "captions",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 10740,
                 "endMs": 11200
-              },
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "with",
                 "emphasis": false,
@@ -645,7 +613,7 @@
               },
               {
                 "text": "React.",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040
               }
@@ -679,15 +647,21 @@
             "words": [
               {
                 "text": "TikTok",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 980,
                 "endMs": 1440
               },
               {
                 "text": "template,",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 1440,
                 "endMs": 1920
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1920,
+                "endMs": 2210
               }
             ]
           }
@@ -698,12 +672,6 @@
           {
             "align": "center",
             "words": [
-              {
-                "text": "you",
-                "emphasis": false,
-                "startMs": 1920,
-                "endMs": 2210
-              },
               {
                 "text": "can",
                 "emphasis": false,
@@ -715,6 +683,12 @@
                 "emphasis": false,
                 "startMs": 2500,
                 "endMs": 3090
+              },
+              {
+                "text": "engaging",
+                "emphasis": true,
+                "startMs": 3090,
+                "endMs": 3870
               }
             ]
           },
@@ -722,26 +696,11 @@
             "align": "center",
             "words": [
               {
-                "text": "engaging",
-                "emphasis": false,
-                "startMs": 3090,
-                "endMs": 3870
-              },
-              {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "lines": [
-          {
-            "align": "center",
-            "words": [
+              },
               {
                 "text": "and",
                 "emphasis": false,
@@ -753,18 +712,22 @@
                 "emphasis": false,
                 "startMs": 4780,
                 "endMs": 5720
-              },
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "by",
                 "emphasis": false,
                 "startMs": 5720,
                 "endMs": 5870
-              }
-            ]
-          },
-          {
-            "align": "center",
-            "words": [
+              },
               {
                 "text": "transcribing",
                 "emphasis": false,
@@ -776,22 +739,18 @@
                 "emphasis": false,
                 "startMs": 6790,
                 "endMs": 7100
-              },
-              {
-                "text": "audio",
-                "emphasis": true,
-                "startMs": 7100,
-                "endMs": 7520
               }
             ]
-          }
-        ]
-      },
-      {
-        "lines": [
+          },
           {
             "align": "center",
             "words": [
+              {
+                "text": "audio",
+                "emphasis": false,
+                "startMs": 7100,
+                "endMs": 7520
+              },
               {
                 "text": "using",
                 "emphasis": false,
@@ -800,26 +759,15 @@
               },
               {
                 "text": "whisper",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 8290,
                 "endMs": 9160
-              }
-            ]
-          },
-          {
-            "align": "center",
-            "words": [
-              {
-                "text": "CPP",
-                "emphasis": true,
-                "startMs": 9160,
-                "endMs": 9580
               },
               {
-                "text": "and",
+                "text": "CPP",
                 "emphasis": false,
-                "startMs": 9580,
-                "endMs": 9900
+                "startMs": 9160,
+                "endMs": 9580
               }
             ]
           }
@@ -830,6 +778,12 @@
           {
             "align": "center",
             "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9580,
+                "endMs": 9900
+              },
               {
                 "text": "animating",
                 "emphasis": false,
@@ -903,11 +857,11 @@
                 "variant": "punch"
               },
               {
-                "text": "template",
+                "text": "template,",
                 "emphasis": false,
                 "startMs": 1440,
                 "endMs": 1920,
-                "variant": "base"
+                "variant": "elegant"
               }
             ]
           }
@@ -934,9 +888,16 @@
               },
               {
                 "text": "create",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 2500,
                 "endMs": 3090,
+                "variant": "base"
+              },
+              {
+                "text": "engaging",
+                "emphasis": true,
+                "startMs": 3090,
+                "endMs": 3870,
                 "variant": "punch"
               }
             ]
@@ -945,18 +906,11 @@
             "align": "center",
             "words": [
               {
-                "text": "engaging",
-                "emphasis": true,
-                "startMs": 3090,
-                "endMs": 3870,
-                "variant": "punch"
-              },
-              {
                 "text": "reels",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "base"
+                "variant": "punch"
               },
               {
                 "text": "and",
@@ -970,7 +924,7 @@
                 "emphasis": false,
                 "startMs": 4780,
                 "endMs": 5720,
-                "variant": "base"
+                "variant": "elegant"
               }
             ]
           }
@@ -994,7 +948,12 @@
                 "startMs": 5870,
                 "endMs": 6790,
                 "variant": "punch"
-              },
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "your",
                 "emphasis": false,
@@ -1007,7 +966,7 @@
                 "emphasis": false,
                 "startMs": 7100,
                 "endMs": 7520,
-                "variant": "base"
+                "variant": "elegant"
               }
             ]
           }
@@ -1026,7 +985,7 @@
                 "variant": "base"
               },
               {
-                "text": "Whisper",
+                "text": "whisper",
                 "emphasis": true,
                 "startMs": 8290,
                 "endMs": 9160,
@@ -1073,19 +1032,19 @@
                 "startMs": 10390,
                 "endMs": 10740,
                 "variant": "base"
-              },
-              {
-                "text": "captions",
-                "emphasis": false,
-                "startMs": 10740,
-                "endMs": 11200,
-                "variant": "base"
               }
             ]
           },
           {
             "align": "center",
             "words": [
+              {
+                "text": "captions",
+                "emphasis": true,
+                "startMs": 10740,
+                "endMs": 11200,
+                "variant": "punch"
+              },
               {
                 "text": "with",
                 "emphasis": false,
@@ -1094,7 +1053,7 @@
                 "variant": "base"
               },
               {
-                "text": "React",
+                "text": "React.",
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
@@ -1106,5 +1065,5 @@
       }
     ]
   },
-  "translation": "استخدام قالب TikTok من Remotion، يمكنك إنشاء مقاطع فيديو جذابة على Reels و TikTok عن طريق تحويل ملفك الصوتي إلى نصوص باستخدام تقنية Whisper CPP وإضافة حركة على العناوين المكتوبة بـ React."
+  "translation": "باستخدام قالب Remotion لتيك توك، يمكنك إنشاء ريلز وتيك توك جذابة عن طريق تفريغ صوتك باستخدام Whisper CPP وتحريك الترجمات باستخدام React."
 }

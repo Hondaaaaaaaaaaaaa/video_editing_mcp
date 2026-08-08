@@ -57,7 +57,15 @@ const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
 // ---------------------------------------------------------------------------
 const SHAPES = {
   hormozi: { maxLines: 2, maxWordsPerLine: 4, note: "two stacked lines; the accent color moves top -> bottom, so 2 lines is ideal" },
-  shiny: { maxLines: 3, maxWordsPerLine: 3, note: "small / BIG / small stagger, up to three short rows" },
+  shiny: {
+    maxLines: 3,
+    maxWordsPerLine: 3,
+    note: "small / BIG / small stagger, up to three short rows",
+    // Hard limits → enables the validate-and-retry pass (Haiku drifts on the
+    // looser 3-line shape without it). Caps words/line and forces a sentence to
+    // end on the caption's last word, so ideas don't get merged to fill space.
+    limits: { minLines: 1, maxLines: 3, minWordsPerLine: 1, maxWordsPerLine: 3, endCaptionAtSentenceEnd: true },
+  },
   minimal: { maxLines: 1, maxWordsPerLine: 6, note: "a single row of a few words" },
   // KINETIC — flowing kinetic-typography poster. Words accumulate one by one
   // into a short stacked block, and each word carries a per-word TYPE TREATMENT
@@ -216,6 +224,8 @@ RULES:
       WORKED EXAMPLE (English): for the words "Using Remotion's TikTok template you can build videos", the first caption is TWO lines — upper "Using Remotion's", lower "TikTok template" — because "Using Remotion's TikTok template" is one complete idea. "you can build videos" starts a NEW idea, so it becomes the next caption. Do NOT produce "TikTok / template, you can".
    d. A genuinely short complete idea may use fewer than ${shape.maxLines} lines. Do not stretch it.
    e. Keep meaning units intact: never split an Arabic article ال from its noun, an idafa (إضافة), a preposition from its object, or a number from its unit.
+   f. THE LINE BUDGET IS A CAP, NOT A TARGET. Having room for more lines is NEVER a reason to pull the next idea into this caption. Two independent clauses or sentences must NOT share a caption: start a NEW caption before a new subject+verb ("you can …", "he said …"), before a coordinating conjunction (and / but / so / because / if / when) that begins a new clause, and always after a sentence-ending mark (. ! ? ؟). A ${shape.maxLines}-line shape splits the SAME ideas a 2-line shape would — the extra line(s) are only for when ONE idea genuinely needs them, NEVER for merging two ideas. Push the leftover words to the next caption (rule c).
+      WORKED EXAMPLE (${shape.maxLines}-line shape): "Using Remotion's TikTok template you can create engaging reels" → caption 1 = the idea "Using Remotion's TikTok template", caption 2 = "you can create engaging reels" ("you can" is a new subject+verb → a NEW caption). NEVER "Using Remotion's TikTok / template, you can create".
 6. EMPHASIS: Mark the single most important "payload" word per segment as emphasis:true — a number/money figure, a superlative, a contrast word, the hook. NEVER emphasize function words (في، من، و، على، the، a، of). Most words are emphasis:false. Some segments may have zero emphasis.
 7. ALIGNMENT: Give each line an "align" of "center" (default), "left", or "right".
 8. TRANSLATION: Provide a natural, fluent English translation of the whole transcript (colloquial where the source is colloquial). If the source is already English, translate to Arabic instead.
