@@ -59,6 +59,32 @@ const SHAPES = {
   hormozi: { maxLines: 2, maxWordsPerLine: 4, note: "two stacked lines; the accent color moves top -> bottom, so 2 lines is ideal" },
   shiny: { maxLines: 3, maxWordsPerLine: 3, note: "small / BIG / small stagger, up to three short rows" },
   minimal: { maxLines: 1, maxWordsPerLine: 6, note: "a single row of a few words" },
+  // KINETIC — flowing kinetic-typography poster. Words accumulate one by one
+  // into a short stacked block, and each word carries a per-word TYPE TREATMENT
+  // (`variant`) the template maps to a font/size/entrance. This is the only
+  // shape that assigns `variant`; `variants` below both drives the JSON schema
+  // (adds the required enum) and is injected into the rules. Colour still rides
+  // on `emphasis` (accent vs base), so a red italic word is elegant+emphasis.
+  kinetic: {
+    maxLines: 3,
+    maxWordsPerLine: 3,
+    note: "a flowing stack that builds word by word; each word is base / punch / elegant",
+    variants: ["base", "punch", "elegant"],
+    limits: { minLines: 1, maxLines: 3, minWordsPerLine: 1, maxWordsPerLine: 4 },
+    extraRules: `TEMPLATE-SPECIFIC RULES (shape "kinetic") — kinetic-typography captions modelled on a specific reference. In ADDITION to the rules above:
+
+K1. SEGMENTATION — one spoken PHRASE/CLAUSE per segment (a natural breath group), typically 3-7 words, 1-3 lines, at most 4 words per line. The block builds word by word then clears, so group words that are spoken together as one thought. Always end a segment at a sentence end; also break at a clear clause boundary (after a comma, or before "and/but/so/because/if/when"). Do NOT merge two separate thoughts into one segment, and do NOT chop a single tight phrase into fragments.
+
+K2. PER-WORD "variant" — tag EVERY word with exactly one of:
+    - "punch"   = a KEY word that should be emphasised: bold and a little bigger than the surrounding text. These are the words that carry the meaning and impact — the vivid noun, the strong verb, the number, the name of the thing, the payoff. A segment usually has 1-3 punch words (they can be adjacent, e.g. "write hooks", "good people", "the triple"). Choose them DELIBERATELY: if you read the segment with only the punch words visible, it should still convey the point. Do NOT punch filler ("the, a, of, to, is, do, you, how, so, and, if").
+    - "elegant" = ONE special word per segment at most, rendered in an italic serif for flavour — usually the single most "quotable" noun or verb, often the last word of the phrase (e.g. "comment", "hook"). Optional; many segments have none. Never make a filler word elegant.
+    - "base"    = everything else (the connective words). Most words are base.
+    Read like: base base PUNCH PUNCH  /  base base ELEGANT.
+
+K3. "emphasis" carries COLOUR (the accent red). Default: set emphasis:true on the punch words so they render RED — that is the norm. Leave a punch word emphasis:false only when you want it bold but WHITE (use sparingly, for a secondary emphasis like a closing "correctly," or "and"). base words are always emphasis:false. An elegant word may be emphasis:true to tint it red, but usually leave it white.
+
+K4. Keep NATURAL casing in "text" (do not UPPERCASE). The template styles words by role; it does not change your casing.`,
+  },
   // GADZHI — the reference clip's rhythm, measured caption by caption: ALWAYS
   // two lines, a short lead-in on top and the payoff underneath, ~6 words per
   // caption. The weight swap moves top -> bottom, so a 1- or 3-line caption
@@ -111,49 +137,64 @@ const SHAPE = SHAPES[SHAPE_NAME] || SHAPES.hormozi;
 // shape, so the response is ALWAYS valid JSON (fixes cheap models emitting
 // malformed JSON). additionalProperties:false + required are mandatory for
 // structured outputs. Supported on Haiku 4.5 / Sonnet 5 / Opus 5 / etc.
-const OUTPUT_SCHEMA = {
-  type: "object",
-  additionalProperties: false,
-  properties: {
-    language: { type: "string" },
-    segments: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        properties: {
-          lines: {
-            type: "array",
-            items: {
-              type: "object",
-              additionalProperties: false,
-              properties: {
-                align: { type: "string", enum: ["center", "left", "right"] },
-                words: {
-                  type: "array",
-                  items: {
-                    type: "object",
-                    additionalProperties: false,
-                    properties: {
-                      i: { type: "integer" },
-                      text: { type: "string" },
-                      emphasis: { type: "boolean" },
+//
+// Built per-shape: a shape can declare `variants` (a list of per-word role
+// names), and when it does the word gains a required `variant` enum so Claude
+// tags every word with its type treatment. Shapes without `variants` produce
+// the exact schema as before, so their output is unchanged.
+const buildOutputSchema = (shape) => {
+  const wordProps = {
+    i: { type: "integer" },
+    text: { type: "string" },
+    emphasis: { type: "boolean" },
+  };
+  const wordRequired = ["i", "text", "emphasis"];
+  if (shape.variants) {
+    wordProps.variant = { type: "string", enum: shape.variants };
+    wordRequired.push("variant");
+  }
+  return {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+      language: { type: "string" },
+      segments: {
+        type: "array",
+        items: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            lines: {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                properties: {
+                  align: { type: "string", enum: ["center", "left", "right"] },
+                  words: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      additionalProperties: false,
+                      properties: wordProps,
+                      required: wordRequired,
                     },
-                    required: ["i", "text", "emphasis"],
                   },
                 },
+                required: ["align", "words"],
               },
-              required: ["align", "words"],
             },
           },
+          required: ["lines"],
         },
-        required: ["lines"],
       },
+      translation: { type: "string" },
     },
-    translation: { type: "string" },
-  },
-  required: ["language", "segments", "translation"],
+    required: ["language", "segments", "translation"],
+  };
 };
+
+const OUTPUT_SCHEMA = buildOutputSchema(SHAPE);
 
 // ---------------------------------------------------------------------------
 // The instructions Claude follows. This is the seam where all the caption
@@ -339,12 +380,16 @@ const buildEnriched = (rawWords, parsed) => {
       align: line.align || "center",
       words: (line.words || []).map((w) => {
         const orig = rawWords[w.i] || {};
-        return {
+        const out = {
           text: w.text,
           emphasis: !!w.emphasis,
           startMs: orig.startMs ?? 0,
           endMs: orig.endMs ?? 0,
         };
+        // Only kinetic-style shapes emit a per-word variant; carry it through
+        // when present so it lands in the enriched document.
+        if (w.variant) out.variant = w.variant;
+        return out;
       }),
     })),
   }));

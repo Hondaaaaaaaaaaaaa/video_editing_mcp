@@ -38,6 +38,12 @@ import {
   gadzhiSchema,
   GadzhiStyleProvider,
 } from "./CaptionedVideo/styles/PageGadzhi";
+import {
+  PageKinetic,
+  kineticSchema,
+  KINETIC_DEFAULTS,
+  KineticStyleProvider,
+} from "./CaptionedVideo/styles/PageKinetic";
 
 // The video that captions are rendered over (a vertical clip at
 // remotion/public/sample-video.mp4). Stored as a PLAIN FILENAME — not
@@ -50,10 +56,11 @@ const SAMPLE_VIDEO = "sample-video.mp4";
 // composition. Same video + captions, different look per composition.
 const ClassicCaptionedVideo: React.FC<z.infer<typeof classicSchema>> = ({
   src,
+  showPunctuation,
   ...style
 }) => (
   <ClassicStyleProvider value={style}>
-    <CaptionedVideo src={src} PageComponent={PageClassic} />
+    <CaptionedVideo src={src} showPunctuation={showPunctuation} PageComponent={PageClassic} />
   </ClassicStyleProvider>
 );
 
@@ -61,11 +68,14 @@ const ClassicCaptionedVideo: React.FC<z.infer<typeof classicSchema>> = ({
 // style via context — the shared engine stays untouched.
 const ShinyCaptionedVideo: React.FC<z.infer<typeof shinySchema>> = ({
   src,
+  showPunctuation,
   ...style
 }) => (
   <ShinyStyleProvider value={style}>
     <CaptionedVideo
       src={src}
+      showPunctuation={showPunctuation}
+      shape="shiny"
       PageComponent={PageShiny}
       // Shiny is kinetic-only: it does its OWN count-based grouping from the
       // flat caption stream, so it always renders as a single full-timeline
@@ -78,10 +88,11 @@ const ShinyCaptionedVideo: React.FC<z.infer<typeof shinySchema>> = ({
 // Typewriter feeds all its typing/cursor/color props to the style via context.
 const TypewriterCaptionedVideo: React.FC<z.infer<typeof typewriterSchema>> = ({
   src,
+  showPunctuation,
   ...style
 }) => (
   <TypewriterStyleProvider value={style}>
-    <CaptionedVideo src={src} PageComponent={PageTypewriter} />
+    <CaptionedVideo src={src} showPunctuation={showPunctuation} PageComponent={PageTypewriter} />
   </TypewriterStyleProvider>
 );
 
@@ -91,10 +102,11 @@ const TypewriterCaptionedVideo: React.FC<z.infer<typeof typewriterSchema>> = ({
 // the style via context.
 const HighlightCaptionedVideo: React.FC<z.infer<typeof highlightSchema>> = ({
   src,
+  showPunctuation,
   ...style
 }) => (
   <HighlightStyleProvider value={style}>
-    <CaptionedVideo src={src} PageComponent={PageHighlight} singleSurface />
+    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="shiny" PageComponent={PageHighlight} singleSurface />
   </HighlightStyleProvider>
 );
 
@@ -103,10 +115,11 @@ const HighlightCaptionedVideo: React.FC<z.infer<typeof highlightSchema>> = ({
 // as a single full-timeline surface.
 const HormoziCaptionedVideo: React.FC<z.infer<typeof hormoziSchema>> = ({
   src,
+  showPunctuation,
   ...style
 }) => (
   <HormoziStyleProvider value={style}>
-    <CaptionedVideo src={src} PageComponent={PageHormozi} singleSurface />
+    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="hormozi" PageComponent={PageHormozi} singleSurface />
   </HormoziStyleProvider>
 );
 
@@ -115,11 +128,24 @@ const HormoziCaptionedVideo: React.FC<z.infer<typeof hormoziSchema>> = ({
 // the video, so it can only work as a single surface.
 const GadzhiCaptionedVideo: React.FC<z.infer<typeof gadzhiSchema>> = ({
   src,
+  showPunctuation,
   ...style
 }) => (
   <GadzhiStyleProvider value={style}>
-    <CaptionedVideo src={src} PageComponent={PageGadzhi} singleSurface />
+    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="gadzhi" PageComponent={PageGadzhi} singleSurface />
   </GadzhiStyleProvider>
+);
+
+// Kinetic reads the caption document's per-word variants and builds the whole
+// flowing block itself, so (like Shiny/Gadzhi) it renders as a single surface.
+const KineticCaptionedVideo: React.FC<z.infer<typeof kineticSchema>> = ({
+  src,
+  showPunctuation,
+  ...style
+}) => (
+  <KineticStyleProvider value={style}>
+    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="kinetic" PageComponent={PageKinetic} singleSurface />
+  </KineticStyleProvider>
 );
 
 // Each <Composition> is an entry in the sidebar!
@@ -193,7 +219,6 @@ export const RemotionRoot: React.FC = () => {
             wordsPerLine: 2,
             linesPerSegment: 3,
             captionScale: 1,
-            wordSpacing: 0.12,
             lineSpacing: 1.1,
             positionX: 50,
             positionY: 84,
@@ -499,6 +524,27 @@ export const RemotionRoot: React.FC = () => {
             shadow: { enabled: true, color: "rgba(0, 0, 0, 0.35)", blur: 12 },
           },
         }}
+      />
+
+      {/* "Kinetic" — kinetic-typography poster captions. Words accumulate one by
+          one, each styled by a per-word role (base / punch / elegant) that Claude
+          assigns; the keyword wipes on, connective words pop in. Defaults are
+          spread from KINETIC_DEFAULTS (the tuning source of truth is the
+          playground) rather than inlined. */}
+      <Composition
+        id="Kinetic"
+        component={KineticCaptionedVideo}
+        schema={kineticSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        // The canonical sample clip. Its enriched sidecar now carries a
+        // `variants.kinetic` (per-word base/punch/elegant roles) matching its
+        // own audio, so the captions are what the speaker actually says — the
+        // template applied to a real video, which is how it works for any clip.
+        defaultProps={{ src: SAMPLE_VIDEO, ...KINETIC_DEFAULTS }}
       />
     </>
   );

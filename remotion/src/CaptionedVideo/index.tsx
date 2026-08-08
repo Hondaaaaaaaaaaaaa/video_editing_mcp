@@ -15,12 +15,19 @@ import { z } from "zod";
 import { getVideoMetadata } from "@remotion/media-utils";
 import { Caption, createTikTokStyleCaptions, type TikTokPage } from "@remotion/captions";
 import { loadFont } from "./load-font";
+import { displayWord } from "./punctuation";
 import SubtitlePage from "./SubtitlePage";
 import { NoCaptionFile } from "./NoCaptionFile";
 import type { CaptionStyle, EnrichedSegment } from "./styles/types";
 
 export const captionedVideoSchema = z.object({
   src: z.string(),
+  // Show sentence punctuation (. , ? ! … and the Arabic/CJK equivalents) on the
+  // captions. OFF by default = the clean TikTok look; punctuation is stripped at
+  // render time only (the document keeps the real text). Every style inherits
+  // this control because they all extend this base schema. Optional so existing
+  // defaultProps that omit it still parse (undefined = off).
+  showPunctuation: z.boolean().optional(),
 });
 
 export type CaptionedVideoProps = z.infer<typeof captionedVideoSchema> & {
@@ -32,6 +39,10 @@ export type CaptionedVideoProps = z.infer<typeof captionedVideoSchema> & {
   // passes all words via the `captions` prop, instead of per-page time
   // Sequences. Undefined/false = the default per-page (time-based) rendering.
   singleSurface?: boolean;
+  // Which per-template segmentation VARIANT to read from the enriched document
+  // (e.g. "hormozi" | "shiny" | "gadzhi" | "kinetic"). Falls back to the
+  // document's default `segments` when the variant is missing.
+  shape?: string;
 };
 
 const FPS = 30;
@@ -119,6 +130,8 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
   src,
   PageComponent,
   singleSurface,
+  showPunctuation,
+  shape,
 }) => {
   const [subtitles, setSubtitles] = useState<Caption[]>([]);
   // Claude's semantic segments (from the enriched sidecar), passed to kinetic
@@ -145,8 +158,13 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
       // engine and templates consume. Fall back to the raw ASR json.
       const enrichedRes = await fetch(enrichedFile);
       if (enrichedRes.ok) {
-        const enriched = (await enrichedRes.json()) as { segments?: EnrichedSegment[] };
-        const segs = enriched.segments ?? [];
+        const enriched = (await enrichedRes.json()) as {
+          segments?: EnrichedSegment[];
+          variants?: Record<string, EnrichedSegment[]>;
+        };
+        // Prefer this template's per-shape variant; fall back to the default.
+        const segs =
+          (shape ? enriched.variants?.[shape] : undefined) ?? enriched.segments ?? [];
         const captions: Caption[] = segs
           .flatMap((s) => s.lines ?? [])
           .flatMap((l) => l.words ?? [])
@@ -176,7 +194,7 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
     } catch (e) {
       cancelRender(e);
     }
-  }, [handle, subtitlesFile, enrichedFile]);
+  }, [handle, subtitlesFile, enrichedFile, shape]);
 
   useEffect(() => {
     fetchSubtitles();
@@ -188,15 +206,39 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
     };
   }, [fetchSubtitles, subtitlesFile, enrichedFile]);
 
+  // Display copies with punctuation stripped when `showPunctuation` is off — a
+  // RENDER-ONLY transform (state/document keep the real text). Everything
+  // downstream (pages, single-surface captions, kinetic segments) reads these.
+  const displaySubtitles = useMemo(
+    () =>
+      showPunctuation
+        ? subtitles
+        : subtitles.map((c) => ({ ...c, text: displayWord(c.text, false) })),
+    [subtitles, showPunctuation],
+  );
+  const displaySegments = useMemo(
+    () =>
+      showPunctuation || !enrichedSegments
+        ? enrichedSegments
+        : enrichedSegments.map((seg) => ({
+            ...seg,
+            lines: seg.lines.map((line) => ({
+              ...line,
+              words: line.words.map((w) => ({ ...w, text: displayWord(w.text, false) })),
+            })),
+          })),
+    [enrichedSegments, showPunctuation],
+  );
+
   // Time-based pages drive the default per-page rendering. The single-surface
   // (self-grouping) path ignores these and groups the flat stream itself.
   const { pages } = useMemo(
     () =>
       createTikTokStyleCaptions({
         combineTokensWithinMilliseconds: SWITCH_CAPTIONS_EVERY_MS,
-        captions: subtitles ?? [],
+        captions: displaySubtitles ?? [],
       }),
-    [subtitles],
+    [displaySubtitles],
   );
 
   const hasVideo = fileExists(resolvedSrc);
@@ -223,8 +265,8 @@ export const CaptionedVideo: React.FC<CaptionedVideoProps> = ({
         <PageComponent
           enterProgress={1}
           page={EMPTY_PAGE}
-          captions={subtitles ?? []}
-          segments={enrichedSegments}
+          captions={displaySubtitles ?? []}
+          segments={displaySegments}
         />
       ) : (
         pages.map((page, index) => {

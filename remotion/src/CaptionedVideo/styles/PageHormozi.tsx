@@ -28,8 +28,9 @@ import {
   glowSchema,
   deepGlowSchema,
   buildGradientCss,
-  buildSweepCss,
   buildDeepGlowCss,
+  buildTravelSweepCss,
+  sweepTravelX,
   groupWordsIntoBlocks,
   enrichedToBlocks,
   type GradientConfig,
@@ -271,6 +272,7 @@ const HormoziSegment: React.FC<{
   fontSize: number;
 }> = ({ lines, lineSwitchFrames, fontSize }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
   const style = useContext(HormoziStyleContext);
 
   const {
@@ -309,16 +311,16 @@ const HormoziSegment: React.FC<{
   const shadowFilter = dropShadowCss(textEffects);
   const deepGlowFilter = buildDeepGlowCss(deepGlow);
 
-  const activeSweeps = [style.effects.sweep1, style.effects.sweep2, style.effects.sweep3].filter(
-    (s) => s.enabled,
-  );
-  const sweepLayers = activeSweeps.map(buildSweepCss);
-  const sweepSizes = activeSweeps.map(() => "300% 300%");
-  const sweepPositions = activeSweeps.map((s) => `${s.positionX}% ${s.positionY}%`);
-  // The highlighted line uses the background-clip technique only when it needs to
-  // — a gradient fill and/or glossy sweeps require it. Otherwise a plain solid
-  // color fill is enough (and cheaper).
-  const accentUsesClip = gradient.enabled || activeSweeps.length > 0;
+  // LIGHT SWEEP is PER-WORD (word.sweep). The look + motion come from the first
+  // sweep slot used as the "sweep style" (color / width / angle / intensity +
+  // animate / speed / bounce). A swept word shows a traveling gloss over its
+  // text; nothing is swept by default. Computed once per frame here; the gloss's
+  // band position comes from sweepTravelX (static X when not animated).
+  const sweepStyle = style.effects.sweep1;
+  const sweepGloss = buildTravelSweepCss(sweepStyle, sweepTravelX(sweepStyle, frame, fps));
+  // Accent words only need the background-clip technique when a gradient fill is
+  // on; the sweep is now painted per-word in an overlay, not in the fill.
+  const accentUsesClip = gradient.enabled;
 
   // The highlight glow + optional deep-glow + drop shadow, as a filter chain.
   const accentFilter = [
@@ -333,18 +335,6 @@ const HormoziSegment: React.FC<{
   // NOTE: `fontSize` is computed ONCE for the whole document by PageHormozi and
   // passed in, so every caption renders at the SAME size (see the uniform
   // auto-fit in the parent). Nothing per-caption to measure here.
-
-  // Builds the clipped background layers for a gradient/sweep highlighted word.
-  const buildAccentBg = () => {
-    const bgLayers = [...sweepLayers];
-    const bgSizes = [...sweepSizes];
-    const bgPositions = [...sweepPositions];
-    // Base fill under the sweeps: the gradient if enabled, else the flat accent.
-    bgLayers.push(gradient.enabled ? buildGradientCss(gradient) : accentColor);
-    bgSizes.push("100% 100%");
-    bgPositions.push("0% 0%");
-    return { bgLayers, bgSizes, bgPositions };
-  };
 
   // The style for a HIGHLIGHTED (spoken-line) word — still, no opacity/transform.
   const accentWordStyle = (): React.CSSProperties => {
@@ -362,14 +352,13 @@ const HormoziSegment: React.FC<{
         filter: accentFilter || undefined,
       };
     }
-    const { bgLayers, bgSizes, bgPositions } = buildAccentBg();
     return {
       display: "inline-block",
       whiteSpace: "pre",
       fontSize,
-      backgroundImage: bgLayers.join(", "),
-      backgroundSize: bgSizes.join(", "),
-      backgroundPosition: bgPositions.join(", "),
+      backgroundImage: buildGradientCss(gradient),
+      backgroundSize: "100% 100%",
+      backgroundPosition: "0% 0%",
       backgroundRepeat: "no-repeat",
       WebkitBackgroundClip: "text",
       backgroundClip: "text",
@@ -381,6 +370,24 @@ const HormoziSegment: React.FC<{
       filter: accentFilter || undefined,
     };
   };
+
+  // Overlay style for ONE swept word: the traveling gloss clipped to its text,
+  // layered above the word so the shine rides over its base color.
+  const sweepWordStyle = (): React.CSSProperties => ({
+    position: "absolute",
+    inset: 0,
+    display: "inline-block",
+    whiteSpace: "pre",
+    fontSize,
+    pointerEvents: "none",
+    backgroundImage: sweepGloss,
+    backgroundSize: "100% 100%",
+    backgroundRepeat: "no-repeat",
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    color: "transparent",
+  });
 
   // The style for a BASE (non-spoken) line word — plain solid color + stroke/shadow.
   const baseWordStyle = (): React.CSSProperties => ({
@@ -424,6 +431,7 @@ const HormoziSegment: React.FC<{
               // algorithm — so English words inside Arabic stay readable.
               dir="auto"
               style={{
+                position: "relative",
                 display: "flex",
                 justifyContent: ALIGN_TO_JUSTIFY[alignment],
                 alignItems: "center",
@@ -437,8 +445,17 @@ const HormoziSegment: React.FC<{
               }}
             >
               {line.map((token, wi) => (
-                <span key={wi} style={isAccent ? accentWordStyle() : baseWordStyle()}>
-                  {token.text}
+                // Wrapper is position:relative so a swept word can host the
+                // moving-gloss overlay directly on top of its own glyphs.
+                <span key={wi} style={{ position: "relative", display: "inline-block" }}>
+                  <span style={isAccent ? accentWordStyle() : baseWordStyle()}>
+                    {token.text}
+                  </span>
+                  {token.sweep ? (
+                    <span aria-hidden style={sweepWordStyle()}>
+                      {token.text}
+                    </span>
+                  ) : null}
                 </span>
               ))}
             </div>

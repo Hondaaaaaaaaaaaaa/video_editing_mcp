@@ -38,6 +38,12 @@ import {
   GADZHI_DEFAULTS,
   GadzhiStyleProvider,
 } from "../src/CaptionedVideo/styles/PageGadzhi";
+import {
+  PageKinetic,
+  kineticSchema,
+  KINETIC_DEFAULTS,
+  KineticStyleProvider,
+} from "../src/CaptionedVideo/styles/PageKinetic";
 
 // Props bag = everything in a style's schema EXCEPT `src` (the shared base).
 export type StyleProps = Record<string, unknown>;
@@ -57,6 +63,9 @@ export type StyleEntry = {
   // engine. The caption editor can only drive the document-driven templates,
   // since its whole job is editing that document; the Style Tuner shows all.
   documentDriven?: boolean;
+  // Which per-template segmentation variant this style reads from the caption
+  // document (CaptionDoc.variants[shape]); falls back to the default segments.
+  shape?: string;
 };
 
 // `src` lives on the shared base schema and is fixed to the sample video here,
@@ -95,6 +104,7 @@ export const STYLES: StyleEntry[] = [
     Provider: HormoziStyleProvider as unknown as React.Provider<never>,
     Page: PageHormozi,
     documentDriven: true,
+    shape: "hormozi",
   },
   {
     id: "Shiny",
@@ -103,6 +113,7 @@ export const STYLES: StyleEntry[] = [
     Provider: ShinyStyleProvider as unknown as React.Provider<never>,
     Page: PageShiny,
     documentDriven: true,
+    shape: "shiny",
   },
   {
     id: "Gadzhi",
@@ -111,6 +122,16 @@ export const STYLES: StyleEntry[] = [
     Provider: GadzhiStyleProvider as unknown as React.Provider<never>,
     Page: PageGadzhi,
     documentDriven: true,
+    shape: "gadzhi",
+  },
+  {
+    id: "Kinetic",
+    schema: kineticSchema,
+    defaults: stripSrc(KINETIC_DEFAULTS),
+    Provider: KineticStyleProvider as unknown as React.Provider<never>,
+    Page: PageKinetic,
+    documentDriven: true,
+    shape: "kinetic",
   },
 ];
 

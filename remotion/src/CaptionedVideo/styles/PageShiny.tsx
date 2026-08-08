@@ -71,6 +71,14 @@ export const sweepSchema = z.object({
   intensity: z.number().min(0).max(100).step(1),
   positionX: z.number().min(0).max(100).step(1),
   positionY: z.number().min(0).max(100).step(1),
+  // MOTION — a moving light sweep. When `animate` is on, the band travels
+  // across the whole caption instead of sitting at `positionX`; `speed` sets how
+  // fast (1 slow … 10 fast); `bounce` makes it go right then back left (the
+  // reference look) vs looping one direction. OPTIONAL so existing docs /
+  // defaults that omit these still parse (runtime falls back to off / 5 / bounce).
+  animate: z.boolean().optional(),
+  speed: z.number().min(1).max(10).step(1).optional(),
+  bounce: z.boolean().optional(),
 });
 
 // Shared enums for the entrance/easing groups (used by both the NORMAL entrance
@@ -114,7 +122,6 @@ export const shinySchema = captionedVideoSchema.extend({
     wordsPerLine: z.number().min(1).max(8).step(1), // normal words per offset line
     linesPerSegment: z.number().min(1).max(6).step(1), // words per segment block
     captionScale: z.number().min(0.5).max(2).step(0.05), // overall caption size multiplier
-    wordSpacing: z.number().min(0).max(1.5).step(0.05), // extra horizontal gap between words (em)
     lineSpacing: z.number().min(0.8).max(2.5).step(0.05), // vertical line spacing
     positionX: z.number().min(0).max(100).step(1), // block horizontal center (0 left, 50 center, 100 right)
     positionY: z.number().min(0).max(100).step(1), // block vertical center (0 top, 100 bottom)
@@ -214,7 +221,6 @@ export type ShinyStyle = {
     wordsPerLine: number;
     linesPerSegment: number;
     captionScale: number;
-    wordSpacing: number;
     lineSpacing: number;
     positionX: number;
     positionY: number;
@@ -295,7 +301,6 @@ export const SHINY_DEFAULTS: ShinyStyle = {
     wordsPerLine: 2,
     linesPerSegment: 3,
     captionScale: 1, // no extra scaling by default
-    wordSpacing: 0.12, // a touch of breathing room between words (em)
     lineSpacing: 1.2,
     positionX: 50, // horizontally centered
     positionY: 70, // lower-center (leaves room below for the stacked lines)
@@ -424,6 +429,52 @@ export type SweepSlot = {
   intensity: number;
   positionX: number;
   positionY: number;
+  // Optional motion (see sweepSchema). Absent = static sweep at positionX.
+  animate?: boolean;
+  speed?: number;
+  bounce?: boolean;
+};
+
+/**
+ * The horizontal position (0–100%) of a sweep band at a given frame. A STATIC
+ * sweep just returns its `positionX`. An ANIMATED sweep travels across the
+ * caption: `bounce` ping-pongs 0→100→0 (right then back left, the reference
+ * look); otherwise it loops 0→100. `speed` 1–10 maps to the cycle length.
+ */
+export const sweepTravelX = (slot: SweepSlot, frame: number, fps: number): number => {
+  if (!slot.animate) return slot.positionX;
+  const speed = slot.speed ?? 5;
+  // frames for ONE 0→100 pass: speed 1 ≈ 3s, speed 10 ≈ 0.5s.
+  const cycle = Math.max(1, Math.round(fps * (3.3 - speed * 0.28)));
+  if (slot.bounce ?? true) {
+    const p = frame % (2 * cycle);
+    const t = p < cycle ? p / cycle : 2 - p / cycle; // 0→1→0
+    return t * 100;
+  }
+  return ((frame % cycle) / cycle) * 100;
+};
+
+/**
+ * A single TRAVELING gloss band whose bright core sits at `xPercent` (0–100)
+ * across the element. Unlike buildSweepCss (a fixed 50%-centered band you slide
+ * with an oversized background-position, which triples the on-screen width),
+ * this bakes the position into the stops and uses background-size 100%, so
+ * `slot.width` is a true on-screen band width and the streak stays crisp as it
+ * moves. `slot.angle` tilts the streak (perpendicular to the gradient axis).
+ */
+export const buildTravelSweepCss = (slot: SweepSlot, xPercent: number): string => {
+  const half = clamp(slot.width / 2, 2, 45);
+  const x = clamp(xPercent, 0, 100);
+  const a = clamp(x - half, 0, 100);
+  const b = clamp(x + half, 0, 100);
+  const ia = clamp(x - half / 2, 0, 100);
+  const ib = clamp(x + half / 2, 0, 100);
+  const bright = `color-mix(in srgb, ${slot.color} ${slot.intensity}%, transparent)`;
+  const soft = `color-mix(in srgb, ${slot.color} ${slot.intensity * 0.35}%, transparent)`;
+  return (
+    `linear-gradient(${slot.angle}deg, ` +
+    `transparent ${a}%, ${soft} ${ia}%, ${bright} ${x}%, ${soft} ${ib}%, transparent ${b}%)`
+  );
 };
 
 // The three sweep slots, in render order. Each group already has SweepSlot shape.
@@ -678,6 +729,9 @@ export type KineticWord = {
   // Claude's emphasis flag when the block came from enriched segments; falls
   // back to the regex `decideEmphasis` when undefined.
   emphasis?: boolean;
+  // Per-word light-sweep target (from EnrichedWord.sweep). Templates render the
+  // moving gloss on words where this is true. Undefined = no sweep.
+  sweep?: boolean;
 };
 export type KineticBlock = {
   /** The block's words, already chopped into lines of `wordsPerLine`. */
@@ -757,6 +811,7 @@ export const enrichedToBlocks = (segments: EnrichedSegment[]): KineticBlock[] =>
           fromMs: w.startMs,
           toMs: w.endMs,
           emphasis: w.emphasis,
+          sweep: w.sweep,
         })),
       );
       const flat = lines.flat();
@@ -784,6 +839,7 @@ export const enrichedToWords = (segments: EnrichedSegment[]): KineticWord[] =>
         fromMs: w.startMs,
         toMs: w.endMs,
         emphasis: w.emphasis,
+        sweep: w.sweep,
       })),
     ),
   );
@@ -977,13 +1033,17 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
   const {
     wordsPerLine,
     captionScale,
-    wordSpacing,
     lineSpacing,
     positionX,
     positionY,
     emphasisAlignment,
     normalAlignment,
   } = style.layout;
+  // Fixed horizontal gap between words (fraction of font size), applied as a real
+  // flex gap so space-less ASR word spans never jam together ("youcan") and never
+  // spread apart. Replaces the old tunable CSS word-spacing (which did nothing on
+  // space-less spans). Line spacing stays user-tunable via `lineSpacing`.
+  const WORD_GAP = 0.16;
   const baseColor = style.text.baseColor;
   // Re-chop the block's flat words so each EMPHASIZED word is isolated on its own
   // (centered, large) line and normal words pack into short offset lines around
@@ -1013,7 +1073,10 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
   // the emphasized ones by emphasisScale, and bind the base font size to the
   // tightest line. This contains emphasized words no matter how big the scale.
   const REF_SIZE = 100;
-  const availWidth = width * 0.9;
+  // Tighter band (was 0.9) so the alternating left/right stagger stays near the
+  // center instead of flinging words to the frame edges.
+  const BLOCK_WIDTH_FRAC = 0.78;
+  const availWidth = width * BLOCK_WIDTH_FRAC;
   const lineMaxSizes = lines.map((ln) => {
     const lineWidthAtRef = ln.reduce((sum, tk) => {
       const emph = wordIsEmphasized(tk);
@@ -1026,9 +1089,9 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
         }).width * (emph ? emphasisScale : 1);
       return sum + w;
     }, 0);
-    // Reserve the extra word-spacing (CSS word-spacing, applied per space char ≈
-    // once per word) so adding it never pushes the line past availWidth.
-    const wordSpacingAtRef = ln.length * wordSpacing * REF_SIZE;
+    // Reserve the fixed inter-word gap (flex columnGap ≈ once between each pair)
+    // so adding it never pushes the line past availWidth.
+    const wordSpacingAtRef = Math.max(0, ln.length - 1) * WORD_GAP * REF_SIZE;
     const totalAtRef = lineWidthAtRef + wordSpacingAtRef;
     // Largest base font size at which this whole line still fits availWidth.
     return totalAtRef > 0 ? (REF_SIZE * availWidth) / totalAtRef : DESIRED_FONT_SIZE;
@@ -1062,6 +1125,29 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
     };
   };
 
+  // Per-word LIGHT SWEEP: sweep1 is the sweep STYLE (color/width/angle + motion);
+  // a word flagged `sweep` gets the traveling gloss overlaid on its own glyphs.
+  const sweepStyle = getSweepSlots(style)[0];
+  const sweepGloss = sweepStyle
+    ? buildTravelSweepCss(sweepStyle, sweepTravelX(sweepStyle, frame, fps))
+    : "";
+  const sweepOverlayStyle = (fs: number, ff: string): React.CSSProperties => ({
+    position: "absolute",
+    inset: 0,
+    display: "inline-block",
+    whiteSpace: "pre",
+    fontSize: fs,
+    fontFamily: ff,
+    pointerEvents: "none",
+    backgroundImage: sweepGloss,
+    backgroundSize: "100% 100%",
+    backgroundRepeat: "no-repeat",
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    color: "transparent",
+  });
+
   return (
     <AbsoluteFill>
       <div
@@ -1072,7 +1158,7 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
           // the whole block. Lines STRETCH to the block width so per-line
           // justify-content can offset them left/right (the Hormozi stagger).
           left: `${positionX}%`,
-          width: "90%",
+          width: `${BLOCK_WIDTH_FRAC * 100}%`,
           top: `${positionY}%`,
           transformOrigin: "center center",
           transform: `translate(-50%, -50%) scale(${captionScale})`,
@@ -1081,8 +1167,6 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
           alignItems: "stretch",
           fontFamily,
           fontWeight: FONT_WEIGHT,
-          // Extra horizontal gap added at each space character between words.
-          wordSpacing: `${wordSpacing}em`,
           // Stroke is inherited by the word spans below; each span also sets
           // paint-order so the stroke sits BEHIND its gradient/white fill.
           WebkitTextStroke: stroke,
@@ -1097,6 +1181,9 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
               // Per-line alignment (emphasized -> centered; normal -> alternating
               // left/right by normal-line index; see lineAligns above).
               justifyContent: ALIGN_TO_JUSTIFY[lineAligns[li]],
+              // Real flex gap between word spans (ASR words have no spaces), so
+              // words never touch ("youcan") — replaces the broken CSS word-spacing.
+              columnGap: `${kFontSize * WORD_GAP}px`,
               // Center the words on the row so a big (emphasized) word and the
               // small (normal) words share a common vertical CENTER instead of a
               // shared baseline (baseline made big words ride up into the line
@@ -1130,25 +1217,24 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
               // the word takes real layout space and its line box grows with it
               // (no overlap). Rendered in emphasisFontFamily, with the shared
               // group-level X/Y nudge applied ON TOP of the entrance travel.
-              if (emphasized) {
-                const emphasisTransform = `translate(${tx + emphasisOffsetX}px, ${ty + emphasisOffsetY}px)`;
-                return (
-                  <span
-                    key={wi}
-                    style={{
-                      ...shinyWordStyle(1, opacity, emphasisTransform),
-                      fontSize: kFontSize * emphasisScale,
-                      fontFamily: emphasisFontFamily,
-                    }}
-                  >
-                    {token.text}
-                  </span>
-                );
-              }
-              // NORMAL words: baseColor fill, base font, base (small) size.
-              return (
+              const emphasisTransform = `translate(${tx + emphasisOffsetX}px, ${ty + emphasisOffsetY}px)`;
+              const wordFontSize = emphasized ? kFontSize * emphasisScale : kFontSize;
+              const wordFontFamily = emphasized ? emphasisFontFamily : fontFamily;
+              const wordSpan = emphasized ? (
+                // EMPHASIZED words: shiny gradient + glow, BIGGER via a real
+                // fontSize (kFontSize x emphasisScale) so they take real layout space.
                 <span
-                  key={wi}
+                  style={{
+                    ...shinyWordStyle(1, opacity, emphasisTransform),
+                    fontSize: wordFontSize,
+                    fontFamily: emphasisFontFamily,
+                  }}
+                >
+                  {token.text}
+                </span>
+              ) : (
+                // NORMAL words: baseColor fill, base font, base (small) size.
+                <span
                   style={{
                     display: "inline-block",
                     whiteSpace: "pre",
@@ -1157,13 +1243,23 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
                     transform,
                     color: baseColor,
                     WebkitTextFillColor: baseColor,
-                    // Stroke painted behind the fill (clean outline).
                     WebkitTextStroke: stroke,
                     paintOrder: stroke ? "stroke fill" : undefined,
                     filter: shadowFilter || undefined,
                   }}
                 >
                   {token.text}
+                </span>
+              );
+              // Wrap so a swept word can host the traveling gloss overlay on top.
+              return (
+                <span key={wi} style={{ position: "relative", display: "inline-block" }}>
+                  {wordSpan}
+                  {token.sweep && sweepGloss ? (
+                    <span aria-hidden style={sweepOverlayStyle(wordFontSize, wordFontFamily)}>
+                      {token.text}
+                    </span>
+                  ) : null}
                 </span>
               );
             })}

@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill, OffthreadVideo } from "remotion";
 import type { Caption, TikTokPage } from "@remotion/captions";
 import type { CaptionDoc } from "../src/CaptionedVideo/styles/types";
+import { displayWord } from "../src/CaptionedVideo/punctuation";
 import { STYLE_BY_ID, type StyleProps } from "./styles";
 
 // The editor's live preview IS the real template fed by the in-memory caption
@@ -28,16 +29,28 @@ export const EditorPreview: React.FC<EditorPreviewProps> = ({
 }) => {
   const entry = STYLE_BY_ID[styleId];
 
+  // Punctuation is stripped for the PREVIEW only (default off) so it matches the
+  // final render; the caption cards still show/edit the real text.
+  const showPunctuation = Boolean((styleProps as { showPunctuation?: boolean }).showPunctuation);
   const captions: Caption[] = doc.segments
     .flatMap((s) => s.lines)
     .flatMap((l) => l.words)
     .map((w) => ({
-      text: w.text,
+      text: displayWord(w.text, showPunctuation),
       startMs: w.startMs,
       endMs: w.endMs,
       timestampMs: Math.round((w.startMs + w.endMs) / 2),
       confidence: null,
     }));
+  const displaySegments = showPunctuation
+    ? doc.segments
+    : doc.segments.map((seg) => ({
+        ...seg,
+        lines: seg.lines.map((line) => ({
+          ...line,
+          words: line.words.map((w) => ({ ...w, text: displayWord(w.text, false) })),
+        })),
+      }));
 
   if (!entry) return null;
   const { Provider, Page } = entry;
@@ -50,7 +63,7 @@ export const EditorPreview: React.FC<EditorPreviewProps> = ({
       {/* `Provider` is typed as never to stay style-agnostic in the registry;
           the value is the style's own props bag. */}
       <Provider value={styleProps as never}>
-        <Page enterProgress={1} page={EMPTY_PAGE} captions={captions} segments={doc.segments} />
+        <Page enterProgress={1} page={EMPTY_PAGE} captions={captions} segments={displaySegments} />
       </Provider>
     </AbsoluteFill>
   );

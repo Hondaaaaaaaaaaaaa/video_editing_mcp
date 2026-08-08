@@ -3,6 +3,7 @@ import { loadFont as loadMontserrat } from "@remotion/google-fonts/Montserrat";
 import { loadFont as loadPoppins } from "@remotion/google-fonts/Poppins";
 import { loadFont as loadBebasNeue } from "@remotion/google-fonts/BebasNeue";
 import { loadFont as loadAnton } from "@remotion/google-fonts/Anton";
+import { loadFont as loadPlayfair } from "@remotion/google-fonts/PlayfairDisplay";
 import { staticFile } from "remotion";
 import { z } from "zod";
 
@@ -27,6 +28,7 @@ export const FONT_FAMILIES = [
   "Poppins",
   "Bebas Neue",
   "Anton",
+  "Playfair Display",
   "Kufyan Arabic",
 ] as const;
 export type FontFamilyName = (typeof FONT_FAMILIES)[number];
@@ -49,6 +51,10 @@ const montserrat = loadMontserrat("normal", {
 const poppins = loadPoppins("normal", { weights: ["200", "300", "700", "800"], subsets: ["latin"] });
 const bebasNeue = loadBebasNeue("normal", { weights: ["400"], subsets: ["latin"] });
 const anton = loadAnton("normal", { weights: ["400"], subsets: ["latin"] });
+// Playfair Display — the high-contrast Didone serif behind the "elegant" role in
+// kinetic templates. Loaded ITALIC (the reference's elegant words are all
+// italic) at 500/700 so both a lighter and a bolder italic are available.
+const playfair = loadPlayfair("italic", { weights: ["500", "700"], subsets: ["latin"] });
 
 // --- Local Arabic font (shipped in public/fonts, not a Google Font) ---------
 // Kufyan Arabic — a Kufi display face for Arabic captions. Loaded via the native
@@ -76,6 +82,7 @@ const FAMILY_BY_NAME: Record<FontFamilyName, string> = {
   Poppins: poppins.fontFamily,
   "Bebas Neue": bebasNeue.fontFamily,
   Anton: anton.fontFamily,
+  "Playfair Display": playfair.fontFamily,
   "Kufyan Arabic": KUFYAN_ARABIC_FAMILY,
 };
 
@@ -104,7 +111,7 @@ export const FONT_DEFAULTS: FontSelection = {
 // unstyled text.
 export const loadFonts = async (): Promise<void> => {
   await Promise.all([
-    ...[inter, montserrat, poppins, bebasNeue, anton].map((h) => h.waitUntilDone()),
+    ...[inter, montserrat, poppins, bebasNeue, anton, playfair].map((h) => h.waitUntilDone()),
     loadKufyanArabic(),
   ]);
 };

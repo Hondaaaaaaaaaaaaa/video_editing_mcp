@@ -86,6 +86,44 @@ export const toggleEmphasis = (
   return replaceSeg(doc, s, markEdited({ ...seg, lines }));
 };
 
+/** Toggle a single word's light-sweep flag (the moving gloss target). */
+export const toggleSweep = (
+  doc: CaptionDoc,
+  s: number,
+  l: number,
+  w: number,
+): CaptionDoc => {
+  const seg = doc.segments[s];
+  if (!seg) return doc;
+  const lines = seg.lines.map((line, li) =>
+    li !== l
+      ? line
+      : {
+          ...line,
+          words: line.words.map((word, wi) =>
+            wi !== w ? word : { ...word, sweep: !word.sweep },
+          ),
+        },
+  );
+  return replaceSeg(doc, s, markEdited({ ...seg, lines }));
+};
+
+/**
+ * SET SWEEP ON ALL WORDS (on = true adds the gloss to every word, false clears
+ * it everywhere). The "all words" convenience next to the per-word toggle.
+ */
+export const setAllSweep = (doc: CaptionDoc, on: boolean): CaptionDoc => ({
+  ...doc,
+  segments: doc.segments.map((seg) => ({
+    ...seg,
+    edited: true,
+    lines: seg.lines.map((line) => ({
+      ...line,
+      words: line.words.map((word) => ({ ...word, sweep: on })),
+    })),
+  })),
+});
+
 /**
  * BREAK LINE: start a new line at word (l, w) — words from w onward drop to a
  * fresh line inserted right after line l. No-op when w is already the line's

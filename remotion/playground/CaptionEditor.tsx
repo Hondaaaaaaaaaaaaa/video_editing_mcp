@@ -13,10 +13,12 @@ import {
   moveWordsToNextSentence,
   moveWordsToPrevSentence,
   removeWord,
+  setAllSweep,
   setLineCount,
   setWordTime,
   stepAddress,
   toggleEmphasis,
+  toggleSweep,
   withIds,
   type WordAddr,
 } from "./captionDoc";
@@ -102,7 +104,13 @@ export const CaptionEditor: React.FC = () => {
     fetch(clip.doc)
       .then((r) => (r.ok ? r.json() : null))
       .then((d: CaptionDoc | null) => {
-        if (!cancelled) reset({ doc: d ? withIds(d) : null, sel: null });
+        if (cancelled) return;
+        if (!d) return reset({ doc: null, sel: null });
+        // Edit the SELECTED template's per-shape variant (so the cards + preview
+        // match what that template renders); fall back to the default segments.
+        const shape = EDITOR_STYLES.find((s) => s.id === styleId)?.shape;
+        const segs = (shape ? d.variants?.[shape] : undefined) ?? d.segments;
+        reset({ doc: withIds({ ...d, segments: segs }), sel: null });
       })
       .catch(() => {
         if (!cancelled) reset({ doc: null, sel: null });
@@ -110,7 +118,7 @@ export const CaptionEditor: React.FC = () => {
     return () => {
       cancelled = true;
     };
-  }, [clip, reset]);
+  }, [clip, reset, styleId]);
 
   // Real frame size + duration, so a 16:9 clip isn't previewed in a 9:16 box.
   useEffect(() => {
@@ -295,6 +303,24 @@ export const CaptionEditor: React.FC = () => {
             <button
               type="button"
               style={btn()}
+              disabled={!doc}
+              onClick={() => doc && apply(setAllSweep(doc, true))}
+              title="Turn the light sweep ON for every word"
+            >
+              ✨ all
+            </button>
+            <button
+              type="button"
+              style={btn()}
+              disabled={!doc}
+              onClick={() => doc && apply(setAllSweep(doc, false))}
+              title="Clear the light sweep from every word"
+            >
+              clear
+            </button>
+            <button
+              type="button"
+              style={btn()}
               disabled={!canUndo}
               onClick={undo}
               title="Undo (Ctrl/Cmd+Z)"
@@ -407,6 +433,14 @@ export const CaptionEditor: React.FC = () => {
                 title="Highlight this word (E)"
               >
                 ★ emphasis
+              </button>
+              <button
+                type="button"
+                style={btn(Boolean(selWord.sweep))}
+                onClick={() => apply(toggleSweep(doc, sel.s, sel.l, sel.w), sel)}
+                title="Light sweep (moving gloss) on this word"
+              >
+                ✨ sweep
               </button>
               <button type="button" style={btn()} onClick={() => setEditing(sel)} title="Edit text (double-click / ⏎)">✎ edit</button>
               <button type="button" style={btn()} onClick={addWord} title="Add a word after this one (⌘I)">＋ word</button>
@@ -577,6 +611,8 @@ export const CaptionEditor: React.FC = () => {
                             fontSize: 13,
                             background: isSel ? "#1e3a8a" : word.emphasis ? "#3a2f10" : "#1b1b22",
                             color: word.emphasis ? "#ffd400" : "#e7e7ea",
+                            // Swept words get a cyan underline marker.
+                            boxShadow: word.sweep ? "inset 0 -3px 0 #38bdf8" : undefined,
                           }}
                         >
                           {word.text}

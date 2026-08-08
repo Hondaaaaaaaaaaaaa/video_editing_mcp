@@ -7,11 +7,28 @@ import type { Caption, TikTokPage } from "@remotion/captions";
 // present, templates group by THIS (meaning) instead of the count-based
 // grouping, and use `emphasis` instead of the regex `decideEmphasis`.
 // ---------------------------------------------------------------------------
+// A word's SEMANTIC ROLE for kinetic-typography templates. Claude assigns it in
+// the `--shape=kinetic` enrich pass; each template maps a role to a font / size
+// / entrance. Optional so every other template and all existing documents are
+// unaffected (they simply never read it). `emphasis` still carries COLOR (accent
+// vs base); `variant` carries the TYPE TREATMENT, so the two are independent —
+// a red italic word is variant:"elegant" + emphasis:true.
+//   base    — connective text (regular sans)
+//   punch   — the shouted keyword (heavy condensed uppercase, usually big)
+//   elegant — a stylistic word (italic serif)
+export type WordVariant = "base" | "punch" | "elegant";
+
 export type EnrichedWord = {
   text: string;
   startMs: number;
   endMs: number;
   emphasis: boolean;
+  variant?: WordVariant;
+  // Per-word LIGHT SWEEP toggle (like `emphasis`, but for the moving gloss).
+  // Off/undefined by default; the editor turns it on for any word or all words,
+  // and every template renders the traveling shine on the flagged words using
+  // the template's shared sweep look + motion (animate/speed/bounce).
+  sweep?: boolean;
 };
 export type EnrichedLine = {
   align?: "center" | "left" | "right";
@@ -32,7 +49,14 @@ export type EnrichedSegment = {
 // transcribe -> enrich pass. The web editor mutates THIS; templates render it.
 export type CaptionDoc = {
   language: string | null;
+  // Default segmentation (back-compat / fallback). When `variants` exists, each
+  // template reads its OWN shape from there instead of this.
   segments: EnrichedSegment[];
+  // PER-TEMPLATE segmentation: Claude segments the same clip once per template
+  // shape (hormozi / shiny / gadzhi / kinetic / …), so every template gets the
+  // grouping designed for its layout. Keyed by shape name. Optional so older
+  // single-shape documents still work.
+  variants?: Record<string, EnrichedSegment[]>;
   translation: string;
 };
 
