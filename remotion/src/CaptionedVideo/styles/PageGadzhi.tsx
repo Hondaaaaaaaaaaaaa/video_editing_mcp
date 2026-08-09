@@ -61,7 +61,8 @@ import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./Page
 
 export const gadzhiSchema = captionedVideoSchema.extend({
   // === LAYOUT — placement + sizing. Line GROUPING is not here: it comes from
-  // the caption document (Claude's `--shape=gadzhi` output, or the user's
+  // the caption document (`variants.gadzhi`: Claude's meaning-based caption
+  // breaks, line-wrapped for this template by enrich.mjs, or the user's
   // per-caption edits in the editor). ===
   layout: z.object({
     // Size as a PERCENTAGE OF FRAME WIDTH, not absolute pixels: the same

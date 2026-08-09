@@ -39,7 +39,7 @@ import {
 // Words ACCUMULATE one by one into a centred block (~upper-middle), then the
 // block clears for the next phrase. Every word slides + fades into place with
 // easing (Shiny-style) — no pop, no wipe. Each word carries a semantic ROLE
-// (`variant`, assigned by Claude's `--shape=kinetic` pass):
+// (`variant`, assigned by Claude in the enrich pass):
 //
 //   base    — ordinary connective text: clean sans, white.
 //   punch   — an emphasised keyword: the SAME sans but BOLD and a bit bigger,

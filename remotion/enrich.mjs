@@ -4,19 +4,32 @@
 // call, produces a corrected + structured result:
 //   - fixes spelling/orthography (Arabic hamza, ة/ه, ى/ي, the "الـ-word" seams)
 //   - applies correct punctuation (Arabic ، ؟ ؛ where appropriate)
-//   - groups words into on-screen SEGMENTS and LINES by MEANING (not by count)
-//   - marks the emphasis word(s) per segment (the payload word, not function words)
+//   - breaks the transcript into CAPTIONS purely BY MEANING (no word counts)
+//   - marks the emphasis word(s) per caption (the payload word, not function words)
+//   - tags each word's TYPE ROLE (base / punch / elegant) for kinetic templates
 //   - provides a natural translation
 // Word TIMESTAMPS are preserved: Claude only regroups/edits text and references
 // each original word by its index, so nothing ever desyncs.
 //
+// SPLIT OF RESPONSIBILITY (the thing that makes captions consistent):
+//   Claude decides MEANING — where one idea ends and the next begins. Once, for
+//   the whole video. Every template shares that one answer, so a caption is the
+//   same words no matter which template is painting it.
+//   CODE decides LAYOUT — how each caption's words stack into that template's
+//   lines (2 for Gadzhi/Hormozi, 3 for Shiny/Kinetic). Deterministic, free, and
+//   it cannot move a word into the wrong caption because it never touches the
+//   caption boundaries. The template then MEASURES the real rendered width and
+//   shrinks to fit, which is why there are no word-count rules anywhere here.
+//
 // This is the swappable LLM seam — Claude today, swap the provider later.
 //
 // Usage:
-//   node enrich.mjs "public/clip.json"     # enrich one caption file
-//   node enrich.mjs "public/clip.mp4"      # (resolves to clip.json)
+//   node enrich.mjs "public/clip.json"                # writes clip.enriched.new.json
+//   node enrich.mjs "public/clip.mp4"                 # (resolves to clip.json)
+//   node enrich.mjs "public/clip.json" --overwrite    # replaces clip.enriched.json
 //
-// Writes `<name>.enriched.json` and prints a raw-vs-corrected comparison.
+// Writes the enriched document and prints a raw-vs-corrected comparison plus
+// every template's captions, so the segmentation can be eyeballed before use.
 
 import path from "path";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
@@ -37,287 +50,324 @@ loadEnv();
 // Config. MODEL is the one knob to trade quality for cost:
 //   claude-opus-5    — best quality
 //   claude-sonnet-5  — near-best, cheaper
-//   claude-haiku-4-5 — cheapest, for high-volume bulk correction (default)
+//   claude-haiku-4-5 — cheapest, for high-volume bulk correction
 // ---------------------------------------------------------------------------
-// Overridable per run with `--model=claude-sonnet-5` (or ENRICH_MODEL in .env)
-// without changing the cheap default. Segmentation is the one stage where a
-// stronger model visibly pays off: Haiku honours the word cap OR the meaning
-// boundaries but tends to trade one for the other on long clips.
+// Overridable per run with `--model=claude-sonnet-5` (or ENRICH_MODEL in .env).
+// Segmentation is the one stage where a stronger model visibly pays off: the
+// whole job is now a judgement call about meaning, with no count rule to lean on.
 const modelArg = process.argv.find((a) => a.startsWith("--model="));
 const MODEL =
   (modelArg && modelArg.split("=")[1]) || process.env.ENRICH_MODEL || "claude-haiku-4-5";
 const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
 
 // ---------------------------------------------------------------------------
-// TEMPLATE SHAPES — per-template segmentation targets (the "per-template" choice).
-// Each template lays captions out differently, so Claude segments to fit the
-// target shape: how many lines a caption may span and a soft cap on words/line.
-// Selected with `--shape=<name>` (default hormozi). `minLines` lets short,
-// complete ideas use fewer lines instead of being padded.
-// ---------------------------------------------------------------------------
-const SHAPES = {
-  hormozi: { maxLines: 2, maxWordsPerLine: 4, note: "two stacked lines; the accent color moves top -> bottom, so 2 lines is ideal" },
-  shiny: {
-    maxLines: 3,
-    maxWordsPerLine: 3,
-    note: "small / BIG / small stagger, up to three short rows",
-    // Hard limits → enables the validate-and-retry pass (Haiku drifts on the
-    // looser 3-line shape without it). Caps words/line and forces a sentence to
-    // end on the caption's last word, so ideas don't get merged to fill space.
-    limits: { minLines: 1, maxLines: 3, minWordsPerLine: 1, maxWordsPerLine: 3, endCaptionAtSentenceEnd: true },
-  },
-  minimal: { maxLines: 1, maxWordsPerLine: 6, note: "a single row of a few words" },
-  // KINETIC — flowing kinetic-typography poster. Words accumulate one by one
-  // into a short stacked block, and each word carries a per-word TYPE TREATMENT
-  // (`variant`) the template maps to a font/size/entrance. This is the only
-  // shape that assigns `variant`; `variants` below both drives the JSON schema
-  // (adds the required enum) and is injected into the rules. Colour still rides
-  // on `emphasis` (accent vs base), so a red italic word is elegant+emphasis.
-  kinetic: {
-    maxLines: 3,
-    maxWordsPerLine: 3,
-    note: "a flowing stack that builds word by word; each word is base / punch / elegant",
-    variants: ["base", "punch", "elegant"],
-    limits: { minLines: 1, maxLines: 3, minWordsPerLine: 1, maxWordsPerLine: 4 },
-    extraRules: `TEMPLATE-SPECIFIC RULES (shape "kinetic") — kinetic-typography captions modelled on a specific reference. In ADDITION to the rules above:
-
-K1. SEGMENTATION — one spoken PHRASE/CLAUSE per segment (a natural breath group), typically 3-7 words, 1-3 lines, at most 4 words per line. The block builds word by word then clears, so group words that are spoken together as one thought. Always end a segment at a sentence end; also break at a clear clause boundary (after a comma, or before "and/but/so/because/if/when"). Do NOT merge two separate thoughts into one segment, and do NOT chop a single tight phrase into fragments.
-
-K2. PER-WORD "variant" — tag EVERY word with exactly one of:
-    - "punch"   = a KEY word that should be emphasised: bold and a little bigger than the surrounding text. These carry the meaning and impact — PREFER the concrete noun/object being talked about, a number, a name, or the outcome, over a generic action verb. Do NOT punch a generic verb (make, get, do, use, create, build, go, have, want, need) unless there is no concrete noun to carry the point; punch the OBJECT instead (e.g. "you can create engaging reels" → punch "engaging reels", NOT "create"). A segment usually has 1-3 punch words (they can be adjacent, e.g. "write hooks", "good people", "the triple"). TEST: reading only the punch words should still convey the point. Do NOT punch filler ("the, a, of, to, is, do, you, how, so, and, if").
-    - "elegant" = ONE special word per segment at most, rendered in an italic serif for flavour — usually the single most "quotable" noun or verb, often the last word of the phrase (e.g. "comment", "hook"). Optional; many segments have none. Never make a filler word elegant.
-    - "base"    = everything else (the connective words). Most words are base.
-    Read like: base base PUNCH PUNCH  /  base base ELEGANT.
-
-K3. "emphasis" carries COLOUR (the accent red). Default: set emphasis:true on the punch words so they render RED — that is the norm. Leave a punch word emphasis:false only when you want it bold but WHITE (use sparingly, for a secondary emphasis like a closing "correctly," or "and"). base words are always emphasis:false. An elegant word may be emphasis:true to tint it red, but usually leave it white.
-
-K4. Keep NATURAL casing in "text" (do not UPPERCASE). The template styles words by role; it does not change your casing.`,
-  },
-  // GADZHI — ALWAYS two lines (thin lead-in on top, bold payoff underneath; the
-  // weight swap moves top -> bottom, so 1 or 3 lines would break the effect).
-  // Grouping is BY MEANING, exactly like Hormozi — each caption is ONE complete
-  // idea, at WHATEVER length that idea is (short ideas make short captions). The
-  // ONLY difference from Hormozi's grouping is the forced 2-line split. There is
-  // NO minimum caption length: never pad a caption or pull in the next idea to
-  // reach a word count. Capital-per-caption is applied at render time, not here.
-  gadzhi: {
-    maxLines: 2,
-    maxWordsPerLine: 5,
-    note: "two stacked lines; group by MEANING like Hormozi, split each idea across the 2 lines",
-    // HARD limits, checked in code after the call (validate-and-retry). Only the
-    // STRUCTURE is enforced: exactly 2 lines, and a sentence never ends mid-
-    // caption. NO minimum word count — grouping length is meaning-driven, so a
-    // caption can be as short as one 2-3 word idea.
-    limits: {
-      minLines: 2,
-      maxLines: 2,
-      minWordsPerLine: 1,
-      maxWordsPerLine: 5,
-      // The reference never lets a sentence end mid-caption: a full stop is
-      // always the last word on screen before the block swaps.
-      endCaptionAtSentenceEnd: true,
-    },
-    extraRules: `TEMPLATE-SPECIFIC RULES (shape "gadzhi") — these OVERRIDE the general rules above wherever they conflict. Follow them literally.
-G1. EXACTLY TWO LINES per caption. Never one, never three. Even a short idea is split across the two lines (e.g. "Using Remotion's / TikTok template," — 2 words on top, 2 below).
-G2. GROUP BY MEANING, NOT BY LENGTH — exactly like the Hormozi shape. Each caption is ONE complete idea/clause that reads on its own; the NEXT idea is a NEW caption. There is NO minimum caption length: a caption may be as few as 3-4 words. NEVER pad a caption to a word count, and NEVER pull the start of the next idea into this caption to make it "long enough". If an idea is short, the caption is short — that is correct, not a failure.
-   WORKED EXAMPLE — "Using Remotion's TikTok template you can create engaging reels and TikToks by transcribing your audio using whisper CPP":
-     CAPTION 1 = "Using Remotion's / TikTok template,"      (one idea: the template — only 4 words, and that is fine)
-     CAPTION 2 = "you can create engaging / reels and TikToks"   ("you can create ..." is a NEW subject+verb → a NEW caption)
-     CAPTION 3 = "by transcribing your audio / using whisper CPP"
-   WRONG: "Using Remotion's TikTok template, / you can create engaging"  (merges two ideas to reach a word count — never do this).
-G3. Within a caption, split the idea's words across the 2 lines by READABILITY (2/2, 2/3, 3/4, 1/3, ... whatever reads best) — lead-in on top, payoff below. Break ONLY at a natural phrase boundary; never strand a word from what it governs (keep article+noun, preposition+object, auxiliary+main verb, adjective+noun, number+unit together).
-G4. LEAD-IN THEN PAYOFF. Line 1 sets up, line 2 lands the point; prefer line 1 no longer than line 2. Both lines may be short. Rhythm: "This AI is / incredibly valuable." — "So let me / explain how it works."
-G5. NEVER LET A SENTENCE END MID-CAPTION. If a word closes a sentence (. ! ?), it must be the LAST word of that caption — the next sentence always starts a fresh caption, even when that leaves the caption short.
-   WRONG: "craziest AI tools / yet. Firefly"        (the period is not the last word)
-   RIGHT: "Craziest / AI tools yet."  THEN  "Firefly is / a generative,"
-G6. Punctuation follows rule 4 — commas and periods stay attached to the words they belong to, and a caption may end without punctuation when the sentence continues into the next caption.
-G7. CASING: use natural sentence casing only. Do NOT capitalize a caption's first word just because it starts a caption — the template applies that convention itself at render time, so the document stays correct if the user later re-splits the captions.`,
-  },
-  // HORMOZI 2 — the "changing-colour + wiggle" viral look. Two stacked lines;
-  // the SPOKEN line lights up in an accent colour that moves top -> bottom, so
-  // (exactly like hormozi/gadzhi) grouping is BY MEANING and split across the 2
-  // lines. There is NO minimum caption length and NO emphasis to assign — the
-  // colour is driven by the spoken line at render time, not by marked words.
-  hormozi2: {
-    maxLines: 2,
-    maxWordsPerLine: 5,
-    note: "two stacked lines; the accent colour lights the spoken line top -> bottom, so 2 lines is ideal",
-    limits: {
-      minLines: 2,
-      maxLines: 2,
-      minWordsPerLine: 1,
-      maxWordsPerLine: 5,
-      endCaptionAtSentenceEnd: true,
-    },
-    extraRules: `TEMPLATE-SPECIFIC RULES (shape "hormozi2") — these OVERRIDE the general rules above wherever they conflict. Follow them literally.
-H1. EXACTLY TWO LINES per caption. Never one, never three. Even a short idea is split across the two lines (e.g. "Here's a guy / that runs" — 2 words on top, 2 below).
-H2. GROUP BY MEANING, NOT BY LENGTH — exactly like the Hormozi shape. Each caption is ONE complete idea/clause that reads on its own; the NEXT idea is a NEW caption. There is NO minimum caption length: a caption may be as few as 3-4 words. NEVER pad a caption to a word count, and NEVER pull the start of the next idea into this caption to make it "long enough". If an idea is short, the caption is short — that is correct.
-   WORKED EXAMPLE — "here's a guy that runs a company and he's skiing":
-     CAPTION 1 = "Here's a guy / that runs a company"   (one idea)
-     CAPTION 2 = "and he's / skiing"                    ("and he's ..." is a NEW clause → a NEW caption)
-   WRONG: "Here's a guy that runs / a company and he's"  (merges two ideas to reach a word count — never do this).
-H3. Within a caption, split the idea's words across the 2 lines by READABILITY (2/2, 2/3, 3/4, 1/3, ... whatever reads best) — the accent colour lights the top line first, then the bottom, so line 1 is the set-up and line 2 the pay-off. Break ONLY at a natural phrase boundary; never strand a word from what it governs (keep article+noun, preposition+object, auxiliary+main verb, adjective+noun, number+unit together).
-H4. NEVER LET A SENTENCE END MID-CAPTION. If a word closes a sentence (. ! ?), it must be the LAST word of that caption — the next sentence always starts a fresh caption, even when that leaves the caption short.
-H5. EMPHASIS DOES NOT MATTER for this template — the colour follows the spoken line, not marked words. Set emphasis:false on every word (or mark the payload word if you like; it is ignored either way). Do not let emphasis change your grouping.
-H6. CASING: use natural sentence casing only — the template UPPERCASES at render time, so keep the document in normal case.`,
-  },
-};
-const shapeArg = process.argv.find((a) => a.startsWith("--shape="));
-const SHAPE_NAME = (shapeArg ? shapeArg.split("=")[1] : "hormozi").toLowerCase();
-const SHAPE = SHAPES[SHAPE_NAME] || SHAPES.hormozi;
-
-// JSON Schema for structured outputs — the API constrains the model to this
-// shape, so the response is ALWAYS valid JSON (fixes cheap models emitting
-// malformed JSON). additionalProperties:false + required are mandatory for
-// structured outputs. Supported on Haiku 4.5 / Sonnet 5 / Opus 5 / etc.
+// TEMPLATE LAYOUTS — how many LINES each template stacks a caption into.
 //
-// Built per-shape: a shape can declare `variants` (a list of per-word role
-// names), and when it does the word gains a required `variant` enum so Claude
-// tags every word with its type treatment. Shapes without `variants` produce
-// the exact schema as before, so their output is unchanged.
-const buildOutputSchema = (shape) => {
-  const wordProps = {
-    i: { type: "integer" },
-    text: { type: "string" },
-    emphasis: { type: "boolean" },
+// This is LAYOUT ONLY. It has no say in where captions break; that is Claude's
+// single meaning-based answer, shared by every template. `charsPerLine` is a
+// rough WIDTH budget (characters are a far better width proxy than words —
+// "extraordinary" is wider than "I go to the top") used only to decide whether
+// a caption needs 1, 2 or 3 lines. The template measures the real pixel width
+// at render time and shrinks to fit, so this only has to be in the right area.
+//
+//   exact: true  — the look REQUIRES that many lines (Gadzhi's thin-over-bold
+//                  swap and Hormozi 2's top->bottom colour step both need two
+//                  lines to step between), so even a 2-word caption is split.
+// ---------------------------------------------------------------------------
+const TEMPLATES = {
+  hormozi: { minLines: 1, maxLines: 2, exact: false, charsPerLine: 26 },
+  hormozi2: { minLines: 2, maxLines: 2, exact: true, charsPerLine: 26 },
+  gadzhi: { minLines: 2, maxLines: 2, exact: true, charsPerLine: 26 },
+  shiny: { minLines: 1, maxLines: 3, exact: false, charsPerLine: 18 },
+  kinetic: { minLines: 1, maxLines: 3, exact: false, charsPerLine: 18 },
+  minimal: { minLines: 1, maxLines: 1, exact: false, charsPerLine: 40 },
+};
+// The document's default `segments` (what a template with no variant falls back
+// to). Two lines is the safe middle ground.
+const DEFAULT_TEMPLATE = "hormozi";
+
+// ---------------------------------------------------------------------------
+// LINE WRAPPING — pure code, no model. Picks where to break a caption's words
+// into N lines by scoring every possible split and taking the cheapest.
+// ---------------------------------------------------------------------------
+
+// Words that GRAB the word after them. A line must NEVER end on one of these —
+// this is what stops "your / captions" and "the / hook". Latin + Arabic.
+const BINDS_NEXT = new Set([
+  // determiners + possessives
+  "a", "an", "the", "my", "your", "his", "her", "its", "our", "their",
+  "this", "that", "these", "those", "no", "every", "each", "all", "some", "any",
+  // prepositions
+  "of", "to", "in", "on", "for", "with", "from", "by", "at", "into", "onto",
+  "about", "over", "under", "after", "before", "between", "through", "across",
+  "around", "against", "during", "without", "within", "than",
+  // auxiliaries + modals
+  "is", "are", "was", "were", "be", "been", "being", "am", "can", "could",
+  "will", "would", "shall", "should", "may", "might", "must", "do", "does",
+  "did", "have", "has", "had", "not",
+  // conjunctions — fine to break BEFORE, never AFTER
+  "and", "but", "or", "so", "because", "if", "when", "while", "although", "as",
+  // intensifiers
+  "very", "more", "most", "less",
+  // Arabic particles / prepositions / relatives
+  "في", "من", "على", "إلى", "عن", "مع", "عند", "بعد", "قبل", "بين", "حتى",
+  "لما", "لو", "إذا", "عشان", "علشان", "لأن", "لكن", "و", "أو", "ما", "لا",
+  "كل", "هذا", "هذه", "ذلك", "تلك", "اللي", "الذي", "التي", "يا", "قد", "كان",
+]);
+
+// Words that START a phrase — a good place to BEGIN a line.
+const STARTS_PHRASE = new Set([
+  "and", "but", "or", "so", "because", "if", "when", "while", "that", "which", "who",
+  "to", "of", "in", "on", "for", "with", "from", "by", "at", "into", "about",
+  "the", "a", "an", "my", "your", "his", "her", "its", "our", "their",
+  "you", "i", "we", "they", "he", "she", "it",
+  "و", "لكن", "أو", "لأن", "إذا", "لما", "عشان", "علشان", "اللي", "الذي", "التي",
+  "في", "من", "على", "إلى", "عن", "مع", "أنا", "إنت", "احنا", "هو", "هي",
+]);
+
+// Endings that usually mark a MODIFIER leaning on the noun after it ("engaging
+// reels"). Only applied when the next word does not itself start a phrase, so
+// a real verb + object ("animating / your captions") is left alone.
+const MODIFIER_SUFFIX = /(ing|ed|ive|ous|ful|able|ible|ic)$/i;
+
+const norm = (w) => (w || "").toLowerCase().replace(/[.,،؛:!?؟"'()[\]]/g, "");
+const endsClause = (w) => /[,،؛:]["')\]]?$/.test(w || "");
+
+// Rendered width of a run of words, approximated by characters + the spaces
+// between them. Deliberately NOT a word count.
+const widthOf = (words) =>
+  words.reduce((s, w) => s + (w.text?.length ?? 0), 0) + Math.max(0, words.length - 1);
+
+// What it costs to end a line after word `k`. Lower is better; negative is good.
+const splitCost = (words, k) => {
+  const cur = words[k]?.text ?? "";
+  const nxt = words[k + 1]?.text ?? "";
+  const c = norm(cur);
+  const n = norm(nxt);
+  let cost = 0;
+  if (BINDS_NEXT.has(c)) cost += 100; // never strand a word from what it governs
+  if (MODIFIER_SUFFIX.test(c) && !STARTS_PHRASE.has(n)) cost += 40; // adjective + noun
+  if (endsClause(cur)) cost -= 25; // a comma is the most natural break there is
+  if (STARTS_PHRASE.has(n)) cost -= 3; // the next word opens a new phrase
+  return cost;
+};
+
+/** Split a caption's words into exactly `n` lines, cheapest total cost wins. */
+const splitInto = (words, n) => {
+  if (n <= 1 || words.length <= 1) return [words];
+  const lines = Math.min(n, words.length);
+  let best = null;
+  let bestCost = Infinity;
+
+  const evaluate = (cuts) => {
+    const out = [];
+    let prev = 0;
+    for (const k of cuts) {
+      out.push(words.slice(prev, k + 1));
+      prev = k + 1;
+    }
+    out.push(words.slice(prev));
+    const widths = out.map(widthOf);
+    // Total = how awkward each break is + how lopsided the lines end up.
+    const spread = Math.max(...widths) - Math.min(...widths);
+    const cost = cuts.reduce((s, k) => s + splitCost(words, k), 0) + spread;
+    if (cost < bestCost) {
+      bestCost = cost;
+      best = out;
+    }
   };
-  const wordRequired = ["i", "text", "emphasis"];
-  if (shape.variants) {
-    wordProps.variant = { type: "string", enum: shape.variants };
-    wordRequired.push("variant");
+
+  // Captions are short, so brute-forcing every combination of break points is
+  // both exact and instant.
+  const walk = (start, need, acc) => {
+    if (need === 0) return evaluate(acc);
+    for (let k = start; k <= words.length - 1 - need; k++) walk(k + 1, need - 1, [...acc, k]);
+  };
+  walk(0, lines - 1, []);
+  return best ?? [words];
+};
+
+/** How many lines this template should use for this caption. */
+const lineCountFor = (words, tpl) => {
+  if (tpl.exact) return Math.min(tpl.maxLines, Math.max(1, words.length));
+  const w = widthOf(words);
+  for (let n = tpl.minLines; n < tpl.maxLines; n++) {
+    if (w / n <= tpl.charsPerLine) return Math.min(n, words.length);
   }
-  return {
-    type: "object",
-    additionalProperties: false,
-    properties: {
-      language: { type: "string" },
-      segments: {
-        type: "array",
-        items: {
-          type: "object",
-          additionalProperties: false,
-          properties: {
-            lines: {
-              type: "array",
-              items: {
-                type: "object",
-                additionalProperties: false,
-                properties: {
-                  align: { type: "string", enum: ["center", "left", "right"] },
-                  words: {
-                    type: "array",
-                    items: {
-                      type: "object",
-                      additionalProperties: false,
-                      properties: wordProps,
-                      required: wordRequired,
-                    },
-                  },
-                },
-                required: ["align", "words"],
+  return Math.min(tpl.maxLines, words.length);
+};
+
+/** Lay the SAME captions out in one template's line shape. */
+const layoutFor = (captions, tpl) =>
+  captions.map((words) => ({
+    lines: splitInto(words, lineCountFor(words, tpl)).map((ws) => ({
+      align: "center",
+      words: ws,
+    })),
+  }));
+
+// ---------------------------------------------------------------------------
+// JSON Schema for structured outputs — the API constrains the model to this
+// shape, so the response is ALWAYS valid JSON. Note there are no `lines` here
+// any more: Claude returns a FLAT word list per caption and code does the rest.
+// ---------------------------------------------------------------------------
+const OUTPUT_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    language: { type: "string" },
+    segments: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          words: {
+            type: "array",
+            items: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                i: { type: "integer" },
+                text: { type: "string" },
+                emphasis: { type: "boolean" },
+                variant: { type: "string", enum: ["base", "punch", "elegant"] },
               },
+              required: ["i", "text", "emphasis", "variant"],
             },
           },
-          required: ["lines"],
         },
+        required: ["words"],
       },
-      translation: { type: "string" },
     },
-    required: ["language", "segments", "translation"],
-  };
+    translation: { type: "string" },
+  },
+  required: ["language", "segments", "translation"],
 };
-
-const OUTPUT_SCHEMA = buildOutputSchema(SHAPE);
 
 // ---------------------------------------------------------------------------
 // The instructions Claude follows. This is the seam where all the caption
-// "content decisions" live — spelling, segmentation, emphasis, translation.
+// CONTENT decisions live — spelling, caption breaks, emphasis, translation.
+// There is deliberately NOTHING here about line counts or words per line: those
+// are layout, and layout is code's job (see TEMPLATES / splitInto above).
 // ---------------------------------------------------------------------------
-const buildSystemPrompt = (shape) => `You are an expert multilingual subtitle editor for short-form social video captions (TikTok/Reels), with deep Arabic expertise including Egyptian and Gulf dialects.
+const SYSTEM_PROMPT = `You are an expert multilingual subtitle editor for short-form social video captions (TikTok/Reels), with deep Arabic expertise including Egyptian and Gulf dialects.
 
 You receive an ordered ASR word list from speech-to-text, each word with an index. The transcription has errors. Produce ONE JSON object that corrects and structures it for on-screen captions.
 
 RULES:
-1. SPELLING/ORTHOGRAPHY: Fix errors. Arabic: correct hamza seats (أ إ آ ء ؤ ئ), taa marbuta ة vs haa ه, yaa ي vs alef maqsura ى, and fix ASR artifacts like an article glued to a word with a dash (e.g. "الـ-digital" -> keep the article on the Arabic word and the English word separate: "الديجيتال" is wrong here — keep English words in Latin, so write it as the Arabic article + the Latin word naturally). Fix obvious mis-hearings only when context makes the intended word unambiguous; otherwise keep the ASR word.
+1. SPELLING/ORTHOGRAPHY: Fix errors. Arabic: correct hamza seats (أ إ آ ء ؤ ئ), taa marbuta ة vs haa ه, yaa ي vs alef maqsura ى, and fix ASR artifacts like an article glued to a word with a dash. Fix obvious mis-hearings only when context makes the intended word unambiguous; otherwise keep the ASR word.
 2. DIALECT: Keep the words AS SPOKEN. Do NOT convert Egyptian/Gulf dialect to Modern Standard Arabic. "عايز/عاوز", "الحين", "بختار", "مو", "بس" stay as-is (spelled correctly).
 3. CODE-SWITCHING: Keep English (or other Latin-script) words that the speaker actually said in Latin script. Never transliterate a spoken English word into Arabic letters.
 4. PUNCTUATION: Add natural punctuation. For Arabic use Arabic marks: comma ، question mark ؟ semicolon ؛. Do NOT add tashkeel/diacritics.
-5. SEGMENTATION — THE MOST IMPORTANT RULE. Target layout: each caption (a "segment") spans UP TO ${shape.maxLines} line(s), with a soft cap of ~${shape.maxWordsPerLine} words per line (${shape.note}).
-   a. A caption = ONE complete, self-contained idea that reads well on its own. Group by MEANING, never by a fixed word count.
-   b. Split a caption into its lines by READABILITY — the number of words on the upper vs lower line is whatever reads best (2+2, 1+3, 3+2, ...), NOT a fixed count. Balance the lines so neither is awkwardly long.
-   c. OVERFLOW → NEXT CAPTION: when a phrase forms a complete idea and the following words begin a NEW idea, END the caption there and move those following words into the NEXT caption. NEVER pad a caption with the beginning of the next thought just to fill a line.
-      WORKED EXAMPLE (English): for the words "Using Remotion's TikTok template you can build videos", the first caption is TWO lines — upper "Using Remotion's", lower "TikTok template" — because "Using Remotion's TikTok template" is one complete idea. "you can build videos" starts a NEW idea, so it becomes the next caption. Do NOT produce "TikTok / template, you can".
-   d. A genuinely short complete idea may use fewer than ${shape.maxLines} lines. Do not stretch it.
-   e. Keep meaning units intact: never split an Arabic article ال from its noun, an idafa (إضافة), a preposition from its object, or a number from its unit.
-   f. THE LINE BUDGET IS A CAP, NOT A TARGET. Having room for more lines is NEVER a reason to pull the next idea into this caption. Two independent clauses or sentences must NOT share a caption: start a NEW caption before a new subject+verb ("you can …", "he said …"), before a coordinating conjunction (and / but / so / because / if / when) that begins a new clause, and always after a sentence-ending mark (. ! ? ؟). A ${shape.maxLines}-line shape splits the SAME ideas a 2-line shape would — the extra line(s) are only for when ONE idea genuinely needs them, NEVER for merging two ideas. Push the leftover words to the next caption (rule c).
-      WORKED EXAMPLE (${shape.maxLines}-line shape): "Using Remotion's TikTok template you can create engaging reels" → caption 1 = the idea "Using Remotion's TikTok template", caption 2 = "you can create engaging reels" ("you can" is a new subject+verb → a NEW caption). NEVER "Using Remotion's TikTok / template, you can create".
-6. EMPHASIS: Mark the "payload" word(s) per segment as emphasis:true — the words a viewer's eye should land on. PREFER THE CONCRETE PAYLOAD: the specific noun/object being talked about, a number/money figure, a name, a superlative/contrast word, or the outcome. DEPRIORITIZE generic action verbs (make, get, do, use, create, build, go, have, want, need) and helper/function words (في، من، و، على، the، a، of، to، is، you، can) — emphasize the concrete thing over the generic verb (e.g. "you can create engaging reels" → emphasize "reels", NOT "create"; "make it 100 times better" → "100"/"better", NOT "make"). TEST: reading only the emphasized words should still convey the point. Most words are emphasis:false; some segments have zero.
-7. ALIGNMENT: Give each line an "align" of "center" (default), "left", or "right".
+
+5. CAPTION BREAKS — THE MOST IMPORTANT RULE, AND YOUR MAIN JOB.
+   Split the transcript into captions. A caption is ONE screen of text.
+   You are deciding MEANING ONLY. You are NOT laying out lines — a separate
+   layout step stacks each caption into whatever line shape the template needs
+   and shrinks the text to fit. So NEVER think about how many words fit, how
+   long a caption is, or how many lines it will take. Think only about ideas.
+
+   a. ONE COMPLETE IDEA PER CAPTION. A caption must read on its own as a whole
+      thought — a clause, a phrase, a statement. When the idea is finished, the
+      caption is finished.
+   b. THERE IS NO MINIMUM AND NO MAXIMUM LENGTH. A caption may be two words if
+      that is the whole idea ("Three things."). It may be ten words if the idea
+      genuinely runs that long. NEVER pad a caption to make it longer, and never
+      cut an idea short to make it smaller.
+   c. NEVER MERGE TWO IDEAS. Start a NEW caption before a new subject+verb
+      ("you can …", "he said …"), before a coordinating conjunction that opens a
+      new clause (and / but / so / because / if / when / و / لكن / لأن / عشان),
+      and ALWAYS after a sentence-ending mark (. ! ? ؟) — a sentence must never
+      end in the middle of a caption.
+      WORKED EXAMPLE: "Using Remotion's TikTok template you can create engaging
+      reels and TikToks by transcribing your audio using Whisper CPP" becomes
+      FOUR captions:
+        1) "Using Remotion's TikTok template,"
+        2) "you can create engaging reels and TikToks"
+        3) "by transcribing your audio using Whisper CPP"
+      WRONG: "Using Remotion's TikTok template, you" — "you" opens a new clause.
+      WRONG: "using Whisper" + "CPP" — a name must never be split across captions.
+   d. KEEP MEANING UNITS WHOLE inside one caption: a name or product ("Whisper
+      CPP", "After Effects"), a number and its unit, an Arabic article ال and its
+      noun, an idafa (إضافة), a preposition and its object.
+   e. Follow the speaker's natural breath and rhythm. Where they pause, the
+      caption usually ends.
+
+6. EMPHASIS: Mark the "payload" word(s) per caption as emphasis:true — the words a viewer's eye should land on. PREFER THE CONCRETE PAYLOAD: the specific noun/object being talked about, a number/money figure, a name, a superlative/contrast word, or the outcome. DEPRIORITIZE generic action verbs (make, get, do, use, create, build, go, have, want, need) and helper/function words (في، من، و، على، the، a، of، to، is، you، can) — emphasize the concrete thing over the generic verb (e.g. "you can create engaging reels" → emphasize "engaging reels", NOT "create"; "make it 100 times better" → "100"/"better", NOT "make"). TEST: reading only the emphasized words should still convey the point. Most words are emphasis:false; some captions have zero.
+
+7. WORD ROLE ("variant") — tag EVERY word with exactly one. Kinetic-typography templates map the role to a font/size/entrance; every other template ignores it, so this never changes their look.
+   - "punch"   = a KEY word: the concrete noun/object, a number, a name, or the outcome. Usually 1-3 per caption. Do NOT punch a generic verb (make, get, do, use, create, build) when there is a concrete noun to carry the point. Do NOT punch filler (the, a, of, to, is, do, you, how, so, and, if).
+   - "elegant" = at most ONE per caption, rendered in an italic serif for flavour — the single most "quotable" noun or verb, often the last word of the phrase. Optional; many captions have none. Never a filler word.
+   - "base"    = everything else. Most words are base.
+   Keep NATURAL casing in "text" — templates uppercase at render time if they want to.
+
 8. TRANSLATION: Provide a natural, fluent English translation of the whole transcript (colloquial where the source is colloquial). If the source is already English, translate to Arabic instead.
-9. WORD INDICES: Reference every original word exactly once by its index "i", in order, across all segments/lines. Do not add, drop, or reorder words. "text" is the CORRECTED form of that word.
-${shape.extraRules ? `\n${shape.extraRules}\n` : ""}
+9. WORD INDICES: Reference every original word exactly once by its index "i", in ascending order, across all captions. Do not add, drop, or reorder words. "text" is the CORRECTED form of that word.
+
 OUTPUT: Return ONLY a JSON object, no prose, no markdown fences:
 {
   "language": "<ISO code, e.g. ar or en>",
   "segments": [
-    { "lines": [ { "align": "center", "words": [ { "i": 0, "text": "...", "emphasis": false } ] } ] }
+    { "words": [ { "i": 0, "text": "...", "emphasis": false, "variant": "base" } ] }
   ],
   "translation": "..."
 }`;
 
 // ---------------------------------------------------------------------------
-// SHAPE VALIDATION — the deterministic half of segmentation quality.
+// VALIDATION — the deterministic half of quality.
 //
-// The prompt asks for a layout; this checks whether the model actually produced
-// it. Returns human-readable violations naming the offending captions, which go
-// straight back to the model as the retry message. Shapes with no `limits`
-// return nothing, so they behave exactly as before (single call).
+// Only checks things CODE CAN ACTUALLY VERIFY. The old word-per-line caps are
+// gone (they were the thing corrupting the meaning boundaries); what is left is
+// structural truth: every word used exactly once in order, no empty caption, and
+// no sentence ending in the middle of a caption. Violations are fed straight
+// back to the model as the retry message.
 // ---------------------------------------------------------------------------
-const MAX_SHAPE_RETRIES = 2;
+const MAX_RETRIES = 2;
 
-const validateShape = (parsed, shape) => {
-  const lim = shape.limits;
-  if (!lim || !Array.isArray(parsed?.segments)) return [];
+const validateSegments = (parsed, rawWords) => {
   const out = [];
-  parsed.segments.forEach((seg, i) => {
-    const lines = seg.lines ?? [];
-    const show = () =>
-      `caption ${i + 1} ("${lines.map((l) => (l.words ?? []).map((w) => w.text).join(" ")).join(" / ")}")`;
-    if (lines.length < lim.minLines || lines.length > lim.maxLines) {
-      out.push(
-        `${show()} has ${lines.length} line(s) — must have ` +
-          (lim.minLines === lim.maxLines ? `exactly ${lim.maxLines}` : `${lim.minLines}-${lim.maxLines}`),
-      );
-      return; // the line count is the primary fault; don't pile on word counts
+  const segs = Array.isArray(parsed?.segments) ? parsed.segments : [];
+  if (!segs.length) return ["no captions were returned."];
+
+  const indices = segs.flatMap((s) => (s.words ?? []).map((w) => w.i));
+  if (indices.length !== rawWords.length) {
+    out.push(
+      `you used ${indices.length} words but the transcript has ${rawWords.length} — every original word must appear exactly once.`,
+    );
+  } else {
+    for (let i = 0; i < indices.length; i++) {
+      if (indices[i] !== i) {
+        out.push(
+          `word indices break at position ${i} (got ${indices[i]}) — keep every index in ascending order with none missing or repeated.`,
+        );
+        break;
+      }
     }
-    lines.forEach((line, li) => {
-      const n = (line.words ?? []).length;
-      if (n > lim.maxWordsPerLine) {
-        out.push(`${show()} line ${li + 1} has ${n} words — the hard cap is ${lim.maxWordsPerLine}. Split the caption.`);
-      } else if (n < lim.minWordsPerLine) {
-        out.push(`${show()} line ${li + 1} has ${n} word(s) — the minimum is ${lim.minWordsPerLine}. Merge with a neighbour.`);
+  }
+
+  segs.forEach((seg, i) => {
+    const ws = seg.words ?? [];
+    const show = `caption ${i + 1} ("${ws.map((w) => w.text).join(" ")}")`;
+    if (!ws.length) {
+      out.push(`caption ${i + 1} is empty — remove it.`);
+      return;
+    }
+    ws.forEach((w, wi) => {
+      // A sentence-final mark anywhere but on the last word means the next
+      // sentence has been pulled onto the same screen.
+      if (wi < ws.length - 1 && /[.!?؟]["')\]]?$/.test(w.text ?? "")) {
+        out.push(`${show} ends a sentence at "${w.text}" but keeps going — start a NEW caption right after it.`);
       }
     });
-    if (lim.endCaptionAtSentenceEnd) {
-      const flat = lines.flatMap((l) => l.words ?? []);
-      flat.forEach((w, wi) => {
-        // A sentence-final mark anywhere but on the caption's last word means
-        // the next sentence has been pulled onto the same screen.
-        if (wi < flat.length - 1 && /[.!?؟]["')\]]?$/.test(w.text ?? "")) {
-          out.push(
-            `${show()} ends a sentence at "${w.text}" but keeps going — start a NEW caption right after it.`,
-          );
-        }
-      });
-    }
   });
   return out;
 };
 
 // ---------------------------------------------------------------------------
-// Call Claude with the raw words, return the parsed enrichment. When the shape
-// declares hard limits, an invalid layout is fed back for up to
-// MAX_SHAPE_RETRIES corrections before we accept the best attempt we got.
+// Call Claude with the raw words, return the parsed enrichment. A structurally
+// invalid answer is fed back for up to MAX_RETRIES corrections before we accept
+// the best attempt we got.
 // ---------------------------------------------------------------------------
 const callClaude = async (key, messages) => {
   const res = await fetch(ANTHROPIC_URL, {
@@ -330,7 +380,7 @@ const callClaude = async (key, messages) => {
     body: JSON.stringify({
       model: MODEL,
       max_tokens: 16000,
-      system: buildSystemPrompt(SHAPE),
+      system: SYSTEM_PROMPT,
       messages,
       // Guarantees the response matches OUTPUT_SCHEMA — valid JSON on any model.
       output_config: { format: { type: "json_schema", schema: OUTPUT_SCHEMA } },
@@ -373,33 +423,31 @@ const enrichWithClaude = async (words, languageHint) => {
   let best = null;
   let bestViolations = Infinity;
 
-  for (let attempt = 0; attempt <= MAX_SHAPE_RETRIES; attempt++) {
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     const { parsed, raw, usage: u } = await callClaude(key, messages);
     usage.input_tokens += u?.input_tokens ?? 0;
     usage.output_tokens += u?.output_tokens ?? 0;
 
-    const violations = validateShape(parsed, SHAPE);
+    const violations = validateSegments(parsed, words);
     if (violations.length < bestViolations) {
       best = parsed;
       bestViolations = violations.length;
     }
     if (!violations.length) return { parsed, usage };
 
-    if (attempt === MAX_SHAPE_RETRIES) {
-      console.warn(
-        `  ! shape "${SHAPE_NAME}": kept the best of ${MAX_SHAPE_RETRIES + 1} attempts with ${bestViolations} layout violation(s).`,
-      );
+    if (attempt === MAX_RETRIES) {
+      console.warn(`  ! kept the best of ${MAX_RETRIES + 1} attempts with ${bestViolations} violation(s).`);
       break;
     }
-    console.warn(`  ~ shape "${SHAPE_NAME}": ${violations.length} layout violation(s), re-asking …`);
+    console.warn(`  ~ ${violations.length} violation(s), re-asking …`);
     messages.push(
       { role: "assistant", content: raw },
       {
         role: "user",
         content:
-          `That layout breaks the shape rules. Fix ONLY the layout — keep the same corrected word text, the same word indices, and the same translation.\n\n` +
+          `That breaks the caption rules. Fix ONLY what is listed — keep the same corrected word text, the same word indices, and the same translation.\n\n` +
           `Violations:\n${violations.map((v) => `- ${v}`).join("\n")}\n\n` +
-          `Re-split so every caption satisfies the rules, then return the complete corrected JSON object.`,
+          `Return the complete corrected JSON object.`,
       },
     );
   }
@@ -407,39 +455,53 @@ const enrichWithClaude = async (words, languageHint) => {
 };
 
 // ---------------------------------------------------------------------------
-// Reconstruct: attach original timestamps to corrected words (by index).
+// Reconstruct: attach original timestamps to corrected words (by index), then
+// lay the SAME captions out once per template.
 // ---------------------------------------------------------------------------
-const buildEnriched = (rawWords, parsed) => {
-  const segments = (parsed.segments || []).map((seg) => ({
-    lines: (seg.lines || []).map((line) => ({
-      align: line.align || "center",
-      words: (line.words || []).map((w) => {
-        const orig = rawWords[w.i] || {};
-        const out = {
-          text: w.text,
-          emphasis: !!w.emphasis,
-          startMs: orig.startMs ?? 0,
-          endMs: orig.endMs ?? 0,
-        };
-        // Only kinetic-style shapes emit a per-word variant; carry it through
-        // when present so it lands in the enriched document.
-        if (w.variant) out.variant = w.variant;
-        return out;
-      }),
-    })),
-  }));
-  return { language: parsed.language || null, segments, translation: parsed.translation || "" };
-};
+const buildCaptions = (rawWords, parsed) =>
+  (parsed.segments || []).map((seg) =>
+    (seg.words || []).map((w) => {
+      const orig = rawWords[w.i] || {};
+      const out = {
+        text: w.text,
+        emphasis: !!w.emphasis,
+        startMs: orig.startMs ?? 0,
+        endMs: orig.endMs ?? 0,
+      };
+      if (w.variant) out.variant = w.variant;
+      return out;
+    }),
+  );
 
-const flatten = (enriched) =>
-  enriched.segments.flatMap((s) => s.lines.flatMap((l) => l.words));
+const buildDocument = (captions, parsed) => ({
+  language: parsed.language || null,
+  // Fallback for any template without its own entry — same captions, 2 lines.
+  segments: layoutFor(captions, TEMPLATES[DEFAULT_TEMPLATE]),
+  // Every template, generated here. Nothing to merge by hand, nothing to forget.
+  variants: Object.fromEntries(
+    Object.entries(TEMPLATES).map(([name, tpl]) => [name, layoutFor(captions, tpl)]),
+  ),
+  translation: parsed.translation || "",
+});
+
+const showSegments = (segments) =>
+  segments
+    .map(
+      (s, i) =>
+        `  ${String(i + 1).padStart(2)}. ` +
+        s.lines
+          .map((l) => l.words.map((w) => (w.emphasis ? `*${w.text}*` : w.text)).join(" "))
+          .join("  /  "),
+    )
+    .join("\n");
 
 // --- CLI ---
 const target = process.argv[2];
 if (!target) {
-  console.error('Usage: node enrich.mjs "public/clip.json"');
+  console.error('Usage: node enrich.mjs "public/clip.json" [--overwrite]');
   process.exit(1);
 }
+const OVERWRITE = process.argv.includes("--overwrite");
 const jsonPath = target.replace(/\.(mp4|webm|mkv|mov|m4a|mp3|wav)$/i, ".json");
 const full = path.isAbsolute(jsonPath) ? jsonPath : path.join(process.cwd(), jsonPath);
 if (!existsSync(full)) {
@@ -449,27 +511,39 @@ if (!existsSync(full)) {
 
 const rawCaptions = JSON.parse(readFileSync(full, "utf8"));
 const rawWords = rawCaptions.map((c) => ({ text: c.text, startMs: c.startMs, endMs: c.endMs }));
-console.log(`Enriching ${path.basename(full)} — ${rawWords.length} words via ${MODEL} — shape="${SHAPE_NAME}" (<=${SHAPE.maxLines} lines, ~${SHAPE.maxWordsPerLine} words/line) …`);
+console.log(
+  `Enriching ${path.basename(full)} — ${rawWords.length} words via ${MODEL} — meaning-based caption breaks, layout for ${Object.keys(TEMPLATES).length} templates …`,
+);
 
 const { parsed, usage } = await enrichWithClaude(rawWords, undefined);
-const enriched = buildEnriched(rawWords, parsed);
+const captions = buildCaptions(rawWords, parsed);
+const doc = buildDocument(captions, parsed);
 
-const outPath = full.replace(/\.json$/i, ".enriched.json");
-writeFileSync(outPath, JSON.stringify(enriched, null, 2));
+const outPath = full.replace(/\.json$/i, OVERWRITE ? ".enriched.json" : ".enriched.new.json");
+writeFileSync(outPath, JSON.stringify(doc, null, 2));
 
 // --- readable before/after ---
 console.log(`\n===== RAW (ASR) =====`);
 console.log(rawWords.map((w) => w.text).join(" ").replace(/\s+/g, " ").trim());
 console.log(`\n===== CORRECTED (Claude) =====`);
-console.log(flatten(enriched).map((w) => w.text).join(" ").replace(/\s+/g, " ").trim());
-console.log(`\n===== SEGMENTS (${enriched.segments.length}) =====`);
-enriched.segments.forEach((s, i) => {
-  const lines = s.lines
-    .map((l) => l.words.map((w) => (w.emphasis ? `*${w.text}*` : w.text)).join(" "))
-    .join("  /  ");
-  console.log(`  ${i + 1}. ${lines}`);
+console.log(captions.flat().map((w) => w.text).join(" ").replace(/\s+/g, " ").trim());
+
+console.log(`\n===== CAPTION BREAKS (${captions.length}) — shared by every template =====`);
+captions.forEach((ws, i) => {
+  console.log(`  ${String(i + 1).padStart(2)}. ${ws.map((w) => w.text).join(" ")}`);
 });
-console.log(`\n===== TRANSLATION =====`);
-console.log(enriched.translation);
-console.log(`\n(lang: ${enriched.language} | tokens in/out: ${usage?.input_tokens}/${usage?.output_tokens} | wrote ${path.relative(process.cwd(), outPath)})`);
-process.exit(0);
+
+for (const name of Object.keys(TEMPLATES)) {
+  console.log(`\n===== ${name.toUpperCase()} (${TEMPLATES[name].maxLines} line max) =====`);
+  console.log(showSegments(doc.variants[name]));
+}
+
+if (doc.translation) {
+  console.log(`\n===== TRANSLATION =====\n${doc.translation}`);
+}
+console.log(
+  `\nWrote ${path.basename(outPath)}  (in ${usage.input_tokens} / out ${usage.output_tokens} tokens)`,
+);
+if (!OVERWRITE) {
+  console.log(`Nothing was overwritten. Re-run with --overwrite to replace the live .enriched.json.`);
+}

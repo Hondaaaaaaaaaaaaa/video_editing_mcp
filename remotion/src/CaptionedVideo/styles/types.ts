@@ -8,7 +8,7 @@ import type { Caption, TikTokPage } from "@remotion/captions";
 // grouping, and use `emphasis` instead of the regex `decideEmphasis`.
 // ---------------------------------------------------------------------------
 // A word's SEMANTIC ROLE for kinetic-typography templates. Claude assigns it in
-// the `--shape=kinetic` enrich pass; each template maps a role to a font / size
+// the enrich pass; each template maps a role to a font / size
 // / entrance. Optional so every other template and all existing documents are
 // unaffected (they simply never read it). `emphasis` still carries COLOR (accent
 // vs base); `variant` carries the TYPE TREATMENT, so the two are independent —

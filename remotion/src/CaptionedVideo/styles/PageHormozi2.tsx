@@ -61,8 +61,9 @@ import {
 //     WIGGLES (a small damped rotation that settles). The white line is still.
 //
 // Grouping (which words share a caption, split across the two lines) is NOT done
-// here — it comes from the caption document (Claude's `--shape=hormozi2` output,
-// or the user's per-caption edits). Per-word `emphasis` is IGNORED: the colour
+// here — it comes from the caption document (`variants.hormozi2`: Claude's
+// meaning-based caption breaks, line-wrapped for this template by enrich.mjs, or
+// the user's per-caption edits). Per-word `emphasis` is IGNORED: the colour
 // is driven by the spoken line, not by marked words.
 // ---------------------------------------------------------------------------
 
