@@ -44,6 +44,11 @@ import {
   KINETIC_DEFAULTS,
   KineticStyleProvider,
 } from "./CaptionedVideo/styles/PageKinetic";
+import {
+  PageHormozi2,
+  hormozi2Schema,
+  Hormozi2StyleProvider,
+} from "./CaptionedVideo/styles/PageHormozi2";
 
 // The video that captions are rendered over (a vertical clip at
 // remotion/public/sample-video.mp4). Stored as a PLAIN FILENAME — not
@@ -134,6 +139,20 @@ const GadzhiCaptionedVideo: React.FC<z.infer<typeof gadzhiSchema>> = ({
   <GadzhiStyleProvider value={style}>
     <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="gadzhi" PageComponent={PageGadzhi} singleSurface />
   </GadzhiStyleProvider>
+);
+
+// Hormozi 2 reads the caption document's segments and needs every caption at
+// once to pick ONE font size for the video, so (like Gadzhi) it renders as a
+// single surface. Its two-line block lights the SPOKEN line in a per-line random
+// accent colour and wiggles it.
+const Hormozi2CaptionedVideo: React.FC<z.infer<typeof hormozi2Schema>> = ({
+  src,
+  showPunctuation,
+  ...style
+}) => (
+  <Hormozi2StyleProvider value={style}>
+    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="hormozi2" PageComponent={PageHormozi2} singleSurface />
+  </Hormozi2StyleProvider>
 );
 
 // Kinetic reads the caption document's per-word variants and builds the whole
@@ -522,6 +541,65 @@ export const RemotionRoot: React.FC = () => {
           effects: {
             stroke: { enabled: false, color: "#000000", width: 4 },
             shadow: { enabled: true, color: "rgba(0, 0, 0, 0.35)", blur: 12 },
+          },
+        }}
+      />
+
+      {/* "Hormozi 2" — the changing-colour + wiggle look. Two stacked ALL-CAPS
+          lines in a heavy condensed italic; the SPOKEN line lights up in a
+          per-line random accent (red / yellow / green, each with its own
+          outline) and pops + wiggles, then reverts to white as the highlight
+          steps to the next line. */}
+      <Composition
+        id="Hormozi2"
+        component={Hormozi2CaptionedVideo}
+        schema={hormozi2Schema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          src: "sample-video.mp4",
+          layout: {
+            fontSizePct: 13.5,
+            captionScale: 1,
+            wordSpacing: 0.22,
+            lineSpacing: 1.05,
+            positionX: 50,
+            positionY: 64,
+            alignment: "center" as const,
+            balanceLines: true,
+          },
+          text: {
+            font: {
+              family: "Montserrat" as const,
+              custom: "avenir-next-condensed-heavy-italic.ttf",
+            },
+            uppercase: true,
+            baseColor: "#ffffff",
+            baseStroke: "#0a0a0a",
+            strokeWidth: 9,
+            accents: {
+              one: { fill: "#ff1f1f", stroke: "#ffffff" },
+              two: { fill: "#ffe000", stroke: "#0a0a0a" },
+              three: { fill: "#28e234", stroke: "#0a0a0a" },
+            },
+          },
+          motion: {
+            fadeInMs: 60,
+            bobEm: 0.08,
+            bobSpeed: 0.4,
+            rotateDeg: 0,
+            rotateSpeed: 0.28,
+          },
+          effects: {
+            shadow: {
+              enabled: true,
+              color: "rgba(0,0,0,0.78)",
+              blur: 14,
+              offsetY: 5,
+            },
           },
         }}
       />

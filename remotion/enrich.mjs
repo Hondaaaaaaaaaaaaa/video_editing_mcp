@@ -84,7 +84,7 @@ const SHAPES = {
 K1. SEGMENTATION — one spoken PHRASE/CLAUSE per segment (a natural breath group), typically 3-7 words, 1-3 lines, at most 4 words per line. The block builds word by word then clears, so group words that are spoken together as one thought. Always end a segment at a sentence end; also break at a clear clause boundary (after a comma, or before "and/but/so/because/if/when"). Do NOT merge two separate thoughts into one segment, and do NOT chop a single tight phrase into fragments.
 
 K2. PER-WORD "variant" — tag EVERY word with exactly one of:
-    - "punch"   = a KEY word that should be emphasised: bold and a little bigger than the surrounding text. These are the words that carry the meaning and impact — the vivid noun, the strong verb, the number, the name of the thing, the payoff. A segment usually has 1-3 punch words (they can be adjacent, e.g. "write hooks", "good people", "the triple"). Choose them DELIBERATELY: if you read the segment with only the punch words visible, it should still convey the point. Do NOT punch filler ("the, a, of, to, is, do, you, how, so, and, if").
+    - "punch"   = a KEY word that should be emphasised: bold and a little bigger than the surrounding text. These carry the meaning and impact — PREFER the concrete noun/object being talked about, a number, a name, or the outcome, over a generic action verb. Do NOT punch a generic verb (make, get, do, use, create, build, go, have, want, need) unless there is no concrete noun to carry the point; punch the OBJECT instead (e.g. "you can create engaging reels" → punch "engaging reels", NOT "create"). A segment usually has 1-3 punch words (they can be adjacent, e.g. "write hooks", "good people", "the triple"). TEST: reading only the punch words should still convey the point. Do NOT punch filler ("the, a, of, to, is, do, you, how, so, and, if").
     - "elegant" = ONE special word per segment at most, rendered in an italic serif for flavour — usually the single most "quotable" noun or verb, often the last word of the phrase (e.g. "comment", "hook"). Optional; many segments have none. Never make a filler word elegant.
     - "base"    = everything else (the connective words). Most words are base.
     Read like: base base PUNCH PUNCH  /  base base ELEGANT.
@@ -93,48 +93,73 @@ K3. "emphasis" carries COLOUR (the accent red). Default: set emphasis:true on th
 
 K4. Keep NATURAL casing in "text" (do not UPPERCASE). The template styles words by role; it does not change your casing.`,
   },
-  // GADZHI — the reference clip's rhythm, measured caption by caption: ALWAYS
-  // two lines, a short lead-in on top and the payoff underneath, ~6 words per
-  // caption. The weight swap moves top -> bottom, so a 1- or 3-line caption
-  // would break the effect — hence `extraRules` overriding the "may use fewer
-  // lines" allowance the other shapes get. The reference's capital-per-caption
-  // convention is NOT here: PageGadzhi applies it at render time so it survives
-  // the user re-splitting captions in the editor.
+  // GADZHI — ALWAYS two lines (thin lead-in on top, bold payoff underneath; the
+  // weight swap moves top -> bottom, so 1 or 3 lines would break the effect).
+  // Grouping is BY MEANING, exactly like Hormozi — each caption is ONE complete
+  // idea, at WHATEVER length that idea is (short ideas make short captions). The
+  // ONLY difference from Hormozi's grouping is the forced 2-line split. There is
+  // NO minimum caption length: never pad a caption or pull in the next idea to
+  // reach a word count. Capital-per-caption is applied at render time, not here.
   gadzhi: {
     maxLines: 2,
-    maxWordsPerLine: 4,
-    note: "two stacked lines; the bold weight moves top -> bottom, so exactly 2 lines is required",
-    // HARD limits, checked in code after the call. A shape with `limits` gets a
-    // validate-and-retry pass: cheap models honour "group by meaning" OR the
-    // word cap but drift between the two on different runs, and a re-ask that
-    // names the specific offending captions converges far more reliably than
-    // any amount of extra prompt wording. Shapes without `limits` are untouched.
+    maxWordsPerLine: 5,
+    note: "two stacked lines; group by MEANING like Hormozi, split each idea across the 2 lines",
+    // HARD limits, checked in code after the call (validate-and-retry). Only the
+    // STRUCTURE is enforced: exactly 2 lines, and a sentence never ends mid-
+    // caption. NO minimum word count — grouping length is meaning-driven, so a
+    // caption can be as short as one 2-3 word idea.
     limits: {
       minLines: 2,
       maxLines: 2,
-      minWordsPerLine: 2,
+      minWordsPerLine: 1,
       maxWordsPerLine: 5,
       // The reference never lets a sentence end mid-caption: a full stop is
-      // always the last word on screen before the block swaps. Checking it in
-      // code is exact, and the retry fixes it far more reliably than prose.
+      // always the last word on screen before the block swaps.
       endCaptionAtSentenceEnd: true,
     },
     extraRules: `TEMPLATE-SPECIFIC RULES (shape "gadzhi") — these OVERRIDE the general rules above wherever they conflict. Follow them literally.
-G1. EXACTLY TWO LINES per caption. Never one, never three. Rule 5d does NOT apply here: even a short idea is split across two lines rather than emitted as a single-line caption.
-G2. LINE LENGTH — a BAND, not a minimum. Every line carries 2-5 words; a whole caption totals 5-9 words (aim for 6-7). NEVER emit an empty line, and never a 1-word line unless the caption has only 3 words in total.
-   The upper bound beats meaning-completeness: a sentence is EXPECTED to run across two or three consecutive captions, and that is correct, not a failure.
-   WRONG (line far too long): "Even then, Firefly / does it in a way that looks completely natural."
-   WRONG (chopped far too short): "It can / do things" then "that would / otherwise be"
-   RIGHT: "Even then, Firefly / does it in a way"  THEN  "That looks / completely natural."
-G3. BREAK ONLY AT A NATURAL PHRASE BOUNDARY, both between the two lines and between captions. Never strand a word from what it governs: keep article+noun, preposition+object, auxiliary+main verb, adjective+noun, and number+unit together.
-   WRONG: "Adobe Firefly / is one" then "of the craziest / AI tools yet."   (splits "one of the")
-   RIGHT: "Adobe Firefly / is one of the"  THEN  "Craziest / AI tools yet."
-G4. LEAD-IN THEN PAYOFF. Line 1 sets up (typically 2-4 words), line 2 lands the point (typically 3-5 words). Prefer line 1 no longer than line 2. The intended rhythm: "This AI is / incredibly valuable." — "But you can also / make it 100 times better." — "So let me / explain how it works."
+G1. EXACTLY TWO LINES per caption. Never one, never three. Even a short idea is split across the two lines (e.g. "Using Remotion's / TikTok template," — 2 words on top, 2 below).
+G2. GROUP BY MEANING, NOT BY LENGTH — exactly like the Hormozi shape. Each caption is ONE complete idea/clause that reads on its own; the NEXT idea is a NEW caption. There is NO minimum caption length: a caption may be as few as 3-4 words. NEVER pad a caption to a word count, and NEVER pull the start of the next idea into this caption to make it "long enough". If an idea is short, the caption is short — that is correct, not a failure.
+   WORKED EXAMPLE — "Using Remotion's TikTok template you can create engaging reels and TikToks by transcribing your audio using whisper CPP":
+     CAPTION 1 = "Using Remotion's / TikTok template,"      (one idea: the template — only 4 words, and that is fine)
+     CAPTION 2 = "you can create engaging / reels and TikToks"   ("you can create ..." is a NEW subject+verb → a NEW caption)
+     CAPTION 3 = "by transcribing your audio / using whisper CPP"
+   WRONG: "Using Remotion's TikTok template, / you can create engaging"  (merges two ideas to reach a word count — never do this).
+G3. Within a caption, split the idea's words across the 2 lines by READABILITY (2/2, 2/3, 3/4, 1/3, ... whatever reads best) — lead-in on top, payoff below. Break ONLY at a natural phrase boundary; never strand a word from what it governs (keep article+noun, preposition+object, auxiliary+main verb, adjective+noun, number+unit together).
+G4. LEAD-IN THEN PAYOFF. Line 1 sets up, line 2 lands the point; prefer line 1 no longer than line 2. Both lines may be short. Rhythm: "This AI is / incredibly valuable." — "So let me / explain how it works."
 G5. NEVER LET A SENTENCE END MID-CAPTION. If a word closes a sentence (. ! ?), it must be the LAST word of that caption — the next sentence always starts a fresh caption, even when that leaves the caption short.
    WRONG: "craziest AI tools / yet. Firefly"        (the period is not the last word)
    RIGHT: "Craziest / AI tools yet."  THEN  "Firefly is / a generative,"
 G6. Punctuation follows rule 4 — commas and periods stay attached to the words they belong to, and a caption may end without punctuation when the sentence continues into the next caption.
 G7. CASING: use natural sentence casing only. Do NOT capitalize a caption's first word just because it starts a caption — the template applies that convention itself at render time, so the document stays correct if the user later re-splits the captions.`,
+  },
+  // HORMOZI 2 — the "changing-colour + wiggle" viral look. Two stacked lines;
+  // the SPOKEN line lights up in an accent colour that moves top -> bottom, so
+  // (exactly like hormozi/gadzhi) grouping is BY MEANING and split across the 2
+  // lines. There is NO minimum caption length and NO emphasis to assign — the
+  // colour is driven by the spoken line at render time, not by marked words.
+  hormozi2: {
+    maxLines: 2,
+    maxWordsPerLine: 5,
+    note: "two stacked lines; the accent colour lights the spoken line top -> bottom, so 2 lines is ideal",
+    limits: {
+      minLines: 2,
+      maxLines: 2,
+      minWordsPerLine: 1,
+      maxWordsPerLine: 5,
+      endCaptionAtSentenceEnd: true,
+    },
+    extraRules: `TEMPLATE-SPECIFIC RULES (shape "hormozi2") — these OVERRIDE the general rules above wherever they conflict. Follow them literally.
+H1. EXACTLY TWO LINES per caption. Never one, never three. Even a short idea is split across the two lines (e.g. "Here's a guy / that runs" — 2 words on top, 2 below).
+H2. GROUP BY MEANING, NOT BY LENGTH — exactly like the Hormozi shape. Each caption is ONE complete idea/clause that reads on its own; the NEXT idea is a NEW caption. There is NO minimum caption length: a caption may be as few as 3-4 words. NEVER pad a caption to a word count, and NEVER pull the start of the next idea into this caption to make it "long enough". If an idea is short, the caption is short — that is correct.
+   WORKED EXAMPLE — "here's a guy that runs a company and he's skiing":
+     CAPTION 1 = "Here's a guy / that runs a company"   (one idea)
+     CAPTION 2 = "and he's / skiing"                    ("and he's ..." is a NEW clause → a NEW caption)
+   WRONG: "Here's a guy that runs / a company and he's"  (merges two ideas to reach a word count — never do this).
+H3. Within a caption, split the idea's words across the 2 lines by READABILITY (2/2, 2/3, 3/4, 1/3, ... whatever reads best) — the accent colour lights the top line first, then the bottom, so line 1 is the set-up and line 2 the pay-off. Break ONLY at a natural phrase boundary; never strand a word from what it governs (keep article+noun, preposition+object, auxiliary+main verb, adjective+noun, number+unit together).
+H4. NEVER LET A SENTENCE END MID-CAPTION. If a word closes a sentence (. ! ?), it must be the LAST word of that caption — the next sentence always starts a fresh caption, even when that leaves the caption short.
+H5. EMPHASIS DOES NOT MATTER for this template — the colour follows the spoken line, not marked words. Set emphasis:false on every word (or mark the payload word if you like; it is ignored either way). Do not let emphasis change your grouping.
+H6. CASING: use natural sentence casing only — the template UPPERCASES at render time, so keep the document in normal case.`,
   },
 };
 const shapeArg = process.argv.find((a) => a.startsWith("--shape="));
@@ -226,7 +251,7 @@ RULES:
    e. Keep meaning units intact: never split an Arabic article ال from its noun, an idafa (إضافة), a preposition from its object, or a number from its unit.
    f. THE LINE BUDGET IS A CAP, NOT A TARGET. Having room for more lines is NEVER a reason to pull the next idea into this caption. Two independent clauses or sentences must NOT share a caption: start a NEW caption before a new subject+verb ("you can …", "he said …"), before a coordinating conjunction (and / but / so / because / if / when) that begins a new clause, and always after a sentence-ending mark (. ! ? ؟). A ${shape.maxLines}-line shape splits the SAME ideas a 2-line shape would — the extra line(s) are only for when ONE idea genuinely needs them, NEVER for merging two ideas. Push the leftover words to the next caption (rule c).
       WORKED EXAMPLE (${shape.maxLines}-line shape): "Using Remotion's TikTok template you can create engaging reels" → caption 1 = the idea "Using Remotion's TikTok template", caption 2 = "you can create engaging reels" ("you can" is a new subject+verb → a NEW caption). NEVER "Using Remotion's TikTok / template, you can create".
-6. EMPHASIS: Mark the single most important "payload" word per segment as emphasis:true — a number/money figure, a superlative, a contrast word, the hook. NEVER emphasize function words (في، من، و، على، the، a، of). Most words are emphasis:false. Some segments may have zero emphasis.
+6. EMPHASIS: Mark the "payload" word(s) per segment as emphasis:true — the words a viewer's eye should land on. PREFER THE CONCRETE PAYLOAD: the specific noun/object being talked about, a number/money figure, a name, a superlative/contrast word, or the outcome. DEPRIORITIZE generic action verbs (make, get, do, use, create, build, go, have, want, need) and helper/function words (في، من، و، على، the، a، of، to، is، you، can) — emphasize the concrete thing over the generic verb (e.g. "you can create engaging reels" → emphasize "reels", NOT "create"; "make it 100 times better" → "100"/"better", NOT "make"). TEST: reading only the emphasized words should still convey the point. Most words are emphasis:false; some segments have zero.
 7. ALIGNMENT: Give each line an "align" of "center" (default), "left", or "right".
 8. TRANSLATION: Provide a natural, fluent English translation of the whole transcript (colloquial where the source is colloquial). If the source is already English, translate to Arabic instead.
 9. WORD INDICES: Reference every original word exactly once by its index "i", in order, across all segments/lines. Do not add, drop, or reorder words. "text" is the CORRECTED form of that word.

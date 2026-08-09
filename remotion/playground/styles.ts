@@ -44,6 +44,12 @@ import {
   KINETIC_DEFAULTS,
   KineticStyleProvider,
 } from "../src/CaptionedVideo/styles/PageKinetic";
+import {
+  PageHormozi2,
+  hormozi2Schema,
+  HORMOZI2_DEFAULTS,
+  Hormozi2StyleProvider,
+} from "../src/CaptionedVideo/styles/PageHormozi2";
 
 // Props bag = everything in a style's schema EXCEPT `src` (the shared base).
 export type StyleProps = Record<string, unknown>;
@@ -132,6 +138,15 @@ export const STYLES: StyleEntry[] = [
     Page: PageKinetic,
     documentDriven: true,
     shape: "kinetic",
+  },
+  {
+    id: "Hormozi 2",
+    schema: hormozi2Schema,
+    defaults: stripSrc(HORMOZI2_DEFAULTS),
+    Provider: Hormozi2StyleProvider as unknown as React.Provider<never>,
+    Page: PageHormozi2,
+    documentDriven: true,
+    shape: "hormozi2",
   },
 ];
 
