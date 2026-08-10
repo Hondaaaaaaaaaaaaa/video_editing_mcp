@@ -34,14 +34,24 @@ export type EnrichedLine = {
   align?: "center" | "left" | "right";
   words: EnrichedWord[];
 };
-// A SEGMENT is one on-screen caption. `id` is a stable handle the editor uses to
+// A SEGMENT is one on-screen SCREEN. `id` is a stable handle the editor uses to
 // select a caption and pin user edits to it (so a Claude re-run won't clobber
 // them). `edited` marks a caption the user has hand-tuned (vs Claude's auto
 // output) — the editor shows these differently and preserves them. A caption may
 // hold ANY number of lines (default 2 for Hormozi; the user can set 1 or 3).
+//
+// One of Claude's meaning-based captions is USUALLY one segment, but a template
+// whose text is too big to fit it (Hormozi 2) shows that same caption across
+// consecutive screens, giving several segments. `ideaIndex` is the caption they
+// all came from — the identity that stays stable across templates — and
+// `part`/`parts` say which screen this is (0-based) and how many there are.
+// Absent on documents written before per-template screen splitting.
 export type EnrichedSegment = {
   id?: string;
   edited?: boolean;
+  ideaIndex?: number;
+  part?: number;
+  parts?: number;
   lines: EnrichedLine[];
 };
 

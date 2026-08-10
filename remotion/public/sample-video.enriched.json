@@ -2,6 +2,9 @@
   "language": "en",
   "segments": [
     {
+      "ideaIndex": 0,
+      "part": 0,
+      "parts": 1,
       "lines": [
         {
           "align": "center",
@@ -44,6 +47,9 @@
       ]
     },
     {
+      "ideaIndex": 1,
+      "part": 0,
+      "parts": 1,
       "lines": [
         {
           "align": "center",
@@ -107,6 +113,9 @@
       ]
     },
     {
+      "ideaIndex": 2,
+      "part": 0,
+      "parts": 1,
       "lines": [
         {
           "align": "center",
@@ -170,6 +179,9 @@
       ]
     },
     {
+      "ideaIndex": 3,
+      "part": 0,
+      "parts": 1,
       "lines": [
         {
           "align": "center",
@@ -229,6 +241,9 @@
   "variants": {
     "hormozi": [
       {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -271,6 +286,9 @@
         ]
       },
       {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -334,6 +352,9 @@
         ]
       },
       {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -397,6 +418,9 @@
         ]
       },
       {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -455,6 +479,9 @@
     ],
     "hormozi2": [
       {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -497,6 +524,9 @@
         ]
       },
       {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 2,
         "lines": [
           {
             "align": "center",
@@ -507,7 +537,12 @@
                 "startMs": 1920,
                 "endMs": 2210,
                 "variant": "base"
-              },
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "can",
                 "emphasis": false,
@@ -523,7 +558,14 @@
                 "variant": "base"
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 1,
+        "parts": 2,
+        "lines": [
           {
             "align": "center",
             "words": [
@@ -540,7 +582,12 @@
                 "startMs": 3870,
                 "endMs": 4390,
                 "variant": "punch"
-              },
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "and",
                 "emphasis": false,
@@ -560,6 +607,9 @@
         ]
       },
       {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 2,
         "lines": [
           {
             "align": "center",
@@ -577,7 +627,12 @@
                 "startMs": 5870,
                 "endMs": 6790,
                 "variant": "elegant"
-              },
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "your",
                 "emphasis": false,
@@ -593,7 +648,14 @@
                 "variant": "punch"
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 2,
+        "lines": [
           {
             "align": "center",
             "words": [
@@ -610,7 +672,12 @@
                 "startMs": 8290,
                 "endMs": 9160,
                 "variant": "punch"
-              },
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "CPP",
                 "emphasis": true,
@@ -623,6 +690,9 @@
         ]
       },
       {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
         "lines": [
           {
             "align": "center",
@@ -633,7 +703,12 @@
                 "startMs": 9580,
                 "endMs": 9900,
                 "variant": "base"
-              },
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "animating",
                 "emphasis": false,
@@ -642,7 +717,14 @@
                 "variant": "elegant"
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
           {
             "align": "center",
             "words": [
@@ -659,7 +741,12 @@
                 "startMs": 10740,
                 "endMs": 11200,
                 "variant": "punch"
-              },
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "with",
                 "emphasis": false,
@@ -681,6 +768,9 @@
     ],
     "gadzhi": [
       {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -723,6 +813,9 @@
         ]
       },
       {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -786,6 +879,9 @@
         ]
       },
       {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -849,6 +945,9 @@
         ]
       },
       {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -907,6 +1006,9 @@
     ],
     "shiny": [
       {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -949,6 +1051,9 @@
         ]
       },
       {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1017,6 +1122,9 @@
         ]
       },
       {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1085,6 +1193,9 @@
         ]
       },
       {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1148,6 +1259,9 @@
     ],
     "kinetic": [
       {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1190,6 +1304,9 @@
         ]
       },
       {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1258,6 +1375,9 @@
         ]
       },
       {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1326,6 +1446,9 @@
         ]
       },
       {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1389,6 +1512,9 @@
     ],
     "minimal": [
       {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1426,6 +1552,9 @@
         ]
       },
       {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1484,6 +1613,9 @@
         ]
       },
       {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
@@ -1542,6 +1674,9 @@
         ]
       },
       {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
         "lines": [
           {
             "align": "center",
