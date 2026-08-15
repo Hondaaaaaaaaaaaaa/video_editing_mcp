@@ -18,11 +18,12 @@ import {
   type TextEffects,
 } from "./text-effects";
 import {
-  fontFamilySchema,
-  FONT_DEFAULTS,
-  resolveFontFamily,
-  type FontSelection,
-} from "./fonts";
+  fontSlotSchema,
+  useFontSlot,
+  effectiveWeight,
+  type FontSlot,
+  type ResolvedFont,
+} from "./font-slot";
 import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./PageShiny";
 
 // ---------------------------------------------------------------------------
@@ -79,9 +80,17 @@ export const typewriterSchema = captionedVideoSchema.extend({
   }),
 
   text: z.object({
+    // The reference face is Montserrat, and the full OTF family (every weight,
+    // roman AND italic) ships in public/fonts. Pointing the slot straight at
+    // the ExtraBold Italic FILE is not the same as asking a variable Montserrat
+    // for weight 800 + `font-style: italic`: the latter lets the browser
+    // synthesise a slant by shearing the roman outlines, which is not the same
+    // shape a designed italic has.
+    font: fontSlotSchema,
     weight: z.number().min(100).max(900).step(100),
-    // The reference face is a heavy ITALIC sans; kept a prop so the classic
-    // terminal look can switch it off.
+    // Faux-italic. OFF by default because the slot already loads a REAL italic
+    // file — turning this on would shear an already-slanted face a second time.
+    // It exists for a roman font swapped in through the slot.
     italic: z.boolean(),
     uppercase: z.boolean(),
     baseTextColor: zColor(),
@@ -118,8 +127,6 @@ export const typewriterSchema = captionedVideoSchema.extend({
 
   // Shared shadow + stroke.
   ...textEffectsSchema,
-  // Shared font dropdown.
-  ...fontFamilySchema,
 });
 
 export type TypewriterEasing = "linear" | "smooth" | "bouncy";
@@ -135,6 +142,7 @@ export type TypewriterStyle = {
     anchor: TypewriterAnchor;
   };
   text: {
+    font: FontSlot;
     weight: number;
     italic: boolean;
     uppercase: boolean;
@@ -156,8 +164,7 @@ export type TypewriterStyle = {
     blinkDuration: number;
     hideWhileTyping: boolean;
   };
-} & TextEffects &
-  FontSelection;
+} & TextEffects;
 
 // Defaults ARE the measurements off the reference clip where the reference has
 // an opinion, and house values where it does not (it is a 16:9 intro, so its
@@ -179,8 +186,17 @@ export const TYPEWRITER_DEFAULTS: TypewriterStyle = {
     anchor: "center",
   },
   text: {
+    // The real designed italic, not a sheared roman. `family` is only the
+    // fallback if the file ever goes missing.
+    font: {
+      family: "Montserrat",
+      custom: "montserrat full version/Montserrat-ExtraBoldItalic.otf",
+    },
+    // A single static file carries ONE weight, so effectiveWeight() drops this
+    // number rather than let the browser smear a faux bold out of it. It still
+    // applies if the slot is pointed at a variable font.
     weight: 800,
-    italic: true, // the reference face is a heavy italic sans
+    italic: false, // the file is already italic — see the schema note
     uppercase: false, // the reference is sentence case ("Hey there,")
     baseTextColor: "#ffffff",
     textColors: [],
@@ -203,7 +219,6 @@ export const TYPEWRITER_DEFAULTS: TypewriterStyle = {
     hideWhileTyping: false,
   },
   ...TEXT_EFFECTS_DEFAULTS,
-  ...FONT_DEFAULTS,
 };
 
 const TypewriterStyleContext = createContext<TypewriterStyle>(TYPEWRITER_DEFAULTS);
@@ -254,7 +269,8 @@ const TypewriterSegment: React.FC<{
   lines: KineticWord[][];
   startMs: number;
   durationInFrames: number;
-}> = ({ lines, startMs, durationInFrames }) => {
+  font: ResolvedFont;
+}> = ({ lines, startMs, durationInFrames, font }) => {
   const frame = useCurrentFrame();
   const { fps, width } = useVideoConfig();
   const style = useContext(TypewriterStyleContext);
@@ -273,7 +289,6 @@ const TypewriterSegment: React.FC<{
   } = style.motion;
   const cursorCfg = style.cursor;
 
-  const fontFamily = resolveFontFamily(style.fontFamily);
   const fontSize = (width * fontSizePct) / 100;
   const easingFn = makeEasing(easing, easingSpeed);
 
@@ -389,8 +404,11 @@ const TypewriterSegment: React.FC<{
           transformOrigin: "center center",
           transform: `translate(-50%, -50%) scale(${captionScale})`,
           fontSize,
-          fontFamily,
-          fontWeight: weight,
+          fontFamily: font.fontFamily,
+          // effectiveWeight() drops the number for a single-weight uploaded
+          // file, so the browser cannot synthesise a fake bold on top of a face
+          // that is already ExtraBold.
+          fontWeight: effectiveWeight(font, weight),
           fontStyle: italic ? "italic" : "normal",
           color: baseTextColor,
           lineHeight: lineSpacing,
@@ -460,6 +478,12 @@ const TypewriterSegment: React.FC<{
  */
 export const PageTypewriter: React.FC<CaptionStyleProps> = ({ captions = [], segments }) => {
   const { fps, durationInFrames } = useVideoConfig();
+  const style = useContext(TypewriterStyleContext);
+
+  // Resolved ONCE here rather than per screen: the file is fetched and
+  // registered a single time, and the delayRender inside the hook stops a
+  // render painting before the face is ready (which would flash a fallback).
+  const font = useFontSlot(style.text.font);
 
   const hasDoc = Boolean(segments && segments.length);
   const blocks = useMemo(
@@ -494,6 +518,7 @@ export const PageTypewriter: React.FC<CaptionStyleProps> = ({ captions = [], seg
               lines={block.lines}
               startMs={block.startMs}
               durationInFrames={dur}
+              font={font}
             />
           </Sequence>
         );
