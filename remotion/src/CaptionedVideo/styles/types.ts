@@ -18,12 +18,33 @@ import type { Caption, TikTokPage } from "@remotion/captions";
 //   elegant — a stylistic word (italic serif)
 export type WordVariant = "base" | "punch" | "elegant";
 
+// A word's SEMANTIC COLOUR, for templates that colour by meaning rather than by
+// position (Speed). Claude assigns it in the enrich pass; each template maps a
+// role to an actual colour, so restyling a palette never needs a Claude re-run.
+// Independent of `emphasis` (which only says "stands out") and of `variant`
+// (which is type treatment).
+// Assigned to a whole PHRASE (every word of a contiguous run carries the same
+// role), because that is what the references colour — "DESTROY YOU", "MET YOU",
+// "SOUTH DAKOTA", or an entire line — not lone words.
+//   base     — ordinary words
+//   key      — the thing being named: noun, number, name, place
+//   loud     — excitement, disbelief, shouting, a threat ("NO WAY",
+//              "THAT'S CRAZY", "MY MAN BE CAREFUL"). NOT "bad news" — in the
+//              references this is the loudest, most-used accent.
+//   positive — good news, approval, success
+//   wild     — playful or absurd flavour
+//   cool     — interjections, sounds, asides ("HA-")
+export type WordColor = "base" | "key" | "loud" | "positive" | "wild" | "cool";
+
 export type EnrichedWord = {
   text: string;
   startMs: number;
   endMs: number;
   emphasis: boolean;
   variant?: WordVariant;
+  // Optional so every existing document and every other template is unaffected
+  // (they simply never read it).
+  color?: WordColor;
   // Per-word LIGHT SWEEP toggle (like `emphasis`, but for the moving gloss).
   // Off/undefined by default; the editor turns it on for any word or all words,
   // and every template renders the traveling shine on the flagged words using

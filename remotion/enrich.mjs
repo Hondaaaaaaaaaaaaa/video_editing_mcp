@@ -89,8 +89,12 @@ const OUTPUT_SCHEMA = {
                 text: { type: "string" },
                 emphasis: { type: "boolean" },
                 variant: { type: "string", enum: ["base", "punch", "elegant"] },
+                color: {
+                  type: "string",
+                  enum: ["base", "key", "loud", "positive", "wild", "cool"],
+                },
               },
-              required: ["i", "text", "emphasis", "variant"],
+              required: ["i", "text", "emphasis", "variant", "color"],
             },
           },
         },
@@ -159,6 +163,23 @@ RULES:
    - "base"    = everything else. Most words are base.
    Keep NATURAL casing in "text" — templates uppercase at render time if they want to.
 
+7b. WORD COLOUR ("color") — tag EVERY word with exactly one. SEMANTIC, not decorative: it says what the words MEAN. The Speed template paints it; other templates ignore it.
+
+   COLOUR A PHRASE, NOT A WORD. The unit is a contiguous RUN of words that belong together — give every word in the run the SAME role. In the reference edits it is "DESTROY YOU", "MET YOU", "SOUTH DAKOTA", "RANDOM RESTAURANT", or an entire line like "MY MAN BE CAREFUL". A lone coloured word happens, but a phrase is the norm. Never colour a function word ("the", "of", "you") that is stranded outside its phrase.
+
+   ACCENT NEARLY EVERY CAPTION. Most captions carry ONE accented phrase, with the rest of the caption "base". A caption with nothing accented should be the exception, not the rule — this look is loud and constantly coloured.
+
+   ONE ACCENT ROLE PER CAPTION. Do not mix two different accent roles inside a single caption.
+
+   VARY IT. Do not give two captions in a row the same role. Move through the roles across the video so the colour keeps changing.
+
+   - "base"     = ordinary words — still the majority of words overall.
+   - "key"      = the thing being named: concrete noun/object, a number or money figure, a proper name, a place, a product.
+   - "loud"     = excitement, disbelief, shouting, a threat, a dare. THE MOST-USED ACCENT — "NO WAY", "THAT'S CRAZY", "MY MAN BE CAREFUL", "DESTROY YOU". Note this is about VOLUME AND ENERGY, not about bad news.
+   - "positive" = good news landing: approval, success, praise, a reveal going well.
+   - "wild"     = playful, absurd or cheeky flavour.
+   - "cool"     = interjections, sounds, laughs and asides ("HA-", "UHM", "WAIT").
+
 8. TRANSLATION: Provide a natural, fluent English translation of the whole transcript (colloquial where the source is colloquial). If the source is already English, translate to Arabic instead.
 9. WORD INDICES: Reference every original word exactly once by its index "i", in ascending order, across all captions. Do not add, drop, or reorder words. "text" is the CORRECTED form of that word.
 
@@ -166,7 +187,7 @@ OUTPUT: Return ONLY a JSON object, no prose, no markdown fences:
 {
   "language": "<ISO code, e.g. ar or en>",
   "segments": [
-    { "words": [ { "i": 0, "text": "...", "emphasis": false, "variant": "base" } ] }
+    { "words": [ { "i": 0, "text": "...", "emphasis": false, "variant": "base", "color": "base" } ] }
   ],
   "translation": "..."
 }`;
@@ -326,6 +347,9 @@ const buildCaptions = (rawWords, parsed) =>
         endMs: orig.endMs ?? 0,
       };
       if (w.variant) out.variant = w.variant;
+      // Only carried when Claude actually assigned one; templates that read it
+      // fall back to `emphasis` when it is absent, so older documents still work.
+      if (w.color) out.color = w.color;
       return out;
     }),
   );

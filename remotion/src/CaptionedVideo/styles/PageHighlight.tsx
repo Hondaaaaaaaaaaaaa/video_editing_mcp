@@ -23,6 +23,11 @@ import {
   type KineticWord,
   type KineticBlock,
 } from "./PageShiny";
+import {
+  captionStartFrames,
+  captionEndFrame,
+  CAPTION_LEAD_MS,
+} from "./caption-timing";
 
 // ---------------------------------------------------------------------------
 // Highlight = Shiny's kinetic multi-line LAYOUT (count-based grouping:
@@ -516,15 +521,22 @@ export const PageHighlight: React.FC<CaptionStyleProps> = ({ captions = [], segm
   // begins; the last runs to the composition end. The first block is pulled back
   // to frame 0 so the screen is never blank before the first spoken word.
   // durationInFrames is forced >= 1 so a Sequence is never zero/negative length.
-  const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
+
+  // Every caption starts LEAD ms early — the ASR pads each word to swallow
+  // the pause after it, so a raw startMs lands after the word is spoken.
+  // Deriving the end from the same array makes gaps/overlaps impossible.
+  const captionStarts = captionStartFrames(
+    blocks.map((b) => b.startMs),
+    fps,
+    CAPTION_LEAD_MS,
+  );
 
   return (
     // Explicit z-index keeps the caption layer above the video AbsoluteFill.
     <AbsoluteFill style={{ zIndex: 10 }}>
       {blocks.map((block, i) => {
-        const startFrame = i === 0 ? 0 : msToFrame(block.startMs);
-        const next = blocks[i + 1];
-        const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
+        const startFrame = captionStarts[i];
+        const endFrame = captionEndFrame(captionStarts, i, durationInFrames);
         const segDurationInFrames = Math.max(1, endFrame - startFrame);
         return (
           <Sequence

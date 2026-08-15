@@ -29,6 +29,11 @@ import {
 // The caption-document -> blocks conversion is shared with the other kinetic
 // templates; only the painting differs here.
 import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./PageShiny";
+import {
+  captionStartFrames,
+  captionEndFrame,
+  CAPTION_LEAD_MS,
+} from "./caption-timing";
 
 // ---------------------------------------------------------------------------
 // GADZHI — the "Iman Gadzhi" / clean-podcast caption style.
@@ -57,6 +62,24 @@ import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./Page
 //
 // Per-word `emphasis` is deliberately IGNORED: the reference marks nothing, and
 // the caption document stays reusable by the templates that do use it.
+//
+// OPTIONAL ACCENT (off by default, so the above is unchanged unless asked for).
+// A second reference, `gadzhi 2.mp4` (720x1280, 30fps), is this same template
+// with one addition: the spoken line is yellow when it is the caption's SECOND
+// line, while a spoken FIRST line stays white. Measured across every caption in
+// that clip:
+//
+//   * It is per LINE, not per word. The lit line's horizontal extent is
+//     identical on every frame it is lit (x=[228,494] for one caption) — it
+//     never advances word by word, so there is no karaoke sweep here.
+//   * It is POSITIONAL, not semantic. The lit lines include "and who we become",
+//     which is not a keyword, so this is not `emphasis` under another name.
+//   * The recolour happens on the SAME single frame as the weight swap (line 2
+//     went 626 white pixels / 0 accent to 0 white / 2028 accent between two
+//     consecutive frames), so it needs no timing of its own — it rides the
+//     existing `activeLine` step.
+//   * Weight, stroke and shadow are identical between the white and the accent
+//     line. Only the fill colour differs.
 // ---------------------------------------------------------------------------
 
 export const gadzhiSchema = captionedVideoSchema.extend({
@@ -87,6 +110,13 @@ export const gadzhiSchema = captionedVideoSchema.extend({
     activeFont: fontSlotSchema, // spoken line
     inactiveFont: fontSlotSchema, // unspoken line
     color: zColor(), // both lines share it; only weight + opacity differ
+    // The PAYOFF colour, off by default so plain Gadzhi is untouched. Switched
+    // on, a spoken line that is NOT the caption's first line is painted in
+    // `accentColor` instead of `color`: a two-line caption reads white on top,
+    // then lights up on the bottom. A caption that came out as a single line has
+    // no second line, so it simply stays white.
+    accentEnabled: z.boolean(),
+    accentColor: zColor(),
     activeWeight: z.number().min(100).max(900).step(100), // spoken line
     inactiveWeight: z.number().min(100).max(900).step(100), // unspoken line
     inactiveOpacity: z.number().min(0.1).max(1).step(0.05),
@@ -129,6 +159,8 @@ export type GadzhiStyle = {
     activeFont: FontSlot;
     inactiveFont: FontSlot;
     color: string;
+    accentEnabled: boolean;
+    accentColor: string;
     activeWeight: number;
     inactiveWeight: number;
     inactiveOpacity: number;
@@ -153,7 +185,10 @@ export const GADZHI_DEFAULTS: GadzhiStyle = {
     wordSpacing: 0.27,
     lineSpacing: 1.19, // 38px baseline gap / 31.8px size
     positionX: 50, // centreX measured at 240.0 of 480 — dead centre
-    positionY: 69, // block centre y=589 of 854
+    // Measured at 69 (block centre y=589 of 854) but moved to the 78% house
+    // safe zone: the reference's speaker is framed high, so 69 lands on the
+    // chin on a normal close-up. See the same note in PageClassic.
+    positionY: 78,
     alignment: "center",
   },
   text: {
@@ -162,6 +197,13 @@ export const GADZHI_DEFAULTS: GadzhiStyle = {
     activeFont: fontSlot("Montserrat"),
     inactiveFont: fontSlot("Montserrat"),
     color: "#ffffff",
+    // OFF, so this file's measured look is what you get out of the box. The
+    // `gadzhi 2.mp4` reference measures #d9ff00 for its accent (mean of the
+    // purest glyph pixels: rgb(216,255,0) — green pinned at 255, blue at 0,
+    // spreading only in red under h.264 chroma subsampling), but plain yellow
+    // was chosen over matching that clip exactly.
+    accentEnabled: false,
+    accentColor: "#ffff00",
     activeWeight: 700, // Montserrat Bold — matched the reference to 0.5%
     inactiveWeight: 200, // ExtraLight — the weight whose size agreed with Bold
     // Matched by rendering 0.70 / 0.85 / 1.00 against the reference crop: 0.70
@@ -226,8 +268,15 @@ const GadzhiSegment: React.FC<{
 
   const { captionScale, wordSpacing, lineSpacing, positionX, positionY, alignment } =
     style.layout;
-  const { color, activeWeight, inactiveWeight, inactiveOpacity, capitalizeFirstWord } =
-    style.text;
+  const {
+    color,
+    accentEnabled,
+    accentColor,
+    activeWeight,
+    inactiveWeight,
+    inactiveOpacity,
+    capitalizeFirstWord,
+  } = style.text;
 
   // The spoken line is the LAST one whose switch frame has been reached — an
   // instant step, exactly as in the reference (no interpolation).
@@ -261,8 +310,13 @@ const GadzhiSegment: React.FC<{
   // Each line carries its OWN family + weight: the two slots are independent,
   // and effectiveWeight() drops the weight number for an uploaded static file
   // so the browser can't synthesise a fake bold from it.
-  const lineStyle = (isActive: boolean): React.CSSProperties => {
+  const lineStyle = (lineIndex: number, isActive: boolean): React.CSSProperties => {
     const slot = isActive ? activeFont : inactiveFont;
+    // The accent rides the SAME instant step as the weight swap — it is the
+    // spoken line painted in another colour, nothing more. Keyed on the line's
+    // POSITION rather than on `lines.length`, so the first line stays white
+    // whether or not a second one follows it.
+    const isAccent = accentEnabled && isActive && lineIndex > 0;
     return {
       display: "flex",
       justifyContent: ALIGN_TO_JUSTIFY[alignment],
@@ -273,7 +327,7 @@ const GadzhiSegment: React.FC<{
       // with no literal space between them, and a gap also behaves correctly in
       // RTL.
       columnGap: `${fontSize * wordSpacing}px`,
-      color,
+      color: isAccent ? accentColor : color,
       fontFamily: slot.fontFamily,
       fontWeight: effectiveWeight(slot, isActive ? activeWeight : inactiveWeight),
       opacity: isActive ? 1 : inactiveOpacity,
@@ -305,7 +359,7 @@ const GadzhiSegment: React.FC<{
           // dir="auto" lets each line follow its own content: Arabic lays out
           // RTL, Latin LTR, and mixed text is ordered by the Unicode bidi
           // algorithm — so this template works for Arabic captions too.
-          <div key={li} dir="auto" style={lineStyle(li === activeLine)}>
+          <div key={li} dir="auto" style={lineStyle(li, li === activeLine)}>
             {line.map((token, wi) => (
               <span key={wi} style={{ display: "inline-block", whiteSpace: "pre" }}>
                 {capitalizeFirstWord && li === 0 && wi === 0
@@ -381,14 +435,22 @@ export const PageGadzhi: React.FC<CaptionStyleProps> = ({ captions = [], segment
   }, [blocks, width, measureFamily, measureWeight, configuredSize, wordSpacing]);
 
   const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
+
+  // Every caption starts LEAD ms early — the ASR pads each word to swallow
+  // the pause after it, so a raw startMs lands after the word is spoken.
+  // Deriving the end from the same array makes gaps/overlaps impossible.
+  const captionStarts = captionStartFrames(
+    blocks.map((b) => b.startMs),
+    fps,
+    CAPTION_LEAD_MS,
+  );
   const fadeInFrames = Math.round((style.motion.fadeInMs / 1000) * fps);
 
   return (
     <AbsoluteFill style={{ zIndex: 10 }}>
       {blocks.map((block, i) => {
-        const startFrame = i === 0 ? 0 : msToFrame(block.startMs);
-        const next = blocks[i + 1];
-        const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
+        const startFrame = captionStarts[i];
+        const endFrame = captionEndFrame(captionStarts, i, durationInFrames);
         const segDurationInFrames = Math.max(1, endFrame - startFrame);
         // Local frame at which each line's first spoken word begins; the bold
         // weight steps through them in order.

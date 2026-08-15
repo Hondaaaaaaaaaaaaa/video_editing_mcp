@@ -33,6 +33,11 @@ import {
   enrichedToBlocks,
   type KineticWord,
 } from "./PageShiny";
+import {
+  captionStartFrames,
+  captionEndFrame,
+  CAPTION_LEAD_MS,
+} from "./caption-timing";
 
 // ---------------------------------------------------------------------------
 // HORMOZI 2 — the "changing-color + wiggle" viral caption look.
@@ -183,7 +188,7 @@ export const HORMOZI2_DEFAULTS: Hormozi2Style = {
     // Under the chin, clear of the face. The references sit higher (~53%) only
     // because those speakers are framed high; on a close-up that lands on the
     // face, so the default sits lower and is tuned per clip.
-    positionY: 64,
+    positionY: 78,
     alignment: "center",
     balanceLines: true,
   },
@@ -529,14 +534,22 @@ export const PageHormozi2: React.FC<CaptionStyleProps> = ({ captions = [], segme
   const fontSize = (width * fontSizePct) / 100;
 
   const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
+
+  // Every caption starts LEAD ms early — the ASR pads each word to swallow
+  // the pause after it, so a raw startMs lands after the word is spoken.
+  // Deriving the end from the same array makes gaps/overlaps impossible.
+  const captionStarts = captionStartFrames(
+    blocks.map((b) => b.startMs),
+    fps,
+    CAPTION_LEAD_MS,
+  );
   const fadeInFrames = Math.round((style.motion.fadeInMs / 1000) * fps);
 
   return (
     <AbsoluteFill style={{ zIndex: 10 }}>
       {blocks.map((block, i) => {
-        const startFrame = i === 0 ? 0 : msToFrame(block.startMs);
-        const next = blocks[i + 1];
-        const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
+        const startFrame = captionStarts[i];
+        const endFrame = captionEndFrame(captionStarts, i, durationInFrames);
         const segDurationInFrames = Math.max(1, endFrame - startFrame);
         // Local frame at which the accent LANDS on each line. Line 0 = caption
         // start; later lines switch the moment the PREVIOUS line finishes being

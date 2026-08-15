@@ -45,6 +45,10 @@ export type CaptionedVideoProps = z.infer<typeof captionedVideoSchema> & {
   shape?: string;
 };
 
+// The DEFAULT timeline rate. `calculateCaptionedVideoMetadata` RETURNS an fps,
+// which overrides whatever a <Composition> declares in its own `fps` prop — so
+// this constant, not the prop, is what actually decides the frame rate. A
+// template whose motion needs a finer rate must pass its own (see below).
 const FPS = 30;
 const FALLBACK_DURATION_IN_SECONDS = 20;
 
@@ -94,6 +98,24 @@ const fileExists = (src: string): boolean => {
  * Generic over `{ src: string }` so it works for any composition whose props
  * extend the base schema (e.g. Shiny's extra glow/gradient props).
  */
+/**
+ * Build a metadata calculator locked to a specific frame rate.
+ *
+ * Needed because a caption template's motion is authored in MILLISECONDS but
+ * SAMPLED in frames: Speed's per-word fade is 85ms, which is 5-6 graded frames
+ * at 60fps (as in its reference reels) but only ~2.5 at 30fps — the same curve
+ * and the same duration, yet at 30fps it reads as a hard cut rather than a
+ * fade. Templates whose animation is that fast must render at the rate they
+ * were measured at.
+ */
+export const captionedVideoMetadataAtFps =
+  (fps: number) =>
+  async <T extends { src: string }>(arg: { props: T }): Promise<{ fps: number; durationInFrames: number }> => {
+    const base = await calculateCaptionedVideoMetadata(arg);
+    // Re-scale the timeline: the duration in SECONDS is what is fixed.
+    return { fps, durationInFrames: Math.max(1, Math.round((base.durationInFrames / base.fps) * fps)) };
+  };
+
 export const calculateCaptionedVideoMetadata = async <T extends { src: string }>({
   props,
 }: {

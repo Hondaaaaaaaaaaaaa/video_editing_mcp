@@ -25,6 +25,11 @@ import {
   resolveFontFamily,
   type FontFamilyName,
 } from "./fonts";
+import {
+  captionStartFrames,
+  captionEndFrame,
+  CAPTION_LEAD_MS,
+} from "./caption-timing";
 
 // ---------------------------------------------------------------------------
 // User-customizable props (rendered as sliders / color pickers in the Studio
@@ -303,7 +308,10 @@ export const SHINY_DEFAULTS: ShinyStyle = {
     captionScale: 1, // no extra scaling by default
     lineSpacing: 1.2,
     positionX: 50, // horizontally centered
-    positionY: 70, // lower-center (leaves room below for the stacked lines)
+    // 78% house safe zone — under the chin, clear of the mouth. Shiny stacks up
+    // to three lines, which grow UPWARD from this centre, so it still clears the
+    // platform UI at the bottom.
+    positionY: 78,
     emphasisAlignment: "center",
     normalAlignment: "alternate",
   },
@@ -1305,7 +1313,15 @@ export const PageShiny: React.FC<CaptionStyleProps> = ({ captions = [], segments
   // block begins; the last block runs to the composition end. The first block is
   // pulled back to frame 0 so the screen is never blank before the first word.
   // durationInFrames is forced >= 1 so a Sequence is never zero/negative length.
-  const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
+
+  // Every caption starts LEAD ms early — the ASR pads each word to swallow
+  // the pause after it, so a raw startMs lands after the word is spoken.
+  // Deriving the end from the same array makes gaps/overlaps impossible.
+  const captionStarts = captionStartFrames(
+    blocks.map((b) => b.startMs),
+    fps,
+    CAPTION_LEAD_MS,
+  );
 
   return (
     // zIndex guarantees the whole caption layer sits ABOVE the video AbsoluteFill
@@ -1313,9 +1329,8 @@ export const PageShiny: React.FC<CaptionStyleProps> = ({ captions = [], segments
     // stacking unambiguous across renderers).
     <AbsoluteFill style={{ zIndex: 10 }}>
       {blocks.map((block, i) => {
-        const startFrame = i === 0 ? 0 : msToFrame(block.startMs);
-        const next = blocks[i + 1];
-        const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
+        const startFrame = captionStarts[i];
+        const endFrame = captionEndFrame(captionStarts, i, durationInFrames);
         const segDurationInFrames = Math.max(1, endFrame - startFrame);
         return (
           <Sequence

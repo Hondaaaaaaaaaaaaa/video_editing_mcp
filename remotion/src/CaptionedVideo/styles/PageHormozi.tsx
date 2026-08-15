@@ -37,6 +37,11 @@ import {
   type SweepSlot,
   type KineticWord,
 } from "./PageShiny";
+import {
+  captionStartFrames,
+  captionEndFrame,
+  CAPTION_LEAD_MS,
+} from "./caption-timing";
 
 // ---------------------------------------------------------------------------
 // HORMOZI — the "Alex Hormozi" viral caption style.
@@ -492,6 +497,15 @@ export const PageHormozi: React.FC<CaptionStyleProps> = ({ captions = [], segmen
       );
   const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
 
+  // Every caption starts LEAD ms early — the ASR pads each word to swallow
+  // the pause after it, so a raw startMs lands after the word is spoken.
+  // Deriving the end from the same array makes gaps/overlaps impossible.
+  const captionStarts = captionStartFrames(
+    blocks.map((b) => b.startMs),
+    fps,
+    CAPTION_LEAD_MS,
+  );
+
   // ---- UNIFORM AUTO-FIT: ONE font size for the WHOLE document ----------------
   // Every caption renders at the SAME size so the scale never jumps between
   // captions. Pick the LARGEST size (capped at DESIRED_FONT_SIZE) at which the
@@ -517,9 +531,8 @@ export const PageHormozi: React.FC<CaptionStyleProps> = ({ captions = [], segmen
   return (
     <AbsoluteFill style={{ zIndex: 10 }}>
       {blocks.map((block, i) => {
-        const startFrame = i === 0 ? 0 : msToFrame(block.startMs);
-        const next = blocks[i + 1];
-        const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
+        const startFrame = captionStarts[i];
+        const endFrame = captionEndFrame(captionStarts, i, durationInFrames);
         const segDurationInFrames = Math.max(1, endFrame - startFrame);
         // Local frame at which the accent LANDS on each line. Line 0 = caption
         // start. Later lines switch the moment the PREVIOUS line finishes being

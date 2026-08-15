@@ -14,3 +14,17 @@ temp
 # user data, not part of the repo. Fonts checked in on purpose live elsewhere
 # under public/fonts.
 public/fonts/uploads
+
+# Reference clips and frame dumps used to reverse-engineer templates. They are
+# working material, not source: ~486 MB and growing, which would be copied again
+# into every git worktree. FONTS are deliberately NOT ignored — a template will
+# not render without its face, so those are small enough to check in.
+#
+# public/sample-video.mp4 (the clip every composition defaults to) was committed
+# before this rule and STAYS tracked: .gitignore has no effect on a file git is
+# already following.
+public/**/*.mp4
+public/**/*.mov
+public/**/*.png
+public/**/*.jpg
+public/**/*.jpeg

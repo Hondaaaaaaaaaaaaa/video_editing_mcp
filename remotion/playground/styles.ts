@@ -50,6 +50,18 @@ import {
   HORMOZI2_DEFAULTS,
   Hormozi2StyleProvider,
 } from "../src/CaptionedVideo/styles/PageHormozi2";
+import {
+  PageAli,
+  aliSchema,
+  ALI_DEFAULTS,
+  AliStyleProvider,
+} from "../src/CaptionedVideo/styles/PageAli";
+import {
+  PageSpeed,
+  speedSchema,
+  SPEED_DEFAULTS,
+  SpeedStyleProvider,
+} from "../src/CaptionedVideo/styles/PageSpeed";
 
 // Props bag = everything in a style's schema EXCEPT `src` (the shared base).
 export type StyleProps = Record<string, unknown>;
@@ -88,6 +100,7 @@ export const STYLES: StyleEntry[] = [
     defaults: stripSrc(CLASSIC_DEFAULTS),
     Provider: ClassicStyleProvider as unknown as React.Provider<never>,
     Page: PageClassic,
+    documentDriven: true,
   },
   {
     id: "Typewriter",
@@ -147,6 +160,24 @@ export const STYLES: StyleEntry[] = [
     Page: PageHormozi2,
     documentDriven: true,
     shape: "hormozi2",
+  },
+  {
+    id: "Ali",
+    schema: aliSchema,
+    defaults: stripSrc(ALI_DEFAULTS),
+    Provider: AliStyleProvider as unknown as React.Provider<never>,
+    Page: PageAli,
+    documentDriven: true,
+    shape: "ali",
+  },
+  {
+    id: "Speed",
+    schema: speedSchema,
+    defaults: stripSrc(SPEED_DEFAULTS),
+    Provider: SpeedStyleProvider as unknown as React.Provider<never>,
+    Page: PageSpeed,
+    documentDriven: true,
+    shape: "speed",
   },
 ];
 

@@ -119,8 +119,9 @@ const d = require("./public/sample-video.enriched.json");
 for (const [k, v] of Object.entries(d.variants)) console.log(k, v.length);
 ```
 
-Baseline for `sample-video` (4 captions): every template 4 screens, except
-`hormozi2` at 7.
+Baseline for `sample-video` (4 captions): 4 screens per template, except the
+ones whose text is too big to hold a whole caption — `hormozi2` 7, `ali` 8,
+`classic` 14.
 
 Remotion Studio caches the fetched `.enriched.json` — hard-reload the tab after
 regenerating, or verify with `remotion render`, which always reads from disk.

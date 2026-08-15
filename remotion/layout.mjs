@@ -50,6 +50,15 @@ const charsPerLine = (fontSizePct, fitFraction, advance) =>
 
 const TEMPLATES = {
   hormozi: { minLines: 1, maxLines: 2, exact: false, charsPerLine: 26 },
+  // CLASSIC is the one template whose capacity is a STYLE choice, not a fitting
+  // one. Its text is small (4.03% cap height), so the formula above would allow
+  // ~43 characters a line — but the reference look shows ONE OR TWO WORDS per
+  // screen and never three (measured: the widest of ten sampled captions was
+  // "RESPECTS YOU" at 12 characters). So this is set from the reference, and
+  // deliberately NOT derived. Do not "correct" it to the fitting number.
+  // One line, ~12 chars: an idea plays across several one-or-two-word screens
+  // while Claude's caption breaks stay exactly where they were.
+  classic: { minLines: 1, maxLines: 1, exact: false, charsPerLine: 12 },
   // 13.5% glyph height is DOUBLE Gadzhi's, so it holds roughly half the text
   // per line — it was inheriting Gadzhi's 26 and cramming ~2x what fits, which
   // is what forced the shrink-to-fit down to its floor on the longer line.
@@ -64,6 +73,37 @@ const TEMPLATES = {
     maxLines: 2,
     exact: true,
     charsPerLine: charsPerLine(6.63, 0.9, ADVANCE_NORMAL),
+  },
+  // ALI — ONE line, always, inside a rounded sticker that hugs the text.
+  // Measured off remotion/public/Ali (1080x1920): Poppins 700 at 5.4% of the
+  // frame width, and the sticker never runs past ~88% of the frame, which after
+  // its own padding leaves 0.8 of the width for text. The formula lands on 28,
+  // and the reference's own longest captions are 27-28 characters ("that makes
+  // way better coffee", "Get out your Clever Dripper") — so this is derived AND
+  // independently confirmed against the look it came from. Keep in step with
+  // FIT_WIDTH_FRACTION / fontSizePct in PageAli.tsx.
+  ali: {
+    minLines: 1,
+    maxLines: 1,
+    exact: false,
+    charsPerLine: charsPerLine(5.4, 0.8, ADVANCE_NORMAL),
+  },
+  // SPEED — heavy all-caps display type, 1-2 lines, words fading in one at a
+  // time. Measured off remotion/public/speed (1080x1440 @60fps): cap height
+  // 48px on a 1080-wide frame over The Bold Font's 0.735 cap/em = 6.28% of the
+  // frame width, lines running to ~87% of it.
+  //
+  // The advance here is NOT ADVANCE_NORMAL: this look sets ~0.18em of TRACKING,
+  // which widens every glyph's advance on top of the face's own. 0.52 + 0.18 =
+  // 0.70. That lands on 20 characters, and the reference's longest lines are
+  // exactly that ("I'M FASTER THAN HENRY" 21, "THE GUY WILL DESTROY" 20) — so
+  // it is derived AND confirmed. Keep in step with fontSizePct / letterSpacing
+  // in PageSpeed.tsx.
+  speed: {
+    minLines: 1,
+    maxLines: 2,
+    exact: false,
+    charsPerLine: charsPerLine(6.28, 0.87, ADVANCE_NORMAL + 0.18),
   },
   shiny: { minLines: 1, maxLines: 3, exact: false, charsPerLine: 18 },
   kinetic: { minLines: 1, maxLines: 3, exact: false, charsPerLine: 18 },

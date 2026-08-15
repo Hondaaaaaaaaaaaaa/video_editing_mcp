@@ -5,6 +5,7 @@ import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import {
   CaptionedVideo,
   calculateCaptionedVideoMetadata,
+  captionedVideoMetadataAtFps,
 } from "./CaptionedVideo";
 import { z } from "zod";
 import {
@@ -49,6 +50,18 @@ import {
   hormozi2Schema,
   Hormozi2StyleProvider,
 } from "./CaptionedVideo/styles/PageHormozi2";
+import {
+  PageAli,
+  aliSchema,
+  ALI_DEFAULTS,
+  AliStyleProvider,
+} from "./CaptionedVideo/styles/PageAli";
+import {
+  PageSpeed,
+  speedSchema,
+  SPEED_DEFAULTS,
+  SpeedStyleProvider,
+} from "./CaptionedVideo/styles/PageSpeed";
 
 // The video that captions are rendered over (a vertical clip at
 // remotion/public/sample-video.mp4). Stored as a PLAIN FILENAME — not
@@ -65,7 +78,15 @@ const ClassicCaptionedVideo: React.FC<z.infer<typeof classicSchema>> = ({
   ...style
 }) => (
   <ClassicStyleProvider value={style}>
-    <CaptionedVideo src={src} showPunctuation={showPunctuation} PageComponent={PageClassic} />
+    <CaptionedVideo
+      src={src}
+      showPunctuation={showPunctuation}
+      shape="classic"
+      PageComponent={PageClassic}
+      // Classic paints its own <Sequence> per screen from the caption document,
+      // so it renders as one full-timeline surface rather than per page.
+      singleSurface
+    />
   </ClassicStyleProvider>
 );
 
@@ -155,6 +176,34 @@ const Hormozi2CaptionedVideo: React.FC<z.infer<typeof hormozi2Schema>> = ({
   </Hormozi2StyleProvider>
 );
 
+// Ali reads the caption document's segments and needs every caption at once to
+// pick ONE font size for the video, so (like Gadzhi) it renders as a single
+// surface. One line of text on a rounded sticker; each word crosses from grey
+// to black as it is spoken.
+const AliCaptionedVideo: React.FC<z.infer<typeof aliSchema>> = ({
+  src,
+  showPunctuation,
+  ...style
+}) => (
+  <AliStyleProvider value={style}>
+    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="ali" PageComponent={PageAli} singleSurface />
+  </AliStyleProvider>
+);
+
+// Speed reads the caption document's segments (including each word's SEMANTIC
+// COLOUR, which only this template uses) and paints the whole timeline itself,
+// so it renders as a single surface. Words fade in one at a time; colour
+// carries meaning rather than position.
+const SpeedCaptionedVideo: React.FC<z.infer<typeof speedSchema>> = ({
+  src,
+  showPunctuation,
+  ...style
+}) => (
+  <SpeedStyleProvider value={style}>
+    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="speed" PageComponent={PageSpeed} singleSurface />
+  </SpeedStyleProvider>
+);
+
 // Kinetic reads the caption document's per-word variants and builds the whole
 // flowing block itself, so (like Shiny/Gadzhi) it renders as a single surface.
 const KineticCaptionedVideo: React.FC<z.infer<typeof kineticSchema>> = ({
@@ -218,7 +267,58 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{ src: SAMPLE_VIDEO, ...CLASSIC_DEFAULTS }}
+        // Spread, NOT a literal copy: Studio writes tuned props back here, and a
+        // literal silently stops tracking CLASSIC_DEFAULTS (it is how the new
+        // `easing` control went missing). Tune in Studio, then fold the value
+        // into CLASSIC_DEFAULTS so both stay in step.
+        defaultProps={{
+          src: "sample-video.mp4",
+          layout: {
+            fontSizePct: 5.45,
+            captionScale: 1,
+            wordSpacing: 0.5,
+            letterSpacing: 0.22,
+            positionX: 50,
+            positionY: 78,
+          },
+          text: {
+            font: {
+              family: "Montserrat" as const,
+              custom: "THEBOLDFONT-FREEVERSION.otf",
+            },
+            uppercase: true,
+            baseColor: "#ffffff",
+            accents: {
+              one: { fill: "#00ffff" },
+              two: { fill: "#ffff00" },
+              three: { fill: "#fbac0b" },
+            },
+          },
+          motion: {
+            popFrom: 0.3,
+            popFrames: 4,
+            fadeFrames: 0,
+            easing: { type: "ease-in-out" as const, strength: 6 },
+          },
+          accentPerCaption: true,
+          effects: {
+            shadow: {
+              enabled: true,
+              color: "rgba(0,0,0,0.45)",
+              blurEm: 0.27,
+              offsetYEm: 0.09,
+            },
+            glow: {
+              enabled: true,
+              radius: 42,
+              brightness: 33,
+              innerColor: "#ffffff",
+              outerColor: "#ffffff",
+              chromatic: 0,
+            },
+            glowTintsWithWord: true,
+          },
+        }}
       />
 
       {/* "Shiny" caption style — cinematic gradient + glow (customizable) */}
@@ -532,6 +632,8 @@ export const RemotionRoot: React.FC = () => {
             activeFont: { family: "Montserrat" as const, custom: "" },
             inactiveFont: { family: "Montserrat" as const, custom: "" },
             color: "#ffffff",
+            accentEnabled: false,
+            accentColor: "#ffff00",
             activeWeight: 700,
             inactiveWeight: 200,
             inactiveOpacity: 0.85,
@@ -589,9 +691,9 @@ export const RemotionRoot: React.FC = () => {
           motion: {
             fadeInMs: 60,
             bobEm: 0.08,
-            bobSpeed: 0.4,
+            bobSpeed: 0.3,
             rotateDeg: 0,
-            rotateSpeed: 0.28,
+            rotateSpeed: 0.4,
           },
           effects: {
             shadow: {
@@ -623,6 +725,46 @@ export const RemotionRoot: React.FC = () => {
         // own audio, so the captions are what the speaker actually says — the
         // template applied to a real video, which is how it works for any clip.
         defaultProps={{ src: SAMPLE_VIDEO, ...KINETIC_DEFAULTS }}
+      />
+
+      {/* "Ali" — the sticker look. ONE line of Poppins on a rounded pill that
+          hugs the text, sitting under the speaker's chin; each word crosses
+          from pale grey to black over ~280ms as it is spoken, and nothing else
+          moves. Defaults are spread from ALI_DEFAULTS (which ARE the
+          measurements taken off remotion/public/Ali) rather than inlined, so
+          Studio nudging a prop can't quietly fork them. */}
+      <Composition
+        id="Ali"
+        component={AliCaptionedVideo}
+        schema={aliSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        defaultProps={{ src: SAMPLE_VIDEO, ...ALI_DEFAULTS }}
+      />
+
+      {/* "Speed" — the fast-cut viral look. Heavy ALL-CAPS display type in the
+          middle of the frame; words fade in ONE AT A TIME over ~85ms on an
+          easeOutQuad curve (measured frame by frame off the 60fps reference —
+          it is a fade, NOT a scale pop), and colour carries MEANING: white
+          base, yellow key term, green positive, red negative, and a rare
+          red-with-white-outline for the peak beat. */}
+      <Composition
+        id="Speed"
+        component={SpeedCaptionedVideo}
+        schema={speedSchema}
+        // 60fps, matching the reference reels. NOT cosmetic: the per-word fade
+        // is 85ms, which is 5-6 graded frames at 60 but only ~2.5 at 30 — at
+        // 30fps the identical curve reads as a hard cut, which is exactly how
+        // this template looked wrong the first time.
+        calculateMetadata={captionedVideoMetadataAtFps(60)}
+        fps={60}
+        durationInFrames={1200}
+        width={1080}
+        height={1920}
+        defaultProps={{ src: SAMPLE_VIDEO, ...SPEED_DEFAULTS }}
       />
     </>
   );

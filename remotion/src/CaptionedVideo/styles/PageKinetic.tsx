@@ -31,6 +31,11 @@ import {
   type EntranceDirection,
   type EntranceEasing,
 } from "./PageShiny";
+import {
+  captionStartFrames,
+  captionEndFrame,
+  CAPTION_LEAD_MS,
+} from "./caption-timing";
 
 // ---------------------------------------------------------------------------
 // KINETIC ("kinetic 1") — flowing kinetic-typography captions, modelled exactly
@@ -429,14 +434,21 @@ export const PageKinetic: React.FC<CaptionStyleProps> = ({ captions = [], segmen
     }));
   }, [hasDoc, segments, captions]);
 
-  const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
+
+  // Every caption starts LEAD ms early — the ASR pads each word to swallow
+  // the pause after it, so a raw startMs lands after the word is spoken.
+  // Deriving the end from the same array makes gaps/overlaps impossible.
+  const captionStarts = captionStartFrames(
+    blocks.map((b) => b.startMs),
+    fps,
+    CAPTION_LEAD_MS,
+  );
 
   return (
     <AbsoluteFill style={{ zIndex: 10 }}>
       {blocks.map((block, i) => {
-        const startFrame = i === 0 ? 0 : msToFrame(block.startMs);
-        const next = blocks[i + 1];
-        const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
+        const startFrame = captionStarts[i];
+        const endFrame = captionEndFrame(captionStarts, i, durationInFrames);
         const segDuration = Math.max(1, endFrame - startFrame);
         return (
           <Sequence key={i} from={startFrame} durationInFrames={segDuration} name={`Caption ${i + 1}`}>
