@@ -29,7 +29,12 @@ import {
 } from "./font-slot";
 // The SHARED easing control, so this template offers the same curve choices as
 // every other one instead of hard-coding its own.
-import { easingSlotSchema, makeOpacityEasing, type EasingSlot } from "./easing-slot";
+import {
+  easingSlotSchema,
+  makeEasing,
+  makeOpacityEasing,
+  type EasingSlot,
+} from "./easing-slot";
 
 // ---------------------------------------------------------------------------
 // SPEED — the fast-cut viral look: heavy ALL-CAPS display type in the middle of
@@ -294,7 +299,7 @@ const SpeedSegment: React.FC<{
   const { uppercase, weight } = style.text;
   const { palette, effects, motion } = style;
 
-  const easing = useMemo(() => makeEasing(motion.easingSpeed), [motion.easingSpeed]);
+  const easing = useMemo(() => makeEasing(motion.easing), [motion.easing]);
   const fadeFrames = Math.max(1, Math.round((motion.wordFadeMs / 1000) * fps));
   const outFrames = Math.max(1, Math.round((motion.outFadeMs / 1000) * fps));
 
