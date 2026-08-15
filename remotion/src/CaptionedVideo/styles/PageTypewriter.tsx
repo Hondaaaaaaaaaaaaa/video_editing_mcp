@@ -1,8 +1,14 @@
-import React, { createContext, useContext } from "react";
-import { AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import React, { createContext, useContext, useMemo } from "react";
+import {
+  AbsoluteFill,
+  Easing,
+  Sequence,
+  interpolate,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { z } from "zod";
 import { zColor } from "@remotion/zod-types";
-import { fitText } from "@remotion/layout-utils";
 import type { CaptionStyleProps } from "./types";
 import { captionedVideoSchema } from "../index";
 import {
@@ -17,61 +23,100 @@ import {
   resolveFontFamily,
   type FontSelection,
 } from "./fonts";
+import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./PageShiny";
 
 // ---------------------------------------------------------------------------
-// User-customizable props. These are a frame-based reimplementation of the
-// React Bits "TextType" web component's FEATURES — none of its setTimeout /
-// gsap / useState timing is used, because that is non-deterministic and breaks
-// in Remotion rendering. Everything here is a pure function of useCurrentFrame.
+// TYPEWRITER — text typed character by character, with a trailing cursor.
 //
-// Studio renders each prop as a control: number -> slider, boolean -> toggle,
-// string -> text field, zColor() -> color picker, array -> add/remove list.
-// Typewriter has its own schema; Classic / Shiny / Highlight are unaffected.
+// The typing engine is a frame-based reimplementation of the React Bits
+// "TextType" component's FEATURES. None of its setTimeout / gsap / useState
+// timing is used: Remotion renders frames deterministically and often out of
+// order across parallel processes, so wall-clock animation renders as garbage.
+// Everything here is a pure function of useCurrentFrame(). This is why the
+// project does NOT depend on gsap — the cursor blink is a cosine of the frame.
+//
+// TWO LOOKS, ONE ENGINE — `layout.anchor`:
+//
+//   "center" — reverse-engineered from `public/Typewriter sample .mp4`
+//              (1920x1080, 29.97fps). The line is CENTRE-anchored, so already
+//              typed characters slide outward as new ones land. Measured across
+//              the clip's first line, while the text grew from 29px wide to
+//              525px:
+//
+//                 frame  text          width   centre
+//                 f001   |              29px    1018
+//                 f005   Hey t|        216px    1017
+//                 f009   Hey there|    402px    1017
+//                 f012   Hey there,|   525px    1018
+//
+//              The centre never moves; both edges travel outward symmetrically
+//              (left 1003->755, right 1032->1280). That is the whole trick —
+//              it is what makes this read as "moving" rather than as a normal
+//              typewriter. ~1 character per frame at 29.97fps = ~33ms/char.
+//
+//   "left"   — the classic terminal typewriter: the left edge is pinned and
+//              text only extends rightward. Nothing already typed ever moves.
+//
+// Both share every other prop (speed, cursor, blink, colours, font), which is
+// why this is one template with a toggle rather than two near-identical files.
 // ---------------------------------------------------------------------------
+
+export type TypewriterAnchor = "center" | "left";
+
 export const typewriterSchema = captionedVideoSchema.extend({
-  // ms per character. Frame-based: drives how far each word's letters step
-  // back from when the word is spoken (so typing stays synced to the audio).
-  typingSpeed: z.number().min(10).max(400).step(5),
-  // ms to wait (within each caption page) before the first letter appears.
-  initialDelay: z.number().min(0).max(3000).step(50),
+  layout: z.object({
+    // Glyph height as a % of FRAME WIDTH, so the look holds at any export
+    // resolution. Capacity in layout.mjs is derived from this number — change
+    // one and the other must follow (see docs/adding-a-caption-template.md).
+    fontSizePct: z.number().min(2).max(20).step(0.01),
+    captionScale: z.number().min(0.5).max(2).step(0.05),
+    wordSpacing: z.number().min(0).max(1.5).step(0.05),
+    lineSpacing: z.number().min(0.8).max(2.5).step(0.05),
+    positionX: z.number().min(0).max(100).step(1),
+    positionY: z.number().min(0).max(100).step(1),
+    // THE toggle between the two looks. See the header comment.
+    anchor: z.enum(["center", "left"]),
+  }),
 
-  // --- cursor ---
-  showCursor: z.boolean(),
-  // Any string: "_", "|", ".", "▮", emoji … shown trailing the typed text.
-  cursorCharacter: z.string(),
-  // ms for one full blink (fade out + back in). Driven by cos(frame).
-  cursorBlinkDuration: z.number().min(100).max(2000).step(10),
-  // Hide the cursor while letters are actively appearing; show it at rest.
-  hideCursorWhileTyping: z.boolean(),
+  text: z.object({
+    weight: z.number().min(100).max(900).step(100),
+    // The reference face is a heavy ITALIC sans; kept a prop so the classic
+    // terminal look can switch it off.
+    italic: z.boolean(),
+    uppercase: z.boolean(),
+    baseTextColor: zColor(),
+    // OPTIONAL per-word accent cycling. Empty (the default) = every word uses
+    // baseTextColor.
+    textColors: z.array(zColor()),
+  }),
 
-  // --- per-character speed variation (deterministic, NOT Math.random) ---
-  variableSpeed: z.boolean(),
-  variableSpeedMin: z.number().min(10).max(400).step(5), // ms/char fastest
-  variableSpeedMax: z.number().min(10).max(400).step(5), // ms/char slowest
+  motion: z.object({
+    // ms per character. The reference measures ~33.
+    typingSpeed: z.number().min(10).max(400).step(1),
+    // ms to wait, within each screen, before the first character appears.
+    initialDelay: z.number().min(0).max(3000).step(50),
+    // How each character eases in once it appears. The reference has NO fade
+    // at all — characters are simply present on the frame they land — so
+    // "linear" over a very short window is the faithful setting.
+    easing: z.enum(["linear", "smooth", "bouncy"]),
+    easingSpeed: z.number().min(1).max(6).step(0.1),
+    // Deterministic per-character speed jitter (NOT Math.random, which would
+    // differ between frames and between render processes).
+    variableSpeed: z.boolean(),
+    variableSpeedMin: z.number().min(10).max(400).step(5),
+    variableSpeedMax: z.number().min(10).max(400).step(5),
+  }),
 
-  // Base text color for EVERY word. Default white. (Studio color picker.)
-  baseTextColor: zColor(),
+  cursor: z.object({
+    show: z.boolean(),
+    // Any string: "|", "_", "▮", an emoji …
+    character: z.string(),
+    // ms for one full blink cycle.
+    blinkDuration: z.number().min(100).max(2000).step(10),
+    hideWhileTyping: z.boolean(),
+  }),
 
-  // OPTIONAL per-word accent cycling. When non-empty, words cycle through these
-  // colors instead of `baseTextColor`. Empty (the default) -> every word uses
-  // `baseTextColor` (i.e. plain white). Each entry is a color picker in Studio.
-  textColors: z.array(zColor()),
-
-  // How each individual letter eases in once it appears (dropdown), and how
-  // strong/snappy that curve is (slider). easingSpeed feeds the easing
-  // function: it's the poly exponent for "smooth" and the overshoot for
-  // "bouncy" (ignored for "linear").
-  easing: z.enum(["linear", "smooth", "bouncy"]),
-  easingSpeed: z.number().min(1).max(6).step(0.1),
-
-  // --- Layout (position / size / spacing) — shared across all templates ---
-  positionX: z.number().min(0).max(100).step(1), // 0 left, 50 center, 100 right
-  positionY: z.number().min(0).max(100).step(1), // 0 top, 100 bottom
-  captionScale: z.number().min(0.5).max(2).step(0.05), // overall caption size multiplier
-  wordSpacing: z.number().min(0).max(1.5).step(0.05), // extra horizontal gap between words (em)
-  lineSpacing: z.number().min(0.8).max(2.5).step(0.05), // line height (vertical gap)
-
-  // Shared shadow + stroke (sliders / pickers / toggles).
+  // Shared shadow + stroke.
   ...textEffectsSchema,
   // Shared font dropdown.
   ...fontFamilySchema,
@@ -80,221 +125,236 @@ export const typewriterSchema = captionedVideoSchema.extend({
 export type TypewriterEasing = "linear" | "smooth" | "bouncy";
 
 export type TypewriterStyle = {
-  typingSpeed: number;
-  initialDelay: number;
-  showCursor: boolean;
-  cursorCharacter: string;
-  cursorBlinkDuration: number;
-  hideCursorWhileTyping: boolean;
-  variableSpeed: boolean;
-  variableSpeedMin: number;
-  variableSpeedMax: number;
-  baseTextColor: string;
-  textColors: string[];
-  easing: TypewriterEasing;
-  easingSpeed: number;
-  positionX: number;
-  positionY: number;
-  captionScale: number;
-  wordSpacing: number;
-  lineSpacing: number;
+  layout: {
+    fontSizePct: number;
+    captionScale: number;
+    wordSpacing: number;
+    lineSpacing: number;
+    positionX: number;
+    positionY: number;
+    anchor: TypewriterAnchor;
+  };
+  text: {
+    weight: number;
+    italic: boolean;
+    uppercase: boolean;
+    baseTextColor: string;
+    textColors: string[];
+  };
+  motion: {
+    typingSpeed: number;
+    initialDelay: number;
+    easing: TypewriterEasing;
+    easingSpeed: number;
+    variableSpeed: boolean;
+    variableSpeedMin: number;
+    variableSpeedMax: number;
+  };
+  cursor: {
+    show: boolean;
+    character: string;
+    blinkDuration: number;
+    hideWhileTyping: boolean;
+  };
 } & TextEffects &
   FontSelection;
 
-// Defaults double as the context fallback if a page is ever rendered without a
-// provider (isolation / tests) and as Root.tsx's defaultProps.
+// Defaults ARE the measurements off the reference clip where the reference has
+// an opinion, and house values where it does not (it is a 16:9 intro, so its
+// framing does not transfer to a 9:16 reel).
 export const TYPEWRITER_DEFAULTS: TypewriterStyle = {
-  typingSpeed: 60,
-  initialDelay: 0,
-  showCursor: true,
-  cursorCharacter: "_",
-  cursorBlinkDuration: 530,
-  hideCursorWhileTyping: false,
-  variableSpeed: false,
-  variableSpeedMin: 40,
-  variableSpeedMax: 120,
-  baseTextColor: "#ffffff",
-  textColors: [],
-  easing: "linear",
-  easingSpeed: 3,
-  positionX: 50, // horizontally centered
-  positionY: 78, // lower-center
-  captionScale: 1, // no extra scaling
-  wordSpacing: 0.12, // a touch of breathing room between words (em)
-  lineSpacing: 1.2,
+  layout: {
+    // The reference sets ~101px on a 1920 frame = 5.26% of width, but that is a
+    // landscape intro with room to spare. 7% is the vertical-reel equivalent
+    // and matches the density of the other templates. layout.mjs derives
+    // charsPerLine from exactly this number.
+    fontSizePct: 7,
+    captionScale: 1,
+    wordSpacing: 0.24,
+    lineSpacing: 1.15,
+    positionX: 50,
+    // The house safe zone — under the chin, clear of the platform UI. The
+    // reference's own 76% is a landscape framing and does not transfer.
+    positionY: 78,
+    anchor: "center",
+  },
+  text: {
+    weight: 800,
+    italic: true, // the reference face is a heavy italic sans
+    uppercase: false, // the reference is sentence case ("Hey there,")
+    baseTextColor: "#ffffff",
+    textColors: [],
+  },
+  motion: {
+    // Measured: ~1 character per frame at 29.97fps.
+    typingSpeed: 33,
+    initialDelay: 0,
+    // The reference has no per-character fade, so keep the curve flat.
+    easing: "linear",
+    easingSpeed: 3,
+    variableSpeed: false,
+    variableSpeedMin: 40,
+    variableSpeedMax: 120,
+  },
+  cursor: {
+    show: true,
+    character: "|", // the reference's own cursor glyph
+    blinkDuration: 530,
+    hideWhileTyping: false,
+  },
   ...TEXT_EFFECTS_DEFAULTS,
   ...FONT_DEFAULTS,
 };
 
-// Carries the schema props from Root down to the style without touching the
-// shared engine (CaptionedVideo / SubtitlePage).
 const TypewriterStyleContext = createContext<TypewriterStyle>(TYPEWRITER_DEFAULTS);
 export const TypewriterStyleProvider = TypewriterStyleContext.Provider;
 
-// ---------------------------------------------------------------------------
-// CONFIG — non-prop tuning.
-// ---------------------------------------------------------------------------
-const DESIRED_FONT_SIZE = 120;
-const FONT_WEIGHT = 800;
+// Grouping used ONLY when there is no caption document (raw ASR, no Claude
+// pass). The real pipeline always has one.
+const FALLBACK_WORDS_PER_LINE = 3;
+const FALLBACK_LINES = 2;
 
-// Builds the per-letter easing function from the `easing` TYPE (dropdown) and
-// the `easingSpeed` SLIDER (how strong/snappy the curve is). For "smooth",
-// easingSpeed is the polynomial exponent (1 = linear … 6 = very snappy); for
-// "bouncy" it's the back-overshoot amount; "linear" ignores it.
-const makeEasing = (type: TypewriterEasing, easingSpeed: number): ((input: number) => number) => {
+// Fraction of a screen's life reserved AFTER typing finishes, so a completed
+// line is readable before the screen changes rather than vanishing on the last
+// keystroke.
+const REST_FRACTION = 0.12;
+
+/**
+ * Builds the per-character easing from the `easing` type and `easingSpeed`.
+ * For "smooth" the speed is the polynomial exponent; for "bouncy" it is the
+ * back-overshoot; "linear" ignores it.
+ */
+const makeEasing = (type: TypewriterEasing, speed: number): ((input: number) => number) => {
   switch (type) {
     case "smooth":
-      return Easing.out(Easing.poly(easingSpeed));
+      return Easing.out(Easing.poly(speed));
     case "bouncy":
-      return Easing.out(Easing.back(easingSpeed));
+      return Easing.out(Easing.back(speed));
     case "linear":
     default:
       return Easing.linear;
   }
 };
 
-// Deterministic pseudo-random in [0,1) from an integer index. Replaces
-// Math.random() from the web component so the same frame always renders the
-// same per-character speed — required for correct Remotion (re)rendering.
+/**
+ * Deterministic pseudo-random in [0,1) from an integer index. Replaces
+ * Math.random() so the same character always gets the same speed on every
+ * frame and in every render process — required for correct Remotion output.
+ */
 const hash01 = (n: number): number => {
   const x = Math.sin(n * 12.9898 + 78.233) * 43758.5453;
   return x - Math.floor(x);
 };
 
 /**
- * Typewriter style (frame-based rebuild of React Bits "TextType").
- *
- * Within each caption page the text types out letter-by-letter, each word
- * finishing roughly as it's spoken. `typingSpeed` (ms/char) sets the spacing
- * between consecutive letters; `variableSpeed` jitters that per character
- * deterministically. A customizable cursor (`cursorCharacter`) trails the last
- * typed letter and blinks via cos(frame) over `cursorBlinkDuration`. Words
- * cycle through `textColors`. All timing is a pure function of the current
- * frame — no setTimeout/gsap/useState.
+ * Renders ONE screen: its lines type out character by character, in reading
+ * order, each word starting when it is spoken.
  */
-export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
+const TypewriterSegment: React.FC<{
+  lines: KineticWord[][];
+  startMs: number;
+  durationInFrames: number;
+}> = ({ lines, startMs, durationInFrames }) => {
   const frame = useCurrentFrame();
-  const { width, fps, durationInFrames } = useVideoConfig();
-  const timeInMs = (frame / fps) * 1000;
-  // This page renders inside a <Sequence>, so `durationInFrames` is the page's
-  // own on-screen window (not the whole composition). We use it to keep all
-  // typing inside that window so no word can be cut off — see the fit logic.
-  const pageDurationMs = (durationInFrames / fps) * 1000;
-
+  const { fps, width } = useVideoConfig();
   const style = useContext(TypewriterStyleContext);
+
+  const { fontSizePct, captionScale, wordSpacing, lineSpacing, positionX, positionY, anchor } =
+    style.layout;
+  const { weight, italic, uppercase, baseTextColor, textColors } = style.text;
   const {
     typingSpeed,
     initialDelay,
-    showCursor,
-    cursorCharacter,
-    cursorBlinkDuration,
-    hideCursorWhileTyping,
+    easing,
+    easingSpeed,
     variableSpeed,
     variableSpeedMin,
     variableSpeedMax,
-    baseTextColor,
-    textColors,
-    easing,
-    easingSpeed,
-    positionX,
-    positionY,
-    captionScale,
-    wordSpacing,
-    lineSpacing,
-  } = style;
-  const fontFamily = resolveFontFamily(style.fontFamily);
+  } = style.motion;
+  const cursorCfg = style.cursor;
 
+  const fontFamily = resolveFontFamily(style.fontFamily);
+  const fontSize = (width * fontSizePct) / 100;
   const easingFn = makeEasing(easing, easingSpeed);
 
-  // Typing clock for this page (shifted by the initial delay).
+  const timeInMs = (frame / fps) * 1000;
   const t = timeInMs - initialDelay;
+  const screenDurationMs = (durationInFrames / fps) * 1000;
 
-  // Per-character interval (ms). Constant `typingSpeed`, or deterministically
-  // varied within [min,max] keyed off the character's global index.
   const charDelayMs = (globalIndex: number): number => {
-    if (!variableSpeed) {
-      return typingSpeed;
-    }
+    if (!variableSpeed) return typingSpeed;
     const lo = Math.min(variableSpeedMin, variableSpeedMax);
     const hi = Math.max(variableSpeedMin, variableSpeedMax);
     return lo + hash01(globalIndex) * (hi - lo);
   };
 
-  const fittedText = fitText({
-    fontFamily,
-    text: page.text,
-    withinWidth: width * 0.9,
-    fontWeight: FONT_WEIGHT,
-  });
-  const fontSize = Math.min(DESIRED_FONT_SIZE, fittedText.fontSize);
+  // Schedule every character in reading order. Each WORD is anchored forward
+  // from the moment it is spoken, so typing stays synced to the audio; its
+  // characters then step forward one delay at a time. Anchoring forward from
+  // the spoken START (rather than back from the END) guarantees a word begins
+  // typing inside the screen's window — a word can be spoken right up to the
+  // boundary, but its end often falls past it.
+  const schedule = useMemo(() => {
+    let acc = 0;
+    const out = lines.map((line, li) =>
+      line.map((token, wi) => {
+        const relStart = Math.max(0, token.fromMs - startMs);
+        const offset = acc;
+        const chars = (uppercase ? token.text.toUpperCase() : token.text).split("");
+        const appear: number[] = new Array<number>(chars.length);
+        let within = 0;
+        for (let ci = 0; ci < chars.length; ci++) {
+          appear[ci] = relStart + within;
+          within += charDelayMs(offset + ci);
+        }
+        acc += chars.length;
+        const colorIndex = li * 100 + wi;
+        const color = textColors.length
+          ? textColors[colorIndex % textColors.length]
+          : baseTextColor;
+        return { chars, offset, appear, color };
+      }),
+    );
+    return { out, totalChars: acc };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lines, startMs, uppercase, textColors, baseTextColor, typingSpeed, variableSpeed, variableSpeedMin, variableSpeedMax]);
 
-  // Per-word reveal scheduled FORWARD from when each word is first spoken
-  // (relStart), so the word's first letter lands in sync with the audio and
-  // each later letter steps forward by its own delay. Anchoring forward (rather
-  // than backward from the spoken END) is what guarantees a word's reveal
-  // begins inside the page's display window — a word can be spoken right up to
-  // the page boundary, but its END often falls past it. `offset` is the word's
-  // first char index within the page so the cursor can track the furthest letter.
-  let acc = 0;
-  const tokenInfo = page.tokens.map((token, ti) => {
-    const relStart = Math.max(0, token.fromMs - page.startMs);
-    const offset = acc;
-    const chars = token.text.split("");
-    const n = chars.length;
-
-    // Prefix-sum of delays from the word's first letter, so letters appear
-    // left-to-right starting at relStart.
-    const appear: number[] = new Array<number>(n);
-    let within = 0;
-    for (let ci = 0; ci < n; ci++) {
-      appear[ci] = relStart + within;
-      within += charDelayMs(offset + ci);
-    }
-
-    acc += n;
-    const color = textColors.length ? textColors[ti % textColors.length] : baseTextColor;
-    return { token, chars, offset, appear, color };
-  });
-
-  const totalChars = acc;
-
-  // When would the last letter of the page naturally finish, unconstrained?
-  let rawEnd = 0;
-  for (const { offset, appear } of tokenInfo) {
-    for (let ci = 0; ci < appear.length; ci++) {
-      rawEnd = Math.max(rawEnd, appear[ci] + Math.max(60, charDelayMs(offset + ci)));
-    }
-  }
-
-  // Compress the whole schedule by `fit` so every letter is typed within the
-  // page's visible window (reserving a little rest time at the end for
-  // readability). If the natural schedule already fits, `fit` === 1 and the
-  // audio-synced timing is left untouched; only over-full pages get squeezed.
-  // This is the guarantee that NO word/letter is ever skipped.
-  const REST_FRACTION = 0.12;
-  const typeBudgetMs = Math.max(1, (pageDurationMs - initialDelay) * (1 - REST_FRACTION));
-  const fit = rawEnd > typeBudgetMs ? typeBudgetMs / rawEnd : 1;
-
-  // Index of the furthest letter that has started appearing (-1 = none yet).
-  let lastRevealed = -1;
-  for (const { offset, appear } of tokenInfo) {
-    for (let ci = 0; ci < appear.length; ci++) {
-      if (t >= appear[ci] * fit) {
-        lastRevealed = Math.max(lastRevealed, offset + ci);
+  // Compress the schedule so every character is typed while the screen is still
+  // up. If the natural schedule already fits, `fit` is 1 and the audio-synced
+  // timing is untouched; only over-full screens are squeezed. This is what
+  // guarantees no character is ever skipped.
+  const { fit, lastRevealed } = useMemo(() => {
+    let rawEnd = 0;
+    for (const line of schedule.out) {
+      for (const { offset, appear } of line) {
+        for (let ci = 0; ci < appear.length; ci++) {
+          rawEnd = Math.max(rawEnd, appear[ci] + Math.max(60, charDelayMs(offset + ci)));
+        }
       }
     }
-  }
+    const budget = Math.max(1, (screenDurationMs - initialDelay) * (1 - REST_FRACTION));
+    const f = rawEnd > budget ? budget / rawEnd : 1;
 
-  // "Typing" == letters are still being revealed (between the first letter and
-  // the last). Before the first and after the last the cursor is "at rest".
-  const fullyTyped = totalChars > 0 && lastRevealed >= totalChars - 1;
+    let last = -1;
+    for (const line of schedule.out) {
+      for (const { offset, appear } of line) {
+        for (let ci = 0; ci < appear.length; ci++) {
+          if (t >= appear[ci] * f) last = Math.max(last, offset + ci);
+        }
+      }
+    }
+    return { fit: f, lastRevealed: last };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schedule, screenDurationMs, initialDelay, t]);
+
+  const fullyTyped = schedule.totalChars > 0 && lastRevealed >= schedule.totalChars - 1;
   const isTyping = lastRevealed > -1 && !fullyTyped;
 
-  // Blink via cos(frame): solid (opacity 1) while typing, fading at rest — this
-  // mirrors gsap's behavior of pausing the blink mid-type, frame-deterministically.
-  const blinkOpacity = 0.5 + 0.5 * Math.cos((timeInMs / cursorBlinkDuration) * Math.PI * 2);
-  const cursorOpacity = isTyping ? 1 : blinkOpacity;
-  const cursorVisible = showCursor && !(hideCursorWhileTyping && isTyping);
+  // Blink as a cosine of time: solid while typing, blinking at rest. That
+  // mirrors gsap's pause-while-typing behaviour, frame-deterministically.
+  const blink = 0.5 + 0.5 * Math.cos((timeInMs / cursorCfg.blinkDuration) * Math.PI * 2);
+  const cursorOpacity = isTyping ? 1 : blink;
+  const cursorVisible = cursorCfg.show && !(cursorCfg.hideWhileTyping && isTyping);
 
   const renderCursor = (key: string, color: string) =>
     cursorVisible ? (
@@ -308,14 +368,18 @@ export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
           marginLeft: fontSize * 0.04,
         }}
       >
-        {cursorCharacter}
+        {cursorCfg.character}
       </span>
     ) : null;
 
+  // THE ANCHOR. "center" centres each line's content, so a growing line pushes
+  // outward in both directions and everything already typed slides — the
+  // reference's behaviour. "left" pins the left edge so nothing typed ever
+  // moves. Everything else about the two looks is identical.
+  const justify = anchor === "center" ? "center" : "flex-start";
+
   return (
     <AbsoluteFill>
-      {/* Position wrapper: the caption's CENTER sits at (positionX%, positionY%)
-          of the frame; captionScale sizes the whole block. */}
       <div
         style={{
           position: "absolute",
@@ -324,66 +388,116 @@ export const PageTypewriter: React.FC<CaptionStyleProps> = ({ page }) => {
           width: "90%",
           transformOrigin: "center center",
           transform: `translate(-50%, -50%) scale(${captionScale})`,
+          fontSize,
+          fontFamily,
+          fontWeight: weight,
+          fontStyle: italic ? "italic" : "normal",
+          color: baseTextColor,
+          lineHeight: lineSpacing,
+          ...textEffectStyle(style),
         }}
       >
-        <div
-          style={{
-            fontSize,
-            width: "100%",
-            textAlign: "center",
-            fontFamily,
-            fontWeight: FONT_WEIGHT,
-            color: baseTextColor,
-            lineHeight: lineSpacing,
-            // Extra horizontal gap added at each space between words.
-            wordSpacing: `${wordSpacing}em`,
-            // Shadow + stroke (inherited by the letter spans + cursor below).
-            ...textEffectStyle(style),
-          }}
-        >
-        {/* Cursor sits at the very start until the first letter shows. */}
-        {lastRevealed === -1
-          ? renderCursor("cursor-start", tokenInfo[0]?.color ?? baseTextColor)
-          : null}
-
-        {tokenInfo.map(({ chars, offset, appear, color }, ti) => (
-          // Whole word is an atomic inline-block so it never breaks mid-word.
-          <span key={ti} style={{ display: "inline-block", whiteSpace: "pre", color }}>
-            {chars.map((char, ci) => {
-              // Same `fit` compression as the reveal check, so the rendered fade
-              // stays inside the page window and every letter completes on time.
-              const appearStart = appear[ci] * fit;
-              const appearMs = Math.max(40, charDelayMs(offset + ci) * fit);
-              const eased = interpolate(t, [appearStart, appearStart + appearMs], [0, 1], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-                easing: easingFn,
-              });
-              const opacity = Math.min(1, Math.max(0, eased));
-              const scale = easing === "linear" ? 1 : Math.max(0, 0.4 + 0.6 * eased);
-              const gi = offset + ci;
-
-              return (
-                <React.Fragment key={ci}>
-                  <span
-                    style={{
-                      display: "inline-block",
-                      whiteSpace: "pre",
-                      opacity,
-                      transform: `scale(${scale})`,
-                      transformOrigin: "center bottom",
-                    }}
-                  >
-                    {char}
-                  </span>
-                  {gi === lastRevealed ? renderCursor(`cursor-${gi}`, color) : null}
-                </React.Fragment>
-              );
-            })}
-          </span>
+        {schedule.out.map((line, li) => (
+          // dir="auto" so an Arabic caption lays out RTL and mixed text follows
+          // the Unicode bidi algorithm.
+          <div
+            key={li}
+            dir="auto"
+            style={{
+              display: "flex",
+              justifyContent: justify,
+              alignItems: "baseline",
+              columnGap: `${fontSize * wordSpacing}px`,
+              whiteSpace: "pre",
+            }}
+          >
+            {line.map(({ chars, offset, appear, color }, wi) => (
+              <span key={wi} style={{ display: "inline-block", whiteSpace: "pre", color }}>
+                {chars.map((char, ci) => {
+                  const start = appear[ci] * fit;
+                  const dur = Math.max(40, charDelayMs(offset + ci) * fit);
+                  const eased = interpolate(t, [start, start + dur], [0, 1], {
+                    extrapolateLeft: "clamp",
+                    extrapolateRight: "clamp",
+                    easing: easingFn,
+                  });
+                  const gi = offset + ci;
+                  return (
+                    <React.Fragment key={ci}>
+                      <span
+                        style={{
+                          display: "inline-block",
+                          whiteSpace: "pre",
+                          opacity: Math.min(1, Math.max(0, eased)),
+                          // A character that has not landed yet must take up NO
+                          // width, or the line would be pre-spaced to its final
+                          // size and the centre anchor could not travel.
+                          ...(eased <= 0 ? { display: "none" } : null),
+                        }}
+                      >
+                        {char}
+                      </span>
+                      {gi === lastRevealed ? renderCursor(`cursor-${gi}`, color) : null}
+                    </React.Fragment>
+                  );
+                })}
+              </span>
+            ))}
+            {/* Before anything is typed the cursor sits alone on the first line. */}
+            {li === 0 && lastRevealed === -1
+              ? renderCursor("cursor-start", baseTextColor)
+              : null}
+          </div>
         ))}
-        </div>
       </div>
+    </AbsoluteFill>
+  );
+};
+
+/**
+ * Typewriter: one <Sequence> per screen from the caption document, each typing
+ * its own text out character by character.
+ */
+export const PageTypewriter: React.FC<CaptionStyleProps> = ({ captions = [], segments }) => {
+  const { fps, durationInFrames } = useVideoConfig();
+
+  const hasDoc = Boolean(segments && segments.length);
+  const blocks = useMemo(
+    () =>
+      hasDoc
+        ? enrichedToBlocks(segments!)
+        : groupWordsIntoBlocks(
+            captions.map((c) => ({ text: c.text, fromMs: c.startMs, toMs: c.endMs })),
+            FALLBACK_WORDS_PER_LINE,
+            FALLBACK_LINES,
+          ),
+    [hasDoc, segments, captions],
+  );
+
+  const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
+
+  return (
+    <AbsoluteFill style={{ zIndex: 10 }}>
+      {blocks.map((block, i) => {
+        const startFrame = i === 0 ? 0 : msToFrame(block.startMs);
+        const next = blocks[i + 1];
+        const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
+        const dur = Math.max(1, endFrame - startFrame);
+        return (
+          <Sequence
+            key={i}
+            from={startFrame}
+            durationInFrames={dur}
+            name={`Caption ${i + 1}`}
+          >
+            <TypewriterSegment
+              lines={block.lines}
+              startMs={block.startMs}
+              durationInFrames={dur}
+            />
+          </Sequence>
+        );
+      })}
     </AbsoluteFill>
   );
 };

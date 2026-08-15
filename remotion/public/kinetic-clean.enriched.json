@@ -70,10 +70,10 @@
             },
             {
               "text": "create",
-              "emphasis": false,
+              "emphasis": true,
               "startMs": 2500,
               "endMs": 3090,
-              "variant": "base"
+              "variant": "punch"
             }
           ]
         },
@@ -85,14 +85,14 @@
               "emphasis": true,
               "startMs": 3090,
               "endMs": 3870,
-              "variant": "elegant"
+              "variant": "punch"
             },
             {
               "text": "reels",
-              "emphasis": true,
+              "emphasis": false,
               "startMs": 3870,
               "endMs": 4390,
-              "variant": "punch"
+              "variant": "elegant"
             },
             {
               "text": "and",
@@ -129,10 +129,10 @@
             },
             {
               "text": "transcribing",
-              "emphasis": false,
+              "emphasis": true,
               "startMs": 5870,
               "endMs": 6790,
-              "variant": "elegant"
+              "variant": "punch"
             },
             {
               "text": "your",
@@ -168,11 +168,11 @@
               "variant": "punch"
             },
             {
-              "text": "CPP",
-              "emphasis": true,
+              "text": "cpp",
+              "emphasis": false,
               "startMs": 9160,
               "endMs": 9580,
-              "variant": "punch"
+              "variant": "elegant"
             }
           ]
         }
@@ -195,10 +195,10 @@
             },
             {
               "text": "animating",
-              "emphasis": false,
+              "emphasis": true,
               "startMs": 9900,
               "endMs": 10390,
-              "variant": "elegant"
+              "variant": "punch"
             }
           ]
         },
@@ -231,13 +231,14 @@
               "emphasis": true,
               "startMs": 11580,
               "endMs": 12040,
-              "variant": "punch"
+              "variant": "elegant"
             }
           ]
         }
       ]
     }
   ],
+  "translation": "باستخدام قالب Remotion الخاص بتيك توك، يمكنك إنشاء ريلز وفيديوهات تيك توك جذابة عن طريق تفريغ صوتك باستخدام Whisper.cpp وتحريك الترجمات باستخدام React.",
   "variants": {
     "hormozi": [
       {
@@ -309,10 +310,10 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           },
@@ -324,14 +325,14 @@
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               },
               {
                 "text": "and",
@@ -368,10 +369,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "your",
@@ -407,11 +408,11 @@
                 "variant": "punch"
               },
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -434,10 +435,10 @@
               },
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           },
@@ -470,7 +471,7 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -578,10 +579,10 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           }
@@ -600,14 +601,14 @@
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -656,10 +657,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           }
@@ -726,11 +727,11 @@
             "align": "center",
             "words": [
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -753,10 +754,10 @@
               },
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           }
@@ -808,7 +809,7 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -890,10 +891,10 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           }
@@ -912,14 +913,14 @@
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           },
@@ -961,10 +962,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           },
@@ -1017,11 +1018,11 @@
             "align": "center",
             "words": [
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -1049,10 +1050,10 @@
             "words": [
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           }
@@ -1097,7 +1098,7 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -1174,10 +1175,10 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           },
@@ -1189,14 +1190,14 @@
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               },
               {
                 "text": "and",
@@ -1233,10 +1234,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "your",
@@ -1272,11 +1273,11 @@
                 "variant": "punch"
               },
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -1299,10 +1300,10 @@
               },
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           },
@@ -1335,7 +1336,7 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -1419,10 +1420,10 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           }
@@ -1441,14 +1442,14 @@
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               },
               {
                 "text": "and",
@@ -1485,10 +1486,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "your",
@@ -1531,11 +1532,11 @@
                 "variant": "punch"
               },
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -1558,10 +1559,10 @@
               },
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           }
@@ -1601,7 +1602,7 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -1678,10 +1679,10 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           },
@@ -1693,14 +1694,14 @@
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               },
               {
                 "text": "and",
@@ -1737,10 +1738,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "your",
@@ -1776,11 +1777,11 @@
                 "variant": "punch"
               },
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -1803,10 +1804,10 @@
               },
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           },
@@ -1839,7 +1840,7 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -1916,10 +1917,10 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           },
@@ -1931,14 +1932,14 @@
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               },
               {
                 "text": "and",
@@ -1975,10 +1976,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "your",
@@ -2014,11 +2015,11 @@
                 "variant": "punch"
               },
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -2041,10 +2042,10 @@
               },
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           },
@@ -2077,7 +2078,7 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -2154,10 +2155,10 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           },
@@ -2169,14 +2170,14 @@
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           },
@@ -2218,10 +2219,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           },
@@ -2262,11 +2263,11 @@
                 "variant": "punch"
               },
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -2289,10 +2290,10 @@
               },
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           },
@@ -2330,7 +2331,7 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -2407,10 +2408,10 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           },
@@ -2422,14 +2423,14 @@
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           },
@@ -2471,10 +2472,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           },
@@ -2515,11 +2516,11 @@
                 "variant": "punch"
               },
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -2542,10 +2543,10 @@
               },
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           },
@@ -2583,7 +2584,7 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -2655,24 +2656,24 @@
               },
               {
                 "text": "create",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 2500,
                 "endMs": 3090,
-                "variant": "base"
+                "variant": "punch"
               },
               {
                 "text": "engaging",
                 "emphasis": true,
                 "startMs": 3090,
                 "endMs": 3870,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "reels",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3870,
                 "endMs": 4390,
-                "variant": "punch"
+                "variant": "elegant"
               },
               {
                 "text": "and",
@@ -2709,10 +2710,10 @@
               },
               {
                 "text": "transcribing",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 5870,
                 "endMs": 6790,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "your",
@@ -2743,11 +2744,11 @@
                 "variant": "punch"
               },
               {
-                "text": "CPP",
-                "emphasis": true,
+                "text": "cpp",
+                "emphasis": false,
                 "startMs": 9160,
                 "endMs": 9580,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -2770,10 +2771,10 @@
               },
               {
                 "text": "animating",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 9900,
                 "endMs": 10390,
-                "variant": "elegant"
+                "variant": "punch"
               },
               {
                 "text": "your",
@@ -2801,13 +2802,12 @@
                 "emphasis": true,
                 "startMs": 11580,
                 "endMs": 12040,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
         ]
       }
     ]
-  },
-  "translation": "باستخدام قالب TikTok من Remotion، يمكنك إنشاء ريلز وفيديوهات TikTok جذابة عن طريق تحويل صوتك إلى نص باستخدام Whisper CPP، وتحريك الترجمات الخاصة بك باستخدام React."
+  }
 }

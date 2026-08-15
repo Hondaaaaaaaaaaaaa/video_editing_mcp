@@ -105,6 +105,17 @@ const TEMPLATES = {
     exact: false,
     charsPerLine: charsPerLine(6.28, 0.87, ADVANCE_NORMAL + 0.18),
   },
+  // Typing is character-by-character, so a screen has to be short enough to
+  // finish typing while it is still on screen — hence 2 lines rather than 3.
+  // Not `exact`: a short caption types on ONE line and must stay one line,
+  // because a half-empty second line would leave the cursor stranded below the
+  // text with nothing to type into it.
+  typewriter: {
+    minLines: 1,
+    maxLines: 2,
+    exact: false,
+    charsPerLine: charsPerLine(7, 0.9, ADVANCE_NORMAL),
+  },
   shiny: { minLines: 1, maxLines: 3, exact: false, charsPerLine: 18 },
   kinetic: { minLines: 1, maxLines: 3, exact: false, charsPerLine: 18 },
   minimal: { minLines: 1, maxLines: 1, exact: false, charsPerLine: 40 },

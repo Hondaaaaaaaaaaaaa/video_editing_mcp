@@ -22,6 +22,7 @@ import {
 import {
   PageTypewriter,
   typewriterSchema,
+  TYPEWRITER_DEFAULTS,
   TypewriterStyleProvider,
 } from "./CaptionedVideo/styles/PageTypewriter";
 import {
@@ -111,14 +112,24 @@ const ShinyCaptionedVideo: React.FC<z.infer<typeof shinySchema>> = ({
   </ShinyStyleProvider>
 );
 
-// Typewriter feeds all its typing/cursor/color props to the style via context.
+// Typewriter paints its own <Sequence> per screen from the caption document —
+// it needs each screen's own start time and duration to schedule typing, which
+// the default per-page rendering cannot give it. Until this carried `shape`, it
+// silently fell back to Hormozi's layout (the "unwired" note in
+// docs/adding-a-caption-template.md).
 const TypewriterCaptionedVideo: React.FC<z.infer<typeof typewriterSchema>> = ({
   src,
   showPunctuation,
   ...style
 }) => (
   <TypewriterStyleProvider value={style}>
-    <CaptionedVideo src={src} showPunctuation={showPunctuation} PageComponent={PageTypewriter} />
+    <CaptionedVideo
+      src={src}
+      showPunctuation={showPunctuation}
+      shape="typewriter"
+      PageComponent={PageTypewriter}
+      singleSurface
+    />
   </TypewriterStyleProvider>
 );
 
@@ -393,34 +404,9 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{
-          src: "sample-video.mp4",
-          typingSpeed: 60,
-          initialDelay: 0,
-          showCursor: true,
-          cursorCharacter: "_",
-          cursorBlinkDuration: 530,
-          hideCursorWhileTyping: false,
-          variableSpeed: false,
-          variableSpeedMin: 40,
-          variableSpeedMax: 120,
-          baseTextColor: "#ffffff",
-          textColors: [],
-          easing: "linear" as const,
-          easingSpeed: 6,
-          fontFamily: "Montserrat" as const,
-          shadowEnabled: true,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowBlur: 13,
-          strokeEnabled: true,
-          strokeColor: "#000000",
-          strokeWidth: 0,
-          positionX: 50,
-          positionY: 78,
-          captionScale: 1,
-          wordSpacing: 0.12,
-          lineSpacing: 1.2,
-        }}
+        // Spread, NOT a literal copy — a literal silently stops tracking
+        // TYPEWRITER_DEFAULTS, which is how Classic's defaults drifted.
+        defaultProps={{ src: SAMPLE_VIDEO, ...TYPEWRITER_DEFAULTS }}
       />
 
       {/* "Highlight" caption style — Shiny's kinetic LAYOUT (wordsPerLine /
@@ -717,7 +703,14 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={1200}
         width={1080}
         height={1920}
-        defaultProps={{ src: SAMPLE_VIDEO, ...SPEED_DEFAULTS }}
+        // NOT the shared sample clip. Speed's whole character is words landing
+        // on top of each other, and that only happens on fast speech: the
+        // sample clip's median gap between words is 460ms, so each 85ms fade
+        // finishes and then sits alone for ~375ms — the template reads as
+        // static text popping on, no matter how correct it is. The reference
+        // reel's median gap is 200ms, where the fades nearly run together.
+        // Judging this template on slow footage will always mislead.
+        defaultProps={{ src: "speed/speed 1.mp4", ...SPEED_DEFAULTS }}
       />
     </>
   );

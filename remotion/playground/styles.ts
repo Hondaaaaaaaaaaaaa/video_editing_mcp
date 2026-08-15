@@ -108,6 +108,8 @@ export const STYLES: StyleEntry[] = [
     defaults: stripSrc(TYPEWRITER_DEFAULTS),
     Provider: TypewriterStyleProvider as unknown as React.Provider<never>,
     Page: PageTypewriter,
+    documentDriven: true,
+    shape: "typewriter",
   },
   {
     id: "Highlight",
