@@ -271,54 +271,7 @@ export const RemotionRoot: React.FC = () => {
         // literal silently stops tracking CLASSIC_DEFAULTS (it is how the new
         // `easing` control went missing). Tune in Studio, then fold the value
         // into CLASSIC_DEFAULTS so both stay in step.
-        defaultProps={{
-          src: "sample-video.mp4",
-          layout: {
-            fontSizePct: 5.45,
-            captionScale: 1,
-            wordSpacing: 0.5,
-            letterSpacing: 0.22,
-            positionX: 50,
-            positionY: 78,
-          },
-          text: {
-            font: {
-              family: "Montserrat" as const,
-              custom: "THEBOLDFONT-FREEVERSION.otf",
-            },
-            uppercase: true,
-            baseColor: "#ffffff",
-            accents: {
-              one: { fill: "#00ffff" },
-              two: { fill: "#ffff00" },
-              three: { fill: "#fbac0b" },
-            },
-          },
-          motion: {
-            popFrom: 0.3,
-            popFrames: 4,
-            fadeFrames: 0,
-            easing: { type: "ease-in-out" as const, strength: 6 },
-          },
-          accentPerCaption: true,
-          effects: {
-            shadow: {
-              enabled: true,
-              color: "rgba(0,0,0,0.45)",
-              blurEm: 0.27,
-              offsetYEm: 0.09,
-            },
-            glow: {
-              enabled: true,
-              radius: 42,
-              brightness: 33,
-              innerColor: "#ffffff",
-              outerColor: "#ffffff",
-              chromatic: 0,
-            },
-            glowTintsWithWord: true,
-          },
-        }}
+        defaultProps={{ src: SAMPLE_VIDEO, ...CLASSIC_DEFAULTS }}
       />
 
       {/* "Shiny" caption style — cinematic gradient + glow (customizable) */}

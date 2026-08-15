@@ -193,18 +193,23 @@ export const CLASSIC_DEFAULTS: ClassicStyle = {
   // a DELIBERATE departure, chosen for polish. Captions hold only ~8 frames, so
   // it has to be over almost immediately: 0.90 -> 1.0 in 3 frames, eased out.
   motion: {
-    // 0.58 and 20 were both dialled in by hand in Studio, so they are kept.
-    // NOTE on fadeFrames: a Classic screen lives ~8 frames, so a 20-frame fade
-    // never finishes — the text tops out around 60% opacity and every screen
-    // reads as semi-transparent. If that is not what was wanted, 3-5 is the
-    // range that completes inside a screen's life.
-    popFrom: 0.58,
+    // These are the Studio-tuned values, folded back here from Root.tsx per the
+    // flow this file asks for. They had drifted: Root.tsx carried a LITERAL copy
+    // of the whole prop object rather than spreading this constant, so tuning in
+    // Studio updated one and left the other behind. Root.tsx now spreads.
+    //
+    // A deeper pop than the 0.58 this was written with, and NO fade. The fade
+    // was 20 frames, which a Classic screen never survives: a screen lives ~8
+    // frames, so the text topped out near 60% opacity and every caption read as
+    // semi-transparent. 0 removes it outright; 3-5 is the range that would
+    // actually complete inside a screen's life if a fade is wanted back.
+    popFrom: 0.3,
     popFrames: 4,
-    fadeFrames: 20,
-    // "smooth" keeps exactly the curve this shipped with, so switching the
-    // control in is not itself a visual change. Try "bouncy" for an overshoot,
-    // "ease-out" for a plainer decelerate, "linear" to hear what no easing does.
-    easing: { type: "smooth", strength: 5 },
+    fadeFrames: 0,
+    // Tuned off "smooth" (the curve this shipped with) to a stronger
+    // ease-in-out. Try "bouncy" for an overshoot, "ease-out" for a plainer
+    // decelerate, "linear" to hear what no easing does.
+    easing: { type: "ease-in-out", strength: 6 },
   },
   accentPerCaption: true,
   effects: {
