@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import {
   AbsoluteFill,
-  Easing,
   Sequence,
   continueRender,
   delayRender,
@@ -31,7 +30,6 @@ import {
 // every other one instead of hard-coding its own.
 import {
   easingSlotSchema,
-  makeEasing,
   makeOpacityEasing,
   type EasingSlot,
 } from "./easing-slot";
@@ -50,26 +48,29 @@ import {
 // white text over a pale wall).
 //
 //   * WORD-BY-WORD BUILD. Each word fades in on its own timestamp; earlier
-//     words stay put. Measured ramp for one word, frame by frame at 60fps:
-//     0 -> 0.36 -> 0.65 -> 0.82 -> 0.90 -> 1.0. That is ~85ms, DECELERATING.
-//   * IT IS A FADE, NOT A POP. The word's horizontal extent is constant within
-//     3% from its first visible frame — nothing scales. It READS as a pop
-//     because 85ms is very fast. A spring with overshoot is the wrong model
-//     here and looks visibly wrong next to the reference.
-//   * The curve fits `smooth` easing at speed 1.0 (easeOutQuad) with rms 0.03.
-//     For contrast at the same duration, `sharp` would already be 80% opaque
-//     one frame in where the reference is 36%.
-//   * BETWEEN CAPTIONS there is a real beat of empty screen: the outgoing
-//     caption fades in ~35ms, then ~100ms of nothing, then the next builds.
-//   * COLOUR IS PER PHRASE AND CARRIES MEANING. The unit is a contiguous run —
-//     "DESTROY YOU", "MET YOU", "SOUTH DAKOTA" — or a whole line, not a lone
-//     word. Nearly every caption carries one accented phrase; this look is
-//     loud and constantly coloured. `loud` (red) is the most-used accent and
-//     means EXCITEMENT, not bad news ("NO WAY", "THAT'S CRAZY", "MY MAN BE
-//     CAREFUL"). Claude assigns the role in the enrich pass
-//     (EnrichedWord.color); this file only maps role -> colour, so re-palletting
-//     never needs a model re-run, and `varyAccents` below guarantees two
-//     consecutive captions never wear the same one.
+//     words stay put. Measured over 8 frames at the reference 60fps = 133ms,
+//     DECELERATING: 0.26 / 0.39 / 0.71 / 0.78 / 0.86 / 0.93 / 0.99 / 1.0
+//     (mean of the REASON and NAME? entrances, which both take 8 frames).
+//   * A SLOW POP, BUT A SMALL ONE. The scale is real and about 2%: measured on
+//     the glyph CORES (thresholded above the glow so it is the text, not the
+//     halo) the span goes 286 -> 291px across the entrance. It is NOT a spring
+//     and NOT an overshoot — the outer ink box appears to grow 34% in height,
+//     but that is the GLOW blooming in, and letter PITCH (which a glow cannot
+//     move) holds at 201-204px throughout. So: a 2% grow on the same curve and
+//     the same window as the fade.
+//   * The curve fits the shared easing slot at `ease-out` strength 2. The
+//     slot's own DEFAULT, `smooth`, is badly wrong here — it reaches 0.66 one
+//     frame in where the reference is at 0.36 — so this template sets easing
+//     explicitly.
+//   * THE OUT IS A HARD CUT, not a fade: measured 0.88 -> 0.00 in one frame.
+//   * COLOUR IS PER PHRASE AND CARRIES MEANING, from a FOUR-COLOUR palette:
+//     white base, YELLOW for the normal highlight, GREEN for good things, RED
+//     for bad things, and RED WITH A WHITE OUTLINE for a surprise. The unit is
+//     a contiguous run — "DESTROY YOU", "SOUTH DAKOTA" — or a whole line, not
+//     a lone word, and nearly every caption carries one. Claude assigns the
+//     role in the enrich pass (EnrichedWord.color); this file only maps role ->
+//     colour, so re-palletting never needs a model re-run, and `varyAccents`
+//     keeps two consecutive captions from wearing the same one.
 //   * A LINE WAITS FOR THE LINE ABOVE IT to finish building before it starts.
 //   * PUNCTUATION KEEPS THE BASE COLOUR even when its word is coloured —
 //     "NAME" is yellow but its "?" is white, "TIM" is green but its quotes are
@@ -89,6 +90,14 @@ export const speedSchema = captionedVideoSchema.extend({
     positionX: z.number().min(0).max(100).step(1),
     positionY: z.number().min(0).max(100).step(1),
     italic: z.boolean(),
+    // Slant in DEGREES, applied as a skew, rather than relying on
+    // font-style:italic. The Bold Font ships no italic face, so the browser
+    // would synthesise its own oblique at a fixed angle we cannot tune — and
+    // the references clearly slant, but I could not measure the angle
+    // reliably (a deskew search returned 6deg on a KNOWN-upright control, so
+    // the method was not trustworthy on this footage). Exposing the angle means
+    // it can be set by eye against the reference instead of guessed.
+    slantDeg: z.number().min(0).max(25).step(0.5),
   }),
 
   // === TEXT =================================================================
@@ -98,16 +107,27 @@ export const speedSchema = captionedVideoSchema.extend({
     uppercase: z.boolean(),
   }),
 
-  // === PALETTE — one colour per SEMANTIC ROLE ===============================
+  // === PALETTE — the base colour plus an EDITABLE LIST of accents ===========
+  // A list rather than fixed fields so the user can add their own colours and
+  // switch the defaults off. Each entry carries only what makes it look
+  // different: a fill and an outline. Animation and glow are deliberately NOT
+  // here — every word fades, pops and glows identically whatever colour it is.
   palette: z.object({
     base: zColor(),
-    key: zColor(),
-    loud: zColor(),
-    positive: zColor(),
-    wild: zColor(),
-    cool: zColor(),
-    strokeWidth: z.number().min(0).max(16).step(0.5),
-    strokeColor: zColor(),
+    accents: z.array(
+      z.object({
+        // Stable key stored on the word. Claude emits key/positive/negative/
+        // shock; anything else is user-added.
+        id: z.string(),
+        label: z.string(),
+        // OFF renders words tagged with it as base. The tag stays on the word,
+        // so switching it back on restores them.
+        enabled: z.boolean(),
+        color: zColor(),
+        strokeWidth: z.number().min(0).max(16).step(0.5),
+        strokeColor: zColor(),
+      }),
+    ),
   }),
 
   // === EFFECTS — the dark shadow under the type + a glow in its own colour ===
@@ -130,6 +150,16 @@ export const speedSchema = captionedVideoSchema.extend({
   // === MOTION — a fade per word, and the gap between captions ================
   motion: z.object({
     wordFadeMs: z.number().min(0).max(600).step(5),
+    // THE SLOW POP. Deliberately DECOUPLED from the fade: the scale runs on its
+    // own duration so it can keep easing out after the word is fully opaque,
+    // which is what reads as "slow popping in" rather than a snap.
+    //   popFrom — the scale a word starts at (0.94 = grows 6% into place)
+    //   popMs   — how long the growth takes; longer than wordFadeMs = slower pop
+    // The measured value off the reference is only ~2% (glyph-core span 286 ->
+    // 291px). These defaults are deliberately MORE than that, tuned by eye
+    // rather than measured, because the measured 2% is nearly invisible.
+    popFrom: z.number().min(0.5).max(1).step(0.005),
+    popMs: z.number().min(0).max(1200).step(5),
     easing: easingSlotSchema,
     outFadeMs: z.number().min(0).max(400).step(5),
     gapMs: z.number().min(0).max(500).step(10), // empty screen between captions
@@ -146,23 +176,32 @@ export type SpeedStyle = {
     positionX: number;
     positionY: number;
     italic: boolean;
+    slantDeg: number;
   };
   text: { font: FontSlot; weight: number; uppercase: boolean };
   palette: {
     base: string;
-    key: string;
-    loud: string;
-    positive: string;
-    wild: string;
-    cool: string;
-    strokeWidth: number;
-    strokeColor: string;
+    accents: {
+      id: string;
+      label: string;
+      enabled: boolean;
+      color: string;
+      strokeWidth: number;
+      strokeColor: string;
+    }[];
   };
   effects: {
     shadow: { enabled: boolean; color: string; blur: number; offsetY: number };
     glow: { enabled: boolean; blur: number; opacity: number };
   };
-  motion: { wordFadeMs: number; easing: EasingSlot; outFadeMs: number; gapMs: number };
+  motion: {
+    wordFadeMs: number;
+    popFrom: number;
+    popMs: number;
+    easing: EasingSlot;
+    outFadeMs: number;
+    gapMs: number;
+  };
 };
 
 // Defaults ARE the measurements taken off the reference reels.
@@ -186,7 +225,11 @@ export const SPEED_DEFAULTS: SpeedStyle = {
     lineSpacing: 1.12,
     positionX: 50,
     positionY: 47, // the references sit mid-frame, not under the chin
-    italic: false,
+    // The 0-3s section of speed 1 ("BEG YOUR PARDON?", "WHO CREATED / THE WORLD
+    // WIDE WEB") is clearly oblique. Other sections are upright, so the
+    // reference mixes — this defaults to the slanted look.
+    italic: true,
+    slantDeg: 12,
   },
   text: {
     // The client-supplied display face, shipped in public/fonts. A single
@@ -197,30 +240,42 @@ export const SPEED_DEFAULTS: SpeedStyle = {
     uppercase: true,
   },
   palette: {
-    // Sampled off the frames. All six appear in the references; `loud` (red) is
-    // by far the most used, which is why it is excitement rather than "bad".
     base: "#ffffff",
-    key: "#ffe000",
-    loud: "#ff1a1a",
-    positive: "#22e34a",
-    wild: "#ff3ea5",
-    cool: "#22d3d3",
-    strokeWidth: 0, // off by default; the references outline only occasionally
-    strokeColor: "#ffffff",
+    // FOUR colours plus the outlined variant. The references also show magenta
+    // and cyan; they are deliberately absent so a video reads as one system.
+    // Only `shock` carries an outline — that IS what makes it the surprise beat.
+    accents: [
+      { id: "key", label: "Yellow — key term", enabled: true, color: "#ffe000", strokeWidth: 0, strokeColor: "#ffffff" },
+      { id: "positive", label: "Green — good", enabled: true, color: "#22e34a", strokeWidth: 0, strokeColor: "#ffffff" },
+      { id: "negative", label: "Red — bad", enabled: true, color: "#ff1a1a", strokeWidth: 0, strokeColor: "#ffffff" },
+      { id: "shock", label: "Red + outline — surprise", enabled: true, color: "#ff1a1a", strokeWidth: 6, strokeColor: "#ffffff" },
+    ],
   },
   effects: {
     shadow: { enabled: true, color: "rgba(0,0,0,0.55)", blur: 12, offsetY: 6 },
     glow: { enabled: true, blur: 26, opacity: 0.55 },
   },
   motion: {
-    // 5 frames at the reference's 60fps. Stored in MS so it survives any fps.
-    wordFadeMs: 85,
+    // 8 frames at the reference 60fps. Measured by counting ink pixels above a
+    // fixed threshold (monotonic in alpha, needs no background model) across two
+    // separate single-word entrances, REASON and NAME?, which both take exactly
+    // 8 frames from first pixel to settled. An earlier photometric estimate said
+    // 5 frames / 85ms because its percentile estimator saturated early — at 85ms
+    // the fade is over before the eye registers it, which is what "it has no
+    // fading" actually was. Stored in MS so it holds at any frame rate.
+    wordFadeMs: 133,
+    // Measured is ~2% (popFrom 0.97) over the fade window. These are larger and
+    // slower on purpose — a 2% pop over 133ms cannot be seen.
+    popFrom: 0.94,
+    popMs: 260,
     // FITTED, not picked: the measured ramp (0.36 / 0.65 / 0.82 / 0.90 / 1.0)
     // matches `ease-out` at strength 2 with rms 0.030. Note the slot's own
     // default, `smooth`, is badly wrong for this look — it reaches 0.66 after
     // one frame where the reference is at 0.36.
     easing: { type: "ease-out", strength: 2 },
-    outFadeMs: 35,
+    // The reference CUTS out: measured 0.88 -> 0.00 in a single frame. There is
+    // no out-fade at all.
+    outFadeMs: 0,
     gapMs: 100,
   },
 };
@@ -243,18 +298,31 @@ const splitPunctuation = (text: string): [string, string, string] => {
   return [m[1] ?? "", m[2], m[3] ?? ""];
 };
 
-/** The accent roles, in the order the no-repeat walk cycles through them. */
-const ACCENTS: Exclude<WordColor, "base">[] = ["loud", "key", "positive", "wild", "cool"];
-
-/** Role -> the colour it paints in. */
-const colorFor = (role: WordColor, palette: SpeedStyle["palette"]): string =>
-  role === "base" ? palette.base : palette[role];
+/**
+ * Resolve a word's palette id to what it actually paints.
+ *
+ * An id that is missing from the palette, or whose entry is switched OFF,
+ * falls back to BASE. That is what makes disabling a colour safe: the id stays
+ * on the word, so switching the entry back on restores it untouched.
+ */
+const paintFor = (
+  role: WordColor,
+  palette: SpeedStyle["palette"],
+): { fill: string; stroke: string | null; strokeWidth: number } => {
+  const hit = palette.accents.find((a) => a.id === role && a.enabled);
+  if (!hit) return { fill: palette.base, stroke: null, strokeWidth: 0 };
+  return {
+    fill: hit.color,
+    stroke: hit.strokeWidth > 0 ? hit.strokeColor : null,
+    strokeWidth: hit.strokeWidth,
+  };
+};
 
 /**
  * Guarantee that CONSECUTIVE CAPTIONS never wear the same accent.
  *
  * Claude picks the role by meaning, but meaning alone clusters — a run of
- * excited lines all come out `loud` and the video stops feeling varied, which
+ * excited lines all come out the same colour and the video stops feeling varied, which
  * is the opposite of what these edits do. So this walks each caption's accent
  * forward to the next unused one whenever it would repeat the caption before
  * it. Claude still decides WHICH PHRASE is accented and what it means; this
@@ -262,16 +330,21 @@ const colorFor = (role: WordColor, palette: SpeedStyle["palette"]): string =>
  *
  * Returns, per caption, the role each accented phrase should actually paint in.
  */
-const varyAccents = (captionRoles: (WordColor | undefined)[][]): WordColor[][] => {
+const varyAccents = (
+  captionRoles: (WordColor | undefined)[][],
+  enabledIds: string[],
+): WordColor[][] => {
   let prev: WordColor | null = null;
   return captionRoles.map((roles) => {
     // The caption's own accent (the first non-base role Claude assigned).
     const own = roles.find((r) => r && r !== "base");
     if (!own) return roles.map(() => "base" as WordColor);
     let use: WordColor = own;
-    if (use === prev) {
-      const i = ACCENTS.indexOf(use as Exclude<WordColor, "base">);
-      use = ACCENTS[(i + 1) % ACCENTS.length];
+    // Only ever step onto a colour that is switched ON; with none enabled the
+    // caption simply keeps what Claude picked and paintFor() renders it base.
+    if (use === prev && enabledIds.length > 1) {
+      const i = enabledIds.indexOf(String(use));
+      use = enabledIds[(i + 1) % enabledIds.length];
     }
     prev = use;
     return roles.map((r) => (r && r !== "base" ? use : "base"));
@@ -294,14 +367,17 @@ const SpeedSegment: React.FC<{
   const style = useContext(SpeedStyleContext);
 
   const {
-    captionScale, letterSpacing, wordSpacing, lineSpacing, positionX, positionY, italic,
+    captionScale, letterSpacing, wordSpacing, lineSpacing, positionX, positionY, italic, slantDeg,
   } = style.layout;
   const { uppercase, weight } = style.text;
   const { palette, effects, motion } = style;
 
-  const easing = useMemo(() => makeEasing(motion.easing), [motion.easing]);
+  // makeOpacityEasing, NOT makeEasing: this curve drives OPACITY, and a
+  // `bouncy` slot deliberately overshoots past 1, which is not a valid alpha.
+  const easing = useMemo(() => makeOpacityEasing(motion.easing), [motion.easing]);
   const fadeFrames = Math.max(1, Math.round((motion.wordFadeMs / 1000) * fps));
   const outFrames = Math.max(1, Math.round((motion.outFadeMs / 1000) * fps));
+  const popFrames = Math.max(1, Math.round((motion.popMs / 1000) * fps));
 
   // The whole caption fades OUT at the end of its window — a fast dip, then the
   // gap before the next caption is empty screen (the Sequence simply ends).
@@ -328,10 +404,13 @@ const SpeedSegment: React.FC<{
   }, [lines]);
 
   // Per-word opacity from its OWN spoken timestamp, so the caption builds up.
-  const wordOpacity = (w: EnrichedWord, li: number): number => {
+  // Eased 0..1 progress for a word, over an arbitrary window length. The fade
+  // and the pop each get their own, so the scale can keep easing out after the
+  // opacity has already arrived — that lag is what makes the pop read as slow.
+  const wordProgress = (w: EnrichedWord, li: number, durationFrames: number): number => {
     const startMs = Math.max(w.startMs, lineGateMs[li] ?? -Infinity);
     const start = Math.max(0, Math.round(((startMs - blockStartMs) / 1000) * fps));
-    return interpolate(frame, [start, start + fadeFrames], [0, 1], {
+    return interpolate(frame, [start, start + Math.max(1, durationFrames)], [0, 1], {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
       easing,
@@ -379,14 +458,21 @@ const SpeedSegment: React.FC<{
           left: `${positionX}%`,
           top: `${positionY}%`,
           width: "100%",
-          transform: `translate(-50%, -50%) scale(${captionScale})`,
+          // skewX LAST so the slant applies to the laid-out block rather than
+          // to the positioning translate. Negative leans the tops to the right,
+          // which is the direction the references slant.
+          transform:
+            `translate(-50%, -50%) scale(${captionScale})` +
+            (italic && slantDeg > 0 ? ` skewX(-${slantDeg}deg)` : ""),
           transformOrigin: "center center",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           fontFamily: font.fontFamily,
           fontWeight,
-          fontStyle: italic ? "italic" : "normal",
+          // Skew rather than font-style, so the angle is ours to set. Combined
+          // with the block transform below.
+          fontStyle: "normal",
           fontSize,
           letterSpacing: `${letterSpacing}em`,
           textTransform: uppercase ? "uppercase" : "none",
@@ -417,20 +503,19 @@ const SpeedSegment: React.FC<{
             }}
           >
             {line.map((w, wi) => {
-              const fill = colorFor(roles[li]?.[wi] ?? "base", palette);
-              // The outline is a palette-wide option (off by default); the
-              // references use it only occasionally, never per role.
-              const stroke = palette.strokeWidth > 0 ? palette.strokeColor : null;
+              const p = wordProgress(w, li, fadeFrames);
+              const popP = wordProgress(w, li, popFrames);
+              const pop = motion.popFrom + (1 - motion.popFrom) * popP;
+              const role = roles[li]?.[wi] ?? "base";
+              const { fill, stroke, strokeWidth } = paintFor(role, palette);
               const [lead, core, tail] = splitPunctuation(w.text);
-              // The glow belongs to ACCENT words only. Comparing a render
-              // against the reference frame at 3x, the reference's white text
-              // has a crisp edge with just a dark shadow, while its red and
-              // yellow phrases carry a halo in their own colour — glowing the
-              // white base too is what made the whole block look soft.
-              const isAccent = (roles[li]?.[wi] ?? "base") !== "base";
+              // The glow is on EVERY word, in that word's own colour, so white
+              // text glows white and red text glows red. Two stacked shadows
+              // build the density the references have — one tight, one wide.
               const glow =
-                effects.glow.enabled && effects.glow.opacity > 0 && isAccent
-                  ? `0 0 ${effects.glow.blur}px ${fill}`
+                effects.glow.enabled && effects.glow.opacity > 0
+                  ? `0 0 ${Math.round(effects.glow.blur * 0.4)}px ${fill}, ` +
+                    `0 0 ${effects.glow.blur}px ${fill}`
                   : "";
               const textShadow = [shadowCss, glow].filter(Boolean).join(", ");
               return (
@@ -439,7 +524,10 @@ const SpeedSegment: React.FC<{
                   style={{
                     display: "inline-block",
                     whiteSpace: "pre",
-                    opacity: wordOpacity(w, li),
+                    opacity: p,
+                    // The slow pop: same curve, same window as the fade.
+                    transform: motion.popFrom < 1 ? `scale(${pop.toFixed(4)})` : undefined,
+                    transformOrigin: "center center",
                     textShadow: textShadow || undefined,
                   }}
                 >
@@ -449,9 +537,7 @@ const SpeedSegment: React.FC<{
                   <span
                     style={{
                       color: fill,
-                      WebkitTextStroke: stroke
-                        ? `${palette.strokeWidth}px ${stroke}`
-                        : undefined,
+                      WebkitTextStroke: stroke ? `${strokeWidth}px ${stroke}` : undefined,
                       paintOrder: "stroke fill",
                     }}
                   >
@@ -499,7 +585,8 @@ export const PageSpeed: React.FC<CaptionStyleProps> = ({ segments }) => {
     const perCaption = raw.map((b) =>
       b.lines.flat().map((w): WordColor | undefined => w.color ?? (w.emphasis ? "key" : "base")),
     );
-    const varied = varyAccents(perCaption);
+    const enabledIds = style.palette.accents.filter((a) => a.enabled).map((a) => a.id);
+    const varied = varyAccents(perCaption, enabledIds);
 
     // Re-shape the flat roles back onto the caption's lines.
     return raw.map((b, i) => {
@@ -507,7 +594,7 @@ export const PageSpeed: React.FC<CaptionStyleProps> = ({ segments }) => {
       const roles = b.lines.map((line) => line.map(() => varied[i][k++] ?? "base"));
       return { ...b, roles };
     });
-  }, [segments]);
+  }, [segments, style.palette.accents]);
 
   const font = useFontSlot(style.text.font);
   const fontSize = (width * style.layout.fontSizePct) / 100;

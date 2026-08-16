@@ -26,15 +26,28 @@ export type WordVariant = "base" | "punch" | "elegant";
 // Assigned to a whole PHRASE (every word of a contiguous run carries the same
 // role), because that is what the references colour — "DESTROY YOU", "MET YOU",
 // "SOUTH DAKOTA", or an entire line — not lone words.
-//   base     — ordinary words
-//   key      — the thing being named: noun, number, name, place
-//   loud     — excitement, disbelief, shouting, a threat ("NO WAY",
-//              "THAT'S CRAZY", "MY MAN BE CAREFUL"). NOT "bad news" — in the
-//              references this is the loudest, most-used accent.
-//   positive — good news, approval, success
-//   wild     — playful or absurd flavour
-//   cool     — interjections, sounds, asides ("HA-")
-export type WordColor = "base" | "key" | "loud" | "positive" | "wild" | "cool";
+// The id of a PALETTE ENTRY. Claude only ever assigns the five below — four
+// colours plus one outlined variant — because a predictable model output is
+// worth more than a model that invents colours:
+//   base     — WHITE. Ordinary words.
+//   key      — YELLOW. The normal highlight: the thing being named.
+//   positive — GREEN. Good things.
+//   negative — RED. Bad things.
+//   shock    — RED WITH A WHITE OUTLINE. Surprise. Rare by design.
+//
+// It is a STRING, not a closed union, because the user can add their own
+// entries in the Style Tuner ("blue") and apply them by hand in the caption
+// editor. The `(string & {})` keeps editor autocomplete for the five defaults
+// while still accepting any custom id. An id with no matching (or a disabled)
+// palette entry falls back to base — so turning a colour off is safe and
+// reversible; the tag stays on the word.
+export type WordColor =
+  | "base"
+  | "key"
+  | "positive"
+  | "negative"
+  | "shock"
+  | (string & {});
 
 export type EnrichedWord = {
   text: string;

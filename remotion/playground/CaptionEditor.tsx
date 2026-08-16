@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Player } from "@remotion/player";
 import { getVideoMetadata } from "@remotion/media-utils";
-import type { CaptionDoc } from "../src/CaptionedVideo/styles/types";
+import type { CaptionDoc, WordColor } from "../src/CaptionedVideo/styles/types";
 import { EditorPreview } from "./EditorPreview";
 import { EDITOR_STYLES } from "./styles";
 import {
@@ -18,6 +18,7 @@ import {
   setWordTime,
   stepAddress,
   toggleEmphasis,
+  setWordColor,
   toggleSweep,
   withIds,
   type WordAddr,
@@ -64,6 +65,23 @@ const kbd: React.CSSProperties = {
   border: "1px solid #23232e",
   borderRadius: 4,
   padding: "1px 4px",
+};
+
+// The swatch list is DERIVED from the selected template's palette, not
+// hard-coded, so a colour the user adds in the Style Tuner turns up here
+// automatically and a disabled one disappears. "base" is always first.
+type Swatch = { role: string; label: string; swatch: string; outlined: boolean };
+const swatchesFor = (styleProps: Record<string, unknown>): Swatch[] => {
+  const palette = styleProps?.palette as
+    | { base?: string; accents?: { id: string; label: string; enabled: boolean; color: string; strokeWidth: number }[] }
+    | undefined;
+  if (!palette?.accents) return [];
+  return [
+    { role: "base", label: "Base — ordinary", swatch: palette.base ?? "#ffffff", outlined: false },
+    ...palette.accents
+      .filter((a) => a.enabled)
+      .map((a) => ({ role: a.id, label: a.label, swatch: a.color, outlined: a.strokeWidth > 0 })),
+  ];
 };
 
 export const CaptionEditor: React.FC = () => {
@@ -442,6 +460,46 @@ export const CaptionEditor: React.FC = () => {
               >
                 ✨ sweep
               </button>
+              {/* SEMANTIC COLOUR — Claude picks one in the enrich pass, but the
+                  call is a judgement ("good news, or just the key term?"), so
+                  the user overrides it here. Click recolours the whole caption
+                  (the accent belongs to a phrase); shift-click recolours only
+                  the selected word. Speed paints these; other templates ignore
+                  them. */}
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 3, marginLeft: 6 }}>
+                {swatchesFor(styleProps).map((sw) => (
+                  <button
+                    key={sw.role}
+                    type="button"
+                    onClick={(e) =>
+                      apply(
+                        setWordColor(
+                          doc,
+                          sel.s,
+                          e.shiftKey ? sel.l : null,
+                          e.shiftKey ? sel.w : null,
+                          sw.role,
+                        ),
+                        sel,
+                      )
+                    }
+                    title={`${sw.label} — click: whole caption, shift-click: this word only`}
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderRadius: 4,
+                      cursor: "pointer",
+                      background: sw.swatch,
+                      border:
+                        (selWord.color ?? "base") === sw.role
+                          ? "2px solid #6ea8ff"
+                          : "1px solid #444",
+                      outline: sw.outlined ? "1px solid #fff" : undefined,
+                      outlineOffset: -4,
+                    }}
+                  />
+                ))}
+              </span>
               <button type="button" style={btn()} onClick={() => setEditing(sel)} title="Edit text (double-click / ⏎)">✎ edit</button>
               <button type="button" style={btn()} onClick={addWord} title="Add a word after this one (⌘I)">＋ word</button>
               <button type="button" style={btn()} onClick={delWord} title="Delete this word (⌘D)">🗑</button>

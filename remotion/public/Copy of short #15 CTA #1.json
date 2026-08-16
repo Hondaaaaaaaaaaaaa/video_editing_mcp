@@ -1,0 +1,786 @@
+[
+  {
+    "text": "أنا",
+    "startMs": 119,
+    "endMs": 259,
+    "timestampMs": 189,
+    "confidence": null
+  },
+  {
+    "text": "الحين",
+    "startMs": 280,
+    "endMs": 519,
+    "timestampMs": 400,
+    "confidence": null
+  },
+  {
+    "text": "ناجحة،",
+    "startMs": 539,
+    "endMs": 1059,
+    "timestampMs": 799,
+    "confidence": null
+  },
+  {
+    "text": "بس",
+    "startMs": 1500,
+    "endMs": 1699,
+    "timestampMs": 1600,
+    "confidence": null
+  },
+  {
+    "text": "لو",
+    "startMs": 1740,
+    "endMs": 1860,
+    "timestampMs": 1800,
+    "confidence": null
+  },
+  {
+    "text": "أرجع",
+    "startMs": 1899,
+    "endMs": 2240,
+    "timestampMs": 2070,
+    "confidence": null
+  },
+  {
+    "text": "أبدأ",
+    "startMs": 2259,
+    "endMs": 2500,
+    "timestampMs": 2380,
+    "confidence": null
+  },
+  {
+    "text": "من",
+    "startMs": 2559,
+    "endMs": 2639,
+    "timestampMs": 2599,
+    "confidence": null
+  },
+  {
+    "text": "الصفر",
+    "startMs": 2659,
+    "endMs": 3159,
+    "timestampMs": 2909,
+    "confidence": null
+  },
+  {
+    "text": "بعد",
+    "startMs": 3559,
+    "endMs": 3759,
+    "timestampMs": 3659,
+    "confidence": null
+  },
+  {
+    "text": "بختار",
+    "startMs": 3799,
+    "endMs": 4119,
+    "timestampMs": 3959,
+    "confidence": null
+  },
+  {
+    "text": "Digital",
+    "startMs": 4219,
+    "endMs": 4559,
+    "timestampMs": 4389,
+    "confidence": null
+  },
+  {
+    "text": "Franchise.",
+    "startMs": 4619,
+    "endMs": 5179,
+    "timestampMs": 4899,
+    "confidence": null
+  },
+  {
+    "text": "بنيت",
+    "startMs": 5559,
+    "endMs": 5900,
+    "timestampMs": 5730,
+    "confidence": null
+  },
+  {
+    "text": "أول",
+    "startMs": 5940,
+    "endMs": 6179,
+    "timestampMs": 6060,
+    "confidence": null
+  },
+  {
+    "text": "مصدر",
+    "startMs": 6239,
+    "endMs": 6519,
+    "timestampMs": 6379,
+    "confidence": null
+  },
+  {
+    "text": "دخل",
+    "startMs": 6579,
+    "endMs": 6799,
+    "timestampMs": 6689,
+    "confidence": null
+  },
+  {
+    "text": "متكرر",
+    "startMs": 6859,
+    "endMs": 7359,
+    "timestampMs": 7109,
+    "confidence": null
+  },
+  {
+    "text": "بدون",
+    "startMs": 7419,
+    "endMs": 7639,
+    "timestampMs": 7529,
+    "confidence": null
+  },
+  {
+    "text": "ما",
+    "startMs": 7679,
+    "endMs": 7759,
+    "timestampMs": 7719,
+    "confidence": null
+  },
+  {
+    "text": "أكون",
+    "startMs": 7779,
+    "endMs": 8000,
+    "timestampMs": 7890,
+    "confidence": null
+  },
+  {
+    "text": "موجودة",
+    "startMs": 8059,
+    "endMs": 8460,
+    "timestampMs": 8260,
+    "confidence": null
+  },
+  {
+    "text": "دائمًا",
+    "startMs": 8539,
+    "endMs": 8880,
+    "timestampMs": 8710,
+    "confidence": null
+  },
+  {
+    "text": "خلال",
+    "startMs": 9000,
+    "endMs": 9319,
+    "timestampMs": 9160,
+    "confidence": null
+  },
+  {
+    "text": "ستين",
+    "startMs": 9399,
+    "endMs": 9859,
+    "timestampMs": 9629,
+    "confidence": null
+  },
+  {
+    "text": "يوم.",
+    "startMs": 9920,
+    "endMs": 10139,
+    "timestampMs": 10030,
+    "confidence": null
+  },
+  {
+    "text": "I",
+    "startMs": 10619,
+    "endMs": 10760,
+    "timestampMs": 10690,
+    "confidence": null
+  },
+  {
+    "text": "know،",
+    "startMs": 10819,
+    "endMs": 10939,
+    "timestampMs": 10879,
+    "confidence": null
+  },
+  {
+    "text": "عجيب",
+    "startMs": 11420,
+    "endMs": 11739,
+    "timestampMs": 11580,
+    "confidence": null
+  },
+  {
+    "text": "ومو",
+    "startMs": 12000,
+    "endMs": 12179,
+    "timestampMs": 12090,
+    "confidence": null
+  },
+  {
+    "text": "بالحظ،",
+    "startMs": 12239,
+    "endMs": 12599,
+    "timestampMs": 12419,
+    "confidence": null
+  },
+  {
+    "text": "كان",
+    "startMs": 12699,
+    "endMs": 12879,
+    "timestampMs": 12789,
+    "confidence": null
+  },
+  {
+    "text": "بنظام",
+    "startMs": 12920,
+    "endMs": 13340,
+    "timestampMs": 13130,
+    "confidence": null
+  },
+  {
+    "text": "وخطوات",
+    "startMs": 13420,
+    "endMs": 13779,
+    "timestampMs": 13600,
+    "confidence": null
+  },
+  {
+    "text": "مدروسة.",
+    "startMs": 13819,
+    "endMs": 14359,
+    "timestampMs": 14089,
+    "confidence": null
+  },
+  {
+    "text": "الـ",
+    "startMs": 14439,
+    "endMs": 14519,
+    "timestampMs": 14479,
+    "confidence": null
+  },
+  {
+    "text": "Franchise",
+    "startMs": 14539,
+    "endMs": 14979,
+    "timestampMs": 14759,
+    "confidence": null
+  },
+  {
+    "text": "الرقمي",
+    "startMs": 15019,
+    "endMs": 15420,
+    "timestampMs": 15220,
+    "confidence": null
+  },
+  {
+    "text": "الحقيقي",
+    "startMs": 15439,
+    "endMs": 15939,
+    "timestampMs": 15689,
+    "confidence": null
+  },
+  {
+    "text": "ما",
+    "startMs": 16020,
+    "endMs": 16079,
+    "timestampMs": 16050,
+    "confidence": null
+  },
+  {
+    "text": "يعتمد",
+    "startMs": 16119,
+    "endMs": 16559,
+    "timestampMs": 16339,
+    "confidence": null
+  },
+  {
+    "text": "على",
+    "startMs": 16600,
+    "endMs": 16699,
+    "timestampMs": 16650,
+    "confidence": null
+  },
+  {
+    "text": "إنك",
+    "startMs": 16719,
+    "endMs": 16940,
+    "timestampMs": 16830,
+    "confidence": null
+  },
+  {
+    "text": "تسوين",
+    "startMs": 16960,
+    "endMs": 17299,
+    "timestampMs": 17130,
+    "confidence": null
+  },
+  {
+    "text": "كل",
+    "startMs": 17359,
+    "endMs": 17500,
+    "timestampMs": 17430,
+    "confidence": null
+  },
+  {
+    "text": "شيء",
+    "startMs": 17559,
+    "endMs": 17719,
+    "timestampMs": 17639,
+    "confidence": null
+  },
+  {
+    "text": "بروحك،",
+    "startMs": 17760,
+    "endMs": 18199,
+    "timestampMs": 17980,
+    "confidence": null
+  },
+  {
+    "text": "يعتمد",
+    "startMs": 18520,
+    "endMs": 18939,
+    "timestampMs": 18730,
+    "confidence": null
+  },
+  {
+    "text": "على",
+    "startMs": 19000,
+    "endMs": 19180,
+    "timestampMs": 19090,
+    "confidence": null
+  },
+  {
+    "text": "أنظمة",
+    "startMs": 19199,
+    "endMs": 19559,
+    "timestampMs": 19379,
+    "confidence": null
+  },
+  {
+    "text": "ذكية،",
+    "startMs": 19639,
+    "endMs": 20059,
+    "timestampMs": 19849,
+    "confidence": null
+  },
+  {
+    "text": "دخل",
+    "startMs": 20459,
+    "endMs": 20719,
+    "timestampMs": 20589,
+    "confidence": null
+  },
+  {
+    "text": "قابل",
+    "startMs": 20819,
+    "endMs": 21159,
+    "timestampMs": 20989,
+    "confidence": null
+  },
+  {
+    "text": "إنه",
+    "startMs": 21199,
+    "endMs": 21319,
+    "timestampMs": 21259,
+    "confidence": null
+  },
+  {
+    "text": "يتكرر،",
+    "startMs": 21379,
+    "endMs": 21899,
+    "timestampMs": 21639,
+    "confidence": null
+  },
+  {
+    "text": "وشغلة",
+    "startMs": 22020,
+    "endMs": 22479,
+    "timestampMs": 22250,
+    "confidence": null
+  },
+  {
+    "text": "أساسينها",
+    "startMs": 22539,
+    "endMs": 22979,
+    "timestampMs": 22759,
+    "confidence": null
+  },
+  {
+    "text": "مرة",
+    "startMs": 23019,
+    "endMs": 23219,
+    "timestampMs": 23119,
+    "confidence": null
+  },
+  {
+    "text": "واحدة.",
+    "startMs": 23260,
+    "endMs": 23659,
+    "timestampMs": 23460,
+    "confidence": null
+  },
+  {
+    "text": "لو",
+    "startMs": 24100,
+    "endMs": 24180,
+    "timestampMs": 24140,
+    "confidence": null
+  },
+  {
+    "text": "رجعت",
+    "startMs": 24260,
+    "endMs": 24619,
+    "timestampMs": 24440,
+    "confidence": null
+  },
+  {
+    "text": "أبدأ",
+    "startMs": 24719,
+    "endMs": 24979,
+    "timestampMs": 24849,
+    "confidence": null
+  },
+  {
+    "text": "من",
+    "startMs": 25039,
+    "endMs": 25159,
+    "timestampMs": 25099,
+    "confidence": null
+  },
+  {
+    "text": "الصفر",
+    "startMs": 25199,
+    "endMs": 25920,
+    "timestampMs": 25560,
+    "confidence": null
+  },
+  {
+    "text": "ما",
+    "startMs": 26039,
+    "endMs": 26119,
+    "timestampMs": 26079,
+    "confidence": null
+  },
+  {
+    "text": "كنت",
+    "startMs": 26180,
+    "endMs": 26319,
+    "timestampMs": 26250,
+    "confidence": null
+  },
+  {
+    "text": "بضيع",
+    "startMs": 26359,
+    "endMs": 26659,
+    "timestampMs": 26509,
+    "confidence": null
+  },
+  {
+    "text": "وقتي",
+    "startMs": 26719,
+    "endMs": 26940,
+    "timestampMs": 26830,
+    "confidence": null
+  },
+  {
+    "text": "في",
+    "startMs": 27039,
+    "endMs": 27079,
+    "timestampMs": 27059,
+    "confidence": null
+  },
+  {
+    "text": "الركضة.",
+    "startMs": 27079,
+    "endMs": 27619,
+    "timestampMs": 27349,
+    "confidence": null
+  },
+  {
+    "text": "At",
+    "startMs": 28019,
+    "endMs": 28199,
+    "timestampMs": 28109,
+    "confidence": null
+  },
+  {
+    "text": "all،",
+    "startMs": 28260,
+    "endMs": 28479,
+    "timestampMs": 28370,
+    "confidence": null
+  },
+  {
+    "text": "كنت",
+    "startMs": 28579,
+    "endMs": 28719,
+    "timestampMs": 28649,
+    "confidence": null
+  },
+  {
+    "text": "بختار",
+    "startMs": 28739,
+    "endMs": 29079,
+    "timestampMs": 28909,
+    "confidence": null
+  },
+  {
+    "text": "مشروع",
+    "startMs": 29139,
+    "endMs": 29899,
+    "timestampMs": 29519,
+    "confidence": null
+  },
+  {
+    "text": "قابل",
+    "startMs": 29979,
+    "endMs": 30219,
+    "timestampMs": 30099,
+    "confidence": null
+  },
+  {
+    "text": "للتوسع،",
+    "startMs": 30260,
+    "endMs": 30899,
+    "timestampMs": 30580,
+    "confidence": null
+  },
+  {
+    "text": "سريع",
+    "startMs": 31179,
+    "endMs": 31499,
+    "timestampMs": 31339,
+    "confidence": null
+  },
+  {
+    "text": "الأتمتة،",
+    "startMs": 31519,
+    "endMs": 32060,
+    "timestampMs": 31790,
+    "confidence": null
+  },
+  {
+    "text": "وبستثمر",
+    "startMs": 32419,
+    "endMs": 33040,
+    "timestampMs": 32730,
+    "confidence": null
+  },
+  {
+    "text": "كل",
+    "startMs": 33099,
+    "endMs": 33259,
+    "timestampMs": 33179,
+    "confidence": null
+  },
+  {
+    "text": "فلس",
+    "startMs": 33380,
+    "endMs": 33659,
+    "timestampMs": 33520,
+    "confidence": null
+  },
+  {
+    "text": "يدخل",
+    "startMs": 33680,
+    "endMs": 34020,
+    "timestampMs": 33850,
+    "confidence": null
+  },
+  {
+    "text": "بنظام،",
+    "startMs": 34079,
+    "endMs": 34579,
+    "timestampMs": 34329,
+    "confidence": null
+  },
+  {
+    "text": "وهاي",
+    "startMs": 34619,
+    "endMs": 34860,
+    "timestampMs": 34740,
+    "confidence": null
+  },
+  {
+    "text": "الفرق",
+    "startMs": 34899,
+    "endMs": 35319,
+    "timestampMs": 35109,
+    "confidence": null
+  },
+  {
+    "text": "بين",
+    "startMs": 35380,
+    "endMs": 35520,
+    "timestampMs": 35450,
+    "confidence": null
+  },
+  {
+    "text": "بيع",
+    "startMs": 35559,
+    "endMs": 35739,
+    "timestampMs": 35649,
+    "confidence": null
+  },
+  {
+    "text": "الوقت",
+    "startMs": 35779,
+    "endMs": 36119,
+    "timestampMs": 35949,
+    "confidence": null
+  },
+  {
+    "text": "مقابل",
+    "startMs": 36180,
+    "endMs": 36639,
+    "timestampMs": 36410,
+    "confidence": null
+  },
+  {
+    "text": "المال",
+    "startMs": 36680,
+    "endMs": 36979,
+    "timestampMs": 36830,
+    "confidence": null
+  },
+  {
+    "text": "وبناء",
+    "startMs": 37020,
+    "endMs": 37419,
+    "timestampMs": 37220,
+    "confidence": null
+  },
+  {
+    "text": "الثروة.",
+    "startMs": 37439,
+    "endMs": 37939,
+    "timestampMs": 37689,
+    "confidence": null
+  },
+  {
+    "text": "تبين",
+    "startMs": 38219,
+    "endMs": 38439,
+    "timestampMs": 38329,
+    "confidence": null
+  },
+  {
+    "text": "طريق",
+    "startMs": 38500,
+    "endMs": 38779,
+    "timestampMs": 38640,
+    "confidence": null
+  },
+  {
+    "text": "واضح",
+    "startMs": 38840,
+    "endMs": 39099,
+    "timestampMs": 38970,
+    "confidence": null
+  },
+  {
+    "text": "ومجرب",
+    "startMs": 39139,
+    "endMs": 39559,
+    "timestampMs": 39349,
+    "confidence": null
+  },
+  {
+    "text": "لبناء",
+    "startMs": 39619,
+    "endMs": 40019,
+    "timestampMs": 39819,
+    "confidence": null
+  },
+  {
+    "text": "دخل",
+    "startMs": 40079,
+    "endMs": 40360,
+    "timestampMs": 40220,
+    "confidence": null
+  },
+  {
+    "text": "Online",
+    "startMs": 40439,
+    "endMs": 40739,
+    "timestampMs": 40589,
+    "confidence": null
+  },
+  {
+    "text": "من",
+    "startMs": 40799,
+    "endMs": 40919,
+    "timestampMs": 40859,
+    "confidence": null
+  },
+  {
+    "text": "البيت؟",
+    "startMs": 40959,
+    "endMs": 41380,
+    "timestampMs": 41170,
+    "confidence": null
+  },
+  {
+    "text": "Comment",
+    "startMs": 41579,
+    "endMs": 41919,
+    "timestampMs": 41749,
+    "confidence": null
+  },
+  {
+    "text": "Digital،",
+    "startMs": 41919,
+    "endMs": 42340,
+    "timestampMs": 42130,
+    "confidence": null
+  },
+  {
+    "text": "وحجز",
+    "startMs": 42419,
+    "endMs": 42680,
+    "timestampMs": 42550,
+    "confidence": null
+  },
+  {
+    "text": "استشارة",
+    "startMs": 42739,
+    "endMs": 43159,
+    "timestampMs": 42949,
+    "confidence": null
+  },
+  {
+    "text": "مجانية",
+    "startMs": 43219,
+    "endMs": 43719,
+    "timestampMs": 43469,
+    "confidence": null
+  },
+  {
+    "text": "مع",
+    "startMs": 43759,
+    "endMs": 43939,
+    "timestampMs": 43849,
+    "confidence": null
+  },
+  {
+    "text": "فريقي",
+    "startMs": 44000,
+    "endMs": 44399,
+    "timestampMs": 44200,
+    "confidence": null
+  },
+  {
+    "text": "علشان",
+    "startMs": 44439,
+    "endMs": 44799,
+    "timestampMs": 44619,
+    "confidence": null
+  },
+  {
+    "text": "تربحين",
+    "startMs": 44840,
+    "endMs": 45239,
+    "timestampMs": 45040,
+    "confidence": null
+  },
+  {
+    "text": "Online.",
+    "startMs": 45279,
+    "endMs": 45520,
+    "timestampMs": 45400,
+    "confidence": null
+  }
+]

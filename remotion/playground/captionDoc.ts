@@ -14,6 +14,7 @@ import type {
   EnrichedLine,
   EnrichedSegment,
   EnrichedWord,
+  WordColor,
 } from "../src/CaptionedVideo/styles/types";
 
 // ---------------------------------------------------------------------------
@@ -80,6 +81,38 @@ export const toggleEmphasis = (
           ...line,
           words: line.words.map((word, wi) =>
             wi !== w ? word : { ...word, emphasis: !word.emphasis },
+          ),
+        },
+  );
+  return replaceSeg(doc, s, markEdited({ ...seg, lines }));
+};
+
+/**
+ * Set the SEMANTIC COLOUR of a word, or of a whole caption.
+ *
+ * Claude assigns these in the enrich pass, but the colour is a judgement call —
+ * "is this good news or just the key term?" — so the user gets the final say.
+ * Passing `l`/`w` as null recolours EVERY word of the caption, which is the
+ * common case: the accent applies to a phrase, not a lone word. Setting "base"
+ * clears an accent back to the plain colour.
+ */
+export const setWordColor = (
+  doc: CaptionDoc,
+  s: number,
+  l: number | null,
+  w: number | null,
+  color: WordColor,
+): CaptionDoc => {
+  const seg = doc.segments[s];
+  if (!seg) return doc;
+  const whole = l === null || w === null;
+  const lines = seg.lines.map((line, li) =>
+    !whole && li !== l
+      ? line
+      : {
+          ...line,
+          words: line.words.map((word, wi) =>
+            !whole && wi !== w ? word : { ...word, color },
           ),
         },
   );

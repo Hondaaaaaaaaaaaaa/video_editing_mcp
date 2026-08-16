@@ -91,7 +91,7 @@ const OUTPUT_SCHEMA = {
                 variant: { type: "string", enum: ["base", "punch", "elegant"] },
                 color: {
                   type: "string",
-                  enum: ["base", "key", "loud", "positive", "wild", "cool"],
+                  enum: ["base", "key", "positive", "negative", "shock"],
                 },
               },
               required: ["i", "text", "emphasis", "variant", "color"],
@@ -173,12 +173,12 @@ RULES:
 
    VARY IT. Do not give two captions in a row the same role. Move through the roles across the video so the colour keeps changing.
 
-   - "base"     = ordinary words — still the majority of words overall.
-   - "key"      = the thing being named: concrete noun/object, a number or money figure, a proper name, a place, a product.
-   - "loud"     = excitement, disbelief, shouting, a threat, a dare. THE MOST-USED ACCENT — "NO WAY", "THAT'S CRAZY", "MY MAN BE CAREFUL", "DESTROY YOU". Note this is about VOLUME AND ENERGY, not about bad news.
-   - "positive" = good news landing: approval, success, praise, a reveal going well.
-   - "wild"     = playful, absurd or cheeky flavour.
-   - "cool"     = interjections, sounds, laughs and asides ("HA-", "UHM", "WAIT").
+   - "base"     = WHITE. Ordinary words — still the majority overall.
+   - "key"      = YELLOW. The NORMAL highlight: the thing being named — concrete noun/object, a number or money figure, a proper name, a place, a product. This is the most common accent.
+   - "positive" = GREEN. GOOD things: good news, approval, success, praise, a reveal landing well, a win.
+   - "negative" = RED. BAD things: refusal, failure, threat, warning, insult, loss, danger.
+   - "shock"    = RED WITH A WHITE OUTLINE. SURPRISE — disbelief, a twist, something the speaker cannot believe ("NO WAY", "WHAT?!"). Use sparingly: at most 2-3 in a whole transcript, or none.
+   There are exactly these five roles and no others. Do not invent colours.
 
 8. TRANSLATION: Provide a natural, fluent English translation of the whole transcript (colloquial where the source is colloquial). If the source is already English, translate to Arabic instead.
 9. WORD INDICES: Reference every original word exactly once by its index "i", in ascending order, across all captions. Do not add, drop, or reorder words. "text" is the CORRECTED form of that word.

@@ -183,6 +183,73 @@ const Field: React.FC<{
     );
   }
 
+  // Array of OBJECTS (e.g. Speed's palette accents) -> one titled card per
+  // entry, each recursing into the element schema, plus add/remove. Without
+  // this an object array fell through to the colour-array branch below and
+  // rendered as "[object Object]" swatches.
+  if (type === "array" && getDef(getDef(schema)?.element ?? getDef(schema)?.type)?.shape) {
+    const elementSchema = getDef(schema).element ?? getDef(schema).type;
+    const shape = getDef(elementSchema).shape;
+    const arr = Array.isArray(value) ? (value as Record<string, unknown>[]) : [];
+    const set = (next: unknown[]) => onChange(next);
+    // A new entry copies the LAST one and gives it a fresh id, so an added
+    // colour arrives with sane outline/label fields already filled in.
+    const blank = () => {
+      const last = arr[arr.length - 1] ?? {};
+      const n = arr.length + 1;
+      return { ...last, id: `custom${n}`, label: `Custom ${n}`, enabled: true };
+    };
+    return (
+      <div style={row}>
+        <div style={labelStyle}>{labelize(name)}</div>
+        {arr.map((item, i) => (
+          <div
+            key={i}
+            style={{
+              border: "1px solid #2a2a35",
+              borderRadius: 6,
+              padding: 8,
+              marginBottom: 6,
+              background: "#131319",
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <strong style={{ fontSize: 11, color: "#9aa" }}>
+                {String(item.label ?? item.id ?? `#${i + 1}`)}
+              </strong>
+              <button
+                type="button"
+                onClick={() => set(arr.filter((_, j) => j !== i))}
+                style={{ ...textInput, width: 28, cursor: "pointer" }}
+                title="Remove this colour"
+              >
+                ✕
+              </button>
+            </div>
+            {Object.keys(shape).map((k) => (
+              <Field
+                key={k}
+                name={k}
+                schema={shape[k]}
+                value={item[k]}
+                onChange={(v) =>
+                  set(arr.map((x, j) => (j === i ? { ...x, [k]: v } : x)))
+                }
+              />
+            ))}
+          </div>
+        ))}
+        <button
+          type="button"
+          onClick={() => set([...arr, blank()])}
+          style={{ ...textInput, cursor: "pointer", color: "#7dd3fc" }}
+        >
+          + Add
+        </button>
+      </div>
+    );
+  }
+
   // Array of colors (e.g. textColors) -> add/remove list of color pickers.
   if (type === "array") {
     const arr = Array.isArray(value) ? (value as string[]) : [];

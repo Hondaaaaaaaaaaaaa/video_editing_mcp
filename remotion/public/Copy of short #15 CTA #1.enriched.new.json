@@ -1,0 +1,7560 @@
+{
+  "language": "ar",
+  "segments": [
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "أنا",
+              "emphasis": false,
+              "startMs": 119,
+              "endMs": 259,
+              "variant": "base"
+            },
+            {
+              "text": "الحين",
+              "emphasis": false,
+              "startMs": 280,
+              "endMs": 519,
+              "variant": "base"
+            },
+            {
+              "text": "ناجحة،",
+              "emphasis": true,
+              "startMs": 539,
+              "endMs": 1059,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "بس",
+              "emphasis": false,
+              "startMs": 1500,
+              "endMs": 1699,
+              "variant": "base"
+            },
+            {
+              "text": "لو",
+              "emphasis": false,
+              "startMs": 1740,
+              "endMs": 1860,
+              "variant": "base"
+            },
+            {
+              "text": "أرجع",
+              "emphasis": false,
+              "startMs": 1899,
+              "endMs": 2240,
+              "variant": "base"
+            },
+            {
+              "text": "أبدأ",
+              "emphasis": false,
+              "startMs": 2259,
+              "endMs": 2500,
+              "variant": "base"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "من",
+              "emphasis": false,
+              "startMs": 2559,
+              "endMs": 2639,
+              "variant": "base"
+            },
+            {
+              "text": "الصفر",
+              "emphasis": true,
+              "startMs": 2659,
+              "endMs": 3159,
+              "variant": "punch"
+            },
+            {
+              "text": "بعد،",
+              "emphasis": false,
+              "startMs": 3559,
+              "endMs": 3759,
+              "variant": "base"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "بختار",
+              "emphasis": false,
+              "startMs": 3799,
+              "endMs": 4119,
+              "variant": "base"
+            },
+            {
+              "text": "Digital",
+              "emphasis": true,
+              "startMs": 4219,
+              "endMs": 4559,
+              "variant": "punch"
+            },
+            {
+              "text": "Franchise.",
+              "emphasis": true,
+              "startMs": 4619,
+              "endMs": 5179,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "بنيت",
+              "emphasis": false,
+              "startMs": 5559,
+              "endMs": 5900,
+              "variant": "base"
+            },
+            {
+              "text": "أول",
+              "emphasis": true,
+              "startMs": 5940,
+              "endMs": 6179,
+              "variant": "punch"
+            },
+            {
+              "text": "مصدر",
+              "emphasis": false,
+              "startMs": 6239,
+              "endMs": 6519,
+              "variant": "base"
+            },
+            {
+              "text": "دخل",
+              "emphasis": true,
+              "startMs": 6579,
+              "endMs": 6799,
+              "variant": "punch"
+            },
+            {
+              "text": "متكرر",
+              "emphasis": true,
+              "startMs": 6859,
+              "endMs": 7359,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "بدون",
+              "emphasis": false,
+              "startMs": 7419,
+              "endMs": 7639,
+              "variant": "base"
+            },
+            {
+              "text": "ما",
+              "emphasis": false,
+              "startMs": 7679,
+              "endMs": 7759,
+              "variant": "base"
+            },
+            {
+              "text": "أكون",
+              "emphasis": false,
+              "startMs": 7779,
+              "endMs": 8000,
+              "variant": "base"
+            },
+            {
+              "text": "موجودة",
+              "emphasis": false,
+              "startMs": 8059,
+              "endMs": 8460,
+              "variant": "elegant"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "دائما",
+              "emphasis": false,
+              "startMs": 8539,
+              "endMs": 8880,
+              "variant": "base"
+            },
+            {
+              "text": "خلال",
+              "emphasis": false,
+              "startMs": 9000,
+              "endMs": 9319,
+              "variant": "base"
+            },
+            {
+              "text": "ستين",
+              "emphasis": true,
+              "startMs": 9399,
+              "endMs": 9859,
+              "variant": "punch"
+            },
+            {
+              "text": "يوم.",
+              "emphasis": true,
+              "startMs": 9920,
+              "endMs": 10139,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "I",
+              "emphasis": false,
+              "startMs": 10619,
+              "endMs": 10760,
+              "variant": "base"
+            },
+            {
+              "text": "know,",
+              "emphasis": true,
+              "startMs": 10819,
+              "endMs": 10939,
+              "variant": "elegant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "عجيب",
+              "emphasis": true,
+              "startMs": 11420,
+              "endMs": 11739,
+              "variant": "punch"
+            },
+            {
+              "text": "ومو",
+              "emphasis": false,
+              "startMs": 12000,
+              "endMs": 12179,
+              "variant": "base"
+            },
+            {
+              "text": "بالحظ،",
+              "emphasis": true,
+              "startMs": 12239,
+              "endMs": 12599,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "كان",
+              "emphasis": false,
+              "startMs": 12699,
+              "endMs": 12879,
+              "variant": "base"
+            },
+            {
+              "text": "بنظام",
+              "emphasis": true,
+              "startMs": 12920,
+              "endMs": 13340,
+              "variant": "punch"
+            },
+            {
+              "text": "وخطوات",
+              "emphasis": false,
+              "startMs": 13420,
+              "endMs": 13779,
+              "variant": "base"
+            },
+            {
+              "text": "مدروسة.",
+              "emphasis": true,
+              "startMs": 13819,
+              "endMs": 14359,
+              "variant": "elegant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "الـ",
+              "emphasis": false,
+              "startMs": 14439,
+              "endMs": 14519,
+              "variant": "base"
+            },
+            {
+              "text": "Franchise",
+              "emphasis": true,
+              "startMs": 14539,
+              "endMs": 14979,
+              "variant": "punch"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "الرقمي",
+              "emphasis": false,
+              "startMs": 15019,
+              "endMs": 15420,
+              "variant": "base"
+            },
+            {
+              "text": "الحقيقي",
+              "emphasis": true,
+              "startMs": 15439,
+              "endMs": 15939,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "ما",
+              "emphasis": false,
+              "startMs": 16020,
+              "endMs": 16079,
+              "variant": "base"
+            },
+            {
+              "text": "يعتمد",
+              "emphasis": false,
+              "startMs": 16119,
+              "endMs": 16559,
+              "variant": "base"
+            },
+            {
+              "text": "على",
+              "emphasis": false,
+              "startMs": 16600,
+              "endMs": 16699,
+              "variant": "base"
+            },
+            {
+              "text": "إنك",
+              "emphasis": false,
+              "startMs": 16719,
+              "endMs": 16940,
+              "variant": "base"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "تسوين",
+              "emphasis": false,
+              "startMs": 16960,
+              "endMs": 17299,
+              "variant": "base"
+            },
+            {
+              "text": "كل",
+              "emphasis": false,
+              "startMs": 17359,
+              "endMs": 17500,
+              "variant": "base"
+            },
+            {
+              "text": "شيء",
+              "emphasis": false,
+              "startMs": 17559,
+              "endMs": 17719,
+              "variant": "base"
+            },
+            {
+              "text": "بروحك،",
+              "emphasis": true,
+              "startMs": 17760,
+              "endMs": 18199,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "يعتمد",
+              "emphasis": false,
+              "startMs": 18520,
+              "endMs": 18939,
+              "variant": "base"
+            },
+            {
+              "text": "على",
+              "emphasis": false,
+              "startMs": 19000,
+              "endMs": 19180,
+              "variant": "base"
+            },
+            {
+              "text": "أنظمة",
+              "emphasis": true,
+              "startMs": 19199,
+              "endMs": 19559,
+              "variant": "punch"
+            },
+            {
+              "text": "ذكية،",
+              "emphasis": true,
+              "startMs": 19639,
+              "endMs": 20059,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "دخل",
+              "emphasis": true,
+              "startMs": 20459,
+              "endMs": 20719,
+              "variant": "punch"
+            },
+            {
+              "text": "قابل",
+              "emphasis": false,
+              "startMs": 20819,
+              "endMs": 21159,
+              "variant": "base"
+            },
+            {
+              "text": "إنه",
+              "emphasis": false,
+              "startMs": 21199,
+              "endMs": 21319,
+              "variant": "base"
+            },
+            {
+              "text": "يتكرر،",
+              "emphasis": true,
+              "startMs": 21379,
+              "endMs": 21899,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "وشغلة",
+              "emphasis": false,
+              "startMs": 22020,
+              "endMs": 22479,
+              "variant": "base"
+            },
+            {
+              "text": "تأسيسها",
+              "emphasis": true,
+              "startMs": 22539,
+              "endMs": 22979,
+              "variant": "punch"
+            },
+            {
+              "text": "مرة",
+              "emphasis": true,
+              "startMs": 23019,
+              "endMs": 23219,
+              "variant": "punch"
+            },
+            {
+              "text": "واحدة.",
+              "emphasis": true,
+              "startMs": 23260,
+              "endMs": 23659,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "لو",
+              "emphasis": false,
+              "startMs": 24100,
+              "endMs": 24180,
+              "variant": "base"
+            },
+            {
+              "text": "رجعت",
+              "emphasis": false,
+              "startMs": 24260,
+              "endMs": 24619,
+              "variant": "base"
+            },
+            {
+              "text": "أبدأ",
+              "emphasis": false,
+              "startMs": 24719,
+              "endMs": 24979,
+              "variant": "base"
+            },
+            {
+              "text": "من",
+              "emphasis": false,
+              "startMs": 25039,
+              "endMs": 25159,
+              "variant": "base"
+            },
+            {
+              "text": "الصفر،",
+              "emphasis": true,
+              "startMs": 25199,
+              "endMs": 25920,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "ما",
+              "emphasis": false,
+              "startMs": 26039,
+              "endMs": 26119,
+              "variant": "base"
+            },
+            {
+              "text": "كنت",
+              "emphasis": false,
+              "startMs": 26180,
+              "endMs": 26319,
+              "variant": "base"
+            },
+            {
+              "text": "بضيع",
+              "emphasis": false,
+              "startMs": 26359,
+              "endMs": 26659,
+              "variant": "base"
+            },
+            {
+              "text": "وقتي",
+              "emphasis": true,
+              "startMs": 26719,
+              "endMs": 26940,
+              "variant": "punch"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "في",
+              "emphasis": false,
+              "startMs": 27039,
+              "endMs": 27079,
+              "variant": "base"
+            },
+            {
+              "text": "الركضة.",
+              "emphasis": true,
+              "startMs": 27079,
+              "endMs": 27619,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "At",
+              "emphasis": false,
+              "startMs": 28019,
+              "endMs": 28199,
+              "variant": "base"
+            },
+            {
+              "text": "all،",
+              "emphasis": true,
+              "startMs": 28260,
+              "endMs": 28479,
+              "variant": "elegant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "كنت",
+              "emphasis": false,
+              "startMs": 28579,
+              "endMs": 28719,
+              "variant": "base"
+            },
+            {
+              "text": "بختار",
+              "emphasis": false,
+              "startMs": 28739,
+              "endMs": 29079,
+              "variant": "base"
+            },
+            {
+              "text": "مشروع",
+              "emphasis": true,
+              "startMs": 29139,
+              "endMs": 29899,
+              "variant": "punch"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "قابل",
+              "emphasis": false,
+              "startMs": 29979,
+              "endMs": 30219,
+              "variant": "base"
+            },
+            {
+              "text": "للتوسع،",
+              "emphasis": true,
+              "startMs": 30260,
+              "endMs": 30899,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "سريع",
+              "emphasis": false,
+              "startMs": 31179,
+              "endMs": 31499,
+              "variant": "base"
+            },
+            {
+              "text": "الأتمتة،",
+              "emphasis": true,
+              "startMs": 31519,
+              "endMs": 32060,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "وبستثمر",
+              "emphasis": false,
+              "startMs": 32419,
+              "endMs": 33040,
+              "variant": "base"
+            },
+            {
+              "text": "كل",
+              "emphasis": false,
+              "startMs": 33099,
+              "endMs": 33259,
+              "variant": "base"
+            },
+            {
+              "text": "فلس",
+              "emphasis": true,
+              "startMs": 33380,
+              "endMs": 33659,
+              "variant": "punch"
+            },
+            {
+              "text": "يدخل",
+              "emphasis": false,
+              "startMs": 33680,
+              "endMs": 34020,
+              "variant": "base"
+            },
+            {
+              "text": "بنظام،",
+              "emphasis": false,
+              "startMs": 34079,
+              "endMs": 34579,
+              "variant": "base"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "وهاي",
+              "emphasis": false,
+              "startMs": 34619,
+              "endMs": 34860,
+              "variant": "base"
+            },
+            {
+              "text": "الفرق",
+              "emphasis": false,
+              "startMs": 34899,
+              "endMs": 35319,
+              "variant": "base"
+            },
+            {
+              "text": "بين",
+              "emphasis": false,
+              "startMs": 35380,
+              "endMs": 35520,
+              "variant": "base"
+            },
+            {
+              "text": "بيع",
+              "emphasis": false,
+              "startMs": 35559,
+              "endMs": 35739,
+              "variant": "base"
+            },
+            {
+              "text": "الوقت",
+              "emphasis": true,
+              "startMs": 35779,
+              "endMs": 36119,
+              "variant": "punch"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "مقابل",
+              "emphasis": false,
+              "startMs": 36180,
+              "endMs": 36639,
+              "variant": "base"
+            },
+            {
+              "text": "المال",
+              "emphasis": true,
+              "startMs": 36680,
+              "endMs": 36979,
+              "variant": "punch"
+            },
+            {
+              "text": "وبناء",
+              "emphasis": false,
+              "startMs": 37020,
+              "endMs": 37419,
+              "variant": "base"
+            },
+            {
+              "text": "الثروة.",
+              "emphasis": true,
+              "startMs": 37439,
+              "endMs": 37939,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "تبين",
+              "emphasis": false,
+              "startMs": 38219,
+              "endMs": 38439,
+              "variant": "base"
+            },
+            {
+              "text": "طريق",
+              "emphasis": false,
+              "startMs": 38500,
+              "endMs": 38779,
+              "variant": "base"
+            },
+            {
+              "text": "واضح",
+              "emphasis": false,
+              "startMs": 38840,
+              "endMs": 39099,
+              "variant": "base"
+            },
+            {
+              "text": "ومجرب",
+              "emphasis": false,
+              "startMs": 39139,
+              "endMs": 39559,
+              "variant": "base"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "لبناء",
+              "emphasis": false,
+              "startMs": 39619,
+              "endMs": 40019,
+              "variant": "base"
+            },
+            {
+              "text": "دخل",
+              "emphasis": true,
+              "startMs": 40079,
+              "endMs": 40360,
+              "variant": "punch"
+            },
+            {
+              "text": "Online",
+              "emphasis": true,
+              "startMs": 40439,
+              "endMs": 40739,
+              "variant": "punch"
+            },
+            {
+              "text": "من",
+              "emphasis": false,
+              "startMs": 40799,
+              "endMs": 40919,
+              "variant": "base"
+            },
+            {
+              "text": "البيت؟",
+              "emphasis": true,
+              "startMs": 40959,
+              "endMs": 41380,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "Comment",
+              "emphasis": true,
+              "startMs": 41579,
+              "endMs": 41919,
+              "variant": "punch"
+            },
+            {
+              "text": "Digital،",
+              "emphasis": true,
+              "startMs": 41919,
+              "endMs": 42340,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "وحجز",
+              "emphasis": false,
+              "startMs": 42419,
+              "endMs": 42680,
+              "variant": "base"
+            },
+            {
+              "text": "استشارة",
+              "emphasis": true,
+              "startMs": 42739,
+              "endMs": 43159,
+              "variant": "punch"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "مجانية",
+              "emphasis": true,
+              "startMs": 43219,
+              "endMs": 43719,
+              "variant": "punch"
+            },
+            {
+              "text": "مع",
+              "emphasis": false,
+              "startMs": 43759,
+              "endMs": 43939,
+              "variant": "base"
+            },
+            {
+              "text": "فريقي",
+              "emphasis": false,
+              "startMs": 44000,
+              "endMs": 44399,
+              "variant": "base"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "علشان",
+              "emphasis": false,
+              "startMs": 44439,
+              "endMs": 44799,
+              "variant": "base"
+            },
+            {
+              "text": "تربحين",
+              "emphasis": true,
+              "startMs": 44840,
+              "endMs": 45239,
+              "variant": "punch"
+            },
+            {
+              "text": "Online.",
+              "emphasis": true,
+              "startMs": 45279,
+              "endMs": 45520,
+              "variant": "punch"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "hormozi": [
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "أنا",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "الحين",
+                "emphasis": false,
+                "startMs": 280,
+                "endMs": 519,
+                "variant": "base"
+              },
+              {
+                "text": "ناجحة،",
+                "emphasis": true,
+                "startMs": 539,
+                "endMs": 1059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بس",
+                "emphasis": false,
+                "startMs": 1500,
+                "endMs": 1699,
+                "variant": "base"
+              },
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 1740,
+                "endMs": 1860,
+                "variant": "base"
+              },
+              {
+                "text": "أرجع",
+                "emphasis": false,
+                "startMs": 1899,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 2259,
+                "endMs": 2500,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 2559,
+                "endMs": 2639,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 3159,
+                "variant": "punch"
+              },
+              {
+                "text": "بعد،",
+                "emphasis": false,
+                "startMs": 3559,
+                "endMs": 3759,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4119,
+                "variant": "base"
+              },
+              {
+                "text": "Digital",
+                "emphasis": true,
+                "startMs": 4219,
+                "endMs": 4559,
+                "variant": "punch"
+              },
+              {
+                "text": "Franchise.",
+                "emphasis": true,
+                "startMs": 4619,
+                "endMs": 5179,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بنيت",
+                "emphasis": false,
+                "startMs": 5559,
+                "endMs": 5900,
+                "variant": "base"
+              },
+              {
+                "text": "أول",
+                "emphasis": true,
+                "startMs": 5940,
+                "endMs": 6179,
+                "variant": "punch"
+              },
+              {
+                "text": "مصدر",
+                "emphasis": false,
+                "startMs": 6239,
+                "endMs": 6519,
+                "variant": "base"
+              },
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 6579,
+                "endMs": 6799,
+                "variant": "punch"
+              },
+              {
+                "text": "متكرر",
+                "emphasis": true,
+                "startMs": 6859,
+                "endMs": 7359,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بدون",
+                "emphasis": false,
+                "startMs": 7419,
+                "endMs": 7639,
+                "variant": "base"
+              },
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 7679,
+                "endMs": 7759,
+                "variant": "base"
+              },
+              {
+                "text": "أكون",
+                "emphasis": false,
+                "startMs": 7779,
+                "endMs": 8000,
+                "variant": "base"
+              },
+              {
+                "text": "موجودة",
+                "emphasis": false,
+                "startMs": 8059,
+                "endMs": 8460,
+                "variant": "elegant"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دائما",
+                "emphasis": false,
+                "startMs": 8539,
+                "endMs": 8880,
+                "variant": "base"
+              },
+              {
+                "text": "خلال",
+                "emphasis": false,
+                "startMs": 9000,
+                "endMs": 9319,
+                "variant": "base"
+              },
+              {
+                "text": "ستين",
+                "emphasis": true,
+                "startMs": 9399,
+                "endMs": 9859,
+                "variant": "punch"
+              },
+              {
+                "text": "يوم.",
+                "emphasis": true,
+                "startMs": 9920,
+                "endMs": 10139,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 10619,
+                "endMs": 10760,
+                "variant": "base"
+              },
+              {
+                "text": "know,",
+                "emphasis": true,
+                "startMs": 10819,
+                "endMs": 10939,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "عجيب",
+                "emphasis": true,
+                "startMs": 11420,
+                "endMs": 11739,
+                "variant": "punch"
+              },
+              {
+                "text": "ومو",
+                "emphasis": false,
+                "startMs": 12000,
+                "endMs": 12179,
+                "variant": "base"
+              },
+              {
+                "text": "بالحظ،",
+                "emphasis": true,
+                "startMs": 12239,
+                "endMs": 12599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كان",
+                "emphasis": false,
+                "startMs": 12699,
+                "endMs": 12879,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام",
+                "emphasis": true,
+                "startMs": 12920,
+                "endMs": 13340,
+                "variant": "punch"
+              },
+              {
+                "text": "وخطوات",
+                "emphasis": false,
+                "startMs": 13420,
+                "endMs": 13779,
+                "variant": "base"
+              },
+              {
+                "text": "مدروسة.",
+                "emphasis": true,
+                "startMs": 13819,
+                "endMs": 14359,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الـ",
+                "emphasis": false,
+                "startMs": 14439,
+                "endMs": 14519,
+                "variant": "base"
+              },
+              {
+                "text": "Franchise",
+                "emphasis": true,
+                "startMs": 14539,
+                "endMs": 14979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الرقمي",
+                "emphasis": false,
+                "startMs": 15019,
+                "endMs": 15420,
+                "variant": "base"
+              },
+              {
+                "text": "الحقيقي",
+                "emphasis": true,
+                "startMs": 15439,
+                "endMs": 15939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 16020,
+                "endMs": 16079,
+                "variant": "base"
+              },
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 16119,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 16600,
+                "endMs": 16699,
+                "variant": "base"
+              },
+              {
+                "text": "إنك",
+                "emphasis": false,
+                "startMs": 16719,
+                "endMs": 16940,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تسوين",
+                "emphasis": false,
+                "startMs": 16960,
+                "endMs": 17299,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 17359,
+                "endMs": 17500,
+                "variant": "base"
+              },
+              {
+                "text": "شيء",
+                "emphasis": false,
+                "startMs": 17559,
+                "endMs": 17719,
+                "variant": "base"
+              },
+              {
+                "text": "بروحك،",
+                "emphasis": true,
+                "startMs": 17760,
+                "endMs": 18199,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 18520,
+                "endMs": 18939,
+                "variant": "base"
+              },
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 19000,
+                "endMs": 19180,
+                "variant": "base"
+              },
+              {
+                "text": "أنظمة",
+                "emphasis": true,
+                "startMs": 19199,
+                "endMs": 19559,
+                "variant": "punch"
+              },
+              {
+                "text": "ذكية،",
+                "emphasis": true,
+                "startMs": 19639,
+                "endMs": 20059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 20459,
+                "endMs": 20719,
+                "variant": "punch"
+              },
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 21159,
+                "variant": "base"
+              },
+              {
+                "text": "إنه",
+                "emphasis": false,
+                "startMs": 21199,
+                "endMs": 21319,
+                "variant": "base"
+              },
+              {
+                "text": "يتكرر،",
+                "emphasis": true,
+                "startMs": 21379,
+                "endMs": 21899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وشغلة",
+                "emphasis": false,
+                "startMs": 22020,
+                "endMs": 22479,
+                "variant": "base"
+              },
+              {
+                "text": "تأسيسها",
+                "emphasis": true,
+                "startMs": 22539,
+                "endMs": 22979,
+                "variant": "punch"
+              },
+              {
+                "text": "مرة",
+                "emphasis": true,
+                "startMs": 23019,
+                "endMs": 23219,
+                "variant": "punch"
+              },
+              {
+                "text": "واحدة.",
+                "emphasis": true,
+                "startMs": 23260,
+                "endMs": 23659,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 24100,
+                "endMs": 24180,
+                "variant": "base"
+              },
+              {
+                "text": "رجعت",
+                "emphasis": false,
+                "startMs": 24260,
+                "endMs": 24619,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 24719,
+                "endMs": 24979,
+                "variant": "base"
+              },
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 25039,
+                "endMs": 25159,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر،",
+                "emphasis": true,
+                "startMs": 25199,
+                "endMs": 25920,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 26039,
+                "endMs": 26119,
+                "variant": "base"
+              },
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 26180,
+                "endMs": 26319,
+                "variant": "base"
+              },
+              {
+                "text": "بضيع",
+                "emphasis": false,
+                "startMs": 26359,
+                "endMs": 26659,
+                "variant": "base"
+              },
+              {
+                "text": "وقتي",
+                "emphasis": true,
+                "startMs": 26719,
+                "endMs": 26940,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "في",
+                "emphasis": false,
+                "startMs": 27039,
+                "endMs": 27079,
+                "variant": "base"
+              },
+              {
+                "text": "الركضة.",
+                "emphasis": true,
+                "startMs": 27079,
+                "endMs": 27619,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "At",
+                "emphasis": false,
+                "startMs": 28019,
+                "endMs": 28199,
+                "variant": "base"
+              },
+              {
+                "text": "all،",
+                "emphasis": true,
+                "startMs": 28260,
+                "endMs": 28479,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 28579,
+                "endMs": 28719,
+                "variant": "base"
+              },
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 28739,
+                "endMs": 29079,
+                "variant": "base"
+              },
+              {
+                "text": "مشروع",
+                "emphasis": true,
+                "startMs": 29139,
+                "endMs": 29899,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 29979,
+                "endMs": 30219,
+                "variant": "base"
+              },
+              {
+                "text": "للتوسع،",
+                "emphasis": true,
+                "startMs": 30260,
+                "endMs": 30899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "سريع",
+                "emphasis": false,
+                "startMs": 31179,
+                "endMs": 31499,
+                "variant": "base"
+              },
+              {
+                "text": "الأتمتة،",
+                "emphasis": true,
+                "startMs": 31519,
+                "endMs": 32060,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وبستثمر",
+                "emphasis": false,
+                "startMs": 32419,
+                "endMs": 33040,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 33099,
+                "endMs": 33259,
+                "variant": "base"
+              },
+              {
+                "text": "فلس",
+                "emphasis": true,
+                "startMs": 33380,
+                "endMs": 33659,
+                "variant": "punch"
+              },
+              {
+                "text": "يدخل",
+                "emphasis": false,
+                "startMs": 33680,
+                "endMs": 34020,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام،",
+                "emphasis": false,
+                "startMs": 34079,
+                "endMs": 34579,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وهاي",
+                "emphasis": false,
+                "startMs": 34619,
+                "endMs": 34860,
+                "variant": "base"
+              },
+              {
+                "text": "الفرق",
+                "emphasis": false,
+                "startMs": 34899,
+                "endMs": 35319,
+                "variant": "base"
+              },
+              {
+                "text": "بين",
+                "emphasis": false,
+                "startMs": 35380,
+                "endMs": 35520,
+                "variant": "base"
+              },
+              {
+                "text": "بيع",
+                "emphasis": false,
+                "startMs": 35559,
+                "endMs": 35739,
+                "variant": "base"
+              },
+              {
+                "text": "الوقت",
+                "emphasis": true,
+                "startMs": 35779,
+                "endMs": 36119,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مقابل",
+                "emphasis": false,
+                "startMs": 36180,
+                "endMs": 36639,
+                "variant": "base"
+              },
+              {
+                "text": "المال",
+                "emphasis": true,
+                "startMs": 36680,
+                "endMs": 36979,
+                "variant": "punch"
+              },
+              {
+                "text": "وبناء",
+                "emphasis": false,
+                "startMs": 37020,
+                "endMs": 37419,
+                "variant": "base"
+              },
+              {
+                "text": "الثروة.",
+                "emphasis": true,
+                "startMs": 37439,
+                "endMs": 37939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تبين",
+                "emphasis": false,
+                "startMs": 38219,
+                "endMs": 38439,
+                "variant": "base"
+              },
+              {
+                "text": "طريق",
+                "emphasis": false,
+                "startMs": 38500,
+                "endMs": 38779,
+                "variant": "base"
+              },
+              {
+                "text": "واضح",
+                "emphasis": false,
+                "startMs": 38840,
+                "endMs": 39099,
+                "variant": "base"
+              },
+              {
+                "text": "ومجرب",
+                "emphasis": false,
+                "startMs": 39139,
+                "endMs": 39559,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "لبناء",
+                "emphasis": false,
+                "startMs": 39619,
+                "endMs": 40019,
+                "variant": "base"
+              },
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 40079,
+                "endMs": 40360,
+                "variant": "punch"
+              },
+              {
+                "text": "Online",
+                "emphasis": true,
+                "startMs": 40439,
+                "endMs": 40739,
+                "variant": "punch"
+              },
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 40799,
+                "endMs": 40919,
+                "variant": "base"
+              },
+              {
+                "text": "البيت؟",
+                "emphasis": true,
+                "startMs": 40959,
+                "endMs": 41380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Comment",
+                "emphasis": true,
+                "startMs": 41579,
+                "endMs": 41919,
+                "variant": "punch"
+              },
+              {
+                "text": "Digital،",
+                "emphasis": true,
+                "startMs": 41919,
+                "endMs": 42340,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وحجز",
+                "emphasis": false,
+                "startMs": 42419,
+                "endMs": 42680,
+                "variant": "base"
+              },
+              {
+                "text": "استشارة",
+                "emphasis": true,
+                "startMs": 42739,
+                "endMs": 43159,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مجانية",
+                "emphasis": true,
+                "startMs": 43219,
+                "endMs": 43719,
+                "variant": "punch"
+              },
+              {
+                "text": "مع",
+                "emphasis": false,
+                "startMs": 43759,
+                "endMs": 43939,
+                "variant": "base"
+              },
+              {
+                "text": "فريقي",
+                "emphasis": false,
+                "startMs": 44000,
+                "endMs": 44399,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "علشان",
+                "emphasis": false,
+                "startMs": 44439,
+                "endMs": 44799,
+                "variant": "base"
+              },
+              {
+                "text": "تربحين",
+                "emphasis": true,
+                "startMs": 44840,
+                "endMs": 45239,
+                "variant": "punch"
+              },
+              {
+                "text": "Online.",
+                "emphasis": true,
+                "startMs": 45279,
+                "endMs": 45520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "hormozi2": [
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "أنا",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "الحين",
+                "emphasis": false,
+                "startMs": 280,
+                "endMs": 519,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ناجحة،",
+                "emphasis": true,
+                "startMs": 539,
+                "endMs": 1059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بس",
+                "emphasis": false,
+                "startMs": 1500,
+                "endMs": 1699,
+                "variant": "base"
+              },
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 1740,
+                "endMs": 1860,
+                "variant": "base"
+              },
+              {
+                "text": "أرجع",
+                "emphasis": false,
+                "startMs": 1899,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 2259,
+                "endMs": 2500,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 2559,
+                "endMs": 2639,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 3159,
+                "variant": "punch"
+              },
+              {
+                "text": "بعد،",
+                "emphasis": false,
+                "startMs": 3559,
+                "endMs": 3759,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4119,
+                "variant": "base"
+              },
+              {
+                "text": "Digital",
+                "emphasis": true,
+                "startMs": 4219,
+                "endMs": 4559,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Franchise.",
+                "emphasis": true,
+                "startMs": 4619,
+                "endMs": 5179,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بنيت",
+                "emphasis": false,
+                "startMs": 5559,
+                "endMs": 5900,
+                "variant": "base"
+              },
+              {
+                "text": "أول",
+                "emphasis": true,
+                "startMs": 5940,
+                "endMs": 6179,
+                "variant": "punch"
+              },
+              {
+                "text": "مصدر",
+                "emphasis": false,
+                "startMs": 6239,
+                "endMs": 6519,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 6579,
+                "endMs": 6799,
+                "variant": "punch"
+              },
+              {
+                "text": "متكرر",
+                "emphasis": true,
+                "startMs": 6859,
+                "endMs": 7359,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بدون",
+                "emphasis": false,
+                "startMs": 7419,
+                "endMs": 7639,
+                "variant": "base"
+              },
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 7679,
+                "endMs": 7759,
+                "variant": "base"
+              },
+              {
+                "text": "أكون",
+                "emphasis": false,
+                "startMs": 7779,
+                "endMs": 8000,
+                "variant": "base"
+              },
+              {
+                "text": "موجودة",
+                "emphasis": false,
+                "startMs": 8059,
+                "endMs": 8460,
+                "variant": "elegant"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دائما",
+                "emphasis": false,
+                "startMs": 8539,
+                "endMs": 8880,
+                "variant": "base"
+              },
+              {
+                "text": "خلال",
+                "emphasis": false,
+                "startMs": 9000,
+                "endMs": 9319,
+                "variant": "base"
+              },
+              {
+                "text": "ستين",
+                "emphasis": true,
+                "startMs": 9399,
+                "endMs": 9859,
+                "variant": "punch"
+              },
+              {
+                "text": "يوم.",
+                "emphasis": true,
+                "startMs": 9920,
+                "endMs": 10139,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 10619,
+                "endMs": 10760,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "know,",
+                "emphasis": true,
+                "startMs": 10819,
+                "endMs": 10939,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "عجيب",
+                "emphasis": true,
+                "startMs": 11420,
+                "endMs": 11739,
+                "variant": "punch"
+              },
+              {
+                "text": "ومو",
+                "emphasis": false,
+                "startMs": 12000,
+                "endMs": 12179,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بالحظ،",
+                "emphasis": true,
+                "startMs": 12239,
+                "endMs": 12599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كان",
+                "emphasis": false,
+                "startMs": 12699,
+                "endMs": 12879,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام",
+                "emphasis": true,
+                "startMs": 12920,
+                "endMs": 13340,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وخطوات",
+                "emphasis": false,
+                "startMs": 13420,
+                "endMs": 13779,
+                "variant": "base"
+              },
+              {
+                "text": "مدروسة.",
+                "emphasis": true,
+                "startMs": 13819,
+                "endMs": 14359,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الـ",
+                "emphasis": false,
+                "startMs": 14439,
+                "endMs": 14519,
+                "variant": "base"
+              },
+              {
+                "text": "Franchise",
+                "emphasis": true,
+                "startMs": 14539,
+                "endMs": 14979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الرقمي",
+                "emphasis": false,
+                "startMs": 15019,
+                "endMs": 15420,
+                "variant": "base"
+              },
+              {
+                "text": "الحقيقي",
+                "emphasis": true,
+                "startMs": 15439,
+                "endMs": 15939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 16020,
+                "endMs": 16079,
+                "variant": "base"
+              },
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 16119,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 16600,
+                "endMs": 16699,
+                "variant": "base"
+              },
+              {
+                "text": "إنك",
+                "emphasis": false,
+                "startMs": 16719,
+                "endMs": 16940,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تسوين",
+                "emphasis": false,
+                "startMs": 16960,
+                "endMs": 17299,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 17359,
+                "endMs": 17500,
+                "variant": "base"
+              },
+              {
+                "text": "شيء",
+                "emphasis": false,
+                "startMs": 17559,
+                "endMs": 17719,
+                "variant": "base"
+              },
+              {
+                "text": "بروحك،",
+                "emphasis": true,
+                "startMs": 17760,
+                "endMs": 18199,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 18520,
+                "endMs": 18939,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 19000,
+                "endMs": 19180,
+                "variant": "base"
+              },
+              {
+                "text": "أنظمة",
+                "emphasis": true,
+                "startMs": 19199,
+                "endMs": 19559,
+                "variant": "punch"
+              },
+              {
+                "text": "ذكية،",
+                "emphasis": true,
+                "startMs": 19639,
+                "endMs": 20059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 20459,
+                "endMs": 20719,
+                "variant": "punch"
+              },
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 21159,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "إنه",
+                "emphasis": false,
+                "startMs": 21199,
+                "endMs": 21319,
+                "variant": "base"
+              },
+              {
+                "text": "يتكرر،",
+                "emphasis": true,
+                "startMs": 21379,
+                "endMs": 21899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وشغلة",
+                "emphasis": false,
+                "startMs": 22020,
+                "endMs": 22479,
+                "variant": "base"
+              },
+              {
+                "text": "تأسيسها",
+                "emphasis": true,
+                "startMs": 22539,
+                "endMs": 22979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مرة",
+                "emphasis": true,
+                "startMs": 23019,
+                "endMs": 23219,
+                "variant": "punch"
+              },
+              {
+                "text": "واحدة.",
+                "emphasis": true,
+                "startMs": 23260,
+                "endMs": 23659,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 24100,
+                "endMs": 24180,
+                "variant": "base"
+              },
+              {
+                "text": "رجعت",
+                "emphasis": false,
+                "startMs": 24260,
+                "endMs": 24619,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 24719,
+                "endMs": 24979,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 25039,
+                "endMs": 25159,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر،",
+                "emphasis": true,
+                "startMs": 25199,
+                "endMs": 25920,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 26039,
+                "endMs": 26119,
+                "variant": "base"
+              },
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 26180,
+                "endMs": 26319,
+                "variant": "base"
+              },
+              {
+                "text": "بضيع",
+                "emphasis": false,
+                "startMs": 26359,
+                "endMs": 26659,
+                "variant": "base"
+              },
+              {
+                "text": "وقتي",
+                "emphasis": true,
+                "startMs": 26719,
+                "endMs": 26940,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "في",
+                "emphasis": false,
+                "startMs": 27039,
+                "endMs": 27079,
+                "variant": "base"
+              },
+              {
+                "text": "الركضة.",
+                "emphasis": true,
+                "startMs": 27079,
+                "endMs": 27619,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "At",
+                "emphasis": false,
+                "startMs": 28019,
+                "endMs": 28199,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "all،",
+                "emphasis": true,
+                "startMs": 28260,
+                "endMs": 28479,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 28579,
+                "endMs": 28719,
+                "variant": "base"
+              },
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 28739,
+                "endMs": 29079,
+                "variant": "base"
+              },
+              {
+                "text": "مشروع",
+                "emphasis": true,
+                "startMs": 29139,
+                "endMs": 29899,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 29979,
+                "endMs": 30219,
+                "variant": "base"
+              },
+              {
+                "text": "للتوسع،",
+                "emphasis": true,
+                "startMs": 30260,
+                "endMs": 30899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "سريع",
+                "emphasis": false,
+                "startMs": 31179,
+                "endMs": 31499,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الأتمتة،",
+                "emphasis": true,
+                "startMs": 31519,
+                "endMs": 32060,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وبستثمر",
+                "emphasis": false,
+                "startMs": 32419,
+                "endMs": 33040,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 33099,
+                "endMs": 33259,
+                "variant": "base"
+              },
+              {
+                "text": "فلس",
+                "emphasis": true,
+                "startMs": 33380,
+                "endMs": 33659,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يدخل",
+                "emphasis": false,
+                "startMs": 33680,
+                "endMs": 34020,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام،",
+                "emphasis": false,
+                "startMs": 34079,
+                "endMs": 34579,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وهاي",
+                "emphasis": false,
+                "startMs": 34619,
+                "endMs": 34860,
+                "variant": "base"
+              },
+              {
+                "text": "الفرق",
+                "emphasis": false,
+                "startMs": 34899,
+                "endMs": 35319,
+                "variant": "base"
+              },
+              {
+                "text": "بين",
+                "emphasis": false,
+                "startMs": 35380,
+                "endMs": 35520,
+                "variant": "base"
+              },
+              {
+                "text": "بيع",
+                "emphasis": false,
+                "startMs": 35559,
+                "endMs": 35739,
+                "variant": "base"
+              },
+              {
+                "text": "الوقت",
+                "emphasis": true,
+                "startMs": 35779,
+                "endMs": 36119,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مقابل",
+                "emphasis": false,
+                "startMs": 36180,
+                "endMs": 36639,
+                "variant": "base"
+              },
+              {
+                "text": "المال",
+                "emphasis": true,
+                "startMs": 36680,
+                "endMs": 36979,
+                "variant": "punch"
+              },
+              {
+                "text": "وبناء",
+                "emphasis": false,
+                "startMs": 37020,
+                "endMs": 37419,
+                "variant": "base"
+              },
+              {
+                "text": "الثروة.",
+                "emphasis": true,
+                "startMs": 37439,
+                "endMs": 37939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تبين",
+                "emphasis": false,
+                "startMs": 38219,
+                "endMs": 38439,
+                "variant": "base"
+              },
+              {
+                "text": "طريق",
+                "emphasis": false,
+                "startMs": 38500,
+                "endMs": 38779,
+                "variant": "base"
+              },
+              {
+                "text": "واضح",
+                "emphasis": false,
+                "startMs": 38840,
+                "endMs": 39099,
+                "variant": "base"
+              },
+              {
+                "text": "ومجرب",
+                "emphasis": false,
+                "startMs": 39139,
+                "endMs": 39559,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "لبناء",
+                "emphasis": false,
+                "startMs": 39619,
+                "endMs": 40019,
+                "variant": "base"
+              },
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 40079,
+                "endMs": 40360,
+                "variant": "punch"
+              },
+              {
+                "text": "Online",
+                "emphasis": true,
+                "startMs": 40439,
+                "endMs": 40739,
+                "variant": "punch"
+              },
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 40799,
+                "endMs": 40919,
+                "variant": "base"
+              },
+              {
+                "text": "البيت؟",
+                "emphasis": true,
+                "startMs": 40959,
+                "endMs": 41380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Comment",
+                "emphasis": true,
+                "startMs": 41579,
+                "endMs": 41919,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Digital،",
+                "emphasis": true,
+                "startMs": 41919,
+                "endMs": 42340,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وحجز",
+                "emphasis": false,
+                "startMs": 42419,
+                "endMs": 42680,
+                "variant": "base"
+              },
+              {
+                "text": "استشارة",
+                "emphasis": true,
+                "startMs": 42739,
+                "endMs": 43159,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مجانية",
+                "emphasis": true,
+                "startMs": 43219,
+                "endMs": 43719,
+                "variant": "punch"
+              },
+              {
+                "text": "مع",
+                "emphasis": false,
+                "startMs": 43759,
+                "endMs": 43939,
+                "variant": "base"
+              },
+              {
+                "text": "فريقي",
+                "emphasis": false,
+                "startMs": 44000,
+                "endMs": 44399,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "علشان",
+                "emphasis": false,
+                "startMs": 44439,
+                "endMs": 44799,
+                "variant": "base"
+              },
+              {
+                "text": "تربحين",
+                "emphasis": true,
+                "startMs": 44840,
+                "endMs": 45239,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Online.",
+                "emphasis": true,
+                "startMs": 45279,
+                "endMs": 45520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "gadzhi": [
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "أنا",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "الحين",
+                "emphasis": false,
+                "startMs": 280,
+                "endMs": 519,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ناجحة،",
+                "emphasis": true,
+                "startMs": 539,
+                "endMs": 1059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بس",
+                "emphasis": false,
+                "startMs": 1500,
+                "endMs": 1699,
+                "variant": "base"
+              },
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 1740,
+                "endMs": 1860,
+                "variant": "base"
+              },
+              {
+                "text": "أرجع",
+                "emphasis": false,
+                "startMs": 1899,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 2259,
+                "endMs": 2500,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 2559,
+                "endMs": 2639,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 3159,
+                "variant": "punch"
+              },
+              {
+                "text": "بعد،",
+                "emphasis": false,
+                "startMs": 3559,
+                "endMs": 3759,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4119,
+                "variant": "base"
+              },
+              {
+                "text": "Digital",
+                "emphasis": true,
+                "startMs": 4219,
+                "endMs": 4559,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Franchise.",
+                "emphasis": true,
+                "startMs": 4619,
+                "endMs": 5179,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بنيت",
+                "emphasis": false,
+                "startMs": 5559,
+                "endMs": 5900,
+                "variant": "base"
+              },
+              {
+                "text": "أول",
+                "emphasis": true,
+                "startMs": 5940,
+                "endMs": 6179,
+                "variant": "punch"
+              },
+              {
+                "text": "مصدر",
+                "emphasis": false,
+                "startMs": 6239,
+                "endMs": 6519,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 6579,
+                "endMs": 6799,
+                "variant": "punch"
+              },
+              {
+                "text": "متكرر",
+                "emphasis": true,
+                "startMs": 6859,
+                "endMs": 7359,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بدون",
+                "emphasis": false,
+                "startMs": 7419,
+                "endMs": 7639,
+                "variant": "base"
+              },
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 7679,
+                "endMs": 7759,
+                "variant": "base"
+              },
+              {
+                "text": "أكون",
+                "emphasis": false,
+                "startMs": 7779,
+                "endMs": 8000,
+                "variant": "base"
+              },
+              {
+                "text": "موجودة",
+                "emphasis": false,
+                "startMs": 8059,
+                "endMs": 8460,
+                "variant": "elegant"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دائما",
+                "emphasis": false,
+                "startMs": 8539,
+                "endMs": 8880,
+                "variant": "base"
+              },
+              {
+                "text": "خلال",
+                "emphasis": false,
+                "startMs": 9000,
+                "endMs": 9319,
+                "variant": "base"
+              },
+              {
+                "text": "ستين",
+                "emphasis": true,
+                "startMs": 9399,
+                "endMs": 9859,
+                "variant": "punch"
+              },
+              {
+                "text": "يوم.",
+                "emphasis": true,
+                "startMs": 9920,
+                "endMs": 10139,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 10619,
+                "endMs": 10760,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "know,",
+                "emphasis": true,
+                "startMs": 10819,
+                "endMs": 10939,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "عجيب",
+                "emphasis": true,
+                "startMs": 11420,
+                "endMs": 11739,
+                "variant": "punch"
+              },
+              {
+                "text": "ومو",
+                "emphasis": false,
+                "startMs": 12000,
+                "endMs": 12179,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بالحظ،",
+                "emphasis": true,
+                "startMs": 12239,
+                "endMs": 12599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كان",
+                "emphasis": false,
+                "startMs": 12699,
+                "endMs": 12879,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام",
+                "emphasis": true,
+                "startMs": 12920,
+                "endMs": 13340,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وخطوات",
+                "emphasis": false,
+                "startMs": 13420,
+                "endMs": 13779,
+                "variant": "base"
+              },
+              {
+                "text": "مدروسة.",
+                "emphasis": true,
+                "startMs": 13819,
+                "endMs": 14359,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الـ",
+                "emphasis": false,
+                "startMs": 14439,
+                "endMs": 14519,
+                "variant": "base"
+              },
+              {
+                "text": "Franchise",
+                "emphasis": true,
+                "startMs": 14539,
+                "endMs": 14979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الرقمي",
+                "emphasis": false,
+                "startMs": 15019,
+                "endMs": 15420,
+                "variant": "base"
+              },
+              {
+                "text": "الحقيقي",
+                "emphasis": true,
+                "startMs": 15439,
+                "endMs": 15939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 16020,
+                "endMs": 16079,
+                "variant": "base"
+              },
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 16119,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 16600,
+                "endMs": 16699,
+                "variant": "base"
+              },
+              {
+                "text": "إنك",
+                "emphasis": false,
+                "startMs": 16719,
+                "endMs": 16940,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تسوين",
+                "emphasis": false,
+                "startMs": 16960,
+                "endMs": 17299,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 17359,
+                "endMs": 17500,
+                "variant": "base"
+              },
+              {
+                "text": "شيء",
+                "emphasis": false,
+                "startMs": 17559,
+                "endMs": 17719,
+                "variant": "base"
+              },
+              {
+                "text": "بروحك،",
+                "emphasis": true,
+                "startMs": 17760,
+                "endMs": 18199,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 18520,
+                "endMs": 18939,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 19000,
+                "endMs": 19180,
+                "variant": "base"
+              },
+              {
+                "text": "أنظمة",
+                "emphasis": true,
+                "startMs": 19199,
+                "endMs": 19559,
+                "variant": "punch"
+              },
+              {
+                "text": "ذكية،",
+                "emphasis": true,
+                "startMs": 19639,
+                "endMs": 20059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 20459,
+                "endMs": 20719,
+                "variant": "punch"
+              },
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 21159,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "إنه",
+                "emphasis": false,
+                "startMs": 21199,
+                "endMs": 21319,
+                "variant": "base"
+              },
+              {
+                "text": "يتكرر،",
+                "emphasis": true,
+                "startMs": 21379,
+                "endMs": 21899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وشغلة",
+                "emphasis": false,
+                "startMs": 22020,
+                "endMs": 22479,
+                "variant": "base"
+              },
+              {
+                "text": "تأسيسها",
+                "emphasis": true,
+                "startMs": 22539,
+                "endMs": 22979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مرة",
+                "emphasis": true,
+                "startMs": 23019,
+                "endMs": 23219,
+                "variant": "punch"
+              },
+              {
+                "text": "واحدة.",
+                "emphasis": true,
+                "startMs": 23260,
+                "endMs": 23659,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 24100,
+                "endMs": 24180,
+                "variant": "base"
+              },
+              {
+                "text": "رجعت",
+                "emphasis": false,
+                "startMs": 24260,
+                "endMs": 24619,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 24719,
+                "endMs": 24979,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 25039,
+                "endMs": 25159,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر،",
+                "emphasis": true,
+                "startMs": 25199,
+                "endMs": 25920,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 26039,
+                "endMs": 26119,
+                "variant": "base"
+              },
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 26180,
+                "endMs": 26319,
+                "variant": "base"
+              },
+              {
+                "text": "بضيع",
+                "emphasis": false,
+                "startMs": 26359,
+                "endMs": 26659,
+                "variant": "base"
+              },
+              {
+                "text": "وقتي",
+                "emphasis": true,
+                "startMs": 26719,
+                "endMs": 26940,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "في",
+                "emphasis": false,
+                "startMs": 27039,
+                "endMs": 27079,
+                "variant": "base"
+              },
+              {
+                "text": "الركضة.",
+                "emphasis": true,
+                "startMs": 27079,
+                "endMs": 27619,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "At",
+                "emphasis": false,
+                "startMs": 28019,
+                "endMs": 28199,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "all،",
+                "emphasis": true,
+                "startMs": 28260,
+                "endMs": 28479,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 28579,
+                "endMs": 28719,
+                "variant": "base"
+              },
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 28739,
+                "endMs": 29079,
+                "variant": "base"
+              },
+              {
+                "text": "مشروع",
+                "emphasis": true,
+                "startMs": 29139,
+                "endMs": 29899,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 29979,
+                "endMs": 30219,
+                "variant": "base"
+              },
+              {
+                "text": "للتوسع،",
+                "emphasis": true,
+                "startMs": 30260,
+                "endMs": 30899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "سريع",
+                "emphasis": false,
+                "startMs": 31179,
+                "endMs": 31499,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الأتمتة،",
+                "emphasis": true,
+                "startMs": 31519,
+                "endMs": 32060,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وبستثمر",
+                "emphasis": false,
+                "startMs": 32419,
+                "endMs": 33040,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 33099,
+                "endMs": 33259,
+                "variant": "base"
+              },
+              {
+                "text": "فلس",
+                "emphasis": true,
+                "startMs": 33380,
+                "endMs": 33659,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يدخل",
+                "emphasis": false,
+                "startMs": 33680,
+                "endMs": 34020,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام،",
+                "emphasis": false,
+                "startMs": 34079,
+                "endMs": 34579,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وهاي",
+                "emphasis": false,
+                "startMs": 34619,
+                "endMs": 34860,
+                "variant": "base"
+              },
+              {
+                "text": "الفرق",
+                "emphasis": false,
+                "startMs": 34899,
+                "endMs": 35319,
+                "variant": "base"
+              },
+              {
+                "text": "بين",
+                "emphasis": false,
+                "startMs": 35380,
+                "endMs": 35520,
+                "variant": "base"
+              },
+              {
+                "text": "بيع",
+                "emphasis": false,
+                "startMs": 35559,
+                "endMs": 35739,
+                "variant": "base"
+              },
+              {
+                "text": "الوقت",
+                "emphasis": true,
+                "startMs": 35779,
+                "endMs": 36119,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مقابل",
+                "emphasis": false,
+                "startMs": 36180,
+                "endMs": 36639,
+                "variant": "base"
+              },
+              {
+                "text": "المال",
+                "emphasis": true,
+                "startMs": 36680,
+                "endMs": 36979,
+                "variant": "punch"
+              },
+              {
+                "text": "وبناء",
+                "emphasis": false,
+                "startMs": 37020,
+                "endMs": 37419,
+                "variant": "base"
+              },
+              {
+                "text": "الثروة.",
+                "emphasis": true,
+                "startMs": 37439,
+                "endMs": 37939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تبين",
+                "emphasis": false,
+                "startMs": 38219,
+                "endMs": 38439,
+                "variant": "base"
+              },
+              {
+                "text": "طريق",
+                "emphasis": false,
+                "startMs": 38500,
+                "endMs": 38779,
+                "variant": "base"
+              },
+              {
+                "text": "واضح",
+                "emphasis": false,
+                "startMs": 38840,
+                "endMs": 39099,
+                "variant": "base"
+              },
+              {
+                "text": "ومجرب",
+                "emphasis": false,
+                "startMs": 39139,
+                "endMs": 39559,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "لبناء",
+                "emphasis": false,
+                "startMs": 39619,
+                "endMs": 40019,
+                "variant": "base"
+              },
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 40079,
+                "endMs": 40360,
+                "variant": "punch"
+              },
+              {
+                "text": "Online",
+                "emphasis": true,
+                "startMs": 40439,
+                "endMs": 40739,
+                "variant": "punch"
+              },
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 40799,
+                "endMs": 40919,
+                "variant": "base"
+              },
+              {
+                "text": "البيت؟",
+                "emphasis": true,
+                "startMs": 40959,
+                "endMs": 41380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Comment",
+                "emphasis": true,
+                "startMs": 41579,
+                "endMs": 41919,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Digital،",
+                "emphasis": true,
+                "startMs": 41919,
+                "endMs": 42340,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وحجز",
+                "emphasis": false,
+                "startMs": 42419,
+                "endMs": 42680,
+                "variant": "base"
+              },
+              {
+                "text": "استشارة",
+                "emphasis": true,
+                "startMs": 42739,
+                "endMs": 43159,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مجانية",
+                "emphasis": true,
+                "startMs": 43219,
+                "endMs": 43719,
+                "variant": "punch"
+              },
+              {
+                "text": "مع",
+                "emphasis": false,
+                "startMs": 43759,
+                "endMs": 43939,
+                "variant": "base"
+              },
+              {
+                "text": "فريقي",
+                "emphasis": false,
+                "startMs": 44000,
+                "endMs": 44399,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "علشان",
+                "emphasis": false,
+                "startMs": 44439,
+                "endMs": 44799,
+                "variant": "base"
+              },
+              {
+                "text": "تربحين",
+                "emphasis": true,
+                "startMs": 44840,
+                "endMs": 45239,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Online.",
+                "emphasis": true,
+                "startMs": 45279,
+                "endMs": 45520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "shiny": [
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "أنا",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "الحين",
+                "emphasis": false,
+                "startMs": 280,
+                "endMs": 519,
+                "variant": "base"
+              },
+              {
+                "text": "ناجحة،",
+                "emphasis": true,
+                "startMs": 539,
+                "endMs": 1059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بس",
+                "emphasis": false,
+                "startMs": 1500,
+                "endMs": 1699,
+                "variant": "base"
+              },
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 1740,
+                "endMs": 1860,
+                "variant": "base"
+              },
+              {
+                "text": "أرجع",
+                "emphasis": false,
+                "startMs": 1899,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 2259,
+                "endMs": 2500,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 2559,
+                "endMs": 2639,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 3159,
+                "variant": "punch"
+              },
+              {
+                "text": "بعد،",
+                "emphasis": false,
+                "startMs": 3559,
+                "endMs": 3759,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4119,
+                "variant": "base"
+              },
+              {
+                "text": "Digital",
+                "emphasis": true,
+                "startMs": 4219,
+                "endMs": 4559,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Franchise.",
+                "emphasis": true,
+                "startMs": 4619,
+                "endMs": 5179,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بنيت",
+                "emphasis": false,
+                "startMs": 5559,
+                "endMs": 5900,
+                "variant": "base"
+              },
+              {
+                "text": "أول",
+                "emphasis": true,
+                "startMs": 5940,
+                "endMs": 6179,
+                "variant": "punch"
+              },
+              {
+                "text": "مصدر",
+                "emphasis": false,
+                "startMs": 6239,
+                "endMs": 6519,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 6579,
+                "endMs": 6799,
+                "variant": "punch"
+              },
+              {
+                "text": "متكرر",
+                "emphasis": true,
+                "startMs": 6859,
+                "endMs": 7359,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بدون",
+                "emphasis": false,
+                "startMs": 7419,
+                "endMs": 7639,
+                "variant": "base"
+              },
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 7679,
+                "endMs": 7759,
+                "variant": "base"
+              },
+              {
+                "text": "أكون",
+                "emphasis": false,
+                "startMs": 7779,
+                "endMs": 8000,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "موجودة",
+                "emphasis": false,
+                "startMs": 8059,
+                "endMs": 8460,
+                "variant": "elegant"
+              },
+              {
+                "text": "دائما",
+                "emphasis": false,
+                "startMs": 8539,
+                "endMs": 8880,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "خلال",
+                "emphasis": false,
+                "startMs": 9000,
+                "endMs": 9319,
+                "variant": "base"
+              },
+              {
+                "text": "ستين",
+                "emphasis": true,
+                "startMs": 9399,
+                "endMs": 9859,
+                "variant": "punch"
+              },
+              {
+                "text": "يوم.",
+                "emphasis": true,
+                "startMs": 9920,
+                "endMs": 10139,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 10619,
+                "endMs": 10760,
+                "variant": "base"
+              },
+              {
+                "text": "know,",
+                "emphasis": true,
+                "startMs": 10819,
+                "endMs": 10939,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "عجيب",
+                "emphasis": true,
+                "startMs": 11420,
+                "endMs": 11739,
+                "variant": "punch"
+              },
+              {
+                "text": "ومو",
+                "emphasis": false,
+                "startMs": 12000,
+                "endMs": 12179,
+                "variant": "base"
+              },
+              {
+                "text": "بالحظ،",
+                "emphasis": true,
+                "startMs": 12239,
+                "endMs": 12599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كان",
+                "emphasis": false,
+                "startMs": 12699,
+                "endMs": 12879,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام",
+                "emphasis": true,
+                "startMs": 12920,
+                "endMs": 13340,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وخطوات",
+                "emphasis": false,
+                "startMs": 13420,
+                "endMs": 13779,
+                "variant": "base"
+              },
+              {
+                "text": "مدروسة.",
+                "emphasis": true,
+                "startMs": 13819,
+                "endMs": 14359,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الـ",
+                "emphasis": false,
+                "startMs": 14439,
+                "endMs": 14519,
+                "variant": "base"
+              },
+              {
+                "text": "Franchise",
+                "emphasis": true,
+                "startMs": 14539,
+                "endMs": 14979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الرقمي",
+                "emphasis": false,
+                "startMs": 15019,
+                "endMs": 15420,
+                "variant": "base"
+              },
+              {
+                "text": "الحقيقي",
+                "emphasis": true,
+                "startMs": 15439,
+                "endMs": 15939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 16020,
+                "endMs": 16079,
+                "variant": "base"
+              },
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 16119,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 16600,
+                "endMs": 16699,
+                "variant": "base"
+              },
+              {
+                "text": "إنك",
+                "emphasis": false,
+                "startMs": 16719,
+                "endMs": 16940,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تسوين",
+                "emphasis": false,
+                "startMs": 16960,
+                "endMs": 17299,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 17359,
+                "endMs": 17500,
+                "variant": "base"
+              },
+              {
+                "text": "شيء",
+                "emphasis": false,
+                "startMs": 17559,
+                "endMs": 17719,
+                "variant": "base"
+              },
+              {
+                "text": "بروحك،",
+                "emphasis": true,
+                "startMs": 17760,
+                "endMs": 18199,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 18520,
+                "endMs": 18939,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 19000,
+                "endMs": 19180,
+                "variant": "base"
+              },
+              {
+                "text": "أنظمة",
+                "emphasis": true,
+                "startMs": 19199,
+                "endMs": 19559,
+                "variant": "punch"
+              },
+              {
+                "text": "ذكية،",
+                "emphasis": true,
+                "startMs": 19639,
+                "endMs": 20059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 20459,
+                "endMs": 20719,
+                "variant": "punch"
+              },
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 21159,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "إنه",
+                "emphasis": false,
+                "startMs": 21199,
+                "endMs": 21319,
+                "variant": "base"
+              },
+              {
+                "text": "يتكرر،",
+                "emphasis": true,
+                "startMs": 21379,
+                "endMs": 21899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وشغلة",
+                "emphasis": false,
+                "startMs": 22020,
+                "endMs": 22479,
+                "variant": "base"
+              },
+              {
+                "text": "تأسيسها",
+                "emphasis": true,
+                "startMs": 22539,
+                "endMs": 22979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مرة",
+                "emphasis": true,
+                "startMs": 23019,
+                "endMs": 23219,
+                "variant": "punch"
+              },
+              {
+                "text": "واحدة.",
+                "emphasis": true,
+                "startMs": 23260,
+                "endMs": 23659,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 24100,
+                "endMs": 24180,
+                "variant": "base"
+              },
+              {
+                "text": "رجعت",
+                "emphasis": false,
+                "startMs": 24260,
+                "endMs": 24619,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 24719,
+                "endMs": 24979,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 25039,
+                "endMs": 25159,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر،",
+                "emphasis": true,
+                "startMs": 25199,
+                "endMs": 25920,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 26039,
+                "endMs": 26119,
+                "variant": "base"
+              },
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 26180,
+                "endMs": 26319,
+                "variant": "base"
+              },
+              {
+                "text": "بضيع",
+                "emphasis": false,
+                "startMs": 26359,
+                "endMs": 26659,
+                "variant": "base"
+              },
+              {
+                "text": "وقتي",
+                "emphasis": true,
+                "startMs": 26719,
+                "endMs": 26940,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "في",
+                "emphasis": false,
+                "startMs": 27039,
+                "endMs": 27079,
+                "variant": "base"
+              },
+              {
+                "text": "الركضة.",
+                "emphasis": true,
+                "startMs": 27079,
+                "endMs": 27619,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "At",
+                "emphasis": false,
+                "startMs": 28019,
+                "endMs": 28199,
+                "variant": "base"
+              },
+              {
+                "text": "all،",
+                "emphasis": true,
+                "startMs": 28260,
+                "endMs": 28479,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 28579,
+                "endMs": 28719,
+                "variant": "base"
+              },
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 28739,
+                "endMs": 29079,
+                "variant": "base"
+              },
+              {
+                "text": "مشروع",
+                "emphasis": true,
+                "startMs": 29139,
+                "endMs": 29899,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 29979,
+                "endMs": 30219,
+                "variant": "base"
+              },
+              {
+                "text": "للتوسع،",
+                "emphasis": true,
+                "startMs": 30260,
+                "endMs": 30899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "سريع",
+                "emphasis": false,
+                "startMs": 31179,
+                "endMs": 31499,
+                "variant": "base"
+              },
+              {
+                "text": "الأتمتة،",
+                "emphasis": true,
+                "startMs": 31519,
+                "endMs": 32060,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وبستثمر",
+                "emphasis": false,
+                "startMs": 32419,
+                "endMs": 33040,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 33099,
+                "endMs": 33259,
+                "variant": "base"
+              },
+              {
+                "text": "فلس",
+                "emphasis": true,
+                "startMs": 33380,
+                "endMs": 33659,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يدخل",
+                "emphasis": false,
+                "startMs": 33680,
+                "endMs": 34020,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام،",
+                "emphasis": false,
+                "startMs": 34079,
+                "endMs": 34579,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وهاي",
+                "emphasis": false,
+                "startMs": 34619,
+                "endMs": 34860,
+                "variant": "base"
+              },
+              {
+                "text": "الفرق",
+                "emphasis": false,
+                "startMs": 34899,
+                "endMs": 35319,
+                "variant": "base"
+              },
+              {
+                "text": "بين",
+                "emphasis": false,
+                "startMs": 35380,
+                "endMs": 35520,
+                "variant": "base"
+              },
+              {
+                "text": "بيع",
+                "emphasis": false,
+                "startMs": 35559,
+                "endMs": 35739,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الوقت",
+                "emphasis": true,
+                "startMs": 35779,
+                "endMs": 36119,
+                "variant": "punch"
+              },
+              {
+                "text": "مقابل",
+                "emphasis": false,
+                "startMs": 36180,
+                "endMs": 36639,
+                "variant": "base"
+              },
+              {
+                "text": "المال",
+                "emphasis": true,
+                "startMs": 36680,
+                "endMs": 36979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وبناء",
+                "emphasis": false,
+                "startMs": 37020,
+                "endMs": 37419,
+                "variant": "base"
+              },
+              {
+                "text": "الثروة.",
+                "emphasis": true,
+                "startMs": 37439,
+                "endMs": 37939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تبين",
+                "emphasis": false,
+                "startMs": 38219,
+                "endMs": 38439,
+                "variant": "base"
+              },
+              {
+                "text": "طريق",
+                "emphasis": false,
+                "startMs": 38500,
+                "endMs": 38779,
+                "variant": "base"
+              },
+              {
+                "text": "واضح",
+                "emphasis": false,
+                "startMs": 38840,
+                "endMs": 39099,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ومجرب",
+                "emphasis": false,
+                "startMs": 39139,
+                "endMs": 39559,
+                "variant": "base"
+              },
+              {
+                "text": "لبناء",
+                "emphasis": false,
+                "startMs": 39619,
+                "endMs": 40019,
+                "variant": "base"
+              },
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 40079,
+                "endMs": 40360,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Online",
+                "emphasis": true,
+                "startMs": 40439,
+                "endMs": 40739,
+                "variant": "punch"
+              },
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 40799,
+                "endMs": 40919,
+                "variant": "base"
+              },
+              {
+                "text": "البيت؟",
+                "emphasis": true,
+                "startMs": 40959,
+                "endMs": 41380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Comment",
+                "emphasis": true,
+                "startMs": 41579,
+                "endMs": 41919,
+                "variant": "punch"
+              },
+              {
+                "text": "Digital،",
+                "emphasis": true,
+                "startMs": 41919,
+                "endMs": 42340,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وحجز",
+                "emphasis": false,
+                "startMs": 42419,
+                "endMs": 42680,
+                "variant": "base"
+              },
+              {
+                "text": "استشارة",
+                "emphasis": true,
+                "startMs": 42739,
+                "endMs": 43159,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مجانية",
+                "emphasis": true,
+                "startMs": 43219,
+                "endMs": 43719,
+                "variant": "punch"
+              },
+              {
+                "text": "مع",
+                "emphasis": false,
+                "startMs": 43759,
+                "endMs": 43939,
+                "variant": "base"
+              },
+              {
+                "text": "فريقي",
+                "emphasis": false,
+                "startMs": 44000,
+                "endMs": 44399,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "علشان",
+                "emphasis": false,
+                "startMs": 44439,
+                "endMs": 44799,
+                "variant": "base"
+              },
+              {
+                "text": "تربحين",
+                "emphasis": true,
+                "startMs": 44840,
+                "endMs": 45239,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Online.",
+                "emphasis": true,
+                "startMs": 45279,
+                "endMs": 45520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "kinetic": [
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "أنا",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "الحين",
+                "emphasis": false,
+                "startMs": 280,
+                "endMs": 519,
+                "variant": "base"
+              },
+              {
+                "text": "ناجحة،",
+                "emphasis": true,
+                "startMs": 539,
+                "endMs": 1059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بس",
+                "emphasis": false,
+                "startMs": 1500,
+                "endMs": 1699,
+                "variant": "base"
+              },
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 1740,
+                "endMs": 1860,
+                "variant": "base"
+              },
+              {
+                "text": "أرجع",
+                "emphasis": false,
+                "startMs": 1899,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 2259,
+                "endMs": 2500,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 2559,
+                "endMs": 2639,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 3159,
+                "variant": "punch"
+              },
+              {
+                "text": "بعد،",
+                "emphasis": false,
+                "startMs": 3559,
+                "endMs": 3759,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4119,
+                "variant": "base"
+              },
+              {
+                "text": "Digital",
+                "emphasis": true,
+                "startMs": 4219,
+                "endMs": 4559,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Franchise.",
+                "emphasis": true,
+                "startMs": 4619,
+                "endMs": 5179,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بنيت",
+                "emphasis": false,
+                "startMs": 5559,
+                "endMs": 5900,
+                "variant": "base"
+              },
+              {
+                "text": "أول",
+                "emphasis": true,
+                "startMs": 5940,
+                "endMs": 6179,
+                "variant": "punch"
+              },
+              {
+                "text": "مصدر",
+                "emphasis": false,
+                "startMs": 6239,
+                "endMs": 6519,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 6579,
+                "endMs": 6799,
+                "variant": "punch"
+              },
+              {
+                "text": "متكرر",
+                "emphasis": true,
+                "startMs": 6859,
+                "endMs": 7359,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بدون",
+                "emphasis": false,
+                "startMs": 7419,
+                "endMs": 7639,
+                "variant": "base"
+              },
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 7679,
+                "endMs": 7759,
+                "variant": "base"
+              },
+              {
+                "text": "أكون",
+                "emphasis": false,
+                "startMs": 7779,
+                "endMs": 8000,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "موجودة",
+                "emphasis": false,
+                "startMs": 8059,
+                "endMs": 8460,
+                "variant": "elegant"
+              },
+              {
+                "text": "دائما",
+                "emphasis": false,
+                "startMs": 8539,
+                "endMs": 8880,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "خلال",
+                "emphasis": false,
+                "startMs": 9000,
+                "endMs": 9319,
+                "variant": "base"
+              },
+              {
+                "text": "ستين",
+                "emphasis": true,
+                "startMs": 9399,
+                "endMs": 9859,
+                "variant": "punch"
+              },
+              {
+                "text": "يوم.",
+                "emphasis": true,
+                "startMs": 9920,
+                "endMs": 10139,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 10619,
+                "endMs": 10760,
+                "variant": "base"
+              },
+              {
+                "text": "know,",
+                "emphasis": true,
+                "startMs": 10819,
+                "endMs": 10939,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "عجيب",
+                "emphasis": true,
+                "startMs": 11420,
+                "endMs": 11739,
+                "variant": "punch"
+              },
+              {
+                "text": "ومو",
+                "emphasis": false,
+                "startMs": 12000,
+                "endMs": 12179,
+                "variant": "base"
+              },
+              {
+                "text": "بالحظ،",
+                "emphasis": true,
+                "startMs": 12239,
+                "endMs": 12599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كان",
+                "emphasis": false,
+                "startMs": 12699,
+                "endMs": 12879,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام",
+                "emphasis": true,
+                "startMs": 12920,
+                "endMs": 13340,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وخطوات",
+                "emphasis": false,
+                "startMs": 13420,
+                "endMs": 13779,
+                "variant": "base"
+              },
+              {
+                "text": "مدروسة.",
+                "emphasis": true,
+                "startMs": 13819,
+                "endMs": 14359,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الـ",
+                "emphasis": false,
+                "startMs": 14439,
+                "endMs": 14519,
+                "variant": "base"
+              },
+              {
+                "text": "Franchise",
+                "emphasis": true,
+                "startMs": 14539,
+                "endMs": 14979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الرقمي",
+                "emphasis": false,
+                "startMs": 15019,
+                "endMs": 15420,
+                "variant": "base"
+              },
+              {
+                "text": "الحقيقي",
+                "emphasis": true,
+                "startMs": 15439,
+                "endMs": 15939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 16020,
+                "endMs": 16079,
+                "variant": "base"
+              },
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 16119,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 16600,
+                "endMs": 16699,
+                "variant": "base"
+              },
+              {
+                "text": "إنك",
+                "emphasis": false,
+                "startMs": 16719,
+                "endMs": 16940,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تسوين",
+                "emphasis": false,
+                "startMs": 16960,
+                "endMs": 17299,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 17359,
+                "endMs": 17500,
+                "variant": "base"
+              },
+              {
+                "text": "شيء",
+                "emphasis": false,
+                "startMs": 17559,
+                "endMs": 17719,
+                "variant": "base"
+              },
+              {
+                "text": "بروحك،",
+                "emphasis": true,
+                "startMs": 17760,
+                "endMs": 18199,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 18520,
+                "endMs": 18939,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 19000,
+                "endMs": 19180,
+                "variant": "base"
+              },
+              {
+                "text": "أنظمة",
+                "emphasis": true,
+                "startMs": 19199,
+                "endMs": 19559,
+                "variant": "punch"
+              },
+              {
+                "text": "ذكية،",
+                "emphasis": true,
+                "startMs": 19639,
+                "endMs": 20059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 20459,
+                "endMs": 20719,
+                "variant": "punch"
+              },
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 21159,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "إنه",
+                "emphasis": false,
+                "startMs": 21199,
+                "endMs": 21319,
+                "variant": "base"
+              },
+              {
+                "text": "يتكرر،",
+                "emphasis": true,
+                "startMs": 21379,
+                "endMs": 21899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وشغلة",
+                "emphasis": false,
+                "startMs": 22020,
+                "endMs": 22479,
+                "variant": "base"
+              },
+              {
+                "text": "تأسيسها",
+                "emphasis": true,
+                "startMs": 22539,
+                "endMs": 22979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مرة",
+                "emphasis": true,
+                "startMs": 23019,
+                "endMs": 23219,
+                "variant": "punch"
+              },
+              {
+                "text": "واحدة.",
+                "emphasis": true,
+                "startMs": 23260,
+                "endMs": 23659,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 24100,
+                "endMs": 24180,
+                "variant": "base"
+              },
+              {
+                "text": "رجعت",
+                "emphasis": false,
+                "startMs": 24260,
+                "endMs": 24619,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 24719,
+                "endMs": 24979,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 25039,
+                "endMs": 25159,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر،",
+                "emphasis": true,
+                "startMs": 25199,
+                "endMs": 25920,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 26039,
+                "endMs": 26119,
+                "variant": "base"
+              },
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 26180,
+                "endMs": 26319,
+                "variant": "base"
+              },
+              {
+                "text": "بضيع",
+                "emphasis": false,
+                "startMs": 26359,
+                "endMs": 26659,
+                "variant": "base"
+              },
+              {
+                "text": "وقتي",
+                "emphasis": true,
+                "startMs": 26719,
+                "endMs": 26940,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "في",
+                "emphasis": false,
+                "startMs": 27039,
+                "endMs": 27079,
+                "variant": "base"
+              },
+              {
+                "text": "الركضة.",
+                "emphasis": true,
+                "startMs": 27079,
+                "endMs": 27619,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "At",
+                "emphasis": false,
+                "startMs": 28019,
+                "endMs": 28199,
+                "variant": "base"
+              },
+              {
+                "text": "all،",
+                "emphasis": true,
+                "startMs": 28260,
+                "endMs": 28479,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 28579,
+                "endMs": 28719,
+                "variant": "base"
+              },
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 28739,
+                "endMs": 29079,
+                "variant": "base"
+              },
+              {
+                "text": "مشروع",
+                "emphasis": true,
+                "startMs": 29139,
+                "endMs": 29899,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 29979,
+                "endMs": 30219,
+                "variant": "base"
+              },
+              {
+                "text": "للتوسع،",
+                "emphasis": true,
+                "startMs": 30260,
+                "endMs": 30899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "سريع",
+                "emphasis": false,
+                "startMs": 31179,
+                "endMs": 31499,
+                "variant": "base"
+              },
+              {
+                "text": "الأتمتة،",
+                "emphasis": true,
+                "startMs": 31519,
+                "endMs": 32060,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وبستثمر",
+                "emphasis": false,
+                "startMs": 32419,
+                "endMs": 33040,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 33099,
+                "endMs": 33259,
+                "variant": "base"
+              },
+              {
+                "text": "فلس",
+                "emphasis": true,
+                "startMs": 33380,
+                "endMs": 33659,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يدخل",
+                "emphasis": false,
+                "startMs": 33680,
+                "endMs": 34020,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام،",
+                "emphasis": false,
+                "startMs": 34079,
+                "endMs": 34579,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وهاي",
+                "emphasis": false,
+                "startMs": 34619,
+                "endMs": 34860,
+                "variant": "base"
+              },
+              {
+                "text": "الفرق",
+                "emphasis": false,
+                "startMs": 34899,
+                "endMs": 35319,
+                "variant": "base"
+              },
+              {
+                "text": "بين",
+                "emphasis": false,
+                "startMs": 35380,
+                "endMs": 35520,
+                "variant": "base"
+              },
+              {
+                "text": "بيع",
+                "emphasis": false,
+                "startMs": 35559,
+                "endMs": 35739,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الوقت",
+                "emphasis": true,
+                "startMs": 35779,
+                "endMs": 36119,
+                "variant": "punch"
+              },
+              {
+                "text": "مقابل",
+                "emphasis": false,
+                "startMs": 36180,
+                "endMs": 36639,
+                "variant": "base"
+              },
+              {
+                "text": "المال",
+                "emphasis": true,
+                "startMs": 36680,
+                "endMs": 36979,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وبناء",
+                "emphasis": false,
+                "startMs": 37020,
+                "endMs": 37419,
+                "variant": "base"
+              },
+              {
+                "text": "الثروة.",
+                "emphasis": true,
+                "startMs": 37439,
+                "endMs": 37939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تبين",
+                "emphasis": false,
+                "startMs": 38219,
+                "endMs": 38439,
+                "variant": "base"
+              },
+              {
+                "text": "طريق",
+                "emphasis": false,
+                "startMs": 38500,
+                "endMs": 38779,
+                "variant": "base"
+              },
+              {
+                "text": "واضح",
+                "emphasis": false,
+                "startMs": 38840,
+                "endMs": 39099,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ومجرب",
+                "emphasis": false,
+                "startMs": 39139,
+                "endMs": 39559,
+                "variant": "base"
+              },
+              {
+                "text": "لبناء",
+                "emphasis": false,
+                "startMs": 39619,
+                "endMs": 40019,
+                "variant": "base"
+              },
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 40079,
+                "endMs": 40360,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Online",
+                "emphasis": true,
+                "startMs": 40439,
+                "endMs": 40739,
+                "variant": "punch"
+              },
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 40799,
+                "endMs": 40919,
+                "variant": "base"
+              },
+              {
+                "text": "البيت؟",
+                "emphasis": true,
+                "startMs": 40959,
+                "endMs": 41380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Comment",
+                "emphasis": true,
+                "startMs": 41579,
+                "endMs": 41919,
+                "variant": "punch"
+              },
+              {
+                "text": "Digital،",
+                "emphasis": true,
+                "startMs": 41919,
+                "endMs": 42340,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وحجز",
+                "emphasis": false,
+                "startMs": 42419,
+                "endMs": 42680,
+                "variant": "base"
+              },
+              {
+                "text": "استشارة",
+                "emphasis": true,
+                "startMs": 42739,
+                "endMs": 43159,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "مجانية",
+                "emphasis": true,
+                "startMs": 43219,
+                "endMs": 43719,
+                "variant": "punch"
+              },
+              {
+                "text": "مع",
+                "emphasis": false,
+                "startMs": 43759,
+                "endMs": 43939,
+                "variant": "base"
+              },
+              {
+                "text": "فريقي",
+                "emphasis": false,
+                "startMs": 44000,
+                "endMs": 44399,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "علشان",
+                "emphasis": false,
+                "startMs": 44439,
+                "endMs": 44799,
+                "variant": "base"
+              },
+              {
+                "text": "تربحين",
+                "emphasis": true,
+                "startMs": 44840,
+                "endMs": 45239,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Online.",
+                "emphasis": true,
+                "startMs": 45279,
+                "endMs": 45520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "minimal": [
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "أنا",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "الحين",
+                "emphasis": false,
+                "startMs": 280,
+                "endMs": 519,
+                "variant": "base"
+              },
+              {
+                "text": "ناجحة،",
+                "emphasis": true,
+                "startMs": 539,
+                "endMs": 1059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بس",
+                "emphasis": false,
+                "startMs": 1500,
+                "endMs": 1699,
+                "variant": "base"
+              },
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 1740,
+                "endMs": 1860,
+                "variant": "base"
+              },
+              {
+                "text": "أرجع",
+                "emphasis": false,
+                "startMs": 1899,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 2259,
+                "endMs": 2500,
+                "variant": "base"
+              },
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 2559,
+                "endMs": 2639,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 3159,
+                "variant": "punch"
+              },
+              {
+                "text": "بعد،",
+                "emphasis": false,
+                "startMs": 3559,
+                "endMs": 3759,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4119,
+                "variant": "base"
+              },
+              {
+                "text": "Digital",
+                "emphasis": true,
+                "startMs": 4219,
+                "endMs": 4559,
+                "variant": "punch"
+              },
+              {
+                "text": "Franchise.",
+                "emphasis": true,
+                "startMs": 4619,
+                "endMs": 5179,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بنيت",
+                "emphasis": false,
+                "startMs": 5559,
+                "endMs": 5900,
+                "variant": "base"
+              },
+              {
+                "text": "أول",
+                "emphasis": true,
+                "startMs": 5940,
+                "endMs": 6179,
+                "variant": "punch"
+              },
+              {
+                "text": "مصدر",
+                "emphasis": false,
+                "startMs": 6239,
+                "endMs": 6519,
+                "variant": "base"
+              },
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 6579,
+                "endMs": 6799,
+                "variant": "punch"
+              },
+              {
+                "text": "متكرر",
+                "emphasis": true,
+                "startMs": 6859,
+                "endMs": 7359,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "بدون",
+                "emphasis": false,
+                "startMs": 7419,
+                "endMs": 7639,
+                "variant": "base"
+              },
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 7679,
+                "endMs": 7759,
+                "variant": "base"
+              },
+              {
+                "text": "أكون",
+                "emphasis": false,
+                "startMs": 7779,
+                "endMs": 8000,
+                "variant": "base"
+              },
+              {
+                "text": "موجودة",
+                "emphasis": false,
+                "startMs": 8059,
+                "endMs": 8460,
+                "variant": "elegant"
+              },
+              {
+                "text": "دائما",
+                "emphasis": false,
+                "startMs": 8539,
+                "endMs": 8880,
+                "variant": "base"
+              },
+              {
+                "text": "خلال",
+                "emphasis": false,
+                "startMs": 9000,
+                "endMs": 9319,
+                "variant": "base"
+              },
+              {
+                "text": "ستين",
+                "emphasis": true,
+                "startMs": 9399,
+                "endMs": 9859,
+                "variant": "punch"
+              },
+              {
+                "text": "يوم.",
+                "emphasis": true,
+                "startMs": 9920,
+                "endMs": 10139,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 10619,
+                "endMs": 10760,
+                "variant": "base"
+              },
+              {
+                "text": "know,",
+                "emphasis": true,
+                "startMs": 10819,
+                "endMs": 10939,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "عجيب",
+                "emphasis": true,
+                "startMs": 11420,
+                "endMs": 11739,
+                "variant": "punch"
+              },
+              {
+                "text": "ومو",
+                "emphasis": false,
+                "startMs": 12000,
+                "endMs": 12179,
+                "variant": "base"
+              },
+              {
+                "text": "بالحظ،",
+                "emphasis": true,
+                "startMs": 12239,
+                "endMs": 12599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كان",
+                "emphasis": false,
+                "startMs": 12699,
+                "endMs": 12879,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام",
+                "emphasis": true,
+                "startMs": 12920,
+                "endMs": 13340,
+                "variant": "punch"
+              },
+              {
+                "text": "وخطوات",
+                "emphasis": false,
+                "startMs": 13420,
+                "endMs": 13779,
+                "variant": "base"
+              },
+              {
+                "text": "مدروسة.",
+                "emphasis": true,
+                "startMs": 13819,
+                "endMs": 14359,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "الـ",
+                "emphasis": false,
+                "startMs": 14439,
+                "endMs": 14519,
+                "variant": "base"
+              },
+              {
+                "text": "Franchise",
+                "emphasis": true,
+                "startMs": 14539,
+                "endMs": 14979,
+                "variant": "punch"
+              },
+              {
+                "text": "الرقمي",
+                "emphasis": false,
+                "startMs": 15019,
+                "endMs": 15420,
+                "variant": "base"
+              },
+              {
+                "text": "الحقيقي",
+                "emphasis": true,
+                "startMs": 15439,
+                "endMs": 15939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 16020,
+                "endMs": 16079,
+                "variant": "base"
+              },
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 16119,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 16600,
+                "endMs": 16699,
+                "variant": "base"
+              },
+              {
+                "text": "إنك",
+                "emphasis": false,
+                "startMs": 16719,
+                "endMs": 16940,
+                "variant": "base"
+              },
+              {
+                "text": "تسوين",
+                "emphasis": false,
+                "startMs": 16960,
+                "endMs": 17299,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 17359,
+                "endMs": 17500,
+                "variant": "base"
+              },
+              {
+                "text": "شيء",
+                "emphasis": false,
+                "startMs": 17559,
+                "endMs": 17719,
+                "variant": "base"
+              },
+              {
+                "text": "بروحك،",
+                "emphasis": true,
+                "startMs": 17760,
+                "endMs": 18199,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "يعتمد",
+                "emphasis": false,
+                "startMs": 18520,
+                "endMs": 18939,
+                "variant": "base"
+              },
+              {
+                "text": "على",
+                "emphasis": false,
+                "startMs": 19000,
+                "endMs": 19180,
+                "variant": "base"
+              },
+              {
+                "text": "أنظمة",
+                "emphasis": true,
+                "startMs": 19199,
+                "endMs": 19559,
+                "variant": "punch"
+              },
+              {
+                "text": "ذكية،",
+                "emphasis": true,
+                "startMs": 19639,
+                "endMs": 20059,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 20459,
+                "endMs": 20719,
+                "variant": "punch"
+              },
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 21159,
+                "variant": "base"
+              },
+              {
+                "text": "إنه",
+                "emphasis": false,
+                "startMs": 21199,
+                "endMs": 21319,
+                "variant": "base"
+              },
+              {
+                "text": "يتكرر،",
+                "emphasis": true,
+                "startMs": 21379,
+                "endMs": 21899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وشغلة",
+                "emphasis": false,
+                "startMs": 22020,
+                "endMs": 22479,
+                "variant": "base"
+              },
+              {
+                "text": "تأسيسها",
+                "emphasis": true,
+                "startMs": 22539,
+                "endMs": 22979,
+                "variant": "punch"
+              },
+              {
+                "text": "مرة",
+                "emphasis": true,
+                "startMs": 23019,
+                "endMs": 23219,
+                "variant": "punch"
+              },
+              {
+                "text": "واحدة.",
+                "emphasis": true,
+                "startMs": 23260,
+                "endMs": 23659,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "لو",
+                "emphasis": false,
+                "startMs": 24100,
+                "endMs": 24180,
+                "variant": "base"
+              },
+              {
+                "text": "رجعت",
+                "emphasis": false,
+                "startMs": 24260,
+                "endMs": 24619,
+                "variant": "base"
+              },
+              {
+                "text": "أبدأ",
+                "emphasis": false,
+                "startMs": 24719,
+                "endMs": 24979,
+                "variant": "base"
+              },
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 25039,
+                "endMs": 25159,
+                "variant": "base"
+              },
+              {
+                "text": "الصفر،",
+                "emphasis": true,
+                "startMs": 25199,
+                "endMs": 25920,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "ما",
+                "emphasis": false,
+                "startMs": 26039,
+                "endMs": 26119,
+                "variant": "base"
+              },
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 26180,
+                "endMs": 26319,
+                "variant": "base"
+              },
+              {
+                "text": "بضيع",
+                "emphasis": false,
+                "startMs": 26359,
+                "endMs": 26659,
+                "variant": "base"
+              },
+              {
+                "text": "وقتي",
+                "emphasis": true,
+                "startMs": 26719,
+                "endMs": 26940,
+                "variant": "punch"
+              },
+              {
+                "text": "في",
+                "emphasis": false,
+                "startMs": 27039,
+                "endMs": 27079,
+                "variant": "base"
+              },
+              {
+                "text": "الركضة.",
+                "emphasis": true,
+                "startMs": 27079,
+                "endMs": 27619,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "At",
+                "emphasis": false,
+                "startMs": 28019,
+                "endMs": 28199,
+                "variant": "base"
+              },
+              {
+                "text": "all،",
+                "emphasis": true,
+                "startMs": 28260,
+                "endMs": 28479,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "كنت",
+                "emphasis": false,
+                "startMs": 28579,
+                "endMs": 28719,
+                "variant": "base"
+              },
+              {
+                "text": "بختار",
+                "emphasis": false,
+                "startMs": 28739,
+                "endMs": 29079,
+                "variant": "base"
+              },
+              {
+                "text": "مشروع",
+                "emphasis": true,
+                "startMs": 29139,
+                "endMs": 29899,
+                "variant": "punch"
+              },
+              {
+                "text": "قابل",
+                "emphasis": false,
+                "startMs": 29979,
+                "endMs": 30219,
+                "variant": "base"
+              },
+              {
+                "text": "للتوسع،",
+                "emphasis": true,
+                "startMs": 30260,
+                "endMs": 30899,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "سريع",
+                "emphasis": false,
+                "startMs": 31179,
+                "endMs": 31499,
+                "variant": "base"
+              },
+              {
+                "text": "الأتمتة،",
+                "emphasis": true,
+                "startMs": 31519,
+                "endMs": 32060,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وبستثمر",
+                "emphasis": false,
+                "startMs": 32419,
+                "endMs": 33040,
+                "variant": "base"
+              },
+              {
+                "text": "كل",
+                "emphasis": false,
+                "startMs": 33099,
+                "endMs": 33259,
+                "variant": "base"
+              },
+              {
+                "text": "فلس",
+                "emphasis": true,
+                "startMs": 33380,
+                "endMs": 33659,
+                "variant": "punch"
+              },
+              {
+                "text": "يدخل",
+                "emphasis": false,
+                "startMs": 33680,
+                "endMs": 34020,
+                "variant": "base"
+              },
+              {
+                "text": "بنظام،",
+                "emphasis": false,
+                "startMs": 34079,
+                "endMs": 34579,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وهاي",
+                "emphasis": false,
+                "startMs": 34619,
+                "endMs": 34860,
+                "variant": "base"
+              },
+              {
+                "text": "الفرق",
+                "emphasis": false,
+                "startMs": 34899,
+                "endMs": 35319,
+                "variant": "base"
+              },
+              {
+                "text": "بين",
+                "emphasis": false,
+                "startMs": 35380,
+                "endMs": 35520,
+                "variant": "base"
+              },
+              {
+                "text": "بيع",
+                "emphasis": false,
+                "startMs": 35559,
+                "endMs": 35739,
+                "variant": "base"
+              },
+              {
+                "text": "الوقت",
+                "emphasis": true,
+                "startMs": 35779,
+                "endMs": 36119,
+                "variant": "punch"
+              },
+              {
+                "text": "مقابل",
+                "emphasis": false,
+                "startMs": 36180,
+                "endMs": 36639,
+                "variant": "base"
+              },
+              {
+                "text": "المال",
+                "emphasis": true,
+                "startMs": 36680,
+                "endMs": 36979,
+                "variant": "punch"
+              },
+              {
+                "text": "وبناء",
+                "emphasis": false,
+                "startMs": 37020,
+                "endMs": 37419,
+                "variant": "base"
+              },
+              {
+                "text": "الثروة.",
+                "emphasis": true,
+                "startMs": 37439,
+                "endMs": 37939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "تبين",
+                "emphasis": false,
+                "startMs": 38219,
+                "endMs": 38439,
+                "variant": "base"
+              },
+              {
+                "text": "طريق",
+                "emphasis": false,
+                "startMs": 38500,
+                "endMs": 38779,
+                "variant": "base"
+              },
+              {
+                "text": "واضح",
+                "emphasis": false,
+                "startMs": 38840,
+                "endMs": 39099,
+                "variant": "base"
+              },
+              {
+                "text": "ومجرب",
+                "emphasis": false,
+                "startMs": 39139,
+                "endMs": 39559,
+                "variant": "base"
+              },
+              {
+                "text": "لبناء",
+                "emphasis": false,
+                "startMs": 39619,
+                "endMs": 40019,
+                "variant": "base"
+              },
+              {
+                "text": "دخل",
+                "emphasis": true,
+                "startMs": 40079,
+                "endMs": 40360,
+                "variant": "punch"
+              },
+              {
+                "text": "Online",
+                "emphasis": true,
+                "startMs": 40439,
+                "endMs": 40739,
+                "variant": "punch"
+              },
+              {
+                "text": "من",
+                "emphasis": false,
+                "startMs": 40799,
+                "endMs": 40919,
+                "variant": "base"
+              },
+              {
+                "text": "البيت؟",
+                "emphasis": true,
+                "startMs": 40959,
+                "endMs": 41380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Comment",
+                "emphasis": true,
+                "startMs": 41579,
+                "endMs": 41919,
+                "variant": "punch"
+              },
+              {
+                "text": "Digital،",
+                "emphasis": true,
+                "startMs": 41919,
+                "endMs": 42340,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "وحجز",
+                "emphasis": false,
+                "startMs": 42419,
+                "endMs": 42680,
+                "variant": "base"
+              },
+              {
+                "text": "استشارة",
+                "emphasis": true,
+                "startMs": 42739,
+                "endMs": 43159,
+                "variant": "punch"
+              },
+              {
+                "text": "مجانية",
+                "emphasis": true,
+                "startMs": 43219,
+                "endMs": 43719,
+                "variant": "punch"
+              },
+              {
+                "text": "مع",
+                "emphasis": false,
+                "startMs": 43759,
+                "endMs": 43939,
+                "variant": "base"
+              },
+              {
+                "text": "فريقي",
+                "emphasis": false,
+                "startMs": 44000,
+                "endMs": 44399,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "علشان",
+                "emphasis": false,
+                "startMs": 44439,
+                "endMs": 44799,
+                "variant": "base"
+              },
+              {
+                "text": "تربحين",
+                "emphasis": true,
+                "startMs": 44840,
+                "endMs": 45239,
+                "variant": "punch"
+              },
+              {
+                "text": "Online.",
+                "emphasis": true,
+                "startMs": 45279,
+                "endMs": 45520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "translation": "I'm successful now, but if I went back to start from zero again, I'd choose Digital Franchise. I built my first source of recurring income without being present all the time, within sixty days. I know, it's amazing and not luck — it was a system and calculated steps. A real digital franchise doesn't depend on you doing everything yourself, it depends on smart systems, income that can repeat, and a task you set up once. If I went back to start from zero, I wouldn't waste my time in the rat race. At all, I'd choose a scalable project, fast to automate, and invest every penny that comes in into the system. And that's the difference between selling time for money and building wealth. Do you want a clear, proven path to build online income from home? Comment 'Digital,' and book a free consultation with my team so you can earn online."
+}

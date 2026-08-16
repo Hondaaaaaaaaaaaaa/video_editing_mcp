@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "animate-text": {
+      "source": "pixel-point/animate-text",
+      "sourceType": "github",
+      "skillPath": "skills/animate-text/SKILL.md",
+      "computedHash": "81b7719e45013fcf651f1f4c9a1ca2af9618e99667ff5cd3e5d102369235ec5e"
+    },
+    "animated-component-libraries": {
+      "source": "freshtechbro/claudedesignskills",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/animated-component-libraries/SKILL.md",
+      "computedHash": "d3b545d0de1747e76f71fe165cfc3428d2f1b17cff6fc9c4ce744bbe2ff36fd8"
+    },
+    "deep-research": {
+      "source": "199-biotechnologies/claude-deep-research-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "9eae8e09f41ddde4f85b49687eefe3301c2b5369f71fdfb1ff9ca46ce35d5cef"
+    },
+    "remotion-best-practices": {
+      "source": "remotion-dev/skills",
+      "sourceType": "github",
+      "skillPath": "skills/remotion/SKILL.md",
+      "computedHash": "664bd31140897056bd575ef57a15f22f517bd576c6b81df429c1f4ed6453e312"
+    }
+  }
+}
