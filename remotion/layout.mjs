@@ -103,7 +103,29 @@ const TEMPLATES = {
     minLines: 1,
     maxLines: 2,
     exact: false,
+    // TWO LINES BY DEFAULT, like the references — any caption with 4+ words
+    // stacks, rather than only stacking when it is too wide to fit on one.
+    preferLines: 2,
     charsPerLine: charsPerLine(6.28, 0.87, ADVANCE_NORMAL + 0.18),
+  },
+  // EDITS — ONE line of heavy all-caps that grows a word at a time, centred.
+  // Measured off remotion/public/edits.mp4 (1080x1080 @60fps): the reference's
+  // own em is 2.52% of the frame width, but the template renders at 5.5% so it
+  // carries on a 9:16 reel (a deliberate departure, see PageEdits.tsx).
+  //
+  // The advance is NOT ADVANCE_NORMAL. The reference's mean advance measures
+  // 0.68em — "SHE SMELLED LIKE COAL TAR SOAP AND LAVENDER" is 43 characters in
+  // 796px against a 27.2px em — which is The Bold Font's own ~0.52 plus the
+  // ~0.16em of tracking this look sets. Keep in step with fontSizePct /
+  // letterSpacing in PageEdits.tsx.
+  //
+  // ONE line only, like the reference: a caption too long for it is shown
+  // across consecutive SCREENS rather than stacked, the same way Classic works.
+  edits: {
+    minLines: 1,
+    maxLines: 1,
+    exact: false,
+    charsPerLine: charsPerLine(5.5, 0.87, ADVANCE_NORMAL + 0.16),
   },
   // Typing is character-by-character, so a screen has to be short enough to
   // finish typing while it is still on screen — hence 2 lines rather than 3.
@@ -238,6 +260,15 @@ const splitInto = (words, n, minPer = 1) => {
 /** How many lines this template should use for this caption. */
 const lineCountFor = (words, tpl) => {
   if (tpl.exact) return Math.min(tpl.maxLines, Math.max(1, words.length));
+  // `preferLines` — stack to N lines because the LOOK wants it, even when the
+  // words would fit on fewer. Speed's references stack two lines by default;
+  // only their very short captions ("NO WAY", "THAT'S CRAZY") sit on one. So
+  // this needs enough words to give every line something real to hold —
+  // 2 per line — otherwise a two-word caption would split one word per line,
+  // which the references never do.
+  if (tpl.preferLines && words.length >= tpl.preferLines * 2) {
+    return Math.min(tpl.maxLines, tpl.preferLines);
+  }
   const w = widthOf(words);
   for (let n = tpl.minLines; n < tpl.maxLines; n++) {
     if (w / n <= tpl.charsPerLine) return Math.min(n, words.length);

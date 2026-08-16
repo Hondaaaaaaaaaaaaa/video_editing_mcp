@@ -63,6 +63,12 @@ import {
   SPEED_DEFAULTS,
   SpeedStyleProvider,
 } from "./CaptionedVideo/styles/PageSpeed";
+import {
+  PageEdits,
+  editsSchema,
+  EDITS_DEFAULTS,
+  EditsStyleProvider,
+} from "./CaptionedVideo/styles/PageEdits";
 
 // The video that captions are rendered over (a vertical clip at
 // remotion/public/sample-video.mp4). Stored as a PLAIN FILENAME — not
@@ -213,6 +219,25 @@ const SpeedCaptionedVideo: React.FC<z.infer<typeof speedSchema>> = ({
   <SpeedStyleProvider value={style}>
     <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="speed" PageComponent={PageSpeed} singleSurface />
   </SpeedStyleProvider>
+);
+
+// Edits reads the caption document's segments and paints the whole timeline
+// itself, so it renders as a single surface. One small centred line of heavy
+// caps that grows a word at a time, the line re-centring as each lands.
+const EditsCaptionedVideo: React.FC<z.infer<typeof editsSchema>> = ({
+  src,
+  showPunctuation,
+  ...style
+}) => (
+  <EditsStyleProvider value={style}>
+    <CaptionedVideo
+      src={src}
+      showPunctuation={showPunctuation}
+      shape="edits"
+      PageComponent={PageEdits}
+      singleSurface
+    />
+  </EditsStyleProvider>
 );
 
 // Kinetic reads the caption document's per-word variants and builds the whole
@@ -643,6 +668,24 @@ export const RemotionRoot: React.FC = () => {
             },
           },
         }}
+      />
+
+      {/* "Edits" — the cinematic edit caption: ONE small line of heavy white
+          caps that grows a word at a time while staying centred, so everything
+          already on screen slides outward as the next word lands. Reverse-
+          engineered from public/edits.mp4; the per-word fade + pop, the larger
+          type and the 78% position are deliberate departures from it, and the
+          glow is an addition (see the header of PageEdits.tsx). */}
+      <Composition
+        id="Edits"
+        component={EditsCaptionedVideo}
+        schema={editsSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        defaultProps={{ src: SAMPLE_VIDEO, ...EDITS_DEFAULTS }}
       />
 
       {/* "Kinetic" — kinetic-typography poster captions. Words accumulate one by

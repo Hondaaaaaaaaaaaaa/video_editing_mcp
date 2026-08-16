@@ -62,6 +62,12 @@ import {
   SPEED_DEFAULTS,
   SpeedStyleProvider,
 } from "../src/CaptionedVideo/styles/PageSpeed";
+import {
+  PageEdits,
+  editsSchema,
+  EDITS_DEFAULTS,
+  EditsStyleProvider,
+} from "../src/CaptionedVideo/styles/PageEdits";
 
 // Props bag = everything in a style's schema EXCEPT `src` (the shared base).
 export type StyleProps = Record<string, unknown>;
@@ -101,6 +107,15 @@ export const STYLES: StyleEntry[] = [
     Provider: ClassicStyleProvider as unknown as React.Provider<never>,
     Page: PageClassic,
     documentDriven: true,
+  },
+  {
+    id: "Edits",
+    schema: editsSchema,
+    defaults: stripSrc(EDITS_DEFAULTS),
+    Provider: EditsStyleProvider as unknown as React.Provider<never>,
+    Page: PageEdits,
+    documentDriven: true,
+    shape: "edits",
   },
   {
     id: "Typewriter",

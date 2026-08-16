@@ -177,7 +177,9 @@ export const TYPEWRITER_DEFAULTS: TypewriterStyle = {
     // charsPerLine from exactly this number.
     fontSizePct: 7,
     captionScale: 1,
-    wordSpacing: 0.24,
+    // 0.3, not the 0.24 this shipped with — tuned by hand in Studio and folded
+    // back here, which is the flow Root.tsx's spread depends on.
+    wordSpacing: 0.3,
     lineSpacing: 1.15,
     positionX: 50,
     // The house safe zone — under the chin, clear of the platform UI. The
