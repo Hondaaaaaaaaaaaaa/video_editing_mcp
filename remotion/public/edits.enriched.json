@@ -1,0 +1,5287 @@
+{
+  "language": "en",
+  "segments": [
+    {
+      "ideaIndex": 0,
+      "part": 0,
+      "parts": 1,
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "I",
+              "emphasis": false,
+              "startMs": 799,
+              "endMs": 859,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "don't",
+              "emphasis": false,
+              "startMs": 899,
+              "endMs": 979,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "know",
+              "emphasis": false,
+              "startMs": 1019,
+              "endMs": 1120,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "that",
+              "emphasis": false,
+              "startMs": 1159,
+              "endMs": 1259,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "you",
+              "emphasis": false,
+              "startMs": 1319,
+              "endMs": 1399,
+              "variant": "base",
+              "color": "base"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "really",
+              "emphasis": false,
+              "startMs": 1459,
+              "endMs": 1699,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "are",
+              "emphasis": false,
+              "startMs": 1759,
+              "endMs": 1860,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "Red",
+              "emphasis": true,
+              "startMs": 1959,
+              "endMs": 2119,
+              "variant": "punch",
+              "color": "key"
+            },
+            {
+              "text": "John.",
+              "emphasis": true,
+              "startMs": 2200,
+              "endMs": 2480,
+              "variant": "punch",
+              "color": "key"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ideaIndex": 1,
+      "part": 0,
+      "parts": 1,
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "Your",
+              "emphasis": false,
+              "startMs": 3639,
+              "endMs": 3740,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "wife",
+              "emphasis": false,
+              "startMs": 3799,
+              "endMs": 4039,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "was",
+              "emphasis": false,
+              "startMs": 4099,
+              "endMs": 4199,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "very",
+              "emphasis": false,
+              "startMs": 4319,
+              "endMs": 4579,
+              "variant": "base",
+              "color": "positive"
+            },
+            {
+              "text": "clean.",
+              "emphasis": true,
+              "startMs": 4679,
+              "endMs": 5159,
+              "variant": "punch",
+              "color": "positive"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ideaIndex": 2,
+      "part": 0,
+      "parts": 1,
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "She",
+              "emphasis": false,
+              "startMs": 8239,
+              "endMs": 8340,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "smelled",
+              "emphasis": false,
+              "startMs": 8399,
+              "endMs": 8599,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "like",
+              "emphasis": false,
+              "startMs": 8639,
+              "endMs": 8760,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "coal",
+              "emphasis": true,
+              "startMs": 8840,
+              "endMs": 9039,
+              "variant": "punch",
+              "color": "key"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "tar",
+              "emphasis": true,
+              "startMs": 9139,
+              "endMs": 9380,
+              "variant": "punch",
+              "color": "key"
+            },
+            {
+              "text": "soap",
+              "emphasis": true,
+              "startMs": 9500,
+              "endMs": 9859,
+              "variant": "punch",
+              "color": "key"
+            },
+            {
+              "text": "and",
+              "emphasis": false,
+              "startMs": 9899,
+              "endMs": 10060,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "lavender.",
+              "emphasis": true,
+              "startMs": 10179,
+              "endMs": 10659,
+              "variant": "punch",
+              "color": "key"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ideaIndex": 3,
+      "part": 0,
+      "parts": 2,
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "Your",
+              "emphasis": false,
+              "startMs": 11880,
+              "endMs": 11979,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "daughter",
+              "emphasis": false,
+              "startMs": 12039,
+              "endMs": 12399,
+              "variant": "base",
+              "color": "base"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "smelled",
+              "emphasis": false,
+              "startMs": 12519,
+              "endMs": 12719,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "like",
+              "emphasis": false,
+              "startMs": 12779,
+              "endMs": 12920,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "sweat",
+              "emphasis": true,
+              "startMs": 13079,
+              "endMs": 13599,
+              "variant": "punch",
+              "color": "key"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ideaIndex": 3,
+      "part": 1,
+      "parts": 2,
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "and",
+              "emphasis": false,
+              "startMs": 16039,
+              "endMs": 16159,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "strawberries",
+              "emphasis": true,
+              "startMs": 16180,
+              "endMs": 16760,
+              "variant": "punch",
+              "color": "key"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "and",
+              "emphasis": false,
+              "startMs": 16799,
+              "endMs": 16899,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "cream.",
+              "emphasis": true,
+              "startMs": 17000,
+              "endMs": 17459,
+              "variant": "elegant",
+              "color": "key"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ideaIndex": 4,
+      "part": 0,
+      "parts": 1,
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "Please,",
+              "emphasis": false,
+              "startMs": 24340,
+              "endMs": 24659,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "wait.",
+              "emphasis": true,
+              "startMs": 25319,
+              "endMs": 25680,
+              "variant": "punch",
+              "color": "base"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ideaIndex": 5,
+      "part": 0,
+      "parts": 1,
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "Can",
+              "emphasis": false,
+              "startMs": 41020,
+              "endMs": 41099,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "I",
+              "emphasis": false,
+              "startMs": 41139,
+              "endMs": 41159,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "get",
+              "emphasis": false,
+              "startMs": 41180,
+              "endMs": 41279,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "the",
+              "emphasis": false,
+              "startMs": 41299,
+              "endMs": 41399,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "check,",
+              "emphasis": true,
+              "startMs": 41459,
+              "endMs": 41700,
+              "variant": "punch",
+              "color": "key"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "please?",
+              "emphasis": false,
+              "startMs": 42020,
+              "endMs": 42319,
+              "variant": "base",
+              "color": "base"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "hormozi": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "classic": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 4,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 4,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 2,
+        "parts": 4,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 3,
+        "parts": 4,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 4,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 4,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 2,
+        "parts": 4,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 3,
+        "parts": 4,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 5,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 5,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 2,
+        "parts": 5,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 3,
+        "parts": 5,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 4,
+        "parts": 5,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 1,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 2,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "hormozi2": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "gadzhi": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "ali": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "speed": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "edits": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 2,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "typewriter": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "shiny": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "kinetic": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "minimal": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 799,
+                "endMs": 859,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "know",
+                "emphasis": false,
+                "startMs": 1019,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "that",
+                "emphasis": false,
+                "startMs": 1159,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1319,
+                "endMs": 1399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "really",
+                "emphasis": false,
+                "startMs": 1459,
+                "endMs": 1699,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "are",
+                "emphasis": false,
+                "startMs": 1759,
+                "endMs": 1860,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "Red",
+                "emphasis": true,
+                "startMs": 1959,
+                "endMs": 2119,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "John.",
+                "emphasis": true,
+                "startMs": 2200,
+                "endMs": 2480,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3740,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wife",
+                "emphasis": false,
+                "startMs": 3799,
+                "endMs": 4039,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "was",
+                "emphasis": false,
+                "startMs": 4099,
+                "endMs": 4199,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "very",
+                "emphasis": false,
+                "startMs": 4319,
+                "endMs": 4579,
+                "variant": "base",
+                "color": "positive"
+              },
+              {
+                "text": "clean.",
+                "emphasis": true,
+                "startMs": 4679,
+                "endMs": 5159,
+                "variant": "punch",
+                "color": "positive"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "She",
+                "emphasis": false,
+                "startMs": 8239,
+                "endMs": 8340,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 8399,
+                "endMs": 8599,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 8639,
+                "endMs": 8760,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "coal",
+                "emphasis": true,
+                "startMs": 8840,
+                "endMs": 9039,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "tar",
+                "emphasis": true,
+                "startMs": 9139,
+                "endMs": 9380,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "soap",
+                "emphasis": true,
+                "startMs": 9500,
+                "endMs": 9859,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9899,
+                "endMs": 10060,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "lavender.",
+                "emphasis": true,
+                "startMs": 10179,
+                "endMs": 10659,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Your",
+                "emphasis": false,
+                "startMs": 11880,
+                "endMs": 11979,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "daughter",
+                "emphasis": false,
+                "startMs": 12039,
+                "endMs": 12399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "smelled",
+                "emphasis": false,
+                "startMs": 12519,
+                "endMs": 12719,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "like",
+                "emphasis": false,
+                "startMs": 12779,
+                "endMs": 12920,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "sweat",
+                "emphasis": true,
+                "startMs": 13079,
+                "endMs": 13599,
+                "variant": "punch",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16039,
+                "endMs": 16159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "strawberries",
+                "emphasis": true,
+                "startMs": 16180,
+                "endMs": 16760,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16799,
+                "endMs": 16899,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "cream.",
+                "emphasis": true,
+                "startMs": 17000,
+                "endMs": 17459,
+                "variant": "elegant",
+                "color": "key"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Please,",
+                "emphasis": false,
+                "startMs": 24340,
+                "endMs": 24659,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "wait.",
+                "emphasis": true,
+                "startMs": 25319,
+                "endMs": 25680,
+                "variant": "punch",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Can",
+                "emphasis": false,
+                "startMs": 41020,
+                "endMs": 41099,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 41139,
+                "endMs": 41159,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "get",
+                "emphasis": false,
+                "startMs": 41180,
+                "endMs": 41279,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 41299,
+                "endMs": 41399,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "check,",
+                "emphasis": true,
+                "startMs": 41459,
+                "endMs": 41700,
+                "variant": "punch",
+                "color": "key"
+              },
+              {
+                "text": "please?",
+                "emphasis": false,
+                "startMs": 42020,
+                "endMs": 42319,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "translation": "لا أعرف أنك حقاً ريد جون. كانت زوجتك نظيفة جداً. كانت رائحتها مثل صابون قطران الفحم واللافندر. ابنتك كانت رائحتها مثل العرق والفراولة والقشطة. من فضلك، انتظر. هل يمكنني الحصول على الفاتورة، من فضلك؟"
+}

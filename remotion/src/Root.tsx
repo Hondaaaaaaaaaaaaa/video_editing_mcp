@@ -67,6 +67,7 @@ import {
   PageEdits,
   editsSchema,
   EDITS_DEFAULTS,
+  EDITS_MATCH_DEFAULTS,
   EditsStyleProvider,
 } from "./CaptionedVideo/styles/PageEdits";
 
@@ -431,7 +432,50 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         // Spread, NOT a literal copy — a literal silently stops tracking
         // TYPEWRITER_DEFAULTS, which is how Classic's defaults drifted.
-        defaultProps={{ src: SAMPLE_VIDEO, ...TYPEWRITER_DEFAULTS }}
+        defaultProps={{
+          src: "sample-video.mp4",
+          layout: {
+            fontSizePct: 7,
+            captionScale: 1,
+            wordSpacing: 0.3,
+            lineSpacing: 1.15,
+            positionX: 50,
+            positionY: 78,
+            anchor: "center" as const,
+          },
+          text: {
+            font: {
+              family: "Montserrat" as const,
+              custom: "montserrat full version/Montserrat-ExtraBoldItalic.otf",
+            },
+            weight: 800,
+            italic: false,
+            uppercase: false,
+            baseTextColor: "#ffffff",
+            textColors: [],
+          },
+          motion: {
+            typingSpeed: 33,
+            initialDelay: 0,
+            easing: "linear" as const,
+            easingSpeed: 3,
+            variableSpeed: false,
+            variableSpeedMin: 40,
+            variableSpeedMax: 120,
+          },
+          cursor: {
+            show: true,
+            character: "|",
+            blinkDuration: 530,
+            hideWhileTyping: false,
+          },
+          shadowEnabled: true,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowBlur: 8,
+          strokeEnabled: true,
+          strokeColor: "#000000",
+          strokeWidth: 2,
+        }}
       />
 
       {/* "Highlight" caption style — Shiny's kinetic LAYOUT (wordsPerLine /
@@ -686,6 +730,24 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{ src: SAMPLE_VIDEO, ...EDITS_DEFAULTS }}
+      />
+
+      {/* "Edits Match" — a verification composition ONLY: the Edits template
+          rendered over the SQUARE reference (public/edits.mp4, 1080x1080, 60fps)
+          with EDITS_MATCH_DEFAULTS — the reference EXACTLY as measured (hard-cut
+          words, true 2.52% em, 65% position, no glow). Overlay this on the
+          reference to confirm ours lands on top of the burned-in captions. The
+          product "Edits" comp above is unchanged. */}
+      <Composition
+        id="EditsMatch"
+        component={EditsCaptionedVideo}
+        schema={editsSchema}
+        calculateMetadata={captionedVideoMetadataAtFps(60)}
+        fps={60}
+        durationInFrames={600}
+        width={1080}
+        height={1080}
+        defaultProps={{ src: "edits.mp4", ...EDITS_MATCH_DEFAULTS }}
       />
 
       {/* "Kinetic" — kinetic-typography poster captions. Words accumulate one by

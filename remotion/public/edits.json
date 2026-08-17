@@ -1,0 +1,275 @@
+[
+  {
+    "text": "I",
+    "startMs": 799,
+    "endMs": 859,
+    "timestampMs": 829,
+    "confidence": null
+  },
+  {
+    "text": "don't",
+    "startMs": 899,
+    "endMs": 979,
+    "timestampMs": 939,
+    "confidence": null
+  },
+  {
+    "text": "know",
+    "startMs": 1019,
+    "endMs": 1120,
+    "timestampMs": 1070,
+    "confidence": null
+  },
+  {
+    "text": "that",
+    "startMs": 1159,
+    "endMs": 1259,
+    "timestampMs": 1209,
+    "confidence": null
+  },
+  {
+    "text": "you",
+    "startMs": 1319,
+    "endMs": 1399,
+    "timestampMs": 1359,
+    "confidence": null
+  },
+  {
+    "text": "really",
+    "startMs": 1459,
+    "endMs": 1699,
+    "timestampMs": 1579,
+    "confidence": null
+  },
+  {
+    "text": "are",
+    "startMs": 1759,
+    "endMs": 1860,
+    "timestampMs": 1810,
+    "confidence": null
+  },
+  {
+    "text": "Red",
+    "startMs": 1959,
+    "endMs": 2119,
+    "timestampMs": 2039,
+    "confidence": null
+  },
+  {
+    "text": "John.",
+    "startMs": 2200,
+    "endMs": 2480,
+    "timestampMs": 2340,
+    "confidence": null
+  },
+  {
+    "text": "Your",
+    "startMs": 3639,
+    "endMs": 3740,
+    "timestampMs": 3690,
+    "confidence": null
+  },
+  {
+    "text": "wife",
+    "startMs": 3799,
+    "endMs": 4039,
+    "timestampMs": 3919,
+    "confidence": null
+  },
+  {
+    "text": "was",
+    "startMs": 4099,
+    "endMs": 4199,
+    "timestampMs": 4149,
+    "confidence": null
+  },
+  {
+    "text": "very",
+    "startMs": 4319,
+    "endMs": 4579,
+    "timestampMs": 4449,
+    "confidence": null
+  },
+  {
+    "text": "clean.",
+    "startMs": 4679,
+    "endMs": 5159,
+    "timestampMs": 4919,
+    "confidence": null
+  },
+  {
+    "text": "She",
+    "startMs": 8239,
+    "endMs": 8340,
+    "timestampMs": 8290,
+    "confidence": null
+  },
+  {
+    "text": "smelled",
+    "startMs": 8399,
+    "endMs": 8599,
+    "timestampMs": 8499,
+    "confidence": null
+  },
+  {
+    "text": "like",
+    "startMs": 8639,
+    "endMs": 8760,
+    "timestampMs": 8700,
+    "confidence": null
+  },
+  {
+    "text": "coal",
+    "startMs": 8840,
+    "endMs": 9039,
+    "timestampMs": 8940,
+    "confidence": null
+  },
+  {
+    "text": "tar",
+    "startMs": 9139,
+    "endMs": 9380,
+    "timestampMs": 9260,
+    "confidence": null
+  },
+  {
+    "text": "soap",
+    "startMs": 9500,
+    "endMs": 9859,
+    "timestampMs": 9680,
+    "confidence": null
+  },
+  {
+    "text": "and",
+    "startMs": 9899,
+    "endMs": 10060,
+    "timestampMs": 9980,
+    "confidence": null
+  },
+  {
+    "text": "lavender.",
+    "startMs": 10179,
+    "endMs": 10659,
+    "timestampMs": 10419,
+    "confidence": null
+  },
+  {
+    "text": "Your",
+    "startMs": 11880,
+    "endMs": 11979,
+    "timestampMs": 11930,
+    "confidence": null
+  },
+  {
+    "text": "daughter",
+    "startMs": 12039,
+    "endMs": 12399,
+    "timestampMs": 12219,
+    "confidence": null
+  },
+  {
+    "text": "smelled",
+    "startMs": 12519,
+    "endMs": 12719,
+    "timestampMs": 12619,
+    "confidence": null
+  },
+  {
+    "text": "like",
+    "startMs": 12779,
+    "endMs": 12920,
+    "timestampMs": 12850,
+    "confidence": null
+  },
+  {
+    "text": "sweat",
+    "startMs": 13079,
+    "endMs": 13599,
+    "timestampMs": 13339,
+    "confidence": null
+  },
+  {
+    "text": "and",
+    "startMs": 16039,
+    "endMs": 16159,
+    "timestampMs": 16099,
+    "confidence": null
+  },
+  {
+    "text": "strawberries",
+    "startMs": 16180,
+    "endMs": 16760,
+    "timestampMs": 16470,
+    "confidence": null
+  },
+  {
+    "text": "and",
+    "startMs": 16799,
+    "endMs": 16899,
+    "timestampMs": 16849,
+    "confidence": null
+  },
+  {
+    "text": "cream.",
+    "startMs": 17000,
+    "endMs": 17459,
+    "timestampMs": 17230,
+    "confidence": null
+  },
+  {
+    "text": "Please,",
+    "startMs": 24340,
+    "endMs": 24659,
+    "timestampMs": 24500,
+    "confidence": null
+  },
+  {
+    "text": "wait.",
+    "startMs": 25319,
+    "endMs": 25680,
+    "timestampMs": 25500,
+    "confidence": null
+  },
+  {
+    "text": "Can",
+    "startMs": 41020,
+    "endMs": 41099,
+    "timestampMs": 41060,
+    "confidence": null
+  },
+  {
+    "text": "I",
+    "startMs": 41139,
+    "endMs": 41159,
+    "timestampMs": 41149,
+    "confidence": null
+  },
+  {
+    "text": "get",
+    "startMs": 41180,
+    "endMs": 41279,
+    "timestampMs": 41230,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 41299,
+    "endMs": 41399,
+    "timestampMs": 41349,
+    "confidence": null
+  },
+  {
+    "text": "check,",
+    "startMs": 41459,
+    "endMs": 41700,
+    "timestampMs": 41580,
+    "confidence": null
+  },
+  {
+    "text": "please?",
+    "startMs": 42020,
+    "endMs": 42319,
+    "timestampMs": 42170,
+    "confidence": null
+  }
+]

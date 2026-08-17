@@ -176,6 +176,26 @@ export const EDITS_DEFAULTS: EditsStyle = {
   },
 };
 
+// Reference-EXACT match of public/edits.mp4 on a SQUARE 1080 frame (the "Edits
+// Match" composition). Differs from EDITS_DEFAULTS, which is the ADAPTED tall-reel
+// look. Here everything is the reference as measured off the footage:
+//   - animation is the reference's HARD CUT: words snap 0->full opacity AND full
+//     size in ONE 60fps frame (measured: peak 140->255, white 0->80->881 with no
+//     intermediate frame). So NO fade (wordFadeMs 0) and NO pop (popFrom 1).
+//   - size is the reference's true em, 2.52% of frame width (not the scaled 5.5%).
+//   - position is the reference's 65% (its own square framing, not the 78% safe
+//     zone the tall reels use).
+//   - GLOW OFF — the reference has a soft downward shadow and no halo.
+export const EDITS_MATCH_DEFAULTS: EditsStyle = {
+  ...EDITS_DEFAULTS,
+  layout: { ...EDITS_DEFAULTS.layout, fontSizePct: 2.52, positionY: 65 },
+  motion: { ...EDITS_DEFAULTS.motion, wordFadeMs: 0, popFrom: 1 },
+  effects: {
+    shadow: { enabled: true, color: "rgba(0,0,0,0.5)", blur: 4, offsetY: 2 },
+    glow: { enabled: false, blur: 0, opacity: 0 },
+  },
+};
+
 const EditsStyleContext = createContext<EditsStyle>(EDITS_DEFAULTS);
 export const EditsStyleProvider = EditsStyleContext.Provider;
 
