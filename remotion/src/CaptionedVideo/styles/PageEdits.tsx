@@ -46,25 +46,23 @@ import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./Page
 //   * Captions are SPARSE — a 1.27s stretch of the reference carries no caption
 //     at all.
 //
-// THREE DELIBERATE DEPARTURES FROM THE REFERENCE, all chosen on purpose:
+// MATCHES THE REFERENCE EXACTLY (confirmed by overlaying our render on the
+// reference footage and measuring both: identical glyph band [348..731]px, same top
+// of caps at y=695, width 35.56%, centre 49.95%, baseline 66.11% at 1.5s). The
+// values below are the reference as measured, with NO stylistic departures:
 //
-//   1. MOTION. The reference has NONE — every transition is a single-frame hard
-//      cut at 60fps, verified three ways: a word appearing (121 -> 255 in one
-//      frame), a caption appearing (108 -> 255), and a caption clearing
-//      (255 -> 148), with no intermediate value anywhere. We instead use the
-//      entrance MEASURED OFF THE SPEED REELS — a 133ms ease-out fade with a ~2%
-//      grow on the same curve and window — because a polished entrance was
-//      wanted over literal fidelity here.
-//   2. SIZE. The reference's 2.52% em is about half of Classic's, the smallest
-//      template in the project, and reads as a small cinematic subtitle. Scaled
-//      to 5.5% so it carries the same presence as the rest of the set on a 9:16
-//      reel.
-//   3. POSITION. The reference sits at 65% of frame height, but it is a SQUARE
-//      1:1 video; that framing does not transfer to a tall frame. 78% is the
-//      house safe zone (Hormozi / Typewriter / Ali / Classic all use it).
+//   * MOTION is the reference's single-frame HARD CUT at 60fps, verified three
+//     ways: a word appearing (121 -> 255 in one frame), a caption appearing
+//     (108 -> 255), and a caption clearing (255 -> 148), with no intermediate
+//     value anywhere. So wordFadeMs 0 and popFrom 1 — a word snaps on.
+//   * SIZE is the reference's true em, 2.52% of frame width (cap height 1.85%).
+//   * POSITION is the reference's own 65% of frame height, dead centre in X.
+//   * SHADOW is the measured soft downward-only drop (no halo). GLOW is OFF —
+//     the reference has none.
 //
-// The GLOW is a feature of this template, not of the reference: the reference
-// has a shadow and no halo. It is on but gentle by default.
+// The word BUILD is timed off the real transcription: each word appears at its
+// own spoken onset (screen-relative), which is why the line grows one word at a
+// time exactly as the reference does.
 // ---------------------------------------------------------------------------
 
 export const editsSchema = captionedVideoSchema.extend({
@@ -138,16 +136,16 @@ export type EditsStyle = {
 
 export const EDITS_DEFAULTS: EditsStyle = {
   layout: {
-    // The reference measures 2.52%; scaled up so this reads with the same
-    // weight as the other templates on a tall frame. See departure (2) above.
-    fontSizePct: 5.5,
+    // The reference's true em, 2.52% of frame width (cap height 1.85%). Matched
+    // exactly — not scaled up.
+    fontSizePct: 2.52,
     captionScale: 1,
     // 0.68 measured advance minus The Bold Font's own ~0.52.
     letterSpacing: 0.16,
     wordSpacing: 0.26,
     lineSpacing: 1.1,
     positionX: 50, // the reference is dead centre (539-540 of 1080)
-    positionY: 78, // house safe zone, not the reference's square-frame 65%
+    positionY: 65, // the reference's own position (65% of frame height)
   },
   text: {
     // A single static weight, so the slot renders it at its natural weight and
@@ -159,42 +157,27 @@ export const EDITS_DEFAULTS: EditsStyle = {
     color: "#ffffff", // measured pure white
   },
   motion: {
-    // Measured off the SPEED reels, not this one — see departure (1).
-    wordFadeMs: 133,
-    popFrom: 0.98, // ~2% grow
-    // `smooth` is wrong for this entrance (it reaches 0.66 one frame in where
-    // the measured curve is at 0.36), so the curve is set explicitly.
+    // The reference's HARD CUT: a word snaps 0->full in one 60fps frame, no
+    // fade and no grow. Verified off the footage (121 -> 255 in a single frame).
+    wordFadeMs: 0,
+    popFrom: 1,
+    // Unused while wordFadeMs is 0 (the window collapses to a single frame), but
+    // kept so a user who dials in a fade gets a sane curve.
     easing: { type: "ease-out", strength: 2 },
   },
   effects: {
-    // Downward-only and soft, as measured. Scaled for the larger type: the
-    // reference's shadow reaches 1-3px under a 20px cap height, so it is ~2-7px
-    // under ours.
-    shadow: { enabled: true, color: "rgba(0,0,0,0.55)", blur: 8, offsetY: 3 },
-    // "A little glow" — present but gentle. Speed runs 26/0.55; this is softer.
-    glow: { enabled: true, blur: 18, opacity: 0.35 },
-  },
-};
-
-// Reference-EXACT match of public/edits.mp4 on a SQUARE 1080 frame (the "Edits
-// Match" composition). Differs from EDITS_DEFAULTS, which is the ADAPTED tall-reel
-// look. Here everything is the reference as measured off the footage:
-//   - animation is the reference's HARD CUT: words snap 0->full opacity AND full
-//     size in ONE 60fps frame (measured: peak 140->255, white 0->80->881 with no
-//     intermediate frame). So NO fade (wordFadeMs 0) and NO pop (popFrom 1).
-//   - size is the reference's true em, 2.52% of frame width (not the scaled 5.5%).
-//   - position is the reference's 65% (its own square framing, not the 78% safe
-//     zone the tall reels use).
-//   - GLOW OFF — the reference has a soft downward shadow and no halo.
-export const EDITS_MATCH_DEFAULTS: EditsStyle = {
-  ...EDITS_DEFAULTS,
-  layout: { ...EDITS_DEFAULTS.layout, fontSizePct: 2.52, positionY: 65 },
-  motion: { ...EDITS_DEFAULTS.motion, wordFadeMs: 0, popFrom: 1 },
-  effects: {
+    // The measured soft, downward-only drop shadow (no halo).
     shadow: { enabled: true, color: "rgba(0,0,0,0.5)", blur: 4, offsetY: 2 },
+    // OFF — the reference has a shadow and no glow.
     glow: { enabled: false, blur: 0, opacity: 0 },
   },
 };
+
+// The square "Edits Match" composition renders over public/edits.mp4 for
+// side-by-side verification. Now that EDITS_DEFAULTS is itself the reference-exact
+// look, this is just the same values (kept as its own export so the composition
+// reads clearly and can diverge again if ever needed).
+export const EDITS_MATCH_DEFAULTS: EditsStyle = { ...EDITS_DEFAULTS };
 
 const EditsStyleContext = createContext<EditsStyle>(EDITS_DEFAULTS);
 export const EditsStyleProvider = EditsStyleContext.Provider;
@@ -344,7 +327,12 @@ export const PageEdits: React.FC<CaptionStyleProps> = ({ captions = [], segments
   return (
     <AbsoluteFill style={{ zIndex: 10 }}>
       {blocks.map((block, i) => {
-        const startFrame = i === 0 ? 0 : msToFrame(block.startMs);
+        // Every screen starts at the spoken onset of its first word — INCLUDING
+        // the first one. Anchoring screen 0 to frame 0 instead shifted its whole
+        // word build ~0.8s early (all words showing at once by 1.0s where the
+        // reference still reads "I DON'T"); the caption must arrive when the
+        // words are actually said, exactly as the reference does.
+        const startFrame = msToFrame(block.startMs);
         const next = blocks[i + 1];
         const endFrame = next ? msToFrame(next.startMs) : durationInFrames;
         const dur = Math.max(1, endFrame - startFrame);
