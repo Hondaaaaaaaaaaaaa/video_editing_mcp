@@ -127,6 +127,31 @@ const TEMPLATES = {
     exact: false,
     charsPerLine: charsPerLine(5.5, 0.87, ADVANCE_NORMAL + 0.16),
   },
+  // CLASSIC 2 — one short centred line of Bebas Neue caps, revealed a word at a
+  // time IN PLACE. Measured off remotion/public/Classic 2.mp4 (1280x720 @30fps).
+  //
+  // The face was identified, not guessed: three words were fingerprinted by
+  // ink-width / cap-height (a size-independent ratio) and fitted against 18
+  // condensed candidates. Bebas Neue at 0.03em tracking matched to 0.31% mean
+  // error, five times closer than the runner-up. It then predicted the reference
+  // line widths to 0.2% — 531px vs 532 measured for "THAT F*CKING NOBODY?", and
+  // 578px vs 577 for the 23-character "K*LL THREE MEN IN A BAR".
+  //
+  // Cap height 48px over Bebas's 0.70 cap/em = 68.6px em = 5.36% of frame width.
+  // The advance is NOT one of the constants above: Bebas's own is ~0.339, plus
+  // the 0.03em of tracking this look sets = 0.369. Keep in step with
+  // fontSizePct / letterSpacing in PageClassic2.tsx.
+  //
+  // ONE line only, like the reference — a caption too long for it plays across
+  // consecutive SCREENS rather than stacking, the same way Classic and Edits do.
+  // The reference's widest line runs to 45% of the frame (23 characters), which
+  // is what 0.46 encodes: this look is a SHORT centred line, not a full-width one.
+  classic2: {
+    minLines: 1,
+    maxLines: 1,
+    exact: false,
+    charsPerLine: charsPerLine(5.36, 0.46, 0.369),
+  },
   // Typing is character-by-character, so a screen has to be short enough to
   // finish typing while it is still on screen — hence 2 lines rather than 3.
   // Not `exact`: a short caption types on ONE line and must stay one line,

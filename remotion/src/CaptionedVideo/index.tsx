@@ -108,6 +108,46 @@ const fileExists = (src: string): boolean => {
  * fade. Templates whose animation is that fast must render at the rate they
  * were measured at.
  */
+// ---------------------------------------------------------------------------
+// FRAME SIZE — the export shapes a caption template can be rendered at.
+//
+// A <Composition> declares one fixed width/height, but `calculateMetadata` may
+// RETURN a size, and that wins. So a template can offer every aspect ratio from
+// a SINGLE composition by taking a `frame` prop and resolving it here, instead
+// of shipping one composition per shape.
+//
+// Sizes are the platform-native ones, all 1080 on their short edge so a caption
+// measured as a % of frame WIDTH keeps its proportions across every shape.
+// ---------------------------------------------------------------------------
+export const FRAME_SIZES = {
+  "9:16": { width: 1080, height: 1920 }, // reels / shorts / TikTok — the default
+  "16:9": { width: 1920, height: 1080 }, // landscape / YouTube
+  "1:1": { width: 1080, height: 1080 }, // square feed
+  "4:5": { width: 1080, height: 1350 }, // portrait feed
+} as const;
+
+export type FrameSizeName = keyof typeof FRAME_SIZES;
+
+export const FRAME_SIZE_DEFAULT: FrameSizeName = "9:16";
+
+/** Spread into a template's schema to expose the frame-size dropdown. */
+export const frameSizeSchema = z.enum(["9:16", "16:9", "1:1", "4:5"]);
+
+/**
+ * `calculateMetadata` that keeps the normal fps/duration behaviour AND sets the
+ * export size from the template's `frame` prop. Opt-in per template: a
+ * composition using `calculateCaptionedVideoMetadata` is unaffected.
+ */
+export const captionedVideoMetadataWithFrame = async <
+  T extends { src: string; frame?: FrameSizeName },
+>(arg: {
+  props: T;
+}): Promise<{ fps: number; durationInFrames: number; width: number; height: number }> => {
+  const base = await calculateCaptionedVideoMetadata(arg);
+  const size = FRAME_SIZES[arg.props.frame ?? FRAME_SIZE_DEFAULT] ?? FRAME_SIZES[FRAME_SIZE_DEFAULT];
+  return { ...base, width: size.width, height: size.height };
+};
+
 export const captionedVideoMetadataAtFps =
   (fps: number) =>
   async <T extends { src: string }>(arg: { props: T }): Promise<{ fps: number; durationInFrames: number }> => {

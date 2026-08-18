@@ -63,6 +63,12 @@ import {
   SpeedStyleProvider,
 } from "../src/CaptionedVideo/styles/PageSpeed";
 import {
+  PageClassic2,
+  classic2Schema,
+  CLASSIC2_DEFAULTS,
+  Classic2StyleProvider,
+} from "../src/CaptionedVideo/styles/PageClassic2";
+import {
   PageEdits,
   editsSchema,
   EDITS_DEFAULTS,
@@ -195,6 +201,15 @@ export const STYLES: StyleEntry[] = [
     Page: PageSpeed,
     documentDriven: true,
     shape: "speed",
+  },
+  {
+    id: "Classic 2",
+    schema: classic2Schema,
+    defaults: stripSrc(CLASSIC2_DEFAULTS),
+    Provider: Classic2StyleProvider as unknown as React.Provider<never>,
+    Page: PageClassic2,
+    documentDriven: true,
+    shape: "classic2",
   },
 ];
 

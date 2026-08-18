@@ -6,6 +6,7 @@ import {
   CaptionedVideo,
   calculateCaptionedVideoMetadata,
   captionedVideoMetadataAtFps,
+  captionedVideoMetadataWithFrame,
 } from "./CaptionedVideo";
 import { z } from "zod";
 import {
@@ -70,6 +71,12 @@ import {
   EDITS_MATCH_DEFAULTS,
   EditsStyleProvider,
 } from "./CaptionedVideo/styles/PageEdits";
+import {
+  PageClassic2,
+  classic2Schema,
+  CLASSIC2_DEFAULTS,
+  Classic2StyleProvider,
+} from "./CaptionedVideo/styles/PageClassic2";
 
 // The video that captions are rendered over (a vertical clip at
 // remotion/public/sample-video.mp4). Stored as a PLAIN FILENAME — not
@@ -239,6 +246,25 @@ const EditsCaptionedVideo: React.FC<z.infer<typeof editsSchema>> = ({
       singleSurface
     />
   </EditsStyleProvider>
+);
+
+// Classic 2 reads the caption document's segments and paints its own <Sequence>
+// per screen, so it renders as one full-timeline surface. One centred line of
+// Bebas Neue caps whose words are revealed in place, a word at a time.
+const Classic2CaptionedVideo: React.FC<z.infer<typeof classic2Schema>> = ({
+  src,
+  showPunctuation,
+  ...style
+}) => (
+  <Classic2StyleProvider value={style}>
+    <CaptionedVideo
+      src={src}
+      showPunctuation={showPunctuation}
+      shape="classic2"
+      PageComponent={PageClassic2}
+      singleSurface
+    />
+  </Classic2StyleProvider>
 );
 
 // Kinetic reads the caption document's per-word variants and builds the whole
@@ -749,6 +775,28 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         defaultProps={{ src: "edits.mp4", ...EDITS_MATCH_DEFAULTS }}
       />
+
+      {/* "Classic 2" — the cinematic movie-clip caption: ONE short centred line
+          of white Bebas Neue caps whose words are revealed IN PLACE, a word at a
+          time (the line is laid out and centred for its FULL text up front, so
+          it never re-centres as it grows). Defaults ARE the measurements taken
+          off public/Classic 2.mp4 — including a hard-cut entrance, which the
+          fade / easing / pop controls can soften. */}
+      <Composition
+        id="Classic2"
+        component={Classic2CaptionedVideo}
+        schema={classic2Schema}
+        // Size comes from the `frame` prop, not the width/height below:
+        // calculateMetadata's return wins. The literals are just the 9:16
+        // default so the Studio has a size before metadata resolves.
+        calculateMetadata={captionedVideoMetadataWithFrame}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        defaultProps={{ src: SAMPLE_VIDEO, ...CLASSIC2_DEFAULTS }}
+      />
+
 
       {/* "Kinetic" — kinetic-typography poster captions. Words accumulate one by
           one, each styled by a per-word role (base / punch / elegant) that Claude
