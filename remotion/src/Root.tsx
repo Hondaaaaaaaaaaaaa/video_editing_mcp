@@ -776,25 +776,33 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{ src: "edits.mp4", ...EDITS_MATCH_DEFAULTS }}
       />
 
-      {/* "Classic 2" — the cinematic movie-clip caption: ONE short centred line
-          of white Bebas Neue caps whose words are revealed IN PLACE, a word at a
-          time (the line is laid out and centred for its FULL text up front, so
-          it never re-centres as it grows). Defaults ARE the measurements taken
-          off public/Classic 2.mp4 — including a hard-cut entrance, which the
-          fade / easing / pop controls can soften. */}
+      {/* "Classic 2 Match" — the cinematic movie-clip caption: ONE short centred
+          line of white Bebas Neue caps whose words are revealed IN PLACE, a word
+          at a time (the line is laid out and centred for its FULL text up front,
+          so it never re-centres as it grows). Defaults ARE the measurements
+          taken off the reference — including a hard-cut entrance, which the
+          fade / easing / pop controls can soften.
+
+          It plays over ITS OWN REFERENCE CLIP (public/Classic 2.mp4) rather than
+          the shared sample video: this look was built for cinematic landscape
+          footage and reads wrong on the vertical talking-head sample. NOTE the
+          reference still carries its own burned-in captions, so ours land on top
+          of them — point `src` at a clean clip to see it alone.
+
+          Size still comes from the `frame` prop (9:16 / 16:9 / 1:1 / 4:5); it
+          defaults to 16:9 here because the reference is landscape. */}
       <Composition
-        id="Classic2"
+        id="Classic2Match"
         component={Classic2CaptionedVideo}
         schema={classic2Schema}
-        // Size comes from the `frame` prop, not the width/height below:
-        // calculateMetadata's return wins. The literals are just the 9:16
-        // default so the Studio has a size before metadata resolves.
+        // calculateMetadata's returned size WINS over the width/height below,
+        // which are only what the Studio shows before it resolves.
         calculateMetadata={captionedVideoMetadataWithFrame}
         fps={30}
         durationInFrames={600}
-        width={1080}
-        height={1920}
-        defaultProps={{ src: SAMPLE_VIDEO, ...CLASSIC2_DEFAULTS }}
+        width={1920}
+        height={1080}
+        defaultProps={{ src: "Classic 2.mp4", ...CLASSIC2_DEFAULTS, frame: "16:9" as const }}
       />
 
 
