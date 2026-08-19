@@ -36,6 +36,11 @@ import {
   captionEndFrame,
   CAPTION_LEAD_MS,
 } from "./caption-timing";
+// Shared profanity mask (masks the first vowel: fuck -> f*ck), the same
+// render-time convention Classic 2 uses, so the whole product censors
+// identically. The caption document always keeps the real word; this only
+// changes what is drawn, so it is reversible via the censorProfanity toggle.
+import { censorWord } from "./censor";
 
 // ---------------------------------------------------------------------------
 // KINETIC ("kinetic 1") — flowing kinetic-typography captions, modelled exactly
@@ -89,12 +94,18 @@ export const kineticSchema = captionedVideoSchema.extend({
     punch: roleSchema,
     elegant: roleSchema,
   }),
-  // ONE entrance for every word (Shiny-style slide + fade with easing). Words
-  // reveal one at a time on their spoken frame, so the block builds up.
+  // Per-word entrance, revealed on each word's spoken frame so the block builds
+  // up. SLIDE and FADE are INDEPENDENT so either can be dialled in or off:
+  //   • FADE = opacity ramp. fadeFrames 0 = the word snaps to full opacity.
+  //   • SLIDE = positional travel. slideDistancePct 0 = no travel; otherwise the
+  //     word moves in from `direction` over slideFrames.
+  // The reference SNAPS (both off): a word is fully opaque and in place on its
+  // first frame. These four are the sliders for tuning that.
   motion: z.object({
-    direction: directionEnum, // where each word slides FROM
-    distancePct: z.number().min(0).max(30).step(0.5), // slide distance, % of width
-    durationFrames: z.number().min(1).max(30).step(1),
+    direction: directionEnum, // where a sliding word travels FROM
+    slideDistancePct: z.number().min(0).max(30).step(0.5), // slide travel, % of width (0 = no slide)
+    slideFrames: z.number().min(0).max(30).step(1), // how long the slide takes
+    fadeFrames: z.number().min(0).max(30).step(1), // opacity-ramp length (0 = snap on)
     easing: easingTypeEnum,
     easingSpeed: z.number().min(1).max(6).step(0.1),
   }),
@@ -105,6 +116,9 @@ export const kineticSchema = captionedVideoSchema.extend({
       blur: textEffectsSchema.shadowBlur,
     }),
   }),
+  // Mask strong language at render time (fuck -> f*ck), as the reference does.
+  // The document keeps the real word, so this is reversible.
+  censorProfanity: z.boolean(),
 });
 
 export type KineticAlignment = "center" | "left" | "right";
@@ -131,12 +145,14 @@ export type KineticStyle = {
   roles: { base: RoleStyle; punch: RoleStyle; elegant: RoleStyle };
   motion: {
     direction: EntranceDirection;
-    distancePct: number;
-    durationFrames: number;
+    slideDistancePct: number;
+    slideFrames: number;
+    fadeFrames: number;
     easing: EntranceEasing;
     easingSpeed: number;
   };
   effects: { shadow: { enabled: boolean; color: string; blur: number } };
+  censorProfanity: boolean;
 };
 
 // Defaults ARE the sample-1 measurements (720-wide source), expressed as
@@ -144,8 +160,12 @@ export type KineticStyle = {
 export const KINETIC_DEFAULTS: KineticStyle = {
   layout: {
     positionX: 50,
-    // Measured off sample 1: the text block TOP sits at ~27% (block centre ~37%).
-    positionY: 26,
+    // Re-measured off sample 1 frame-by-frame: the block is TOP-ANCHORED and the
+    // first line's cap-top sits at ~39% of frame height regardless of how many
+    // lines have accumulated (s_1.0 top≈500px, s_2.2 top≈496px on a 1280 frame,
+    // i.e. ~38.8%). positionY 38 lands our first-line cap-top there (measured
+    // 38.9% on our own render, vs the reference's 38.7%).
+    positionY: 38,
     blockWidthPct: 84,
     captionScale: 1,
     wordSpacing: 0.24,
@@ -154,7 +174,7 @@ export const KINETIC_DEFAULTS: KineticStyle = {
   },
   colors: {
     baseColor: "#ffffff",
-    accentColor: "#b81f1c", // the signature red, measured off sample 1 (~#b02020)
+    accentColor: "#b2201a", // signature red, re-measured off sample 1 core pixels (178,32,26)
   },
   roles: {
     // Ordinary text — clean sans, white. Base cap-height ≈ 6% of width (sample 1).
@@ -166,11 +186,12 @@ export const KINETIC_DEFAULTS: KineticStyle = {
       italic: false,
       letterSpacing: 0,
     },
-    // Emphasised keyword — SAME sans, heavy and SUPERSIZED (~2x base, ~13% of
-    // width in sample 1); red via emphasis. This is the word the eye lands on.
+    // Emphasised keyword — SAME sans, heavy and bigger; red via emphasis. This is
+    // the word the eye lands on. Re-measured off sample 1: punch cap ≈ 45px vs
+    // base ≈ 32px on a 720-wide frame — a 1.4x step, NOT 2x. em ≈ 8.5% of width.
     punch: {
       font: fontSlot("Montserrat"),
-      sizePct: 12.5,
+      sizePct: 8.5,
       weight: 800,
       uppercase: false,
       italic: false,
@@ -187,9 +208,17 @@ export const KINETIC_DEFAULTS: KineticStyle = {
     },
   },
   motion: {
-    direction: "up", // rises into place
-    distancePct: 5,
-    durationFrames: 11,
+    // Re-measured off sample 1: words SNAP in — a base word goes from absent to
+    // fully opaque and in final position within a single 24fps frame (b_40 empty
+    // -> e_55 full), with no slide and no resolvable fade. The visible "kinetic"
+    // motion is the block RE-CENTERING as each word piles in, not a per-word
+    // entrance. So both are OFF by default: fadeFrames 0 (snap on) and
+    // slideDistancePct 0 (no travel). slideFrames only matters once a slide
+    // distance is dialled in.
+    direction: "up",
+    slideDistancePct: 0,
+    slideFrames: 3,
+    fadeFrames: 0,
     easing: "smooth",
     easingSpeed: 3,
   },
@@ -197,6 +226,8 @@ export const KINETIC_DEFAULTS: KineticStyle = {
     // A soft shadow keeps text legible over bright footage; subtle by default.
     shadow: { enabled: true, color: "rgba(0,0,0,0.5)", blur: 16 },
   },
+  // The reference masks profanity (f*ck), so on by default.
+  censorProfanity: true,
 };
 
 const KineticStyleContext = createContext<KineticStyle>(KINETIC_DEFAULTS);
@@ -262,6 +293,10 @@ const KineticSegment: React.FC<{
     alignment,
   } = style.layout;
   const { baseColor, accentColor } = style.colors;
+  const { censorProfanity } = style;
+  // What is actually DRAWN for a word — profanity-masked if the toggle is on.
+  // Used for both painting and width measurement so the layout matches the pixels.
+  const shown = (tk: KWord) => censorWord(tk.text, censorProfanity);
   const motion = style.motion;
   const easingFn = useMemo(
     () => makeEntranceEasing(motion.easing, motion.easingSpeed),
@@ -283,19 +318,27 @@ const KineticSegment: React.FC<{
   const msToFrame = (ms: number) => Math.round((ms / 1000) * fps);
   const px = (pct: number) => (frameWidth * pct) / 100;
 
-  // The single shared entrance: fade + slide from `direction`, timed to this
-  // word's own spoken start relative to the block (word-by-word build).
+  // Entrance timed to this word's own spoken start (relative to the block). FADE
+  // and SLIDE run on their OWN durations so they are independent: a 0-frame ramp
+  // means that channel snaps (fully on / fully in place from the first frame).
   const wordEnter = (startMs: number) => {
     const startFrame = Math.max(0, msToFrame(startMs - blockStartMs));
-    const p = interpolate(frame, [startFrame, startFrame + motion.durationFrames], [0, 1], {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: easingFn,
-    });
-    const off = px(motion.distancePct) * (1 - p);
+    const ramp = (durFrames: number) =>
+      durFrames <= 0
+        ? frame >= startFrame
+          ? 1
+          : 0
+        : interpolate(frame, [startFrame, startFrame + durFrames], [0, 1], {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+            easing: easingFn,
+          });
+    const pFade = ramp(motion.fadeFrames);
+    const pSlide = ramp(motion.slideFrames);
+    const off = px(motion.slideDistancePct) * (1 - pSlide);
     const v = ENTRANCE_VECTOR[motion.direction];
     return {
-      opacity: p,
+      opacity: pFade,
       tx: v.axis === "x" ? v.sign * off : 0,
       ty: v.axis === "y" ? v.sign * off : 0,
     };
@@ -310,7 +353,7 @@ const KineticSegment: React.FC<{
       const r = resolved[tk.variant];
       w +=
         measureText({
-          text: tk.text,
+          text: shown(tk),
           fontFamily: r.font.fontFamily,
           fontSize: px(r.style.sizePct),
           fontWeight: effectiveWeight(r.font, r.style.weight),
@@ -382,7 +425,7 @@ const KineticSegment: React.FC<{
           >
             {line.map((tk, wi) => (
               <span key={wi} style={wordStyle(tk)}>
-                {tk.text}
+                {shown(tk)}
               </span>
             ))}
           </div>

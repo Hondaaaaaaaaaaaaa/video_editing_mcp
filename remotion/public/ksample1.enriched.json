@@ -2475,10 +2475,10 @@
               },
               {
                 "text": "hooks",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 939,
                 "endMs": 1199,
-                "variant": "elegant"
+                "variant": "punch"
               }
             ]
           }
@@ -2508,10 +2508,10 @@
               },
               {
                 "text": "people",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 1799,
                 "endMs": 2099,
-                "variant": "base"
+                "variant": "punch"
               }
             ]
           },
@@ -2558,10 +2558,10 @@
             "words": [
               {
                 "text": "the",
-                "emphasis": false,
+                "emphasis": true,
                 "startMs": 3019,
                 "endMs": 3099,
-                "variant": "base"
+                "variant": "punch"
               },
               {
                 "text": "triple",
