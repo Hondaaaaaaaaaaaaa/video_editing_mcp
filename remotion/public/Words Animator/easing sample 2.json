@@ -1,0 +1,37 @@
+[
+  {
+    "text": "It'll",
+    "startMs": 99,
+    "endMs": 319,
+    "timestampMs": 209,
+    "confidence": null
+  },
+  {
+    "text": "paralyze",
+    "startMs": 319,
+    "endMs": 740,
+    "timestampMs": 530,
+    "confidence": null
+  },
+  {
+    "text": "anyone",
+    "startMs": 819,
+    "endMs": 1120,
+    "timestampMs": 970,
+    "confidence": null
+  },
+  {
+    "text": "from",
+    "startMs": 1120,
+    "endMs": 1259,
+    "timestampMs": 1190,
+    "confidence": null
+  },
+  {
+    "text": "scrolling",
+    "startMs": 1299,
+    "endMs": 1500,
+    "timestampMs": 1400,
+    "confidence": null
+  }
+]

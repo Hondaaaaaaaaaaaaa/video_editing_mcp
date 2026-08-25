@@ -23,7 +23,6 @@ import {
 import {
   PageTypewriter,
   typewriterSchema,
-  TYPEWRITER_DEFAULTS,
   TypewriterStyleProvider,
 } from "./CaptionedVideo/styles/PageTypewriter";
 import {
@@ -72,6 +71,11 @@ import {
   EditsStyleProvider,
 } from "./CaptionedVideo/styles/PageEdits";
 import {
+  PageAnimator,
+  animatorSchema,
+  AnimatorStyleProvider,
+} from "./CaptionedVideo/styles/PageAnimator";
+import {
   PageClassic2,
   classic2Schema,
   CLASSIC2_DEFAULTS,
@@ -84,6 +88,19 @@ import {
 // object literal that Remotion Studio can SAVE (a function call would block
 // "save default props"). CaptionedVideo resolves the filename via staticFile().
 const SAMPLE_VIDEO = "sample-video.mp4";
+
+// The Edits 2 reference reel (remotion/public/edits 2.mp4) — 576x576, 30 fps,
+// with its own captions burned in. The "Edits" composition plays THIS rather
+// than the shared sample video while Edits 2 is reverse-engineered from it, so
+// the Studio timeline scrubs the same footage the measurements come from.
+const EDITS2_REFERENCE = "edits 2.mp4";
+
+// The Words Animator reference reel (remotion/public/Words Animator/easing
+// sample 2.mp4) — 720x1280, 23.98fps, with its own captions burned in. The
+// "Animator" composition plays THIS rather than the shared sample video, so the
+// Studio timeline scrubs the exact footage the motion was measured from and our
+// words land on top of the reference's for comparison.
+const WORDS_ANIMATOR_REFERENCE = "Words Animator/easing sample 2.mp4";
 
 // Thin wrappers bind a caption *style* to the shared CaptionedVideo
 // composition. Same video + captions, different look per composition.
@@ -246,6 +263,24 @@ const EditsCaptionedVideo: React.FC<z.infer<typeof editsSchema>> = ({
       singleSurface
     />
   </EditsStyleProvider>
+);
+
+// Animator is the slider-driven one: the caption document gives it the words,
+// and its own wave decides when each one arrives. Single surface, like the rest.
+const AnimatorCaptionedVideo: React.FC<z.infer<typeof animatorSchema>> = ({
+  src,
+  showPunctuation,
+  ...style
+}) => (
+  <AnimatorStyleProvider value={style}>
+    <CaptionedVideo
+      src={src}
+      showPunctuation={showPunctuation}
+      shape="animator"
+      PageComponent={PageAnimator}
+      singleSurface
+    />
+  </AnimatorStyleProvider>
 );
 
 // Classic 2 reads the caption document's segments and paints its own <Sequence>
@@ -753,9 +788,11 @@ export const RemotionRoot: React.FC = () => {
         calculateMetadata={calculateCaptionedVideoMetadata}
         fps={30}
         durationInFrames={600}
+        // SQUARE, because the Edits 2 reference is 1:1. Put this composition
+        // back on the vertical sample with 1080x1920 + SAMPLE_VIDEO.
         width={1080}
-        height={1920}
-        defaultProps={{ src: SAMPLE_VIDEO, ...EDITS_DEFAULTS }}
+        height={1080}
+        defaultProps={{ src: EDITS2_REFERENCE, ...EDITS_DEFAULTS }}
       />
 
       {/* "Edits Match" — a verification composition ONLY: the Edits template
@@ -774,6 +811,71 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1080}
         defaultProps={{ src: "edits.mp4", ...EDITS_MATCH_DEFAULTS }}
+      />
+
+      {/* "Animator" — the slider-driven word animator, modelled on the Text
+          Animator Pro MOGRT and calibrated against its exported clips. Words
+          only, entrance only: a WAVE sweeps the caption, so at any instant some
+          words are settled, one is mid-flight and the rest have not arrived.
+          Every channel (rise, fade, blur, scale, rotation, duration, stagger,
+          curve, direction) is a slider — this is the one template whose motion
+          is meant to be dialled rather than fixed. */}
+      <Composition
+        id="Animator"
+        component={AnimatorCaptionedVideo}
+        schema={animatorSchema}
+        calculateMetadata={captionedVideoMetadataWithFrame}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          src: WORDS_ANIMATOR_REFERENCE,
+          showPunctuation: false,
+          frame: "9:16" as const,
+          animation: {
+            moveY: 3.47,
+            moveX: 0,
+            fadeFrom: 0,
+            fadeMs: 165,
+            blurPct: 0.83,
+            blurMs: 540,
+            scaleFrom: 1,
+            rotateFrom: 0,
+            durationMs: 580,
+            staggerMs: 188,
+            easing: { type: "ease-out" as const, strength: 4 },
+            direction: "reading" as const,
+            seed: 0,
+          },
+          layout: {
+            fontSizePct: 6.7,
+            captionScale: 1,
+            letterSpacing: 0,
+            wordSpacing: 0.24,
+            lineSpacing: 1.2,
+            positionX: 50,
+            positionY: 50,
+            alignment: "left" as const,
+          },
+          text: {
+            font: { family: "Playfair Display" as const, custom: "" },
+            weight: 700,
+            uppercase: false,
+            color: "#ffffff",
+            accentColor: "#e02020",
+            accentOnEmphasis: true,
+          },
+          effects: {
+            shadow: {
+              enabled: true,
+              color: "rgba(0,0,0,0.5)",
+              blur: 10,
+              offsetY: 3,
+            },
+            glow: { enabled: false, blur: 18, opacity: 0.3 },
+          },
+        }}
       />
 
       {/* "Classic 2 Match" — the cinematic movie-clip caption: ONE short centred
@@ -825,6 +927,23 @@ export const RemotionRoot: React.FC = () => {
         // own audio, so the captions are what the speaker actually says — the
         // template applied to a real video, which is how it works for any clip.
         defaultProps={{ src: SAMPLE_VIDEO, ...KINETIC_DEFAULTS }}
+      />
+
+      {/* "KineticMatch" — reference-fidelity verification comp. Renders the
+          kinetic template over ksample1.mp4 (an identical copy of the reference
+          "kinetic 1/sample 1.mp4", 720x1280, with its OWN kinetic caption data)
+          so our captions can be overlaid on the reference's burned-in captions
+          and compared pixel-for-pixel. NOT a product composition. */}
+      <Composition
+        id="KineticMatch"
+        component={KineticCaptionedVideo}
+        schema={kineticSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={210}
+        width={720}
+        height={1280}
+        defaultProps={{ src: "ksample1.mp4", ...KINETIC_DEFAULTS }}
       />
 
       {/* "Ali" — the sticker look. ONE line of Poppins on a rounded pill that

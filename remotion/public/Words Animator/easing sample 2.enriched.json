@@ -1,0 +1,884 @@
+{
+  "language": "en",
+  "segments": [
+    {
+      "ideaIndex": 0,
+      "part": 0,
+      "parts": 1,
+      "lines": [
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "It'll",
+              "emphasis": false,
+              "startMs": 99,
+              "endMs": 319,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "paralyze",
+              "emphasis": true,
+              "startMs": 319,
+              "endMs": 740,
+              "variant": "punch",
+              "color": "negative"
+            },
+            {
+              "text": "anyone",
+              "emphasis": false,
+              "startMs": 819,
+              "endMs": 1120,
+              "variant": "base",
+              "color": "negative"
+            }
+          ]
+        },
+        {
+          "align": "center",
+          "words": [
+            {
+              "text": "from",
+              "emphasis": false,
+              "startMs": 1120,
+              "endMs": 1259,
+              "variant": "base",
+              "color": "base"
+            },
+            {
+              "text": "scrolling",
+              "emphasis": true,
+              "startMs": 1299,
+              "endMs": 1500,
+              "variant": "elegant",
+              "color": "base"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "hormozi": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "classic": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 2,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "hormozi2": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "gadzhi": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "ali": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "speed": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "edits": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "classic2": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "animator": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "typewriter": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "shiny": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "kinetic": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "minimal": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It'll",
+                "emphasis": false,
+                "startMs": 99,
+                "endMs": 319,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 319,
+                "endMs": 740,
+                "variant": "punch",
+                "color": "negative"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 819,
+                "endMs": 1120,
+                "variant": "base",
+                "color": "negative"
+              },
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 1120,
+                "endMs": 1259,
+                "variant": "base",
+                "color": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 1299,
+                "endMs": 1500,
+                "variant": "elegant",
+                "color": "base"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "translation": "سيُشِلّ أي شخص عن التمرير."
+}

@@ -152,6 +152,24 @@ const TEMPLATES = {
     exact: false,
     charsPerLine: charsPerLine(5.36, 0.46, 0.369),
   },
+  // ANIMATOR — the slider-driven word animator, modelled on the "Text Animator
+  // Pro" MOGRT the user supplied and calibrated against its own exported clips
+  // (public/easing sample .mp4, 720x1280 @23.98fps).
+  //
+  // WORDS ONLY by design: characters and lines are separate templates. Two lines
+  // like the reference, and the wave runs in reading order straight through
+  // both, so a caption reads as one sweep rather than two.
+  //
+  // Inter Bold at 6.7% of the frame width (cap height 48px measured on the
+  // 720-wide reference over Inter's 0.727 cap/em). Lines run to ~84% of the
+  // width, which is what 0.84 encodes. Keep in step with fontSizePct /
+  // FIT_WIDTH_FRACTION in PageAnimator.tsx.
+  animator: {
+    minLines: 1,
+    maxLines: 2,
+    exact: false,
+    charsPerLine: charsPerLine(6.7, 0.84, ADVANCE_NORMAL),
+  },
   // Typing is character-by-character, so a screen has to be short enough to
   // finish typing while it is still on screen — hence 2 lines rather than 3.
   // Not `exact`: a short caption types on ONE line and must stay one line,
