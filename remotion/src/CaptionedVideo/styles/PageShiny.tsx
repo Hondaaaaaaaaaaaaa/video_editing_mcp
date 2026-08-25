@@ -16,12 +16,10 @@ import {
   textEffectsSchema,
   textStrokeCss,
   dropShadowCss,
-  TEXT_EFFECTS_DEFAULTS,
   type TextEffects,
 } from "./text-effects";
 import {
   fontFamilySchema,
-  FONT_DEFAULTS,
   resolveFontFamily,
   type FontFamilyName,
 } from "./fonts";
@@ -299,113 +297,101 @@ export type ShinyStyle = {
 // rendered without a provider (e.g. in isolation / tests). Default = TWO stops
 // (top at 0%, bottom at 100%); the middle stop is OFF until the user enables it.
 export const SHINY_DEFAULTS: ShinyStyle = {
-  layout: {
-    // Hormozi stagger: short 2-word lines keep their words grouped, normal lines
-    // alternate left/right, and any line with the big/shiny (emphasized) word is
-    // centered & prominent.
-    wordsPerLine: 2,
-    linesPerSegment: 3,
-    captionScale: 1, // no extra scaling by default
-    lineSpacing: 1.2,
-    positionX: 50, // horizontally centered
-    // 78% house safe zone — under the chin, clear of the mouth. Shiny stacks up
-    // to three lines, which grow UPWARD from this centre, so it still clears the
-    // platform UI at the bottom.
-    positionY: 78,
-    emphasisAlignment: "center",
-    normalAlignment: "alternate",
-  },
-  text: {
-    fontFamily: FONT_DEFAULTS.fontFamily,
-    baseColor: "#ffffff",
-  },
-  emphasis: {
-    scale: 1.4,
-    fontFamily: FONT_DEFAULTS.fontFamily,
-    offsetX: 0,
-    offsetY: 0,
-    colorEnabled: false,
-    color: "#ffffff",
-    entrance: {
-      direction: "up",
-      distance: 50,
-      easing: "smooth",
-      easingSpeed: 3,
-    },
-  },
-  effects: {
-    gradient: {
-      angle: 180,
-      topColor: "#ffe14d",
-      topPosition: 0,
-      midEnabled: false,
-      midColor: "#ff8a00",
-      midPosition: 50,
-      bottomColor: "#ff3d00",
-      bottomPosition: 100,
-    },
-    glow: {
-      strength: 30,
-      color: "#ff8a00",
-    },
-    deepGlow: {
-      enabled: false,
-      radius: 60,
-      brightness: 70,
-      innerColor: "#fff5e6",
-      outerColor: "#ff8a00",
-      chromatic: 0,
-    },
-    sweep1: {
-      enabled: true,
-      color: "#ffffff",
-      angle: 20,
-      width: 30,
-      intensity: 70,
-      positionX: 50,
-      positionY: 50,
-    },
-    sweep2: {
-      enabled: false,
-      color: "#ffffff",
-      angle: 160,
-      width: 20,
-      intensity: 50,
-      positionX: 50,
-      positionY: 50,
-    },
-    sweep3: {
-      enabled: false,
-      color: "#ffffff",
-      angle: 90,
-      width: 15,
-      intensity: 40,
-      positionX: 50,
-      positionY: 50,
-    },
-    stroke: {
-      enabled: TEXT_EFFECTS_DEFAULTS.strokeEnabled,
-      color: TEXT_EFFECTS_DEFAULTS.strokeColor,
-      width: TEXT_EFFECTS_DEFAULTS.strokeWidth,
-    },
-    shadow: {
-      enabled: TEXT_EFFECTS_DEFAULTS.shadowEnabled,
-      color: TEXT_EFFECTS_DEFAULTS.shadowColor,
-      blur: TEXT_EFFECTS_DEFAULTS.shadowBlur,
-    },
-  },
-  animation: {
-    entrance: {
-      direction: "up",
-      distance: 30,
-      duration: 12,
-    },
-    easing: {
-      type: "smooth",
-      speed: 3,
-    },
-  },
-};
+          // === LAYOUT ===
+          layout: {
+            wordsPerLine: 2,
+            linesPerSegment: 3,
+            captionScale: 1,
+            lineSpacing: 1.1,
+            positionX: 50,
+            positionY: 84,
+            emphasisAlignment: "center" as const,
+            normalAlignment: "alternate" as const,
+          },
+          // === TEXT (normal words) ===
+          text: {
+            fontFamily: "Inter" as const,
+            baseColor: "#ffffff",
+          },
+          // === EMPHASIS (big/shiny words) ===
+          emphasis: {
+            scale: 1.4,
+            fontFamily: "Anton" as const,
+            offsetX: 0,
+            offsetY: 0,
+            colorEnabled: false,
+            color: "#ffffff",
+            entrance: {
+              direction: "left" as const,
+              distance: 29,
+              easing: "smooth" as const,
+              easingSpeed: 3,
+            },
+          },
+          // === EFFECTS ===
+          effects: {
+            gradient: {
+              angle: 295,
+              topColor: "#ff8800",
+              topPosition: 0,
+              midEnabled: false,
+              midColor: "#000000",
+              midPosition: 50,
+              bottomColor: "#ff8800",
+              bottomPosition: 100,
+            },
+            glow: { strength: 0, color: "#ff8800" },
+            deepGlow: {
+              enabled: true,
+              radius: 23,
+              brightness: 36,
+              innerColor: "#ff8a00",
+              outerColor: "#ff8a00",
+              chromatic: 0,
+            },
+            sweep1: {
+              enabled: false,
+              color: "#ffffff",
+              angle: 150,
+              width: 6,
+              intensity: 17,
+              positionX: 61,
+              positionY: 41,
+            },
+            sweep2: {
+              enabled: true,
+              color: "#e8ff00",
+              angle: 160,
+              width: 1,
+              intensity: 50,
+              positionX: 32,
+              positionY: 50,
+            },
+            sweep3: {
+              enabled: true,
+              color: "#ffffff",
+              angle: 163,
+              width: 1,
+              intensity: 40,
+              positionX: 58,
+              positionY: 57,
+            },
+            stroke: { enabled: true, color: "#000000", width: 0 },
+            shadow: { enabled: false, color: "rgba(0, 0, 0, 0.6)", blur: 0 },
+          },
+          // === ANIMATION (normal-word entrance + easing) ===
+          animation: {
+            entrance: {
+              direction: "up" as const,
+              distance: 63,
+              duration: 13,
+            },
+            easing: {
+              type: "smooth" as const,
+              speed: 1,
+            },
+          },
+        };
 
 /**
  * Builds the text gradient CSS from the enabled stops + positions, in the

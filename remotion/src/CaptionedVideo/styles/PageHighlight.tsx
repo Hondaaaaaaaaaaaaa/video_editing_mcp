@@ -117,59 +117,39 @@ export type HighlightStyle = Omit<z.infer<typeof highlightSchema>, "src">;
 // defaultProps in Root.tsx (the values saved from Studio) so the template opens
 // with the same look whether or not a provider supplies props.
 export const HIGHLIGHT_DEFAULTS: HighlightStyle = {
-  layout: {
-    wordsPerLine: 3, // short, readable lines (auto-fit) — adjustable
-    linesPerSegment: 1, // one line per segment by default
-    fontSize: 120,
-    captionScale: 1, // no extra scaling by default
-    wordSpacing: 0.28, // clean, tight word gap (em), ~matches Shiny's spacing
-    lineSpacing: 1.25,
-    positionX: 50, // horizontally centered
-    positionY: 79, // lower-center
-    alignment: "center",
-  },
-  text: {
-    fontFamily: "Inter",
-    baseTextColor: "#FFFFFF",
-    highlightColor: "#56ff00",
-  },
-  gradient: {
-    enabled: false,
-    angle: 180,
-    topColor: "#ffe14d",
-    topPosition: 0,
-    midEnabled: false,
-    midColor: "#ff8a00",
-    midPosition: 50,
-    bottomColor: "#ff3d00",
-    bottomPosition: 100,
-  },
-  glow: {
-    enabled: true,
-    color: "rgba(0, 255, 43, 0.38)",
-    size: 30,
-  },
-  pop: {
-    enabled: true,
-    speed: 130,
-    intensity: 1.2,
-  },
-  wiggle: {
-    enabled: false,
-    strength: 15, // subtle drift (~15px / ~2.25deg) by default
-    speed: 1, // gentle, slow wander by default
-  },
-  shadow: {
-    enabled: true,
-    color: "rgba(0, 0, 0, 0.6)",
-    blur: 8,
-  },
-  stroke: {
-    enabled: true,
-    color: "#000000",
-    width: 1,
-  },
-};
+          layout: {
+            wordsPerLine: 3,
+            linesPerSegment: 1,
+            fontSize: 120,
+            captionScale: 1,
+            wordSpacing: 0,
+            lineSpacing: 1.25,
+            positionX: 50,
+            positionY: 79,
+            alignment: "center" as const,
+          },
+          text: {
+            fontFamily: "Inter" as const,
+            baseTextColor: "#FFFFFF",
+            highlightColor: "#56ff00",
+          },
+          gradient: {
+            enabled: false,
+            angle: 180,
+            topColor: "#ffe14d",
+            topPosition: 0,
+            midEnabled: false,
+            midColor: "#ff8a00",
+            midPosition: 50,
+            bottomColor: "#ff3d00",
+            bottomPosition: 100,
+          },
+          glow: { enabled: true, color: "rgba(0, 255, 43, 0.38)", size: 30 },
+          pop: { enabled: true, speed: 130, intensity: 1.2 },
+          wiggle: { enabled: false, strength: 14, speed: 0.2 },
+          shadow: { enabled: true, color: "rgba(0, 0, 0, 0.6)", blur: 8 },
+          stroke: { enabled: true, color: "#000000", width: 1 },
+        };
 
 // Carries the schema props from Root down to the style without touching the
 // shared engine (CaptionedVideo).

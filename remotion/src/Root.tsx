@@ -18,26 +18,31 @@ import {
 import {
   PageShiny,
   shinySchema,
+  SHINY_DEFAULTS,
   ShinyStyleProvider,
 } from "./CaptionedVideo/styles/PageShiny";
 import {
   PageTypewriter,
   typewriterSchema,
+  TYPEWRITER_DEFAULTS,
   TypewriterStyleProvider,
 } from "./CaptionedVideo/styles/PageTypewriter";
 import {
   PageHighlight,
   highlightSchema,
+  HIGHLIGHT_DEFAULTS,
   HighlightStyleProvider,
 } from "./CaptionedVideo/styles/PageHighlight";
 import {
   PageHormozi,
   hormoziSchema,
+  HORMOZI_DEFAULTS,
   HormoziStyleProvider,
 } from "./CaptionedVideo/styles/PageHormozi";
 import {
   PageGadzhi,
   gadzhiSchema,
+  GADZHI_DEFAULTS,
   GadzhiStyleProvider,
 } from "./CaptionedVideo/styles/PageGadzhi";
 import {
@@ -49,6 +54,7 @@ import {
 import {
   PageHormozi2,
   hormozi2Schema,
+  HORMOZI2_DEFAULTS,
   Hormozi2StyleProvider,
 } from "./CaptionedVideo/styles/PageHormozi2";
 import {
@@ -73,6 +79,7 @@ import {
 import {
   PageAnimator,
   animatorSchema,
+  ANIMATOR_DEFAULTS,
   AnimatorStyleProvider,
 } from "./CaptionedVideo/styles/PageAnimator";
 import {
@@ -382,103 +389,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{
-          src: "sample-video.mp4",
-          // === LAYOUT ===
-          layout: {
-            wordsPerLine: 2,
-            linesPerSegment: 3,
-            captionScale: 1,
-            lineSpacing: 1.1,
-            positionX: 50,
-            positionY: 84,
-            emphasisAlignment: "center" as const,
-            normalAlignment: "alternate" as const,
-          },
-          // === TEXT (normal words) ===
-          text: {
-            fontFamily: "Inter" as const,
-            baseColor: "#ffffff",
-          },
-          // === EMPHASIS (big/shiny words) ===
-          emphasis: {
-            scale: 1.4,
-            fontFamily: "Anton" as const,
-            offsetX: 0,
-            offsetY: 0,
-            colorEnabled: false,
-            color: "#ffffff",
-            entrance: {
-              direction: "left" as const,
-              distance: 29,
-              easing: "smooth" as const,
-              easingSpeed: 3,
-            },
-          },
-          // === EFFECTS ===
-          effects: {
-            gradient: {
-              angle: 295,
-              topColor: "#ff8800",
-              topPosition: 0,
-              midEnabled: false,
-              midColor: "#000000",
-              midPosition: 50,
-              bottomColor: "#ff8800",
-              bottomPosition: 100,
-            },
-            glow: { strength: 0, color: "#ff8800" },
-            deepGlow: {
-              enabled: true,
-              radius: 23,
-              brightness: 36,
-              innerColor: "#ff8a00",
-              outerColor: "#ff8a00",
-              chromatic: 0,
-            },
-            sweep1: {
-              enabled: false,
-              color: "#ffffff",
-              angle: 150,
-              width: 6,
-              intensity: 17,
-              positionX: 61,
-              positionY: 41,
-            },
-            sweep2: {
-              enabled: true,
-              color: "#e8ff00",
-              angle: 160,
-              width: 1,
-              intensity: 50,
-              positionX: 32,
-              positionY: 50,
-            },
-            sweep3: {
-              enabled: true,
-              color: "#ffffff",
-              angle: 163,
-              width: 1,
-              intensity: 40,
-              positionX: 58,
-              positionY: 57,
-            },
-            stroke: { enabled: true, color: "#000000", width: 0 },
-            shadow: { enabled: false, color: "rgba(0, 0, 0, 0.6)", blur: 0 },
-          },
-          // === ANIMATION (normal-word entrance + easing) ===
-          animation: {
-            entrance: {
-              direction: "up" as const,
-              distance: 63,
-              duration: 13,
-            },
-            easing: {
-              type: "smooth" as const,
-              speed: 1,
-            },
-          },
-        }}
+        defaultProps={{ src: "sample-video.mp4", ...SHINY_DEFAULTS }}
       />
 
       {/* "Typewriter" caption style — letter-by-letter typing (customizable) */}
@@ -493,50 +404,7 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         // Spread, NOT a literal copy — a literal silently stops tracking
         // TYPEWRITER_DEFAULTS, which is how Classic's defaults drifted.
-        defaultProps={{
-          src: "sample-video.mp4",
-          layout: {
-            fontSizePct: 7,
-            captionScale: 1,
-            wordSpacing: 0.3,
-            lineSpacing: 1.15,
-            positionX: 50,
-            positionY: 78,
-            anchor: "center" as const,
-          },
-          text: {
-            font: {
-              family: "Montserrat" as const,
-              custom: "montserrat full version/Montserrat-ExtraBoldItalic.otf",
-            },
-            weight: 800,
-            italic: false,
-            uppercase: false,
-            baseTextColor: "#ffffff",
-            textColors: [],
-          },
-          motion: {
-            typingSpeed: 33,
-            initialDelay: 0,
-            easing: "linear" as const,
-            easingSpeed: 3,
-            variableSpeed: false,
-            variableSpeedMin: 40,
-            variableSpeedMax: 120,
-          },
-          cursor: {
-            show: true,
-            character: "|",
-            blinkDuration: 530,
-            hideWhileTyping: false,
-          },
-          shadowEnabled: true,
-          shadowColor: "rgba(0, 0, 0, 0.6)",
-          shadowBlur: 8,
-          strokeEnabled: true,
-          strokeColor: "#000000",
-          strokeWidth: 2,
-        }}
+        defaultProps={{ src: "sample-video.mp4", ...TYPEWRITER_DEFAULTS }}
       />
 
       {/* "Highlight" caption style — Shiny's kinetic LAYOUT (wordsPerLine /
@@ -552,41 +420,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{
-          src: "sample-video.mp4",
-          layout: {
-            wordsPerLine: 3,
-            linesPerSegment: 1,
-            fontSize: 120,
-            captionScale: 1,
-            wordSpacing: 0,
-            lineSpacing: 1.25,
-            positionX: 50,
-            positionY: 79,
-            alignment: "center" as const,
-          },
-          text: {
-            fontFamily: "Inter" as const,
-            baseTextColor: "#FFFFFF",
-            highlightColor: "#56ff00",
-          },
-          gradient: {
-            enabled: false,
-            angle: 180,
-            topColor: "#ffe14d",
-            topPosition: 0,
-            midEnabled: false,
-            midColor: "#ff8a00",
-            midPosition: 50,
-            bottomColor: "#ff3d00",
-            bottomPosition: 100,
-          },
-          glow: { enabled: true, color: "rgba(0, 255, 43, 0.38)", size: 30 },
-          pop: { enabled: true, speed: 130, intensity: 1.2 },
-          wiggle: { enabled: false, strength: 14, speed: 0.2 },
-          shadow: { enabled: true, color: "rgba(0, 0, 0, 0.6)", blur: 8 },
-          stroke: { enabled: true, color: "#000000", width: 1 },
-        }}
+        defaultProps={{ src: "sample-video.mp4", ...HIGHLIGHT_DEFAULTS }}
       />
 
       {/* "Hormozi" caption style — the viral Alex Hormozi look: two stacked
@@ -603,73 +437,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{
-          src: "sample-video.mp4",
-          layout: {
-            captionScale: 1,
-            wordSpacing: 0.2,
-            lineSpacing: 1.15,
-            positionX: 50,
-            positionY: 78,
-            alignment: "center" as const,
-          },
-          text: {
-            fontFamily: "Montserrat" as const,
-            baseColor: "#ffffff",
-            accentColor: "#ffd400",
-          },
-          effects: {
-            gradient: {
-              enabled: false,
-              angle: 180,
-              topColor: "#ffe14d",
-              topPosition: 0,
-              midEnabled: false,
-              midColor: "#ff8a00",
-              midPosition: 50,
-              bottomColor: "#ff3d00",
-              bottomPosition: 100,
-            },
-            glow: { strength: 0, color: "#ffd400" },
-            deepGlow: {
-              enabled: false,
-              radius: 60,
-              brightness: 70,
-              innerColor: "#fff5e6",
-              outerColor: "#ffd400",
-              chromatic: 0,
-            },
-            sweep1: {
-              enabled: false,
-              color: "#ffffff",
-              angle: 20,
-              width: 30,
-              intensity: 70,
-              positionX: 50,
-              positionY: 50,
-            },
-            sweep2: {
-              enabled: false,
-              color: "#ffffff",
-              angle: 160,
-              width: 20,
-              intensity: 50,
-              positionX: 50,
-              positionY: 50,
-            },
-            sweep3: {
-              enabled: false,
-              color: "#ffffff",
-              angle: 90,
-              width: 15,
-              intensity: 40,
-              positionX: 50,
-              positionY: 50,
-            },
-            stroke: { enabled: true, color: "#000000", width: 6 },
-            shadow: { enabled: true, color: "rgba(0, 0, 0, 0.65)", blur: 8 },
-          },
-        }}
+        defaultProps={{ src: "sample-video.mp4", ...HORMOZI_DEFAULTS }}
       />
 
       {/* "Gadzhi" caption style — the clean podcast look reverse-engineered from
@@ -686,34 +454,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{
-          src: "sample-video.mp4",
-          layout: {
-            fontSizePct: 6.63,
-            captionScale: 1,
-            wordSpacing: 0.27,
-            lineSpacing: 1.19,
-            positionX: 50,
-            positionY: 69,
-            alignment: "center" as const,
-          },
-          text: {
-            activeFont: { family: "Montserrat" as const, custom: "" },
-            inactiveFont: { family: "Montserrat" as const, custom: "" },
-            color: "#ffffff",
-            accentEnabled: false,
-            accentColor: "#ffff00",
-            activeWeight: 700,
-            inactiveWeight: 200,
-            inactiveOpacity: 0.85,
-            capitalizeFirstWord: true,
-          },
-          motion: { fadeInMs: 0 },
-          effects: {
-            stroke: { enabled: false, color: "#000000", width: 4 },
-            shadow: { enabled: true, color: "rgba(0, 0, 0, 0.35)", blur: 12 },
-          },
-        }}
+        defaultProps={{ src: "sample-video.mp4", ...GADZHI_DEFAULTS }}
       />
 
       {/* "Hormozi 2" — the changing-colour + wiggle look. Two stacked ALL-CAPS
@@ -730,49 +471,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{
-          src: "sample-video.mp4",
-          layout: {
-            fontSizePct: 13.5,
-            captionScale: 1,
-            wordSpacing: 0.22,
-            lineSpacing: 1.05,
-            positionX: 50,
-            positionY: 64,
-            alignment: "center" as const,
-            balanceLines: true,
-          },
-          text: {
-            font: {
-              family: "Montserrat" as const,
-              custom: "avenir-next-condensed-heavy-italic.ttf",
-            },
-            uppercase: true,
-            baseColor: "#ffffff",
-            baseStroke: "#0a0a0a",
-            strokeWidth: 9,
-            accents: {
-              one: { fill: "#ff1f1f", stroke: "#ffffff" },
-              two: { fill: "#ffe000", stroke: "#0a0a0a" },
-              three: { fill: "#28e234", stroke: "#0a0a0a" },
-            },
-          },
-          motion: {
-            fadeInMs: 60,
-            bobEm: 0.08,
-            bobSpeed: 0.3,
-            rotateDeg: 0,
-            rotateSpeed: 0.4,
-          },
-          effects: {
-            shadow: {
-              enabled: true,
-              color: "rgba(0,0,0,0.78)",
-              blur: 14,
-              offsetY: 5,
-            },
-          },
-        }}
+        defaultProps={{ src: "sample-video.mp4", ...HORMOZI2_DEFAULTS }}
       />
 
       {/* "Edits" — the cinematic edit caption: ONE small line of heavy white
@@ -829,53 +528,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{
-          src: WORDS_ANIMATOR_REFERENCE,
-          showPunctuation: false,
-          frame: "9:16" as const,
-          animation: {
-            moveY: 3.47,
-            moveX: 0,
-            fadeFrom: 0,
-            fadeMs: 165,
-            blurPct: 0.83,
-            blurMs: 540,
-            scaleFrom: 1,
-            rotateFrom: 0,
-            durationMs: 580,
-            staggerMs: 188,
-            easing: { type: "ease-out" as const, strength: 4 },
-            direction: "reading" as const,
-            seed: 0,
-          },
-          layout: {
-            fontSizePct: 6.7,
-            captionScale: 1,
-            letterSpacing: 0,
-            wordSpacing: 0.24,
-            lineSpacing: 1.2,
-            positionX: 50,
-            positionY: 50,
-            alignment: "left" as const,
-          },
-          text: {
-            font: { family: "Playfair Display" as const, custom: "" },
-            weight: 700,
-            uppercase: false,
-            color: "#ffffff",
-            accentColor: "#e02020",
-            accentOnEmphasis: true,
-          },
-          effects: {
-            shadow: {
-              enabled: true,
-              color: "rgba(0,0,0,0.5)",
-              blur: 10,
-              offsetY: 3,
-            },
-            glow: { enabled: false, blur: 18, opacity: 0.3 },
-          },
-        }}
+        defaultProps={{ src: WORDS_ANIMATOR_REFERENCE, ...ANIMATOR_DEFAULTS }}
       />
 
       {/* "Classic 2 Match" — the cinematic movie-clip caption: ONE short centred

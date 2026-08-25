@@ -14,7 +14,6 @@ import { captionedVideoSchema } from "../index";
 import {
   textEffectsSchema,
   textEffectStyle,
-  TEXT_EFFECTS_DEFAULTS,
   type TextEffects,
 } from "./text-effects";
 import {
@@ -170,58 +169,48 @@ export type TypewriterStyle = {
 // an opinion, and house values where it does not (it is a 16:9 intro, so its
 // framing does not transfer to a 9:16 reel).
 export const TYPEWRITER_DEFAULTS: TypewriterStyle = {
-  layout: {
-    // The reference sets ~101px on a 1920 frame = 5.26% of width, but that is a
-    // landscape intro with room to spare. 7% is the vertical-reel equivalent
-    // and matches the density of the other templates. layout.mjs derives
-    // charsPerLine from exactly this number.
-    fontSizePct: 7,
-    captionScale: 1,
-    // 0.3, not the 0.24 this shipped with — tuned by hand in Studio and folded
-    // back here, which is the flow Root.tsx's spread depends on.
-    wordSpacing: 0.3,
-    lineSpacing: 1.15,
-    positionX: 50,
-    // The house safe zone — under the chin, clear of the platform UI. The
-    // reference's own 76% is a landscape framing and does not transfer.
-    positionY: 78,
-    anchor: "center",
-  },
-  text: {
-    // The real designed italic, not a sheared roman. `family` is only the
-    // fallback if the file ever goes missing.
-    font: {
-      family: "Montserrat",
-      custom: "montserrat full version/Montserrat-ExtraBoldItalic.otf",
-    },
-    // A single static file carries ONE weight, so effectiveWeight() drops this
-    // number rather than let the browser smear a faux bold out of it. It still
-    // applies if the slot is pointed at a variable font.
-    weight: 800,
-    italic: false, // the file is already italic — see the schema note
-    uppercase: false, // the reference is sentence case ("Hey there,")
-    baseTextColor: "#ffffff",
-    textColors: [],
-  },
-  motion: {
-    // Measured: ~1 character per frame at 29.97fps.
-    typingSpeed: 33,
-    initialDelay: 0,
-    // The reference has no per-character fade, so keep the curve flat.
-    easing: "linear",
-    easingSpeed: 3,
-    variableSpeed: false,
-    variableSpeedMin: 40,
-    variableSpeedMax: 120,
-  },
-  cursor: {
-    show: true,
-    character: "|", // the reference's own cursor glyph
-    blinkDuration: 530,
-    hideWhileTyping: false,
-  },
-  ...TEXT_EFFECTS_DEFAULTS,
-};
+          layout: {
+            fontSizePct: 7,
+            captionScale: 1,
+            wordSpacing: 0.3,
+            lineSpacing: 1.15,
+            positionX: 50,
+            positionY: 78,
+            anchor: "center" as const,
+          },
+          text: {
+            font: {
+              family: "Montserrat" as const,
+              custom: "montserrat full version/Montserrat-ExtraBoldItalic.otf",
+            },
+            weight: 800,
+            italic: false,
+            uppercase: false,
+            baseTextColor: "#ffffff",
+            textColors: [],
+          },
+          motion: {
+            typingSpeed: 33,
+            initialDelay: 0,
+            easing: "linear" as const,
+            easingSpeed: 3,
+            variableSpeed: false,
+            variableSpeedMin: 40,
+            variableSpeedMax: 120,
+          },
+          cursor: {
+            show: true,
+            character: "|",
+            blinkDuration: 530,
+            hideWhileTyping: false,
+          },
+          shadowEnabled: true,
+          shadowColor: "rgba(0, 0, 0, 0.6)",
+          shadowBlur: 8,
+          strokeEnabled: true,
+          strokeColor: "#000000",
+          strokeWidth: 2,
+        };
 
 const TypewriterStyleContext = createContext<TypewriterStyle>(TYPEWRITER_DEFAULTS);
 export const TypewriterStyleProvider = TypewriterStyleContext.Provider;

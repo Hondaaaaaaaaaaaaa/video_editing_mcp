@@ -20,7 +20,6 @@ import {
 } from "./text-effects";
 import {
   fontSlotSchema,
-  fontSlot,
   useFontSlot,
   effectiveWeight,
   type FontSlot,
@@ -176,52 +175,32 @@ export type GadzhiStyle = {
 // Defaults ARE the measurements taken off the reference clip, expressed as
 // fractions of the frame so they hold at any export resolution.
 export const GADZHI_DEFAULTS: GadzhiStyle = {
-  layout: {
-    fontSizePct: 6.63, // 31.8px on the 480-wide reference frame
-    captionScale: 1,
-    // Solved from the reference's line widths minus the glyph ink: 0.267em over
-    // the 4-gap line, 0.278em over the 3-word line — i.e. the face's own space
-    // advance (0.283em bold / 0.253em light), so the reference just uses spaces.
-    wordSpacing: 0.27,
-    lineSpacing: 1.19, // 38px baseline gap / 31.8px size
-    positionX: 50, // centreX measured at 240.0 of 480 — dead centre
-    // Measured at 69 (block centre y=589 of 854) but moved to the 78% house
-    // safe zone: the reference's speaker is framed high, so 69 lands on the
-    // chin on a normal close-up. See the same note in PageClassic.
-    positionY: 78,
-    alignment: "center",
-  },
-  text: {
-    // Both default to built-in Montserrat; either can be swapped for an
-    // uploaded file without touching the other.
-    activeFont: fontSlot("Montserrat"),
-    inactiveFont: fontSlot("Montserrat"),
-    color: "#ffffff",
-    // OFF, so this file's measured look is what you get out of the box. The
-    // `gadzhi 2.mp4` reference measures #d9ff00 for its accent (mean of the
-    // purest glyph pixels: rgb(216,255,0) — green pinned at 255, blue at 0,
-    // spreading only in red under h.264 chroma subsampling), but plain yellow
-    // was chosen over matching that clip exactly.
-    accentEnabled: false,
-    accentColor: "#ffff00",
-    activeWeight: 700, // Montserrat Bold — matched the reference to 0.5%
-    inactiveWeight: 200, // ExtraLight — the weight whose size agreed with Bold
-    // Matched by rendering 0.70 / 0.85 / 1.00 against the reference crop: 0.70
-    // is visibly too faint and 1.00 slightly too solid.
-    inactiveOpacity: 0.85,
-    capitalizeFirstWord: true,
-  },
-  // No entrance animation: captions cut straight in, one after another. The
-  // reference clip does fade over ~5 frames, but a hard cut is the look we
-  // want here — raise fadeInMs to bring the fade back.
-  motion: { fadeInMs: 0 },
-  effects: {
-    // The reference shows no outline and at most a whisper of shadow; both are
-    // here for legibility over bright footage rather than to match the clip.
-    stroke: { enabled: false, color: "#000000", width: 4 },
-    shadow: { enabled: true, color: "rgba(0, 0, 0, 0.35)", blur: 12 },
-  },
-};
+          layout: {
+            fontSizePct: 6.63,
+            captionScale: 1,
+            wordSpacing: 0.27,
+            lineSpacing: 1.19,
+            positionX: 50,
+            positionY: 69,
+            alignment: "center" as const,
+          },
+          text: {
+            activeFont: { family: "Montserrat" as const, custom: "" },
+            inactiveFont: { family: "Montserrat" as const, custom: "" },
+            color: "#ffffff",
+            accentEnabled: false,
+            accentColor: "#ffff00",
+            activeWeight: 700,
+            inactiveWeight: 200,
+            inactiveOpacity: 0.85,
+            capitalizeFirstWord: true,
+          },
+          motion: { fadeInMs: 0 },
+          effects: {
+            stroke: { enabled: false, color: "#000000", width: 4 },
+            shadow: { enabled: true, color: "rgba(0, 0, 0, 0.35)", blur: 12 },
+          },
+        };
 
 const GadzhiStyleContext = createContext<GadzhiStyle>(GADZHI_DEFAULTS);
 export const GadzhiStyleProvider = GadzhiStyleContext.Provider;

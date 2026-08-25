@@ -175,55 +175,47 @@ export type Hormozi2Style = {
 
 // Defaults ARE the measurements taken off the reference reels.
 export const HORMOZI2_DEFAULTS: Hormozi2Style = {
-  layout: {
-    // The reference face is very CONDENSED, so it reads tall without getting
-    // wide: measured cap-height ~13.5% of frame width (the line fills ~74% of
-    // the frame). A width-based fit under-sizes a condensed face (it fills width
-    // with less height), so we size big and only shrink lines past 94% width.
-    fontSizePct: 13.5,
-    captionScale: 1,
-    wordSpacing: 0.22,
-    lineSpacing: 1.05, // tight stack, like the references
-    positionX: 50,
-    // Under the chin, clear of the face. The references sit higher (~53%) only
-    // because those speakers are framed high; on a close-up that lands on the
-    // face, so the default sits lower and is tuned per clip.
-    positionY: 78,
-    alignment: "center",
-    balanceLines: true,
-  },
-  text: {
-    // The client-supplied face, shipped in public/fonts. A single static weight
-    // (heavy italic), so the slot renders it at its natural weight — no faux
-    // bold. `family` is only the fallback if the file ever goes missing.
-    font: { family: "Montserrat", custom: "avenir-next-condensed-heavy-italic.ttf" },
-    uppercase: true,
-    baseColor: "#ffffff",
-    baseStroke: "#0a0a0a",
-    strokeWidth: 9,
-    // Measured off the frames: bright red (white outline), warm yellow + green
-    // (dark outline). Editable — set all three the same to get a single colour.
-    accents: {
-      one: { fill: "#ff1f1f", stroke: "#ffffff" },
-      two: { fill: "#ffe000", stroke: "#0a0a0a" },
-      three: { fill: "#28e234", stroke: "#0a0a0a" },
-    },
-  },
-  motion: {
-    fadeInMs: 60,
-    // Amplitude ~±9px @1080 ≈ 0.08 of the font size. Speed is a slow, lazy
-    // float; rotation defaults OFF (pure up/down) — both tunable live.
-    bobEm: 0.08,
-    bobSpeed: 0.4,
-    rotateDeg: 0,
-    rotateSpeed: 0.28,
-  },
-  effects: {
-    // The strong dark blurred halo behind the text that lifts it off the footage
-    // (built as layered drop-shadows so it hugs the glyph shapes).
-    shadow: { enabled: true, color: "rgba(0,0,0,0.78)", blur: 14, offsetY: 5 },
-  },
-};
+          layout: {
+            fontSizePct: 13.5,
+            captionScale: 1,
+            wordSpacing: 0.22,
+            lineSpacing: 1.05,
+            positionX: 50,
+            positionY: 64,
+            alignment: "center" as const,
+            balanceLines: true,
+          },
+          text: {
+            font: {
+              family: "Montserrat" as const,
+              custom: "avenir-next-condensed-heavy-italic.ttf",
+            },
+            uppercase: true,
+            baseColor: "#ffffff",
+            baseStroke: "#0a0a0a",
+            strokeWidth: 9,
+            accents: {
+              one: { fill: "#ff1f1f", stroke: "#ffffff" },
+              two: { fill: "#ffe000", stroke: "#0a0a0a" },
+              three: { fill: "#28e234", stroke: "#0a0a0a" },
+            },
+          },
+          motion: {
+            fadeInMs: 60,
+            bobEm: 0.08,
+            bobSpeed: 0.3,
+            rotateDeg: 0,
+            rotateSpeed: 0.4,
+          },
+          effects: {
+            shadow: {
+              enabled: true,
+              color: "rgba(0,0,0,0.78)",
+              blur: 14,
+              offsetY: 5,
+            },
+          },
+        };
 
 const Hormozi2StyleContext = createContext<Hormozi2Style>(HORMOZI2_DEFAULTS);
 export const Hormozi2StyleProvider = Hormozi2StyleContext.Provider;

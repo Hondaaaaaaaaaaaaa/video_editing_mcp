@@ -188,53 +188,51 @@ export type AnimatorStyle = {
 // Defaults ARE the measurements from `easing sample .mp4`. The second reference
 // is the same look tuned slower — reach it by raising blurMs/durationMs.
 export const ANIMATOR_DEFAULTS: AnimatorStyle & { showPunctuation: boolean } = {
-  showPunctuation: false,
-  frame: "9:16",
-  animation: {
-    // 25px rise on a 720-wide frame = 3.47% of the width.
-    moveY: 3.47,
-    moveX: 0,
-    fadeFrom: 0, // fades all the way up from invisible
-    fadeMs: 165, // opacity reached full in ~4 frames @23.98fps
-    // Measured as a 5px EDGE softening on a 48px cap height; as a CSS blur
-    // radius that is ~6px, i.e. 0.83% of the 720-wide frame.
-    blurPct: 0.83,
-    blurMs: 540, // ~13 frames — the slowest channel, and the reason it feels smooth
-    scaleFrom: 1, // off in the reference
-    rotateFrom: 0, // off in the reference
-    durationMs: 580, // the position settle
-    staggerMs: 188, // ~4.5 frames between words
-    // Strong deceleration: the reference covers half its travel in 2 frames and
-    // spends the rest settling.
-    easing: { type: "ease-out", strength: 4 },
-    direction: "reading",
-    seed: 0,
-  },
-  layout: {
-    // Inter Bold cap height 48px on the 720-wide reference / 0.727 cap-per-em.
-    fontSizePct: 6.7,
-    captionScale: 1,
-    letterSpacing: 0,
-    wordSpacing: 0.24,
-    lineSpacing: 1.2,
-    positionX: 50,
-    positionY: 50,
-    // The real-caption reference is LEFT aligned; the MOGRT demo is centred.
-    alignment: "left",
-  },
-  text: {
-    font: { family: "Inter", custom: "" }, // the MOGRT's own font: Inter Bold
-    weight: 700,
-    uppercase: false, // the caption reference is natural case
-    color: "#ffffff",
-    accentColor: "#e02020", // the red keyword in the second reference
-    accentOnEmphasis: true,
-  },
-  effects: {
-    shadow: { enabled: true, color: "rgba(0,0,0,0.5)", blur: 10, offsetY: 3 },
-    glow: { enabled: false, blur: 18, opacity: 0.3 },
-  },
-};
+          showPunctuation: false,
+          frame: "9:16" as const,
+          animation: {
+            moveY: 3.47,
+            moveX: 0,
+            fadeFrom: 0,
+            fadeMs: 165,
+            blurPct: 0.83,
+            blurMs: 540,
+            scaleFrom: 1,
+            rotateFrom: 0,
+            durationMs: 580,
+            staggerMs: 188,
+            easing: { type: "ease-out" as const, strength: 4 },
+            direction: "reading" as const,
+            seed: 0,
+          },
+          layout: {
+            fontSizePct: 6.7,
+            captionScale: 1,
+            letterSpacing: 0,
+            wordSpacing: 0.24,
+            lineSpacing: 1.2,
+            positionX: 50,
+            positionY: 50,
+            alignment: "left" as const,
+          },
+          text: {
+            font: { family: "Playfair Display" as const, custom: "" },
+            weight: 700,
+            uppercase: false,
+            color: "#ffffff",
+            accentColor: "#e02020",
+            accentOnEmphasis: true,
+          },
+          effects: {
+            shadow: {
+              enabled: true,
+              color: "rgba(0,0,0,0.5)",
+              blur: 10,
+              offsetY: 3,
+            },
+            glow: { enabled: false, blur: 18, opacity: 0.3 },
+          },
+        };
 
 const AnimatorStyleContext = createContext<AnimatorStyle>(ANIMATOR_DEFAULTS);
 export const AnimatorStyleProvider = AnimatorStyleContext.Provider;

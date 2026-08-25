@@ -142,72 +142,71 @@ export type HormoziStyle = {
 };
 
 export const HORMOZI_DEFAULTS: HormoziStyle = {
-  layout: {
-    captionScale: 1,
-    wordSpacing: 0.12,
-    lineSpacing: 1.15,
-    positionX: 50,
-    positionY: 78, // lower-center like the reference
-    alignment: "center",
-  },
-  text: {
-    fontFamily: "Montserrat", // bold rounded face matching the reference clip
-    baseColor: "#ffffff", // white (non-spoken) line
-    accentColor: "#ffd400", // yellow highlight on the spoken line
-  },
-  effects: {
-    gradient: {
-      enabled: false,
-      angle: 180,
-      topColor: "#ffe14d",
-      topPosition: 0,
-      midEnabled: false,
-      midColor: "#ff8a00",
-      midPosition: 50,
-      bottomColor: "#ff3d00",
-      bottomPosition: 100,
-    },
-    glow: { strength: 0, color: "#ffd400" },
-    deepGlow: {
-      enabled: false,
-      radius: 60,
-      brightness: 70,
-      innerColor: "#fff5e6",
-      outerColor: "#ffd400",
-      chromatic: 0,
-    },
-    sweep1: {
-      enabled: false,
-      color: "#ffffff",
-      angle: 20,
-      width: 30,
-      intensity: 70,
-      positionX: 50,
-      positionY: 50,
-    },
-    sweep2: {
-      enabled: false,
-      color: "#ffffff",
-      angle: 160,
-      width: 20,
-      intensity: 50,
-      positionX: 50,
-      positionY: 50,
-    },
-    sweep3: {
-      enabled: false,
-      color: "#ffffff",
-      angle: 90,
-      width: 15,
-      intensity: 40,
-      positionX: 50,
-      positionY: 50,
-    },
-    // Outline + drop shadow for legibility over the video.
-    stroke: { enabled: true, color: "#000000", width: 6 },
-    shadow: { enabled: true, color: "rgba(0, 0, 0, 0.65)", blur: 8 },
-  },
-};
+          layout: {
+            captionScale: 1,
+            wordSpacing: 0.2,
+            lineSpacing: 1.15,
+            positionX: 50,
+            positionY: 78,
+            alignment: "center" as const,
+          },
+          text: {
+            fontFamily: "Montserrat" as const,
+            baseColor: "#ffffff",
+            accentColor: "#ffd400",
+          },
+          effects: {
+            gradient: {
+              enabled: false,
+              angle: 180,
+              topColor: "#ffe14d",
+              topPosition: 0,
+              midEnabled: false,
+              midColor: "#ff8a00",
+              midPosition: 50,
+              bottomColor: "#ff3d00",
+              bottomPosition: 100,
+            },
+            glow: { strength: 0, color: "#ffd400" },
+            deepGlow: {
+              enabled: false,
+              radius: 60,
+              brightness: 70,
+              innerColor: "#fff5e6",
+              outerColor: "#ffd400",
+              chromatic: 0,
+            },
+            sweep1: {
+              enabled: false,
+              color: "#ffffff",
+              angle: 20,
+              width: 30,
+              intensity: 70,
+              positionX: 50,
+              positionY: 50,
+            },
+            sweep2: {
+              enabled: false,
+              color: "#ffffff",
+              angle: 160,
+              width: 20,
+              intensity: 50,
+              positionX: 50,
+              positionY: 50,
+            },
+            sweep3: {
+              enabled: false,
+              color: "#ffffff",
+              angle: 90,
+              width: 15,
+              intensity: 40,
+              positionX: 50,
+              positionY: 50,
+            },
+            stroke: { enabled: true, color: "#000000", width: 6 },
+            shadow: { enabled: true, color: "rgba(0, 0, 0, 0.65)", blur: 8 },
+          },
+        };
 
 // The seam that carries schema props from Root down to the style.
 const HormoziStyleContext = createContext<HormoziStyle>(HORMOZI_DEFAULTS);
