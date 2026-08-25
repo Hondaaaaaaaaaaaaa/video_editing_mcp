@@ -1,0 +1,758 @@
+[
+  {
+    "text": "I",
+    "startMs": 140,
+    "endMs": 159,
+    "timestampMs": 150,
+    "confidence": null
+  },
+  {
+    "text": "beg",
+    "startMs": 159,
+    "endMs": 239,
+    "timestampMs": 199,
+    "confidence": null
+  },
+  {
+    "text": "your",
+    "startMs": 299,
+    "endMs": 400,
+    "timestampMs": 350,
+    "confidence": null
+  },
+  {
+    "text": "pardon?",
+    "startMs": 419,
+    "endMs": 659,
+    "timestampMs": 539,
+    "confidence": null
+  },
+  {
+    "text": "Who",
+    "startMs": 959,
+    "endMs": 1079,
+    "timestampMs": 1019,
+    "confidence": null
+  },
+  {
+    "text": "created",
+    "startMs": 1120,
+    "endMs": 1339,
+    "timestampMs": 1230,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 1360,
+    "endMs": 1399,
+    "timestampMs": 1380,
+    "confidence": null
+  },
+  {
+    "text": "World",
+    "startMs": 1439,
+    "endMs": 1559,
+    "timestampMs": 1499,
+    "confidence": null
+  },
+  {
+    "text": "Wide",
+    "startMs": 1599,
+    "endMs": 1699,
+    "timestampMs": 1649,
+    "confidence": null
+  },
+  {
+    "text": "Web?",
+    "startMs": 1779,
+    "endMs": 1919,
+    "timestampMs": 1849,
+    "confidence": null
+  },
+  {
+    "text": "The",
+    "startMs": 2019,
+    "endMs": 2079,
+    "timestampMs": 2049,
+    "confidence": null
+  },
+  {
+    "text": "World",
+    "startMs": 2159,
+    "endMs": 2319,
+    "timestampMs": 2239,
+    "confidence": null
+  },
+  {
+    "text": "Wide",
+    "startMs": 2339,
+    "endMs": 2460,
+    "timestampMs": 2400,
+    "confidence": null
+  },
+  {
+    "text": "what?",
+    "startMs": 2539,
+    "endMs": 2720,
+    "timestampMs": 2630,
+    "confidence": null
+  },
+  {
+    "text": "The",
+    "startMs": 3059,
+    "endMs": 3099,
+    "timestampMs": 3079,
+    "confidence": null
+  },
+  {
+    "text": "World",
+    "startMs": 3179,
+    "endMs": 3359,
+    "timestampMs": 3269,
+    "confidence": null
+  },
+  {
+    "text": "Wide",
+    "startMs": 3419,
+    "endMs": 3539,
+    "timestampMs": 3479,
+    "confidence": null
+  },
+  {
+    "text": "Web.",
+    "startMs": 3619,
+    "endMs": 3839,
+    "timestampMs": 3729,
+    "confidence": null
+  },
+  {
+    "text": "You",
+    "startMs": 4099,
+    "endMs": 4199,
+    "timestampMs": 4149,
+    "confidence": null
+  },
+  {
+    "text": "created",
+    "startMs": 4239,
+    "endMs": 4440,
+    "timestampMs": 4340,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 4460,
+    "endMs": 4519,
+    "timestampMs": 4490,
+    "confidence": null
+  },
+  {
+    "text": "internet?",
+    "startMs": 4559,
+    "endMs": 4859,
+    "timestampMs": 4709,
+    "confidence": null
+  },
+  {
+    "text": "I",
+    "startMs": 5019,
+    "endMs": 5099,
+    "timestampMs": 5059,
+    "confidence": null
+  },
+  {
+    "text": "did.",
+    "startMs": 5239,
+    "endMs": 5359,
+    "timestampMs": 5299,
+    "confidence": null
+  },
+  {
+    "text": "No",
+    "startMs": 5599,
+    "endMs": 5679,
+    "timestampMs": 5639,
+    "confidence": null
+  },
+  {
+    "text": "way.",
+    "startMs": 5799,
+    "endMs": 5960,
+    "timestampMs": 5880,
+    "confidence": null
+  },
+  {
+    "text": "You're",
+    "startMs": 6179,
+    "endMs": 6279,
+    "timestampMs": 6229,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 6299,
+    "endMs": 6359,
+    "timestampMs": 6329,
+    "confidence": null
+  },
+  {
+    "text": "reason",
+    "startMs": 6379,
+    "endMs": 6559,
+    "timestampMs": 6469,
+    "confidence": null
+  },
+  {
+    "text": "why",
+    "startMs": 6579,
+    "endMs": 6659,
+    "timestampMs": 6619,
+    "confidence": null
+  },
+  {
+    "text": "I'm",
+    "startMs": 6679,
+    "endMs": 6779,
+    "timestampMs": 6729,
+    "confidence": null
+  },
+  {
+    "text": "here",
+    "startMs": 6799,
+    "endMs": 6940,
+    "timestampMs": 6870,
+    "confidence": null
+  },
+  {
+    "text": "right",
+    "startMs": 6980,
+    "endMs": 7119,
+    "timestampMs": 7050,
+    "confidence": null
+  },
+  {
+    "text": "now.",
+    "startMs": 7159,
+    "endMs": 7319,
+    "timestampMs": 7239,
+    "confidence": null
+  },
+  {
+    "text": "That's",
+    "startMs": 7460,
+    "endMs": 7619,
+    "timestampMs": 7540,
+    "confidence": null
+  },
+  {
+    "text": "crazy.",
+    "startMs": 7639,
+    "endMs": 7839,
+    "timestampMs": 7739,
+    "confidence": null
+  },
+  {
+    "text": "I",
+    "startMs": 7919,
+    "endMs": 7940,
+    "timestampMs": 7930,
+    "confidence": null
+  },
+  {
+    "text": "just",
+    "startMs": 8000,
+    "endMs": 8079,
+    "timestampMs": 8040,
+    "confidence": null
+  },
+  {
+    "text": "met",
+    "startMs": 8119,
+    "endMs": 8240,
+    "timestampMs": 8180,
+    "confidence": null
+  },
+  {
+    "text": "you",
+    "startMs": 8279,
+    "endMs": 8319,
+    "timestampMs": 8299,
+    "confidence": null
+  },
+  {
+    "text": "in",
+    "startMs": 8340,
+    "endMs": 8420,
+    "timestampMs": 8380,
+    "confidence": null
+  },
+  {
+    "text": "a",
+    "startMs": 8439,
+    "endMs": 8460,
+    "timestampMs": 8450,
+    "confidence": null
+  },
+  {
+    "text": "random",
+    "startMs": 8559,
+    "endMs": 8960,
+    "timestampMs": 8760,
+    "confidence": null
+  },
+  {
+    "text": "restaurant",
+    "startMs": 9019,
+    "endMs": 9319,
+    "timestampMs": 9169,
+    "confidence": null
+  },
+  {
+    "text": "in",
+    "startMs": 9359,
+    "endMs": 9420,
+    "timestampMs": 9390,
+    "confidence": null
+  },
+  {
+    "text": "South",
+    "startMs": 9460,
+    "endMs": 9600,
+    "timestampMs": 9530,
+    "confidence": null
+  },
+  {
+    "text": "Dakota.",
+    "startMs": 9659,
+    "endMs": 10059,
+    "timestampMs": 9859,
+    "confidence": null
+  },
+  {
+    "text": "What's",
+    "startMs": 10199,
+    "endMs": 10359,
+    "timestampMs": 10279,
+    "confidence": null
+  },
+  {
+    "text": "your",
+    "startMs": 10380,
+    "endMs": 10460,
+    "timestampMs": 10420,
+    "confidence": null
+  },
+  {
+    "text": "name?",
+    "startMs": 10500,
+    "endMs": 10719,
+    "timestampMs": 10610,
+    "confidence": null
+  },
+  {
+    "text": "Well,",
+    "startMs": 10880,
+    "endMs": 10980,
+    "timestampMs": 10930,
+    "confidence": null
+  },
+  {
+    "text": "you're",
+    "startMs": 11019,
+    "endMs": 11079,
+    "timestampMs": 11049,
+    "confidence": null
+  },
+  {
+    "text": "gonna",
+    "startMs": 11119,
+    "endMs": 11239,
+    "timestampMs": 11179,
+    "confidence": null
+  },
+  {
+    "text": "Google",
+    "startMs": 11279,
+    "endMs": 11460,
+    "timestampMs": 11370,
+    "confidence": null
+  },
+  {
+    "text": "Tim",
+    "startMs": 11619,
+    "endMs": 11859,
+    "timestampMs": 11739,
+    "confidence": null
+  },
+  {
+    "text": "Berners-Lee.",
+    "startMs": 12059,
+    "endMs": 13059,
+    "timestampMs": 12559,
+    "confidence": null
+  },
+  {
+    "text": "Tim",
+    "startMs": 13159,
+    "endMs": 13340,
+    "timestampMs": 13250,
+    "confidence": null
+  },
+  {
+    "text": "Berners-Lee.",
+    "startMs": 13420,
+    "endMs": 14019,
+    "timestampMs": 13720,
+    "confidence": null
+  },
+  {
+    "text": "That's",
+    "startMs": 14059,
+    "endMs": 14220,
+    "timestampMs": 14140,
+    "confidence": null
+  },
+  {
+    "text": "not",
+    "startMs": 14259,
+    "endMs": 14380,
+    "timestampMs": 14320,
+    "confidence": null
+  },
+  {
+    "text": "me.",
+    "startMs": 14420,
+    "endMs": 14559,
+    "timestampMs": 14490,
+    "confidence": null
+  },
+  {
+    "text": "That's",
+    "startMs": 14579,
+    "endMs": 14699,
+    "timestampMs": 14639,
+    "confidence": null
+  },
+  {
+    "text": "my,",
+    "startMs": 14779,
+    "endMs": 14900,
+    "timestampMs": 14840,
+    "confidence": null
+  },
+  {
+    "text": "that's",
+    "startMs": 15099,
+    "endMs": 15239,
+    "timestampMs": 15169,
+    "confidence": null
+  },
+  {
+    "text": "my",
+    "startMs": 15259,
+    "endMs": 15340,
+    "timestampMs": 15300,
+    "confidence": null
+  },
+  {
+    "text": "friend.",
+    "startMs": 15420,
+    "endMs": 15639,
+    "timestampMs": 15530,
+    "confidence": null
+  },
+  {
+    "text": "Read",
+    "startMs": 15799,
+    "endMs": 15920,
+    "timestampMs": 15860,
+    "confidence": null
+  },
+  {
+    "text": "about",
+    "startMs": 15939,
+    "endMs": 16100,
+    "timestampMs": 16020,
+    "confidence": null
+  },
+  {
+    "text": "him.",
+    "startMs": 16159,
+    "endMs": 16319,
+    "timestampMs": 16239,
+    "confidence": null
+  },
+  {
+    "text": "Tim",
+    "startMs": 16440,
+    "endMs": 16579,
+    "timestampMs": 16510,
+    "confidence": null
+  },
+  {
+    "text": "Berners-Lee,",
+    "startMs": 16659,
+    "endMs": 17180,
+    "timestampMs": 16920,
+    "confidence": null
+  },
+  {
+    "text": "also",
+    "startMs": 17299,
+    "endMs": 17479,
+    "timestampMs": 17389,
+    "confidence": null
+  },
+  {
+    "text": "known",
+    "startMs": 17500,
+    "endMs": 17619,
+    "timestampMs": 17560,
+    "confidence": null
+  },
+  {
+    "text": "as",
+    "startMs": 17659,
+    "endMs": 17760,
+    "timestampMs": 17710,
+    "confidence": null
+  },
+  {
+    "text": "TimBL,",
+    "startMs": 17819,
+    "endMs": 18180,
+    "timestampMs": 18000,
+    "confidence": null
+  },
+  {
+    "text": "is",
+    "startMs": 18260,
+    "endMs": 18340,
+    "timestampMs": 18300,
+    "confidence": null
+  },
+  {
+    "text": "an",
+    "startMs": 18379,
+    "endMs": 18500,
+    "timestampMs": 18440,
+    "confidence": null
+  },
+  {
+    "text": "English",
+    "startMs": 18559,
+    "endMs": 18799,
+    "timestampMs": 18679,
+    "confidence": null
+  },
+  {
+    "text": "computer",
+    "startMs": 18879,
+    "endMs": 19180,
+    "timestampMs": 19030,
+    "confidence": null
+  },
+  {
+    "text": "scientist",
+    "startMs": 19279,
+    "endMs": 19579,
+    "timestampMs": 19429,
+    "confidence": null
+  },
+  {
+    "text": "best",
+    "startMs": 19659,
+    "endMs": 19799,
+    "timestampMs": 19729,
+    "confidence": null
+  },
+  {
+    "text": "known",
+    "startMs": 19840,
+    "endMs": 20100,
+    "timestampMs": 19970,
+    "confidence": null
+  },
+  {
+    "text": "as,",
+    "startMs": 20159,
+    "endMs": 20479,
+    "timestampMs": 20319,
+    "confidence": null
+  },
+  {
+    "text": "as",
+    "startMs": 20520,
+    "endMs": 20639,
+    "timestampMs": 20580,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 20680,
+    "endMs": 20759,
+    "timestampMs": 20720,
+    "confidence": null
+  },
+  {
+    "text": "inventor",
+    "startMs": 20819,
+    "endMs": 21379,
+    "timestampMs": 21099,
+    "confidence": null
+  },
+  {
+    "text": "of",
+    "startMs": 21439,
+    "endMs": 21559,
+    "timestampMs": 21499,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 21600,
+    "endMs": 21639,
+    "timestampMs": 21620,
+    "confidence": null
+  },
+  {
+    "text": "World",
+    "startMs": 21760,
+    "endMs": 21940,
+    "timestampMs": 21850,
+    "confidence": null
+  },
+  {
+    "text": "Wide",
+    "startMs": 22079,
+    "endMs": 22439,
+    "timestampMs": 22259,
+    "confidence": null
+  },
+  {
+    "text": "Web.",
+    "startMs": 22559,
+    "endMs": 23000,
+    "timestampMs": 22780,
+    "confidence": null
+  },
+  {
+    "text": "Okay,",
+    "startMs": 23139,
+    "endMs": 23279,
+    "timestampMs": 23209,
+    "confidence": null
+  },
+  {
+    "text": "now",
+    "startMs": 23319,
+    "endMs": 23420,
+    "timestampMs": 23370,
+    "confidence": null
+  },
+  {
+    "text": "type",
+    "startMs": 23579,
+    "endMs": 23780,
+    "timestampMs": 23680,
+    "confidence": null
+  },
+  {
+    "text": "in",
+    "startMs": 23780,
+    "endMs": 23859,
+    "timestampMs": 23820,
+    "confidence": null
+  },
+  {
+    "text": "my",
+    "startMs": 23899,
+    "endMs": 24039,
+    "timestampMs": 23969,
+    "confidence": null
+  },
+  {
+    "text": "name",
+    "startMs": 24079,
+    "endMs": 24180,
+    "timestampMs": 24130,
+    "confidence": null
+  },
+  {
+    "text": "next",
+    "startMs": 24260,
+    "endMs": 24440,
+    "timestampMs": 24350,
+    "confidence": null
+  },
+  {
+    "text": "to",
+    "startMs": 24479,
+    "endMs": 24559,
+    "timestampMs": 24519,
+    "confidence": null
+  },
+  {
+    "text": "his.",
+    "startMs": 24600,
+    "endMs": 25039,
+    "timestampMs": 24820,
+    "confidence": null
+  },
+  {
+    "text": "Here.",
+    "startMs": 26019,
+    "endMs": 26519,
+    "timestampMs": 26269,
+    "confidence": null
+  },
+  {
+    "text": "Let",
+    "startMs": 27479,
+    "endMs": 27579,
+    "timestampMs": 27529,
+    "confidence": null
+  },
+  {
+    "text": "me-",
+    "startMs": 27739,
+    "endMs": 27779,
+    "timestampMs": 27759,
+    "confidence": null
+  },
+  {
+    "text": "I",
+    "startMs": 28199,
+    "endMs": 28399,
+    "timestampMs": 28299,
+    "confidence": null
+  },
+  {
+    "text": "heard",
+    "startMs": 28579,
+    "endMs": 28680,
+    "timestampMs": 28630,
+    "confidence": null
+  },
+  {
+    "text": "it",
+    "startMs": 28699,
+    "endMs": 28739,
+    "timestampMs": 28719,
+    "confidence": null
+  },
+  {
+    "text": "downloading.",
+    "startMs": 28739,
+    "endMs": 29199,
+    "timestampMs": 28969,
+    "confidence": null
+  },
+  {
+    "text": "What?",
+    "startMs": 30840,
+    "endMs": 31340,
+    "timestampMs": 31090,
+    "confidence": null
+  }
+]

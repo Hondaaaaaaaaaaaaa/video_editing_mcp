@@ -93,7 +93,7 @@ const SAMPLE_VIDEO = "sample-video.mp4";
 // with its own captions burned in. The "Edits" composition plays THIS rather
 // than the shared sample video while Edits 2 is reverse-engineered from it, so
 // the Studio timeline scrubs the same footage the measurements come from.
-const EDITS2_REFERENCE = "edits 2.mp4";
+const EDITS2_REFERENCE = "References/Fade + pop/edits 2.mp4";
 
 // The Words Animator reference reel (remotion/public/Words Animator/easing
 // sample 2.mp4) — 720x1280, 23.98fps, with its own captions burned in. The
@@ -810,7 +810,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1080}
-        defaultProps={{ src: "edits.mp4", ...EDITS_MATCH_DEFAULTS }}
+        defaultProps={{ src: "References/Type Writer/edits.mp4", ...EDITS_MATCH_DEFAULTS }}
       />
 
       {/* "Animator" — the slider-driven word animator, modelled on the Text
@@ -904,7 +904,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1920}
         height={1080}
-        defaultProps={{ src: "Classic 2.mp4", ...CLASSIC2_DEFAULTS, frame: "16:9" as const }}
+        defaultProps={{ src: "References/Classic/Classic 2.mp4", ...CLASSIC2_DEFAULTS, frame: "16:9" as const }}
       />
 
 
@@ -943,7 +943,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={210}
         width={720}
         height={1280}
-        defaultProps={{ src: "ksample1.mp4", ...KINETIC_DEFAULTS }}
+        defaultProps={{ src: "References/kinetic 1/ksample1.mp4", ...KINETIC_DEFAULTS }}
       />
 
       {/* "Ali" — the sticker look. ONE line of Poppins on a rounded pill that
@@ -990,7 +990,7 @@ export const RemotionRoot: React.FC = () => {
         // static text popping on, no matter how correct it is. The reference
         // reel's median gap is 200ms, where the fades nearly run together.
         // Judging this template on slow footage will always mislead.
-        defaultProps={{ src: "speed/speed 1.mp4", ...SPEED_DEFAULTS }}
+        defaultProps={{ src: "References/Fade + pop/speed 1.mp4", ...SPEED_DEFAULTS }}
       />
     </>
   );

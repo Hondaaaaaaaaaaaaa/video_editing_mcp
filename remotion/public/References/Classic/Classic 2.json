@@ -1,0 +1,562 @@
+[
+  {
+    "text": "It's",
+    "startMs": 19,
+    "endMs": 159,
+    "timestampMs": 89,
+    "confidence": null
+  },
+  {
+    "text": "not",
+    "startMs": 219,
+    "endMs": 419,
+    "timestampMs": 319,
+    "confidence": null
+  },
+  {
+    "text": "what",
+    "startMs": 680,
+    "endMs": 879,
+    "timestampMs": 780,
+    "confidence": null
+  },
+  {
+    "text": "you",
+    "startMs": 919,
+    "endMs": 1059,
+    "timestampMs": 989,
+    "confidence": null
+  },
+  {
+    "text": "did,",
+    "startMs": 1120,
+    "endMs": 1299,
+    "timestampMs": 1210,
+    "confidence": null
+  },
+  {
+    "text": "son,",
+    "startMs": 1500,
+    "endMs": 1799,
+    "timestampMs": 1650,
+    "confidence": null
+  },
+  {
+    "text": "that",
+    "startMs": 2500,
+    "endMs": 2659,
+    "timestampMs": 2580,
+    "confidence": null
+  },
+  {
+    "text": "angers",
+    "startMs": 2740,
+    "endMs": 3099,
+    "timestampMs": 2920,
+    "confidence": null
+  },
+  {
+    "text": "me",
+    "startMs": 3159,
+    "endMs": 3220,
+    "timestampMs": 3190,
+    "confidence": null
+  },
+  {
+    "text": "so.",
+    "startMs": 3299,
+    "endMs": 3659,
+    "timestampMs": 3479,
+    "confidence": null
+  },
+  {
+    "text": "It's",
+    "startMs": 4380,
+    "endMs": 4539,
+    "timestampMs": 4460,
+    "confidence": null
+  },
+  {
+    "text": "who",
+    "startMs": 4599,
+    "endMs": 4739,
+    "timestampMs": 4669,
+    "confidence": null
+  },
+  {
+    "text": "you",
+    "startMs": 4819,
+    "endMs": 4900,
+    "timestampMs": 4860,
+    "confidence": null
+  },
+  {
+    "text": "did",
+    "startMs": 5059,
+    "endMs": 5199,
+    "timestampMs": 5129,
+    "confidence": null
+  },
+  {
+    "text": "it",
+    "startMs": 5219,
+    "endMs": 5380,
+    "timestampMs": 5300,
+    "confidence": null
+  },
+  {
+    "text": "to.",
+    "startMs": 5440,
+    "endMs": 5619,
+    "timestampMs": 5530,
+    "confidence": null
+  },
+  {
+    "text": "Who?",
+    "startMs": 6039,
+    "endMs": 6339,
+    "timestampMs": 6189,
+    "confidence": null
+  },
+  {
+    "text": "That",
+    "startMs": 7440,
+    "endMs": 7539,
+    "timestampMs": 7490,
+    "confidence": null
+  },
+  {
+    "text": "fucking",
+    "startMs": 7679,
+    "endMs": 7960,
+    "timestampMs": 7820,
+    "confidence": null
+  },
+  {
+    "text": "nobody?",
+    "startMs": 8059,
+    "endMs": 8559,
+    "timestampMs": 8309,
+    "confidence": null
+  },
+  {
+    "text": "That",
+    "startMs": 10179,
+    "endMs": 10439,
+    "timestampMs": 10309,
+    "confidence": null
+  },
+  {
+    "text": "fucking",
+    "startMs": 10639,
+    "endMs": 11099,
+    "timestampMs": 10869,
+    "confidence": null
+  },
+  {
+    "text": "nobody",
+    "startMs": 11380,
+    "endMs": 12880,
+    "timestampMs": 12130,
+    "confidence": null
+  },
+  {
+    "text": "is",
+    "startMs": 14859,
+    "endMs": 15000,
+    "timestampMs": 14930,
+    "confidence": null
+  },
+  {
+    "text": "John",
+    "startMs": 15079,
+    "endMs": 15219,
+    "timestampMs": 15149,
+    "confidence": null
+  },
+  {
+    "text": "Wick.",
+    "startMs": 15299,
+    "endMs": 15619,
+    "timestampMs": 15459,
+    "confidence": null
+  },
+  {
+    "text": "I",
+    "startMs": 16239,
+    "endMs": 16279,
+    "timestampMs": 16259,
+    "confidence": null
+  },
+  {
+    "text": "once",
+    "startMs": 16359,
+    "endMs": 16600,
+    "timestampMs": 16480,
+    "confidence": null
+  },
+  {
+    "text": "saw",
+    "startMs": 16639,
+    "endMs": 16819,
+    "timestampMs": 16729,
+    "confidence": null
+  },
+  {
+    "text": "him",
+    "startMs": 16859,
+    "endMs": 17079,
+    "timestampMs": 16969,
+    "confidence": null
+  },
+  {
+    "text": "kill",
+    "startMs": 17219,
+    "endMs": 17379,
+    "timestampMs": 17299,
+    "confidence": null
+  },
+  {
+    "text": "three",
+    "startMs": 17399,
+    "endMs": 17680,
+    "timestampMs": 17540,
+    "confidence": null
+  },
+  {
+    "text": "men",
+    "startMs": 17779,
+    "endMs": 17959,
+    "timestampMs": 17869,
+    "confidence": null
+  },
+  {
+    "text": "in",
+    "startMs": 18020,
+    "endMs": 18079,
+    "timestampMs": 18050,
+    "confidence": null
+  },
+  {
+    "text": "a",
+    "startMs": 18139,
+    "endMs": 18199,
+    "timestampMs": 18169,
+    "confidence": null
+  },
+  {
+    "text": "bar.",
+    "startMs": 18260,
+    "endMs": 18619,
+    "timestampMs": 18440,
+    "confidence": null
+  },
+  {
+    "text": "With",
+    "startMs": 19719,
+    "endMs": 19819,
+    "timestampMs": 19769,
+    "confidence": null
+  },
+  {
+    "text": "a",
+    "startMs": 19859,
+    "endMs": 19879,
+    "timestampMs": 19869,
+    "confidence": null
+  },
+  {
+    "text": "pencil.",
+    "startMs": 19939,
+    "endMs": 20459,
+    "timestampMs": 20199,
+    "confidence": null
+  },
+  {
+    "text": "I",
+    "startMs": 20879,
+    "endMs": 20899,
+    "timestampMs": 20889,
+    "confidence": null
+  },
+  {
+    "text": "know,",
+    "startMs": 20979,
+    "endMs": 21059,
+    "timestampMs": 21019,
+    "confidence": null
+  },
+  {
+    "text": "I've",
+    "startMs": 21119,
+    "endMs": 21239,
+    "timestampMs": 21179,
+    "confidence": null
+  },
+  {
+    "text": "heard",
+    "startMs": 21260,
+    "endMs": 21399,
+    "timestampMs": 21330,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 21420,
+    "endMs": 21479,
+    "timestampMs": 21450,
+    "confidence": null
+  },
+  {
+    "text": "stories,",
+    "startMs": 21539,
+    "endMs": 21859,
+    "timestampMs": 21699,
+    "confidence": null
+  },
+  {
+    "text": "right?",
+    "startMs": 21899,
+    "endMs": 21959,
+    "timestampMs": 21929,
+    "confidence": null
+  },
+  {
+    "text": "With",
+    "startMs": 21979,
+    "endMs": 22000,
+    "timestampMs": 21990,
+    "confidence": null
+  },
+  {
+    "text": "a",
+    "startMs": 22020,
+    "endMs": 22020,
+    "timestampMs": 22020,
+    "confidence": null
+  },
+  {
+    "text": "fucking",
+    "startMs": 22039,
+    "endMs": 22459,
+    "timestampMs": 22249,
+    "confidence": null
+  },
+  {
+    "text": "pencil.",
+    "startMs": 22639,
+    "endMs": 23340,
+    "timestampMs": 22990,
+    "confidence": null
+  },
+  {
+    "text": "Who",
+    "startMs": 24979,
+    "endMs": 25139,
+    "timestampMs": 25059,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 25199,
+    "endMs": 25279,
+    "timestampMs": 25239,
+    "confidence": null
+  },
+  {
+    "text": "fuck",
+    "startMs": 25439,
+    "endMs": 25639,
+    "timestampMs": 25539,
+    "confidence": null
+  },
+  {
+    "text": "can",
+    "startMs": 25699,
+    "endMs": 25840,
+    "timestampMs": 25770,
+    "confidence": null
+  },
+  {
+    "text": "do",
+    "startMs": 25939,
+    "endMs": 26079,
+    "timestampMs": 26009,
+    "confidence": null
+  },
+  {
+    "text": "that?",
+    "startMs": 26159,
+    "endMs": 26379,
+    "timestampMs": 26269,
+    "confidence": null
+  },
+  {
+    "text": "We",
+    "startMs": 28779,
+    "endMs": 28879,
+    "timestampMs": 28829,
+    "confidence": null
+  },
+  {
+    "text": "call",
+    "startMs": 28979,
+    "endMs": 29139,
+    "timestampMs": 29059,
+    "confidence": null
+  },
+  {
+    "text": "him",
+    "startMs": 29239,
+    "endMs": 29459,
+    "timestampMs": 29349,
+    "confidence": null
+  },
+  {
+    "text": "Baba",
+    "startMs": 29760,
+    "endMs": 30019,
+    "timestampMs": 29890,
+    "confidence": null
+  },
+  {
+    "text": "Yaga.",
+    "startMs": 30079,
+    "endMs": 30599,
+    "timestampMs": 30339,
+    "confidence": null
+  },
+  {
+    "text": "The",
+    "startMs": 32180,
+    "endMs": 32279,
+    "timestampMs": 32230,
+    "confidence": null
+  },
+  {
+    "text": "Boogeyman?",
+    "startMs": 32360,
+    "endMs": 32899,
+    "timestampMs": 32630,
+    "confidence": null
+  },
+  {
+    "text": "Well,",
+    "startMs": 33340,
+    "endMs": 33500,
+    "timestampMs": 33420,
+    "confidence": null
+  },
+  {
+    "text": "John",
+    "startMs": 33559,
+    "endMs": 33719,
+    "timestampMs": 33639,
+    "confidence": null
+  },
+  {
+    "text": "wasn't",
+    "startMs": 33779,
+    "endMs": 34099,
+    "timestampMs": 33939,
+    "confidence": null
+  },
+  {
+    "text": "exactly",
+    "startMs": 34159,
+    "endMs": 34659,
+    "timestampMs": 34409,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 34719,
+    "endMs": 34799,
+    "timestampMs": 34759,
+    "confidence": null
+  },
+  {
+    "text": "Boogeyman.",
+    "startMs": 34899,
+    "endMs": 35619,
+    "timestampMs": 35259,
+    "confidence": null
+  },
+  {
+    "text": "He",
+    "startMs": 39979,
+    "endMs": 40099,
+    "timestampMs": 40039,
+    "confidence": null
+  },
+  {
+    "text": "was",
+    "startMs": 40180,
+    "endMs": 40360,
+    "timestampMs": 40270,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 40419,
+    "endMs": 40479,
+    "timestampMs": 40449,
+    "confidence": null
+  },
+  {
+    "text": "one",
+    "startMs": 40540,
+    "endMs": 40680,
+    "timestampMs": 40610,
+    "confidence": null
+  },
+  {
+    "text": "you",
+    "startMs": 40759,
+    "endMs": 40860,
+    "timestampMs": 40810,
+    "confidence": null
+  },
+  {
+    "text": "sent",
+    "startMs": 40959,
+    "endMs": 41200,
+    "timestampMs": 41080,
+    "confidence": null
+  },
+  {
+    "text": "to",
+    "startMs": 41239,
+    "endMs": 41379,
+    "timestampMs": 41309,
+    "confidence": null
+  },
+  {
+    "text": "kill",
+    "startMs": 41500,
+    "endMs": 41719,
+    "timestampMs": 41610,
+    "confidence": null
+  },
+  {
+    "text": "the",
+    "startMs": 41779,
+    "endMs": 41879,
+    "timestampMs": 41829,
+    "confidence": null
+  },
+  {
+    "text": "fucking",
+    "startMs": 42200,
+    "endMs": 42699,
+    "timestampMs": 42450,
+    "confidence": null
+  },
+  {
+    "text": "Boogeyman.",
+    "startMs": 42840,
+    "endMs": 43500,
+    "timestampMs": 43170,
+    "confidence": null
+  }
+]
