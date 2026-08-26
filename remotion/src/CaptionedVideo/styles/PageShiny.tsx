@@ -29,6 +29,7 @@ import {
   CAPTION_LEAD_MS,
 } from "./caption-timing";
 import { durationMsSchema, msToFrames, msToFramesMin } from "./timing";
+import { makeEasing as makeSlotEasing } from "./easing-slot";
 
 // ---------------------------------------------------------------------------
 // User-customizable props (rendered as sliders / color pickers in the Studio
@@ -89,7 +90,7 @@ export const sweepSchema = z.object({
 // under `animation` and the EMPHASIS entrance under `emphasis`). Exported so
 // other templates reuse the identical direction/easing dropdowns.
 export const directionEnum = z.enum(["up", "down", "left", "right"]);
-export const easingTypeEnum = z.enum(["smooth", "sharp", "bouncy"]);
+export const easingTypeEnum = z.enum(["smooth", "sharp", "bouncy", "elastic", "spring"]);
 
 // --- Warm glow halo + AE "Deep Glow" bloom, extracted to standalone exported
 // schemas so other templates (e.g. Hormozi) expose the identical controls and
@@ -210,7 +211,7 @@ export const shinySchema = captionedVideoSchema.extend({
 
 // The direction a word comes FROM as it enters, and the easing curve shape.
 export type EntranceDirection = "up" | "down" | "left" | "right";
-export type EntranceEasing = "smooth" | "sharp" | "bouncy";
+export type EntranceEasing = "smooth" | "sharp" | "bouncy" | "elastic" | "spring";
 
 // Per-line kinetic alignment. A resolved line aligns left/center/right; the
 // emphasis/normal props pick which, with normal supporting "alternate".
@@ -634,6 +635,17 @@ export const makeEntranceEasing = (
       // Overshoot past the target then settle. `back` overshoot grows with speed.
       const overshoot = 1 + s * 2; // 1.0 -> 3.0
       return Easing.out(Easing.back(overshoot));
+    }
+    case "elastic":
+    case "spring": {
+      // DELEGATED to the shared slot so there is exactly one implementation
+      // of these two curves in the project. The three curves ABOVE are NOT
+      // delegated: this template's smooth/sharp are bespoke beziers with no
+      // equivalent in the slot, and mapping them onto its polynomial family
+      // would silently change the motion of every existing caption.
+      // This slider is 1..6; the slot's strength is 1..10.
+      const strength = 1 + ((clamp(easingSpeed, 1, 6) - 1) / 5) * 9;
+      return makeSlotEasing({ type, strength });
     }
     case "sharp":
     default: {

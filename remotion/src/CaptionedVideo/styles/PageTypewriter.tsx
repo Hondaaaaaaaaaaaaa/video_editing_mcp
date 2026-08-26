@@ -24,6 +24,7 @@ import {
   type ResolvedFont,
 } from "./font-slot";
 import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./PageShiny";
+import { makeEasing as makeSlotEasing } from "./easing-slot";
 
 // ---------------------------------------------------------------------------
 // TYPEWRITER — text typed character by character, with a trailing cursor.
@@ -106,7 +107,7 @@ export const typewriterSchema = captionedVideoSchema.extend({
     // How each character eases in once it appears. The reference has NO fade
     // at all — characters are simply present on the frame they land — so
     // "linear" over a very short window is the faithful setting.
-    easing: z.enum(["linear", "smooth", "bouncy"]),
+    easing: z.enum(["linear", "smooth", "bouncy", "elastic", "spring"]),
     easingSpeed: z.number().min(1).max(6).step(0.1),
     // Deterministic per-character speed jitter (NOT Math.random, which would
     // differ between frames and between render processes).
@@ -128,7 +129,7 @@ export const typewriterSchema = captionedVideoSchema.extend({
   ...textEffectsSchema,
 });
 
-export type TypewriterEasing = "linear" | "smooth" | "bouncy";
+export type TypewriterEasing = "linear" | "smooth" | "bouncy" | "elastic" | "spring";
 
 export type TypewriterStyle = {
   layout: {
@@ -236,6 +237,13 @@ const makeEasing = (type: TypewriterEasing, speed: number): ((input: number) => 
       return Easing.out(Easing.poly(speed));
     case "bouncy":
       return Easing.out(Easing.back(speed));
+    case "elastic":
+    case "spring": {
+      // Delegated to the shared slot: one implementation of these curves for
+      // the whole project. This slider is 1..6, the slot's strength is 1..10.
+      const strength = 1 + ((Math.min(6, Math.max(1, speed)) - 1) / 5) * 9;
+      return makeSlotEasing({ type, strength });
+    }
     case "linear":
     default:
       return Easing.linear;
