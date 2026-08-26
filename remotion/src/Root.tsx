@@ -1,3 +1,4 @@
+import type { CaptionStyle } from "./CaptionedVideo/styles/types";
 import "./index.css";
 import { Composition } from "remotion";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
@@ -111,43 +112,48 @@ const WORDS_ANIMATOR_REFERENCE = "Words Animator/easing sample 2.mp4";
 
 // Thin wrappers bind a caption *style* to the shared CaptionedVideo
 // composition. Same video + captions, different look per composition.
-const ClassicCaptionedVideo: React.FC<z.infer<typeof classicSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <ClassicStyleProvider value={style}>
-    <CaptionedVideo
-      src={src}
-      showPunctuation={showPunctuation}
-      shape="classic"
-      PageComponent={PageClassic}
-      // Classic paints its own <Sequence> per screen from the caption document,
-      // so it renders as one full-timeline surface rather than per page.
-      singleSurface
-    />
-  </ClassicStyleProvider>
+// ---------------------------------------------------------------------------
+// Every caption composition wraps the same three things: put the tuned props on
+// the style context, hand CaptionedVideo its page component, and name the
+// per-template segmentation variant to read from the caption document. Only the
+// provider, the page and the shape differ, so those are the only arguments.
+//
+// Generic over the PROPS rather than loosely typed: <Composition> is generic
+// over its schema, so a wrapper typed as React.FC<any> would force casts at
+// every call site and lose the check that defaultProps match the schema.
+// ---------------------------------------------------------------------------
+type CaptionBaseProps = { src: string; showPunctuation?: boolean };
+
+const makeCaptionedVideo = <P extends CaptionBaseProps>(
+  Provider: React.Provider<Omit<P, "src" | "showPunctuation">>,
+  PageComponent: CaptionStyle,
+  shape: string,
+): React.FC<P> => {
+  const Wrapped: React.FC<P> = ({ src, showPunctuation, ...style }) => (
+    <Provider value={style as Omit<P, "src" | "showPunctuation">}>
+      <CaptionedVideo
+        src={src}
+        showPunctuation={showPunctuation}
+        shape={shape}
+        PageComponent={PageComponent}
+        singleSurface
+      />
+    </Provider>
+  );
+  return Wrapped;
+};
+const ClassicCaptionedVideo = makeCaptionedVideo<z.infer<typeof classicSchema>>(
+  ClassicStyleProvider,
+  PageClassic,
+  "classic",
 );
 
 // Shiny takes extra schema props (glow + gradient) and feeds them to the
 // style via context — the shared engine stays untouched.
-const ShinyCaptionedVideo: React.FC<z.infer<typeof shinySchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <ShinyStyleProvider value={style}>
-    <CaptionedVideo
-      src={src}
-      showPunctuation={showPunctuation}
-      shape="shiny"
-      PageComponent={PageShiny}
-      // Shiny is kinetic-only: it does its OWN count-based grouping from the
-      // flat caption stream, so it always renders as a single full-timeline
-      // surface (not the default per-page time-based rendering).
-      singleSurface
-    />
-  </ShinyStyleProvider>
+const ShinyCaptionedVideo = makeCaptionedVideo<z.infer<typeof shinySchema>>(
+  ShinyStyleProvider,
+  PageShiny,
+  "shiny",
 );
 
 // Typewriter paints its own <Sequence> per screen from the caption document —
@@ -155,170 +161,102 @@ const ShinyCaptionedVideo: React.FC<z.infer<typeof shinySchema>> = ({
 // the default per-page rendering cannot give it. Until this carried `shape`, it
 // silently fell back to Hormozi's layout (the "unwired" note in
 // docs/adding-a-caption-template.md).
-const TypewriterCaptionedVideo: React.FC<z.infer<typeof typewriterSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <TypewriterStyleProvider value={style}>
-    <CaptionedVideo
-      src={src}
-      showPunctuation={showPunctuation}
-      shape="typewriter"
-      PageComponent={PageTypewriter}
-      singleSurface
-    />
-  </TypewriterStyleProvider>
+const TypewriterCaptionedVideo = makeCaptionedVideo<z.infer<typeof typewriterSchema>>(
+  TypewriterStyleProvider,
+  PageTypewriter,
+  "typewriter",
 );
 
 // Highlight uses Shiny's kinetic LAYOUT, so (like Shiny) it does its own
 // count-based grouping from the flat caption stream and renders as a single
 // full-timeline surface. Its layout/color/gradient/glow/pop/wiggle props feed
 // the style via context.
-const HighlightCaptionedVideo: React.FC<z.infer<typeof highlightSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <HighlightStyleProvider value={style}>
-    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="shiny" PageComponent={PageHighlight} singleSurface />
-  </HighlightStyleProvider>
+const HighlightCaptionedVideo = makeCaptionedVideo<z.infer<typeof highlightSchema>>(
+  HighlightStyleProvider,
+  PageHighlight,
+  "shiny",
 );
 
 // Hormozi is kinetic-only like Shiny: it does its OWN count-based grouping into
 // two-line blocks and alternates which line wears the accent color, so it renders
 // as a single full-timeline surface.
-const HormoziCaptionedVideo: React.FC<z.infer<typeof hormoziSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <HormoziStyleProvider value={style}>
-    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="hormozi" PageComponent={PageHormozi} singleSurface />
-  </HormoziStyleProvider>
+const HormoziCaptionedVideo = makeCaptionedVideo<z.infer<typeof hormoziSchema>>(
+  HormoziStyleProvider,
+  PageHormozi,
+  "hormozi",
 );
 
 // Gadzhi renders the whole timeline itself too: it reads the caption document's
 // segments directly and needs every caption at once to pick ONE font size for
 // the video, so it can only work as a single surface.
-const GadzhiCaptionedVideo: React.FC<z.infer<typeof gadzhiSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <GadzhiStyleProvider value={style}>
-    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="gadzhi" PageComponent={PageGadzhi} singleSurface />
-  </GadzhiStyleProvider>
+const GadzhiCaptionedVideo = makeCaptionedVideo<z.infer<typeof gadzhiSchema>>(
+  GadzhiStyleProvider,
+  PageGadzhi,
+  "gadzhi",
 );
 
 // Hormozi 2 reads the caption document's segments and needs every caption at
 // once to pick ONE font size for the video, so (like Gadzhi) it renders as a
 // single surface. Its two-line block lights the SPOKEN line in a per-line random
 // accent colour and wiggles it.
-const Hormozi2CaptionedVideo: React.FC<z.infer<typeof hormozi2Schema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <Hormozi2StyleProvider value={style}>
-    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="hormozi2" PageComponent={PageHormozi2} singleSurface />
-  </Hormozi2StyleProvider>
+const Hormozi2CaptionedVideo = makeCaptionedVideo<z.infer<typeof hormozi2Schema>>(
+  Hormozi2StyleProvider,
+  PageHormozi2,
+  "hormozi2",
 );
 
 // Ali reads the caption document's segments and needs every caption at once to
 // pick ONE font size for the video, so (like Gadzhi) it renders as a single
 // surface. One line of text on a rounded sticker; each word crosses from grey
 // to black as it is spoken.
-const AliCaptionedVideo: React.FC<z.infer<typeof aliSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <AliStyleProvider value={style}>
-    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="ali" PageComponent={PageAli} singleSurface />
-  </AliStyleProvider>
+const AliCaptionedVideo = makeCaptionedVideo<z.infer<typeof aliSchema>>(
+  AliStyleProvider,
+  PageAli,
+  "ali",
 );
 
 // Speed reads the caption document's segments (including each word's SEMANTIC
 // COLOUR, which only this template uses) and paints the whole timeline itself,
 // so it renders as a single surface. Words fade in one at a time; colour
 // carries meaning rather than position.
-const SpeedCaptionedVideo: React.FC<z.infer<typeof speedSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <SpeedStyleProvider value={style}>
-    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="speed" PageComponent={PageSpeed} singleSurface />
-  </SpeedStyleProvider>
+const SpeedCaptionedVideo = makeCaptionedVideo<z.infer<typeof speedSchema>>(
+  SpeedStyleProvider,
+  PageSpeed,
+  "speed",
 );
 
 // Edits reads the caption document's segments and paints the whole timeline
 // itself, so it renders as a single surface. One small centred line of heavy
 // caps that grows a word at a time, the line re-centring as each lands.
-const EditsCaptionedVideo: React.FC<z.infer<typeof editsSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <EditsStyleProvider value={style}>
-    <CaptionedVideo
-      src={src}
-      showPunctuation={showPunctuation}
-      shape="edits"
-      PageComponent={PageEdits}
-      singleSurface
-    />
-  </EditsStyleProvider>
+const EditsCaptionedVideo = makeCaptionedVideo<z.infer<typeof editsSchema>>(
+  EditsStyleProvider,
+  PageEdits,
+  "edits",
 );
 
 // Animator is the slider-driven one: the caption document gives it the words,
 // and its own wave decides when each one arrives. Single surface, like the rest.
-const AnimatorCaptionedVideo: React.FC<z.infer<typeof animatorSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <AnimatorStyleProvider value={style}>
-    <CaptionedVideo
-      src={src}
-      showPunctuation={showPunctuation}
-      shape="animator"
-      PageComponent={PageAnimator}
-      singleSurface
-    />
-  </AnimatorStyleProvider>
+const AnimatorCaptionedVideo = makeCaptionedVideo<z.infer<typeof animatorSchema>>(
+  AnimatorStyleProvider,
+  PageAnimator,
+  "animator",
 );
 
 // Classic 2 reads the caption document's segments and paints its own <Sequence>
 // per screen, so it renders as one full-timeline surface. One centred line of
 // Bebas Neue caps whose words are revealed in place, a word at a time.
-const Classic2CaptionedVideo: React.FC<z.infer<typeof classic2Schema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <Classic2StyleProvider value={style}>
-    <CaptionedVideo
-      src={src}
-      showPunctuation={showPunctuation}
-      shape="classic2"
-      PageComponent={PageClassic2}
-      singleSurface
-    />
-  </Classic2StyleProvider>
+const Classic2CaptionedVideo = makeCaptionedVideo<z.infer<typeof classic2Schema>>(
+  Classic2StyleProvider,
+  PageClassic2,
+  "classic2",
 );
 
 // Kinetic reads the caption document's per-word variants and builds the whole
 // flowing block itself, so (like Shiny/Gadzhi) it renders as a single surface.
-const KineticCaptionedVideo: React.FC<z.infer<typeof kineticSchema>> = ({
-  src,
-  showPunctuation,
-  ...style
-}) => (
-  <KineticStyleProvider value={style}>
-    <CaptionedVideo src={src} showPunctuation={showPunctuation} shape="kinetic" PageComponent={PageKinetic} singleSurface />
-  </KineticStyleProvider>
+const KineticCaptionedVideo = makeCaptionedVideo<z.infer<typeof kineticSchema>>(
+  KineticStyleProvider,
+  PageKinetic,
+  "kinetic",
 );
 
 // Each <Composition> is an entry in the sidebar!
