@@ -1,3 +1,4 @@
+import { durationMsSchema, msToFrames, msToFramesMin } from "./timing";
 import React, { createContext, useContext, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   AbsoluteFill,
@@ -90,8 +91,8 @@ export const classicSchema = captionedVideoSchema.extend({
   motion: z.object({
     // The pop: how far below full size a screen starts, and how long it takes.
     popFrom: z.number().min(0.3).max(1).step(0.01),
-    popFrames: z.number().min(1).max(30).step(1),
-    fadeFrames: z.number().min(0).max(20).step(1),
+    popMs: durationMsSchema,
+    fadeMs: durationMsSchema,
     // Curve + how pronounced it is. See easing-slot.ts for what each does.
     easing: easingSlotSchema,
   }),
@@ -136,8 +137,8 @@ export type ClassicStyle = {
   };
   motion: {
     popFrom: number;
-    popFrames: number;
-    fadeFrames: number;
+    popMs: number;
+    fadeMs: number;
     easing: EasingSlot;
   };
   effects: {
@@ -204,8 +205,8 @@ export const CLASSIC_DEFAULTS: ClassicStyle = {
     // semi-transparent. 0 removes it outright; 3-5 is the range that would
     // actually complete inside a screen's life if a fade is wanted back.
     popFrom: 0.3,
-    popFrames: 4,
-    fadeFrames: 0,
+    popMs: 133, // was 4 frames at 30fps
+    fadeMs: 0,
     // Tuned off "smooth" (the curve this shipped with) to a stronger
     // ease-in-out. Try "bouncy" for an overshoot, "ease-out" for a plainer
     // decelerate, "linear" to hear what no easing does.
@@ -273,11 +274,11 @@ const ClassicSegment: React.FC<{
 }> = ({ words, accentAt, accentColor, fontSize, font, style }) => {
   const frame = useCurrentFrame();
   const { layout, text, motion, effects } = style;
-  const { width } = useVideoConfig();
+  const { width, fps } = useVideoConfig();
 
   // POP + FADE share one curve so they settle together. A caption only lives
   // ~8 frames, so the whole entrance is over in 3-4.
-  const pop = interpolate(frame, [0, motion.popFrames], [motion.popFrom, 1], {
+  const pop = interpolate(frame, [0, msToFramesMin(motion.popMs, fps)], [motion.popFrom, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: makeEasing(motion.easing),
@@ -288,7 +289,7 @@ const ClassicSegment: React.FC<{
   // legible the instant it appears while the fade still does its job.
   // makeOpacityEasing, not makeEasing: "bouncy" overshoots past 1, which is not
   // a valid alpha. The SCALE still gets to overshoot; the fade does not.
-  const opacity = interpolate(frame, [0, Math.max(1, motion.fadeFrames)], [OPACITY_FLOOR, 1], {
+  const opacity = interpolate(frame, [0, Math.max(1, msToFrames(motion.fadeMs, fps))], [OPACITY_FLOOR, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: makeOpacityEasing(motion.easing),

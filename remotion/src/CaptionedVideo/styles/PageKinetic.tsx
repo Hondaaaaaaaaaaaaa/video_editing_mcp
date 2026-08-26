@@ -1,3 +1,4 @@
+import { durationMsSchema, msToFrames } from "./timing";
 import React, { createContext, useContext, useMemo } from "react";
 import { AbsoluteFill, Sequence, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { z } from "zod";
@@ -104,8 +105,8 @@ export const kineticSchema = captionedVideoSchema.extend({
   motion: z.object({
     direction: directionEnum, // where a sliding word travels FROM
     slideDistancePct: z.number().min(0).max(30).step(0.5), // slide travel, % of width (0 = no slide)
-    slideFrames: z.number().min(0).max(30).step(1), // how long the slide takes
-    fadeFrames: z.number().min(0).max(30).step(1), // opacity-ramp length (0 = snap on)
+    slideMs: durationMsSchema, // how long the slide takes
+    fadeMs: durationMsSchema, // opacity-ramp length (0 = snap on)
     easing: easingTypeEnum,
     easingSpeed: z.number().min(1).max(6).step(0.1),
   }),
@@ -146,8 +147,8 @@ export type KineticStyle = {
   motion: {
     direction: EntranceDirection;
     slideDistancePct: number;
-    slideFrames: number;
-    fadeFrames: number;
+    slideMs: number;
+    fadeMs: number;
     easing: EntranceEasing;
     easingSpeed: number;
   };
@@ -217,8 +218,8 @@ export const KINETIC_DEFAULTS: KineticStyle = {
     // distance is dialled in.
     direction: "up",
     slideDistancePct: 0,
-    slideFrames: 3,
-    fadeFrames: 0,
+    slideMs: 100, // was 3 frames at 30fps
+    fadeMs: 0,
     easing: "smooth",
     easingSpeed: 3,
   },
@@ -333,8 +334,8 @@ const KineticSegment: React.FC<{
             extrapolateRight: "clamp",
             easing: easingFn,
           });
-    const pFade = ramp(motion.fadeFrames);
-    const pSlide = ramp(motion.slideFrames);
+    const pFade = ramp(msToFrames(motion.fadeMs, fps));
+    const pSlide = ramp(msToFrames(motion.slideMs, fps));
     const off = px(motion.slideDistancePct) * (1 - pSlide);
     const v = ENTRANCE_VECTOR[motion.direction];
     return {

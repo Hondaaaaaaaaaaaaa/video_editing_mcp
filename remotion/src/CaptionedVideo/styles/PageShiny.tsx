@@ -28,6 +28,7 @@ import {
   captionEndFrame,
   CAPTION_LEAD_MS,
 } from "./caption-timing";
+import { durationMsSchema, msToFrames } from "./timing";
 
 // ---------------------------------------------------------------------------
 // User-customizable props (rendered as sliders / color pickers in the Studio
@@ -193,7 +194,7 @@ export const shinySchema = captionedVideoSchema.extend({
     entrance: z.object({
       direction: directionEnum, // where normal words come FROM
       distance: z.number().min(5).max(300).step(1), // px traveled
-      duration: z.number().min(5).max(30).step(1), // entrance length (frames) — shared
+      durationMs: durationMsSchema, // entrance length (ms) — shared by both entrances
     }),
     easing: z.object({
       type: easingTypeEnum, // curve type for normal words
@@ -284,7 +285,7 @@ export type ShinyStyle = {
     entrance: {
       direction: EntranceDirection;
       distance: number;
-      duration: number;
+      durationMs: number;
     };
     easing: {
       type: EntranceEasing;
@@ -384,7 +385,7 @@ export const SHINY_DEFAULTS: ShinyStyle = {
             entrance: {
               direction: "up" as const,
               distance: 63,
-              duration: 13,
+              durationMs: 433, // was 13 frames at 30fps
             },
             easing: {
               type: "smooth" as const,
@@ -894,7 +895,7 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
   // (`entranceDuration`) is shared and comes from animation.entrance.
   const { entrance: normalEntranceProps, easing: normalEasing } = style.animation;
   const emphasisEntranceProps = style.emphasis.entrance;
-  const entranceDuration = normalEntranceProps.duration;
+  const entranceDuration = msToFrames(normalEntranceProps.durationMs, fps);
 
   // Entrance config (easing curve + which axis/sign the word enters from +
   // travel distance). NORMAL words use `normalEntrance`; EMPHASIZED words use
