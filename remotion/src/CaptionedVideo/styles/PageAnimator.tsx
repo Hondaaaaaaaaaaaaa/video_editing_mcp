@@ -264,7 +264,7 @@ const AnimatorSegment: React.FC<{
   lines: KineticWord[][];
   startMs: number;
   font: ResolvedFont;
-}> = ({ lines, startMs, font }) => {
+}> = ({ lines, font }) => {
   const frame = useCurrentFrame();
   const { fps, width } = useVideoConfig();
   const style = useContext(AnimatorStyleContext);

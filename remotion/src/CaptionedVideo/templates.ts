@@ -119,7 +119,8 @@ export type TemplateDef = {
 // `src` lives on the shared base schema and is fixed to the sample video here,
 // so it is never shown as a control.
 const stripSrc = (defaults: Record<string, unknown>): TemplateProps => {
-  const { src: _src, ...rest } = defaults;
+  const rest = { ...defaults };
+  delete rest.src;
   return rest;
 };
 
