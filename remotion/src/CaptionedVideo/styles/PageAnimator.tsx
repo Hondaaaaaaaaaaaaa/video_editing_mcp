@@ -68,14 +68,19 @@ export const animatorSchema = captionedVideoSchema.extend({
 
   // === TEXT ANIMATION — the wave. Set any channel to 0 to switch it off. ===
   animation: z.object({
-    // HOW FAR the word travels in from, as a % of FRAME WIDTH (both axes use
-    // width so a diagonal move stays a true diagonal, and so the motion keeps
-    // its proportions at every export size). Positive Y = comes from BELOW.
-    // The range runs to +-50% of the width — on a 1080 frame that is 540px, so
-    // a word can fly in from far off-screen, not just nudge up.
-    //   reference values: 3.47 = the measured 25px rise on a 720-wide frame.
-    moveY: z.number().min(-50).max(50).step(0.05),
-    moveX: z.number().min(-50).max(50).step(0.05),
+    // WHICH WAY each word slides in from. All four are the SAME measured motion —
+    // only the axis and sign of the travel change:
+    //   up    — rises from below into place (the measured default)
+    //   down  — drops from above into place
+    //   left  — comes in from the right, moving left
+    //   right — comes in from the left, moving right
+    slideDirection: z.enum(["up", "down", "left", "right"]),
+    // HOW FAR the word travels in, as a % of FRAME WIDTH (width on both axes so
+    // the motion keeps its proportions at every export size). The range runs to
+    // 50% of the width — on a 1080 frame that is 540px, so a word can fly in from
+    // far off-screen, not just nudge in. 0 = no travel (fade/blur only).
+    //   reference value: 3.47 = the measured 25px rise on a 720-wide frame.
+    slideDistancePct: z.number().min(0).max(50).step(0.05),
     // FADE. `fadeFrom` is the opacity the word STARTS at: 0 = invisible and
     // fades all the way up, 0.5 = starts half-visible, 1 = no fade at all. It is
     // a slider rather than a switch so the strength of the fade is tunable, not
@@ -147,8 +152,8 @@ export type AnimatorAlignment = "left" | "center" | "right";
 export type AnimatorStyle = {
   frame: FrameSizeName;
   animation: {
-    moveY: number;
-    moveX: number;
+    slideDirection: "up" | "down" | "left" | "right";
+    slideDistancePct: number;
     fadeFrom: number;
     fadeMs: number;
     blurPct: number;
@@ -191,8 +196,8 @@ export const ANIMATOR_DEFAULTS: AnimatorStyle & { showPunctuation: boolean } = {
           showPunctuation: false,
           frame: "9:16" as const,
           animation: {
-            moveY: 3.47,
-            moveX: 0,
+            slideDirection: "up" as const,
+            slideDistancePct: 3.47,
             fadeFrom: 0,
             fadeMs: 165,
             blurPct: 0.83,
@@ -288,9 +293,16 @@ const AnimatorSegment: React.FC<{
   const moveEase = useMemo(() => makeEasing(a.easing), [a.easing]);
   const fadeEase = useMemo(() => makeOpacityEasing(a.easing), [a.easing]);
 
-  // Distances are % of frame width, so the motion scales with the export size.
-  const moveYpx = (width * a.moveY) / 100;
-  const moveXpx = (width * a.moveX) / 100;
+  // The slide vector: ONE distance (% of frame width, so it scales with export
+  // size) applied on the axis/sign the direction picks. Positive Y is DOWNWARD on
+  // screen, so "up" starts the word BELOW its home (+dist) and it rises to 0;
+  // "down" starts it above (-dist); "left" starts it to the RIGHT (+dist) and it
+  // moves left; "right" starts it to the LEFT (-dist).
+  const distPx = (width * a.slideDistancePct) / 100;
+  const moveYpx =
+    a.slideDirection === "up" ? distPx : a.slideDirection === "down" ? -distPx : 0;
+  const moveXpx =
+    a.slideDirection === "left" ? distPx : a.slideDirection === "right" ? -distPx : 0;
   const blurPx = (width * a.blurPct) / 100;
 
   const shadowCss = shadow.enabled
