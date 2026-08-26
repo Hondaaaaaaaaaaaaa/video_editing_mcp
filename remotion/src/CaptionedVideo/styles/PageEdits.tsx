@@ -21,6 +21,7 @@ import {
 // Speed and Classic rather than hard-coding its own.
 import { easingSlotSchema, makeOpacityEasing, type EasingSlot } from "./easing-slot";
 import { groupWordsIntoBlocks, enrichedToBlocks, type KineticWord } from "./PageShiny";
+import { censorWord } from "./censor";
 
 // ---------------------------------------------------------------------------
 // EDITS — the cinematic "edit" caption: one small line of heavy white caps that
@@ -86,6 +87,16 @@ export const editsSchema = captionedVideoSchema.extend({
     weight: z.number().min(100).max(900).step(100),
     uppercase: z.boolean(),
     color: zColor(),
+    // --- OPTIONAL FEATURES, all no-ops at their defaults ---------------------
+    // A COLOURED KEYWORD. Reference 2 puts the payload word in red ("I HAVE
+    // 100"); references 3 and 4 keep everything white. Claude already marks the
+    // payload word per caption (`emphasis`), so this only needs a colour and a
+    // switch. OFF by default, which is reference 1 exactly.
+    accentOnEmphasis: z.boolean(),
+    accentColor: zColor(),
+    // Reference 4 masks strong language ("F*CK"). Render-time only — the caption
+    // document always keeps the real word. OFF by default.
+    censorProfanity: z.boolean(),
   }),
 
   // === MOTION — the per-word entrance. NOT from this reference (which has no
@@ -113,6 +124,15 @@ export const editsSchema = captionedVideoSchema.extend({
       blur: z.number().min(0).max(60).step(1),
       opacity: z.number().min(0).max(1).step(0.05),
     }),
+    // CHROMATIC ABERRATION — the RGB split in reference 4, where a cyan ghost
+    // sits one side of the letters and a warm one the other. Two offset copies
+    // of the word are drawn behind it and screened together. OFF by default.
+    chromatic: z.object({
+      enabled: z.boolean(),
+      offsetPct: z.number().min(0).max(1).step(0.01), // % of frame width
+      colorA: zColor(),
+      colorB: zColor(),
+    }),
   }),
 });
 
@@ -126,11 +146,20 @@ export type EditsStyle = {
     positionX: number;
     positionY: number;
   };
-  text: { font: FontSlot; weight: number; uppercase: boolean; color: string };
+  text: {
+    font: FontSlot;
+    weight: number;
+    uppercase: boolean;
+    color: string;
+    accentOnEmphasis: boolean;
+    accentColor: string;
+    censorProfanity: boolean;
+  };
   motion: { wordFadeMs: number; popFrom: number; easing: EasingSlot };
   effects: {
     shadow: { enabled: boolean; color: string; blur: number; offsetY: number };
     glow: { enabled: boolean; blur: number; opacity: number };
+    chromatic: { enabled: boolean; offsetPct: number; colorA: string; colorB: string };
   };
 };
 
@@ -155,6 +184,11 @@ export const EDITS_DEFAULTS: EditsStyle = {
     weight: 700,
     uppercase: true, // the reference is ALL CAPS throughout
     color: "#ffffff", // measured pure white
+    // All three OFF: reference 1 is pure white with no coloured keyword and no
+    // masking, and these must be no-ops so nothing about today's render moves.
+    accentOnEmphasis: false,
+    accentColor: "#e01b1b", // the red measured off reference 2 ("100")
+    censorProfanity: false,
   },
   motion: {
     // The reference's HARD CUT: a word snaps 0->full in one 60fps frame, no
@@ -170,14 +204,42 @@ export const EDITS_DEFAULTS: EditsStyle = {
     shadow: { enabled: true, color: "rgba(0,0,0,0.5)", blur: 4, offsetY: 2 },
     // OFF — the reference has a shadow and no glow.
     glow: { enabled: false, blur: 0, opacity: 0 },
+    // OFF — only reference 4 has the RGB split.
+    chromatic: { enabled: false, offsetPct: 0.12, colorA: "#39c7e8", colorB: "#e8563a" },
   },
 };
 
-// The square "Edits Match" composition renders over public/edits.mp4 for
-// side-by-side verification. Now that EDITS_DEFAULTS is itself the reference-exact
-// look, this is just the same values (kept as its own export so the composition
-// reads clearly and can diverge again if ever needed).
-export const EDITS_MATCH_DEFAULTS: EditsStyle = { ...EDITS_DEFAULTS };
+// WRITER — the same word-at-a-time build, sized and placed from a DIFFERENT
+// reference: public/References/Type Writer/1.mp4 (1920x1080).
+//
+// Measured off that clip, not guessed: cap height 80px on a 1920-wide frame
+// (4.17% of the width) over The Bold Font's 0.735 cap/em = an em of 5.67% of the
+// width, with the line centred at 50.0% of the frame height. Confirmed on two
+// independent captions ("MY FIST AND A" at 14s, "BLOOD ON IT" at 29s) which
+// agreed on both numbers exactly.
+//
+// That is more than DOUBLE the Edits reference's 2.52% em, and 15 points higher
+// up the frame — the two references genuinely differ, which is why this is its
+// own defaults object rather than a copy.
+//
+// Everything else is inherited: the same hard-cut word build, the same soft
+// downward shadow, and every optional feature (coloured keyword, glow,
+// chromatic split, censoring) left OFF — reference 1 is plain white throughout.
+// That was checked, not assumed: 79 timestamps were sampled across all 60
+// seconds and every caption found is pure white. The colour hits the pixel scan
+// reported all turned out to be the orange prison jumpsuit in the same band.
+export const EDITS_MATCH_DEFAULTS: EditsStyle = {
+  ...EDITS_DEFAULTS,
+  layout: {
+    ...EDITS_DEFAULTS.layout,
+    fontSizePct: 5.67, // 80px cap / 0.735 cap-per-em / 1920 frame width
+    positionY: 50, // measured 50.0% of frame height (Edits own reference sits at 65%)
+    // NO extra tracking. The 0.16em Edits inherits was measured off ITS OWN
+    // reference (edits.mp4); reference 1 is visibly tighter, and carrying 0.16
+    // over made our line far wider than the reference we are matching.
+    letterSpacing: 0,
+  },
+};
 
 const EditsStyleContext = createContext<EditsStyle>(EDITS_DEFAULTS);
 export const EditsStyleProvider = EditsStyleContext.Provider;
@@ -206,11 +268,14 @@ const EditsSegment: React.FC<{
     positionX,
     positionY,
   } = style.layout;
-  const { weight, uppercase, color } = style.text;
+  const { weight, uppercase, color, accentOnEmphasis, accentColor, censorProfanity } =
+    style.text;
   const { wordFadeMs, popFrom, easing } = style.motion;
-  const { shadow, glow } = style.effects;
+  const { shadow, glow, chromatic } = style.effects;
 
   const fontSize = (width * fontSizePct) / 100;
+  // The RGB-split ghosts sit this far either side of the word.
+  const chromaOffset = (width * chromatic.offsetPct) / 100;
   const timeInMs = (frame / fps) * 1000;
   const ease = useMemo(() => makeOpacityEasing(easing), [easing]);
 
@@ -274,18 +339,61 @@ const EditsSegment: React.FC<{
               // travel.
               if (p <= 0) return null;
               const scale = popFrom + (1 - popFrom) * p;
+              // Claude marks the payload word; only this word takes the accent,
+              // and only when the feature is switched on.
+              const isAccent = accentOnEmphasis && token.emphasis;
+              const shown = censorWord(token.text, censorProfanity);
+              const label = uppercase ? shown.toUpperCase() : shown;
               return (
                 <span
                   key={wi}
                   style={{
+                    // position:relative ONLY so the chromatic ghosts can be
+                    // absolutely placed against this word; layout is unchanged.
+                    position: chromatic.enabled ? "relative" : undefined,
                     display: "inline-block",
                     whiteSpace: "pre",
                     opacity: p,
+                    color: isAccent ? accentColor : undefined,
                     transform: popFrom < 1 ? `scale(${scale.toFixed(4)})` : undefined,
                     transformOrigin: "center center",
                   }}
                 >
-                  {uppercase ? token.text.toUpperCase() : token.text}
+                  {chromatic.enabled ? (
+                    <>
+                      {/* Two offset copies screened behind the word: cyan one
+                          side, warm the other. aria-hidden — they are the same
+                          word repeated and must not reach a screen reader. */}
+                      <span
+                        aria-hidden
+                        style={{
+                          position: "absolute",
+                          left: -chromaOffset,
+                          top: 0,
+                          color: chromatic.colorA,
+                          mixBlendMode: "screen",
+                          pointerEvents: "none",
+                        }}
+                      >
+                        {label}
+                      </span>
+                      <span
+                        aria-hidden
+                        style={{
+                          position: "absolute",
+                          left: chromaOffset,
+                          top: 0,
+                          color: chromatic.colorB,
+                          mixBlendMode: "screen",
+                          pointerEvents: "none",
+                        }}
+                      >
+                        {label}
+                      </span>
+                    </>
+                  ) : null}
+                  {/* The real word sits above the ghosts. */}
+                  <span style={{ position: "relative" }}>{label}</span>
                 </span>
               );
             })}
