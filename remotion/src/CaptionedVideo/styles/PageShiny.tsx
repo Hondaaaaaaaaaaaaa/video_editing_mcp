@@ -28,7 +28,7 @@ import {
   captionEndFrame,
   CAPTION_LEAD_MS,
 } from "./caption-timing";
-import { durationMsSchema, msToFrames } from "./timing";
+import { durationMsSchema, msToFrames, msToFramesMin } from "./timing";
 
 // ---------------------------------------------------------------------------
 // User-customizable props (rendered as sliders / color pickers in the Studio
@@ -195,6 +195,11 @@ export const shinySchema = captionedVideoSchema.extend({
       direction: directionEnum, // where normal words come FROM
       distance: z.number().min(5).max(300).step(1), // px traveled
       durationMs: durationMsSchema, // entrance length (ms) — shared by both entrances
+      // How long the word takes to reach full opacity. SEPARATE from
+      // durationMs so a word can, say, slide for 400ms while fading in over
+      // 150ms. Defaults to the same value as durationMs, which is exactly
+      // what the template did before this control existed.
+      fadeMs: durationMsSchema,
     }),
     easing: z.object({
       type: easingTypeEnum, // curve type for normal words
@@ -286,6 +291,7 @@ export type ShinyStyle = {
       direction: EntranceDirection;
       distance: number;
       durationMs: number;
+      fadeMs: number;
     };
     easing: {
       type: EntranceEasing;
@@ -386,6 +392,7 @@ export const SHINY_DEFAULTS: ShinyStyle = {
               direction: "up" as const,
               distance: 63,
               durationMs: 433, // was 13 frames at 30fps
+              fadeMs: 433, // = durationMs: opacity and travel share one window, as before
             },
             easing: {
               type: "smooth" as const,
@@ -896,6 +903,7 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
   const { entrance: normalEntranceProps, easing: normalEasing } = style.animation;
   const emphasisEntranceProps = style.emphasis.entrance;
   const entranceDuration = msToFrames(normalEntranceProps.durationMs, fps);
+  const fadeDuration = msToFramesMin(normalEntranceProps.fadeMs, fps);
 
   // Entrance config (easing curve + which axis/sign the word enters from +
   // travel distance). NORMAL words use `normalEntrance`; EMPHASIZED words use
@@ -1111,7 +1119,15 @@ const ShinySegment: React.FC<{ block: KineticBlock }> = ({ block }) => {
       [0, 1],
       { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: cfg.easingFn },
     );
-    const p = Math.min(1, Math.max(0, progress));
+    // Opacity runs on its own window so the fade can be shorter (or longer)
+    // than the travel. Clamped to 0..1 because an overshooting curve is fine
+    // for position but not for alpha.
+    const fadeProgress = interpolate(frame, [startFrame, startFrame + fadeDuration], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: cfg.easingFn,
+    });
+    const p = Math.min(1, Math.max(0, fadeProgress));
     const offset = cfg.distance * (1 - progress);
     return {
       opacity: p,

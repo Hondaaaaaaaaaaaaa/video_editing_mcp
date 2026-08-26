@@ -1,4 +1,4 @@
-import { Easing } from "remotion";
+import { Easing, spring } from "remotion";
 import { z } from "zod";
 
 // ---------------------------------------------------------------------------
@@ -36,6 +36,8 @@ export const easingTypeEnum = z.enum([
   "ease-in",
   "ease-in-out",
   "bouncy",
+  "elastic",
+  "spring",
   "linear",
 ]);
 
@@ -52,6 +54,16 @@ export type EasingSlot = z.infer<typeof easingSlotSchema>;
 export const SMOOTH_BEZIER = [0.32, 0.72, 0, 1] as const;
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+
+// Resolution at which a spring is sampled as a 0..1 curve. The spring is FITTED
+// to this window (durationInFrames), so it always settles exactly at t=1 rather
+// than being cut off mid-wobble.
+const SPRING_SAMPLES = 100;
+
+// Curves that deliberately leave the 0..1 range. Valid for geometry (scale,
+// position), never for opacity — alpha above 1 just clips, so the overshoot is
+// invisible and the fade merely looks wrong.
+const OVERSHOOTING: ReadonlySet<string> = new Set(["bouncy", "elastic", "spring"]);
 
 /**
  * Turn a slot into a curve function for `interpolate({ easing })`.
@@ -79,6 +91,23 @@ export const makeEasing = (slot: EasingSlot | undefined): ((t: number) => number
     case "bouncy":
       // 1..10 -> 0.4..3.0 of overshoot.
       return Easing.out(Easing.back(0.4 + ((s - 1) / 9) * 2.6));
+    case "elastic":
+      // 1..10 -> 0.3..3.0 bounciness: one soft wobble up to a rubbery ring-out.
+      return Easing.out(Easing.elastic(0.3 + ((s - 1) / 9) * 2.7));
+    case "spring": {
+      // Real physics rather than a drawn curve. Bouncy (back) overshoots once
+      // on a fixed shape; a spring is a mass on a damped spring, so it rings
+      // down naturally and the number of wobbles falls out of the damping.
+      // strength loosens it: 1 = firm and quick, 10 = loose and wobbly.
+      const damping = 26 - ((s - 1) / 9) * 18;
+      return (t: number) =>
+        spring({
+          frame: clamp(t, 0, 1) * SPRING_SAMPLES,
+          fps: SPRING_SAMPLES,
+          config: { damping, mass: 1, stiffness: 170 },
+          durationInFrames: SPRING_SAMPLES,
+        });
+    }
     case "smooth":
     default:
       return Easing.bezier(...SMOOTH_BEZIER);
@@ -91,4 +120,4 @@ export const makeEasing = (slot: EasingSlot | undefined): ((t: number) => number
  * still gets to overshoot.
  */
 export const makeOpacityEasing = (slot: EasingSlot | undefined): ((t: number) => number) =>
-  slot?.type === "bouncy" ? Easing.out(Easing.poly(2)) : makeEasing(slot);
+  OVERSHOOTING.has(slot?.type ?? "") ? Easing.out(Easing.poly(2)) : makeEasing(slot);
