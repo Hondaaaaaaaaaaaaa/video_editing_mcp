@@ -180,7 +180,7 @@ export const HORMOZI2_DEFAULTS: Hormozi2Style = {
             wordSpacing: 0.22,
             lineSpacing: 1.05,
             positionX: 50,
-            positionY: 64,
+            positionY: 78, // house safe zone: under the chin, clear of the mouth
             alignment: "center" as const,
             balanceLines: true,
           },
