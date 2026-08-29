@@ -10,7 +10,7 @@ import {
 import { z } from "zod";
 import { zColor } from "@remotion/zod-types";
 import { measureText } from "@remotion/layout-utils";
-import type { CaptionStyleProps, EnrichedSegment } from "./types";
+import type { CaptionStyleProps, EnrichedSegment, WordColor } from "./types";
 import { captionedVideoSchema } from "../index";
 import {
   textEffectsSchema,
@@ -746,6 +746,12 @@ export type KineticWord = {
   // Per-word light-sweep target (from EnrichedWord.sweep). Templates render the
   // moving gloss on words where this is true. Undefined = no sweep.
   sweep?: boolean;
+  // Claude's per-word SEMANTIC colour (from EnrichedWord.color): what the word
+  // MEANS — key / positive / negative / shock / base. Optional, and ignored by
+  // every template that does not paint it, so carrying it here changes nothing
+  // for them. Before this, a template that wanted colour had to bypass
+  // enrichedToBlocks entirely and re-walk the document itself (see PageSpeed).
+  color?: WordColor;
 };
 export type KineticBlock = {
   /** The block's words, already chopped into lines of `wordsPerLine`. */
@@ -826,6 +832,7 @@ export const enrichedToBlocks = (segments: EnrichedSegment[]): KineticBlock[] =>
           toMs: w.endMs,
           emphasis: w.emphasis,
           sweep: w.sweep,
+          color: w.color,
         })),
       );
       const flat = lines.flat();

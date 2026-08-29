@@ -88,12 +88,22 @@ export const editsSchema = captionedVideoSchema.extend({
     uppercase: z.boolean(),
     color: zColor(),
     // --- OPTIONAL FEATURES, all no-ops at their defaults ---------------------
-    // A COLOURED KEYWORD. Reference 2 puts the payload word in red ("I HAVE
-    // 100"); references 3 and 4 keep everything white. Claude already marks the
-    // payload word per caption (`emphasis`), so this only needs a colour and a
-    // switch. OFF by default, which is reference 1 exactly.
-    accentOnEmphasis: z.boolean(),
-    accentColor: zColor(),
+    // SEMANTIC WORD COLOUR. Claude already tags EVERY word with what it MEANS
+    // (`color` on the word: key / positive / negative / shock / base) in the
+    // same enrich pass that Speed uses — video 1's transcript alone carries 22
+    // negative, 17 key, 3 positive and 3 shock. This switch makes the template
+    // paint those tags rather than flatten every marked word to one colour.
+    // OFF by default so Edits is untouched.
+    semanticColor: z.boolean(),
+    // The palette those tags map to. Same values Speed uses, so a word means
+    // the same thing whichever template renders it.
+    wordColors: z.object({
+      key: zColor(), // YELLOW — the thing being named: a noun, number, name, place
+      positive: zColor(), // GREEN — good news, success, praise, a win
+      negative: zColor(), // RED — refusal, failure, threat, insult, loss, danger
+      shock: zColor(), // RED + outline — disbelief, a twist ("NO WAY")
+      shockOutline: z.number().min(0).max(20).step(1),
+    }),
     // Reference 4 masks strong language ("F*CK"). Render-time only — the caption
     // document always keeps the real word. OFF by default.
     censorProfanity: z.boolean(),
@@ -151,8 +161,14 @@ export type EditsStyle = {
     weight: number;
     uppercase: boolean;
     color: string;
-    accentOnEmphasis: boolean;
-    accentColor: string;
+    semanticColor: boolean;
+    wordColors: {
+      key: string;
+      positive: string;
+      negative: string;
+      shock: string;
+      shockOutline: number;
+    };
     censorProfanity: boolean;
   };
   motion: { wordFadeMs: number; popFrom: number; easing: EasingSlot };
@@ -184,10 +200,15 @@ export const EDITS_DEFAULTS: EditsStyle = {
     weight: 700,
     uppercase: true, // the reference is ALL CAPS throughout
     color: "#ffffff", // measured pure white
-    // All three OFF: reference 1 is pure white with no coloured keyword and no
-    // masking, and these must be no-ops so nothing about today's render moves.
-    accentOnEmphasis: false,
-    accentColor: "#e01b1b", // the red measured off reference 2 ("100")
+    // OFF, so nothing about today's Edits render moves. Writer turns it on.
+    semanticColor: false,
+    wordColors: {
+      key: "#ffe000",
+      positive: "#22e34a",
+      negative: "#ff1a1a",
+      shock: "#ff1a1a",
+      shockOutline: 6,
+    },
     censorProfanity: false,
   },
   motion: {
@@ -232,11 +253,13 @@ export const EDITS_MATCH_DEFAULTS: EditsStyle = {
   ...EDITS_DEFAULTS,
   text: {
     ...EDITS_DEFAULTS.text,
-    // ON for Writer. Claude already marks the payload word of every caption
-    // (33 of the 135 words in reference 1 — "keep", "38 feet", "concrete",
-    // "fist", "blood", "digging"), so this only needs switching on to colour
-    // them. Edits keeps it OFF, so that template is unaffected.
-    accentOnEmphasis: true,
+    // ON for Writer: paint what Claude decided each word MEANS.
+    //   RED   for bad — refusal, threat, failure, danger
+    //   YELLOW for the normal highlight — the thing being named
+    //   GREEN for good — success, praise, a win
+    // Reference 1's own transcript already carries all four tags, so this is
+    // reading a decision that was made, not inventing one. Edits keeps it off.
+    semanticColor: true,
   },
   layout: {
     ...EDITS_DEFAULTS.layout,
@@ -276,7 +299,7 @@ const EditsSegment: React.FC<{
     positionX,
     positionY,
   } = style.layout;
-  const { weight, uppercase, color, accentOnEmphasis, accentColor, censorProfanity } =
+  const { weight, uppercase, color, semanticColor, wordColors, censorProfanity } =
     style.text;
   const { wordFadeMs, popFrom, easing } = style.motion;
   const { shadow, glow, chromatic } = style.effects;
@@ -347,9 +370,24 @@ const EditsSegment: React.FC<{
               // travel.
               if (p <= 0) return null;
               const scale = popFrom + (1 - popFrom) * p;
-              // Claude marks the payload word; only this word takes the accent,
-              // and only when the feature is switched on.
-              const isAccent = accentOnEmphasis && token.emphasis;
+              // Claude's own semantic tag decides the colour. `shock` is the
+              // only one that carries an outline — that is what makes it read as
+              // the surprise beat rather than just another red word.
+              const tag = semanticColor ? token.color : undefined;
+              const tagColor =
+                tag === "key"
+                  ? wordColors.key
+                  : tag === "positive"
+                    ? wordColors.positive
+                    : tag === "negative"
+                      ? wordColors.negative
+                      : tag === "shock"
+                        ? wordColors.shock
+                        : undefined;
+              const tagStroke =
+                tag === "shock" && wordColors.shockOutline > 0
+                  ? `${wordColors.shockOutline}px ${color}`
+                  : undefined;
               const shown = censorWord(token.text, censorProfanity);
               const label = uppercase ? shown.toUpperCase() : shown;
               return (
@@ -362,7 +400,9 @@ const EditsSegment: React.FC<{
                     display: "inline-block",
                     whiteSpace: "pre",
                     opacity: p,
-                    color: isAccent ? accentColor : undefined,
+                    color: tagColor,
+                    WebkitTextStroke: tagStroke,
+                    paintOrder: tagStroke ? "stroke fill" : undefined,
                     transform: popFrom < 1 ? `scale(${scale.toFixed(4)})` : undefined,
                     transformOrigin: "center center",
                   }}
