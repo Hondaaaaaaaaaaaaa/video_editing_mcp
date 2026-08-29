@@ -127,6 +127,31 @@ const TEMPLATES = {
     exact: false,
     charsPerLine: charsPerLine(5.5, 0.87, ADVANCE_NORMAL + 0.16),
   },
+  // WRITER — the Edits word-build over its own reel,
+  // References/Type Writer/1.mp4 (1920x1080).
+  //
+  // Like CLASSIC above, this capacity is a STYLE choice READ OFF THE REEL,
+  // not the fitting number. The fitting formula allows 24 characters at this
+  // size, but the reel itself puts far less than that on screen — every
+  // caption sampled from it lands in a tight band:
+  //     "BLOOD ON IT" 11   "YEAH, IT'LL" 11   "MY FIST AND A" 13
+  //     "BECAUSE IT'S 38" 15    ("WHAT, YOU BRING A SHOVEL, DID YOU?" 34
+  //      is the single outlier across the whole minute)
+  // So 15 is the reel's own rhythm: short, punchy screens that turn over
+  // quickly, rather than one long line holding the width of the frame.
+  //
+  // It also cannot share the `edits` budget: Writer renders at more than
+  // double that em, and laying Writer out against 23 produced a 38-character
+  // screen followed by a 6-character one — the caption was only long enough
+  // to need two screens, so the splitter took the single cheap break (the
+  // comma) instead of a balanced one. A smaller budget uses three screens and
+  // gets to choose.
+  writer: {
+    minLines: 1,
+    maxLines: 1,
+    exact: false,
+    charsPerLine: 15,
+  },
   // CLASSIC 2 — one short centred line of Bebas Neue caps, revealed a word at a
   // time IN PLACE. Measured off remotion/public/Classic 2.mp4 (1280x720 @30fps).
   //
