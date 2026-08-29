@@ -230,6 +230,14 @@ export const EDITS_DEFAULTS: EditsStyle = {
 // reported all turned out to be the orange prison jumpsuit in the same band.
 export const EDITS_MATCH_DEFAULTS: EditsStyle = {
   ...EDITS_DEFAULTS,
+  text: {
+    ...EDITS_DEFAULTS.text,
+    // ON for Writer. Claude already marks the payload word of every caption
+    // (33 of the 135 words in reference 1 — "keep", "38 feet", "concrete",
+    // "fist", "blood", "digging"), so this only needs switching on to colour
+    // them. Edits keeps it OFF, so that template is unaffected.
+    accentOnEmphasis: true,
+  },
   layout: {
     ...EDITS_DEFAULTS.layout,
     fontSizePct: 5.67, // 80px cap / 0.735 cap-per-em / 1920 frame width
