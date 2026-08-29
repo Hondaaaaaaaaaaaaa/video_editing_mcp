@@ -38,6 +38,12 @@ import {
   captionEndFrame,
   CAPTION_LEAD_MS,
 } from "./caption-timing";
+import { wiggleSlotSchema, wiggleAt, type WiggleSlot } from "./wiggle-slot";
+import {
+  textAnimationSchema,
+  textAnimationAt,
+  type TextAnimation,
+} from "./text-animation-slot";
 
 // ---------------------------------------------------------------------------
 // HORMOZI 2 — the "changing-color + wiggle" viral caption look.
@@ -120,13 +126,11 @@ export const hormozi2Schema = captionedVideoSchema.extend({
   // scaling/pop. A small rotation on a SLIGHTLY DIFFERENT rhythm drifts in and
   // out of phase with the bob, giving the organic "sometimes a little tilt"
   // feel rather than a metronome. ===
-  motion: z.object({
-    fadeInMs: z.number().min(0).max(600).step(10), // block entrance fade (0 = cut)
-    bobEm: z.number().min(0).max(0.3).step(0.005), // vertical float height (× font size)
-    bobSpeed: z.number().min(0).max(4).step(0.05), // floats per second
-    rotateDeg: z.number().min(0).max(8).step(0.1), // rotation amplitude (degrees)
-    rotateSpeed: z.number().min(0).max(4).step(0.05), // rotations per second (own rhythm)
-  }),
+  // === TEXT ANIMATION — how the caption ARRIVES (fade / pop) ===
+  textAnimation: textAnimationSchema,
+
+  // === WIGGLE — the slow drift it keeps WHILE on screen ===
+  wiggle: wiggleSlotSchema,
 
   // === EFFECTS — the soft dark blurred "sticker" halo behind each line ===
   effects: z.object({
@@ -161,13 +165,8 @@ export type Hormozi2Style = {
     strokeWidth: number;
     accents: { one: Accent; two: Accent; three: Accent };
   };
-  motion: {
-    fadeInMs: number;
-    bobEm: number;
-    bobSpeed: number;
-    rotateDeg: number;
-    rotateSpeed: number;
-  };
+  textAnimation: TextAnimation;
+  wiggle: WiggleSlot;
   effects: {
     shadow: { enabled: boolean; color: string; blur: number; offsetY: number };
   };
@@ -200,12 +199,25 @@ export const HORMOZI2_DEFAULTS: Hormozi2Style = {
               three: { fill: "#28e234", stroke: "#0a0a0a" },
             },
           },
-          motion: {
-            fadeInMs: 60,
-            bobEm: 0.08,
-            bobSpeed: 0.3,
-            rotateDeg: 0,
-            rotateSpeed: 0.4,
+          // The reference caption simply APPEARS - full size, full opacity on
+          // frame one - so both entrance effects are off by default. The
+          // controls remain for looks that do want them.
+          textAnimation: {
+            fadeInMs: 0,
+            popIn: { enabled: false as const },
+          },
+          // Measured from public/References/wiggle.mp4. See wiggle-slot.ts.
+          wiggle: {
+            enabled: true as const,
+            amountXEm: 0.48,
+            amountYEm: 0.4,
+            periodXSec: 4.75,
+            periodYSec: 3.5,
+            tiltDeg: 0,
+            tiltPeriodSec: 2.9,
+            startsAtMs: 0,
+            durationMs: 0,
+            onsetMs: 600,
           },
           effects: {
             shadow: {
@@ -330,7 +342,8 @@ const Hormozi2Segment: React.FC<{
   const { captionScale, wordSpacing, lineSpacing, positionX, positionY, alignment } =
     style.layout;
   const { uppercase, baseColor, baseStroke, strokeWidth, accents } = style.text;
-  const { bobEm, bobSpeed, rotateDeg, rotateSpeed } = style.motion;
+  const wiggleSlot = style.wiggle;
+  const textAnim = style.textAnimation;
   const { shadow } = style.effects;
 
   const palette: Accent[] = [accents.one, accents.two, accents.three];
@@ -367,14 +380,13 @@ const Hormozi2Segment: React.FC<{
   // "sometimes a little tilt"). Driven by the caption-local frame, so each
   // caption starts its float from rest — no jump when it appears.
   const secs = frame / fps;
-  // Ease the float IN over the first ~0.6s (smoothstep) so it glides up to full
-  // amplitude instead of starting mid-swing — the sine itself already eases each
-  // up/down turn, this just eases the ONSET.
-  const onset = Math.min(1, secs / 0.6);
-  const env = onset * onset * (3 - 2 * onset); // smoothstep 0->1
-  const bobPx = -bobEm * fontSize * env * Math.sin(secs * Math.PI * 2 * bobSpeed);
-  const rotDeg = rotateDeg * env * Math.sin(secs * Math.PI * 2 * rotateSpeed);
-  const wiggle = `translateY(${bobPx.toFixed(2)}px) rotate(${rotDeg.toFixed(3)}deg)`;
+  // x and y drift on DIFFERENT periods, which is what stops the path retracing
+  // itself and reading as a metronome. The onset envelope lives in wiggleAt.
+  const wig = wiggleAt(wiggleSlot, secs, fontSize);
+  const entrance = textAnimationAt(textAnim, secs);
+  const wiggle =
+    `translate(${wig.x.toFixed(2)}px, ${wig.y.toFixed(2)}px) ` +
+    `rotate(${wig.deg.toFixed(3)}deg) scale(${entrance.scale.toFixed(4)})`;
 
   // ---- PER-LINE FIT so text can NEVER leave the screen ----------------------
   // Measure each line's ACTUAL rendered width in the DOM (not measureText — that
@@ -383,7 +395,13 @@ const Hormozi2Segment: React.FC<{
   // NATURAL (un-transformed) width, so applying a scale never changes what we
   // measure — the result is stable, no oscillation. A delayRender holds the
   // export until the first measurement lands, so no frame paints unscaled.
-  const avail = width * FIT_WIDTH_FRACTION;
+  // The fit must ALSO leave room for the wiggle, because the drift translates
+  // the line AFTER it has been fitted. Without this, a line that exactly fills
+  // the frame gets pushed off the edge at the extremes of the x swing — which
+  // is precisely what a wide caption did once the measured 0.48em amplitude
+  // replaced the old 0.08em bob.
+  const wiggleRoomPx = wiggleSlot.enabled ? wiggleSlot.amountXEm * fontSize : 0;
+  const avail = Math.max(1, width * FIT_WIDTH_FRACTION - 2 * wiggleRoomPx);
   const innerRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const [scales, setScales] = useState<number[]>(() => lines.map(() => 1));
   const [fitHandle] = useState(() => delayRender("Hormozi2 line fit"));
@@ -535,7 +553,7 @@ export const PageHormozi2: React.FC<CaptionStyleProps> = ({ captions = [], segme
     fps,
     CAPTION_LEAD_MS,
   );
-  const fadeInFrames = Math.round((style.motion.fadeInMs / 1000) * fps);
+  const fadeInFrames = Math.round((style.textAnimation.fadeInMs / 1000) * fps);
 
   return (
     <AbsoluteFill style={{ zIndex: 10 }}>
