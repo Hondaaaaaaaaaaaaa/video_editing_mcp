@@ -127,6 +127,32 @@ const TEMPLATES = {
     exact: false,
     charsPerLine: charsPerLine(5.5, 0.87, ADVANCE_NORMAL + 0.16),
   },
+  // TYPEWRITER 3 — a small Roman-serif caption typed out one CHARACTER at a
+  // time, dead centre. Measured off
+  // References/"typewriter 3 .mp4" (576x576 @30fps):
+  //
+  //   cap height 17px on a 576-wide frame, over Marcellus' 0.700 cap/em,
+  //   gives an em of 4.22% of the frame width.
+  //
+  // The advance is NOT ADVANCE_NORMAL. This is a wide Roman face, and the
+  // reel's own lines measure 0.51-0.60 em per character depending on the
+  // letters ("FATHER FOUGHT" 13 chars in 184px, "YOUR FATHERS NAME" 17 in
+  // 246px, "RESTS ENTIRELY ON" 17 in 210px, all at a 24.3px em), averaging
+  // 0.56. Its widest line runs to 43% of the frame, so 0.46 is the fit.
+  //
+  // That lands on 19, and the longest line seen anywhere in the reel is 17
+  // characters — so the budget is derived AND sits just above what the
+  // reference actually uses. Keep in step with fontSizePct in
+  // PageTypewriter3.tsx.
+  //
+  // 1-2 lines, not exactly 2: the reel shows both single-line captions and
+  // stacked pairs, so `exact` stays false.
+  typewriter3: {
+    minLines: 1,
+    maxLines: 2,
+    exact: false,
+    charsPerLine: charsPerLine(4.22, 0.46, 0.56),
+  },
   // WRITER — the Edits word-build over its own reel,
   // References/Type Writer/1.mp4 (1920x1080).
   //
@@ -205,6 +231,24 @@ const TEMPLATES = {
     maxLines: 2,
     exact: false,
     charsPerLine: charsPerLine(7, 0.9, ADVANCE_NORMAL),
+  },
+  // WORD BY WORD — the caption is laid out in full and its words arrive one at
+  // a time into slots they never leave. Measured off
+  // References/Fade + pop/fade  in .mp4 (720x720): cap height 22px = 3.06% of
+  // the frame width, which over Inter's 0.727 cap-to-em is a 4.25% em.
+  //
+  // The advance is NOT ADVANCE_NORMAL. This look sets ~0.18em of TRACKING — the
+  // reference's own advance measures 0.73 em/char against Inter 800's ~0.55 —
+  // so the per-character advance is Inter's 0.52 plus that 0.18. Keep in step
+  // with fontSizePct / letterSpacing / FIT_WIDTH_FRACTION in PageWordByWord.tsx.
+  //
+  // TWO lines like the reference, but not forced: it puts "IT'S OKAY." on one
+  // line and longer captions on two, so short captions must stay short.
+  wordbyword: {
+    minLines: 1,
+    maxLines: 2,
+    exact: false,
+    charsPerLine: charsPerLine(4.25, 0.86, ADVANCE_NORMAL + 0.18),
   },
   shiny: { minLines: 1, maxLines: 3, exact: false, charsPerLine: 18 },
   kinetic: { minLines: 1, maxLines: 3, exact: false, charsPerLine: 18 },

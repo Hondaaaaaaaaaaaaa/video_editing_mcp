@@ -4,6 +4,7 @@ import { loadFont as loadPoppins } from "@remotion/google-fonts/Poppins";
 import { loadFont as loadBebasNeue } from "@remotion/google-fonts/BebasNeue";
 import { loadFont as loadAnton } from "@remotion/google-fonts/Anton";
 import { loadFont as loadPlayfair } from "@remotion/google-fonts/PlayfairDisplay";
+import { loadFont as loadMarcellus } from "@remotion/google-fonts/Marcellus";
 import { staticFile } from "remotion";
 import { z } from "zod";
 
@@ -29,6 +30,7 @@ export const FONT_FAMILIES = [
   "Bebas Neue",
   "Anton",
   "Playfair Display",
+  "Marcellus",
   "Kufyan Arabic",
 ] as const;
 export type FontFamilyName = (typeof FONT_FAMILIES)[number];
@@ -55,6 +57,13 @@ const anton = loadAnton("normal", { weights: ["400"], subsets: ["latin"] });
 // kinetic templates. Loaded ITALIC (the reference's elegant words are all
 // italic) at 500/700 so both a lighter and a bolder italic are available.
 const playfair = loadPlayfair("italic", { weights: ["500", "700"], subsets: ["latin"] });
+// Marcellus — the classical Roman inscriptional serif behind Typewriter 3.
+// Single weight (400) by design, like Bebas Neue and Anton: the face is already
+// the shape it wants to be, and a synthesised bold would ruin the thin strokes
+// that make it read as carved rather than printed. Identified by fingerprinting
+// the reel's captions (ink width over cap height) against 21 Roman serifs — it
+// won at 0.46% error, and held at 1.57% on two captions kept out of the fit.
+const marcellus = loadMarcellus("normal", { weights: ["400"], subsets: ["latin"] });
 
 // --- Local Arabic font (shipped in public/fonts, not a Google Font) ---------
 // Kufyan Arabic — a Kufi display face for Arabic captions. Loaded via the native
@@ -83,6 +92,7 @@ const FAMILY_BY_NAME: Record<FontFamilyName, string> = {
   "Bebas Neue": bebasNeue.fontFamily,
   Anton: anton.fontFamily,
   "Playfair Display": playfair.fontFamily,
+  Marcellus: marcellus.fontFamily,
   "Kufyan Arabic": KUFYAN_ARABIC_FAMILY,
 };
 
