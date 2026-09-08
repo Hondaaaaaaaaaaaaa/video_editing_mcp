@@ -303,6 +303,13 @@ const AnimatorSegment: React.FC<{
     a.slideDirection === "up" ? distPx : a.slideDirection === "down" ? -distPx : 0;
   const moveXpx =
     a.slideDirection === "left" ? distPx : a.slideDirection === "right" ? -distPx : 0;
+  // A SIDEWAYS slide travels a word across its line, so without a mask it would
+  // pass OVER the words already placed beside it (the "paralyze" over "It'll"
+  // clash on slide-right). For left/right only, each word is therefore clipped to
+  // its own slot so it reveals in place instead of sliding over its neighbour.
+  // up/down move vertically into empty inter-line space and need no mask, so they
+  // stay exactly as before (and "up", the default, is untouched).
+  const clipToSlot = moveXpx !== 0;
   const blurPx = (width * a.blurPct) / 100;
 
   const shadowCss = shadow.enabled
@@ -395,6 +402,44 @@ const AnimatorSegment: React.FC<{
               if (a.rotateFrom !== 0) t.push(`rotate(${rot.toFixed(2)}deg)`);
 
               const isAccent = accentOnEmphasis && token.emphasis;
+              const glyph = uppercase ? token.text.toUpperCase() : token.text;
+              // Sideways slides (left/right) reveal WITHIN the word's own slot: the
+              // moving glyph is wrapped in an overflow-clipped box the size of the
+              // word, so it is masked to its slot and never drawn over its
+              // neighbour. up/down (and the default) keep the original single-span
+              // float untouched, so their output is byte-for-byte unchanged.
+              if (clipToSlot) {
+                return (
+                  <span
+                    key={wi}
+                    style={{
+                      display: "inline-block",
+                      // Mask the word to its own slot so a sideways slide is
+                      // revealed in place instead of crossing its neighbour. Uses
+                      // clip-path, NOT overflow:hidden, so it does not shift the
+                      // inline baseline; the small horizontal inset leaves room for
+                      // the italic overhang and the generous vertical inset keeps
+                      // ascenders/descenders and the entrance blur from being cut.
+                      clipPath: "inset(-40% -0.12em -40% -0.12em)",
+                      whiteSpace: "pre",
+                      opacity,
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: "inline-block",
+                        whiteSpace: "pre",
+                        color: isAccent ? accentColor : undefined,
+                        transform: t.length ? t.join(" ") : undefined,
+                        filter: bl > 0.05 ? `blur(${bl.toFixed(2)}px)` : undefined,
+                        transformOrigin: "center center",
+                      }}
+                    >
+                      {glyph}
+                    </span>
+                  </span>
+                );
+              }
               return (
                 <span
                   key={wi}
@@ -408,7 +453,7 @@ const AnimatorSegment: React.FC<{
                     transformOrigin: "center center",
                   }}
                 >
-                  {uppercase ? token.text.toUpperCase() : token.text}
+                  {glyph}
                 </span>
               );
             })}
