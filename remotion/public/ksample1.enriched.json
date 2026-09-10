@@ -1903,6 +1903,1375 @@
         ]
       }
     ],
+    "edits": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "How",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 199,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 219,
+                "endMs": 319,
+                "variant": "base"
+              },
+              {
+                "text": "fuck",
+                "emphasis": true,
+                "startMs": 379,
+                "endMs": 500,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "do",
+                "emphasis": false,
+                "startMs": 539,
+                "endMs": 599,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 639,
+                "endMs": 699,
+                "variant": "base"
+              },
+              {
+                "text": "write",
+                "emphasis": true,
+                "startMs": 719,
+                "endMs": 899,
+                "variant": "punch"
+              },
+              {
+                "text": "hooks",
+                "emphasis": false,
+                "startMs": 939,
+                "endMs": 1199,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "so",
+                "emphasis": false,
+                "startMs": 1299,
+                "endMs": 1419,
+                "variant": "base"
+              },
+              {
+                "text": "good",
+                "emphasis": true,
+                "startMs": 1579,
+                "endMs": 1719,
+                "variant": "punch"
+              },
+              {
+                "text": "people",
+                "emphasis": false,
+                "startMs": 1799,
+                "endMs": 2099,
+                "variant": "base"
+              },
+              {
+                "text": "comment?",
+                "emphasis": false,
+                "startMs": 2119,
+                "endMs": 2379,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It's",
+                "emphasis": false,
+                "startMs": 2700,
+                "endMs": 2819,
+                "variant": "base"
+              },
+              {
+                "text": "called",
+                "emphasis": false,
+                "startMs": 2819,
+                "endMs": 3000,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 3019,
+                "endMs": 3099,
+                "variant": "base"
+              },
+              {
+                "text": "triple",
+                "emphasis": true,
+                "startMs": 3119,
+                "endMs": 3359,
+                "variant": "punch"
+              },
+              {
+                "text": "hook,",
+                "emphasis": false,
+                "startMs": 3419,
+                "endMs": 3599,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 3939,
+                "endMs": 4000,
+                "variant": "base"
+              },
+              {
+                "text": "if",
+                "emphasis": false,
+                "startMs": 4019,
+                "endMs": 4139,
+                "variant": "base"
+              },
+              {
+                "text": "done",
+                "emphasis": false,
+                "startMs": 4159,
+                "endMs": 4339,
+                "variant": "base"
+              },
+              {
+                "text": "correctly,",
+                "emphasis": false,
+                "startMs": 4380,
+                "endMs": 5019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "it'll",
+                "emphasis": false,
+                "startMs": 5079,
+                "endMs": 5279,
+                "variant": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 5299,
+                "endMs": 5699,
+                "variant": "punch"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 5739,
+                "endMs": 6059,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 6079,
+                "endMs": 6219,
+                "variant": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 6219,
+                "endMs": 6480,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "typewriter3": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "How",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 199,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 219,
+                "endMs": 319,
+                "variant": "base"
+              },
+              {
+                "text": "fuck",
+                "emphasis": true,
+                "startMs": 379,
+                "endMs": 500,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "do",
+                "emphasis": false,
+                "startMs": 539,
+                "endMs": 599,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 639,
+                "endMs": 699,
+                "variant": "base"
+              },
+              {
+                "text": "write",
+                "emphasis": true,
+                "startMs": 719,
+                "endMs": 899,
+                "variant": "punch"
+              },
+              {
+                "text": "hooks",
+                "emphasis": false,
+                "startMs": 939,
+                "endMs": 1199,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "so",
+                "emphasis": false,
+                "startMs": 1299,
+                "endMs": 1419,
+                "variant": "base"
+              },
+              {
+                "text": "good",
+                "emphasis": true,
+                "startMs": 1579,
+                "endMs": 1719,
+                "variant": "punch"
+              },
+              {
+                "text": "people",
+                "emphasis": false,
+                "startMs": 1799,
+                "endMs": 2099,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "comment?",
+                "emphasis": false,
+                "startMs": 2119,
+                "endMs": 2379,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It's",
+                "emphasis": false,
+                "startMs": 2700,
+                "endMs": 2819,
+                "variant": "base"
+              },
+              {
+                "text": "called",
+                "emphasis": false,
+                "startMs": 2819,
+                "endMs": 3000,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 3019,
+                "endMs": 3099,
+                "variant": "base"
+              },
+              {
+                "text": "triple",
+                "emphasis": true,
+                "startMs": 3119,
+                "endMs": 3359,
+                "variant": "punch"
+              },
+              {
+                "text": "hook,",
+                "emphasis": false,
+                "startMs": 3419,
+                "endMs": 3599,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 3939,
+                "endMs": 4000,
+                "variant": "base"
+              },
+              {
+                "text": "if",
+                "emphasis": false,
+                "startMs": 4019,
+                "endMs": 4139,
+                "variant": "base"
+              },
+              {
+                "text": "done",
+                "emphasis": false,
+                "startMs": 4159,
+                "endMs": 4339,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "correctly,",
+                "emphasis": false,
+                "startMs": 4380,
+                "endMs": 5019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "it'll",
+                "emphasis": false,
+                "startMs": 5079,
+                "endMs": 5279,
+                "variant": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 5299,
+                "endMs": 5699,
+                "variant": "punch"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 5739,
+                "endMs": 6059,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 6079,
+                "endMs": 6219,
+                "variant": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 6219,
+                "endMs": 6480,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "writer": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "How",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 199,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 219,
+                "endMs": 319,
+                "variant": "base"
+              },
+              {
+                "text": "fuck",
+                "emphasis": true,
+                "startMs": 379,
+                "endMs": 500,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "do",
+                "emphasis": false,
+                "startMs": 539,
+                "endMs": 599,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 639,
+                "endMs": 699,
+                "variant": "base"
+              },
+              {
+                "text": "write",
+                "emphasis": true,
+                "startMs": 719,
+                "endMs": 899,
+                "variant": "punch"
+              },
+              {
+                "text": "hooks",
+                "emphasis": false,
+                "startMs": 939,
+                "endMs": 1199,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "so",
+                "emphasis": false,
+                "startMs": 1299,
+                "endMs": 1419,
+                "variant": "base"
+              },
+              {
+                "text": "good",
+                "emphasis": true,
+                "startMs": 1579,
+                "endMs": 1719,
+                "variant": "punch"
+              },
+              {
+                "text": "people",
+                "emphasis": false,
+                "startMs": 1799,
+                "endMs": 2099,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "comment?",
+                "emphasis": false,
+                "startMs": 2119,
+                "endMs": 2379,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It's",
+                "emphasis": false,
+                "startMs": 2700,
+                "endMs": 2819,
+                "variant": "base"
+              },
+              {
+                "text": "called",
+                "emphasis": false,
+                "startMs": 2819,
+                "endMs": 3000,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 3019,
+                "endMs": 3099,
+                "variant": "base"
+              },
+              {
+                "text": "triple",
+                "emphasis": true,
+                "startMs": 3119,
+                "endMs": 3359,
+                "variant": "punch"
+              },
+              {
+                "text": "hook,",
+                "emphasis": false,
+                "startMs": 3419,
+                "endMs": 3599,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 3939,
+                "endMs": 4000,
+                "variant": "base"
+              },
+              {
+                "text": "if",
+                "emphasis": false,
+                "startMs": 4019,
+                "endMs": 4139,
+                "variant": "base"
+              },
+              {
+                "text": "done",
+                "emphasis": false,
+                "startMs": 4159,
+                "endMs": 4339,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "correctly,",
+                "emphasis": false,
+                "startMs": 4380,
+                "endMs": 5019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "it'll",
+                "emphasis": false,
+                "startMs": 5079,
+                "endMs": 5279,
+                "variant": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 5299,
+                "endMs": 5699,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 1,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 5739,
+                "endMs": 6059,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 2,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 6079,
+                "endMs": 6219,
+                "variant": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 6219,
+                "endMs": 6480,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "classic2": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "How",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 199,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 219,
+                "endMs": 319,
+                "variant": "base"
+              },
+              {
+                "text": "fuck",
+                "emphasis": true,
+                "startMs": 379,
+                "endMs": 500,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "do",
+                "emphasis": false,
+                "startMs": 539,
+                "endMs": 599,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 639,
+                "endMs": 699,
+                "variant": "base"
+              },
+              {
+                "text": "write",
+                "emphasis": true,
+                "startMs": 719,
+                "endMs": 899,
+                "variant": "punch"
+              },
+              {
+                "text": "hooks",
+                "emphasis": false,
+                "startMs": 939,
+                "endMs": 1199,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "so",
+                "emphasis": false,
+                "startMs": 1299,
+                "endMs": 1419,
+                "variant": "base"
+              },
+              {
+                "text": "good",
+                "emphasis": true,
+                "startMs": 1579,
+                "endMs": 1719,
+                "variant": "punch"
+              },
+              {
+                "text": "people",
+                "emphasis": false,
+                "startMs": 1799,
+                "endMs": 2099,
+                "variant": "base"
+              },
+              {
+                "text": "comment?",
+                "emphasis": false,
+                "startMs": 2119,
+                "endMs": 2379,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It's",
+                "emphasis": false,
+                "startMs": 2700,
+                "endMs": 2819,
+                "variant": "base"
+              },
+              {
+                "text": "called",
+                "emphasis": false,
+                "startMs": 2819,
+                "endMs": 3000,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 3019,
+                "endMs": 3099,
+                "variant": "base"
+              },
+              {
+                "text": "triple",
+                "emphasis": true,
+                "startMs": 3119,
+                "endMs": 3359,
+                "variant": "punch"
+              },
+              {
+                "text": "hook,",
+                "emphasis": false,
+                "startMs": 3419,
+                "endMs": 3599,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 3939,
+                "endMs": 4000,
+                "variant": "base"
+              },
+              {
+                "text": "if",
+                "emphasis": false,
+                "startMs": 4019,
+                "endMs": 4139,
+                "variant": "base"
+              },
+              {
+                "text": "done",
+                "emphasis": false,
+                "startMs": 4159,
+                "endMs": 4339,
+                "variant": "base"
+              },
+              {
+                "text": "correctly,",
+                "emphasis": false,
+                "startMs": 4380,
+                "endMs": 5019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "it'll",
+                "emphasis": false,
+                "startMs": 5079,
+                "endMs": 5279,
+                "variant": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 5299,
+                "endMs": 5699,
+                "variant": "punch"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 5739,
+                "endMs": 6059,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 6079,
+                "endMs": 6219,
+                "variant": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 6219,
+                "endMs": 6480,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "animator": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "How",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 199,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 219,
+                "endMs": 319,
+                "variant": "base"
+              },
+              {
+                "text": "fuck",
+                "emphasis": true,
+                "startMs": 379,
+                "endMs": 500,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "do",
+                "emphasis": false,
+                "startMs": 539,
+                "endMs": 599,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 639,
+                "endMs": 699,
+                "variant": "base"
+              },
+              {
+                "text": "write",
+                "emphasis": true,
+                "startMs": 719,
+                "endMs": 899,
+                "variant": "punch"
+              },
+              {
+                "text": "hooks",
+                "emphasis": false,
+                "startMs": 939,
+                "endMs": 1199,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "so",
+                "emphasis": false,
+                "startMs": 1299,
+                "endMs": 1419,
+                "variant": "base"
+              },
+              {
+                "text": "good",
+                "emphasis": true,
+                "startMs": 1579,
+                "endMs": 1719,
+                "variant": "punch"
+              },
+              {
+                "text": "people",
+                "emphasis": false,
+                "startMs": 1799,
+                "endMs": 2099,
+                "variant": "base"
+              },
+              {
+                "text": "comment?",
+                "emphasis": false,
+                "startMs": 2119,
+                "endMs": 2379,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It's",
+                "emphasis": false,
+                "startMs": 2700,
+                "endMs": 2819,
+                "variant": "base"
+              },
+              {
+                "text": "called",
+                "emphasis": false,
+                "startMs": 2819,
+                "endMs": 3000,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 3019,
+                "endMs": 3099,
+                "variant": "base"
+              },
+              {
+                "text": "triple",
+                "emphasis": true,
+                "startMs": 3119,
+                "endMs": 3359,
+                "variant": "punch"
+              },
+              {
+                "text": "hook,",
+                "emphasis": false,
+                "startMs": 3419,
+                "endMs": 3599,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 3939,
+                "endMs": 4000,
+                "variant": "base"
+              },
+              {
+                "text": "if",
+                "emphasis": false,
+                "startMs": 4019,
+                "endMs": 4139,
+                "variant": "base"
+              },
+              {
+                "text": "done",
+                "emphasis": false,
+                "startMs": 4159,
+                "endMs": 4339,
+                "variant": "base"
+              },
+              {
+                "text": "correctly,",
+                "emphasis": false,
+                "startMs": 4380,
+                "endMs": 5019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "it'll",
+                "emphasis": false,
+                "startMs": 5079,
+                "endMs": 5279,
+                "variant": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 5299,
+                "endMs": 5699,
+                "variant": "punch"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 5739,
+                "endMs": 6059,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 6079,
+                "endMs": 6219,
+                "variant": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 6219,
+                "endMs": 6480,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "typewriter": [
       {
         "ideaIndex": 0,
@@ -2037,6 +3406,253 @@
           {
             "align": "center",
             "words": [
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 3019,
+                "endMs": 3099,
+                "variant": "base"
+              },
+              {
+                "text": "triple",
+                "emphasis": true,
+                "startMs": 3119,
+                "endMs": 3359,
+                "variant": "punch"
+              },
+              {
+                "text": "hook,",
+                "emphasis": false,
+                "startMs": 3419,
+                "endMs": 3599,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 3939,
+                "endMs": 4000,
+                "variant": "base"
+              },
+              {
+                "text": "if",
+                "emphasis": false,
+                "startMs": 4019,
+                "endMs": 4139,
+                "variant": "base"
+              },
+              {
+                "text": "done",
+                "emphasis": false,
+                "startMs": 4159,
+                "endMs": 4339,
+                "variant": "base"
+              },
+              {
+                "text": "correctly,",
+                "emphasis": false,
+                "startMs": 4380,
+                "endMs": 5019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "it'll",
+                "emphasis": false,
+                "startMs": 5079,
+                "endMs": 5279,
+                "variant": "base"
+              },
+              {
+                "text": "paralyze",
+                "emphasis": true,
+                "startMs": 5299,
+                "endMs": 5699,
+                "variant": "punch"
+              },
+              {
+                "text": "anyone",
+                "emphasis": false,
+                "startMs": 5739,
+                "endMs": 6059,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "from",
+                "emphasis": false,
+                "startMs": 6079,
+                "endMs": 6219,
+                "variant": "base"
+              },
+              {
+                "text": "scrolling",
+                "emphasis": true,
+                "startMs": 6219,
+                "endMs": 6480,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "wordbyword": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "How",
+                "emphasis": false,
+                "startMs": 119,
+                "endMs": 199,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 219,
+                "endMs": 319,
+                "variant": "base"
+              },
+              {
+                "text": "fuck",
+                "emphasis": true,
+                "startMs": 379,
+                "endMs": 500,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "do",
+                "emphasis": false,
+                "startMs": 539,
+                "endMs": 599,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 639,
+                "endMs": 699,
+                "variant": "base"
+              },
+              {
+                "text": "write",
+                "emphasis": true,
+                "startMs": 719,
+                "endMs": 899,
+                "variant": "punch"
+              },
+              {
+                "text": "hooks",
+                "emphasis": false,
+                "startMs": 939,
+                "endMs": 1199,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "so",
+                "emphasis": false,
+                "startMs": 1299,
+                "endMs": 1419,
+                "variant": "base"
+              },
+              {
+                "text": "good",
+                "emphasis": true,
+                "startMs": 1579,
+                "endMs": 1719,
+                "variant": "punch"
+              },
+              {
+                "text": "people",
+                "emphasis": false,
+                "startMs": 1799,
+                "endMs": 2099,
+                "variant": "base"
+              },
+              {
+                "text": "comment?",
+                "emphasis": false,
+                "startMs": 2119,
+                "endMs": 2379,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "It's",
+                "emphasis": false,
+                "startMs": 2700,
+                "endMs": 2819,
+                "variant": "base"
+              },
+              {
+                "text": "called",
+                "emphasis": false,
+                "startMs": 2819,
+                "endMs": 3000,
+                "variant": "base"
+              },
               {
                 "text": "the",
                 "emphasis": false,
@@ -2475,10 +4091,10 @@
               },
               {
                 "text": "hooks",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 939,
                 "endMs": 1199,
-                "variant": "punch"
+                "variant": "elegant"
               }
             ]
           }
@@ -2508,10 +4124,10 @@
               },
               {
                 "text": "people",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 1799,
                 "endMs": 2099,
-                "variant": "punch"
+                "variant": "base"
               }
             ]
           },
@@ -2558,10 +4174,10 @@
             "words": [
               {
                 "text": "the",
-                "emphasis": true,
+                "emphasis": false,
                 "startMs": 3019,
                 "endMs": 3099,
-                "variant": "punch"
+                "variant": "base"
               },
               {
                 "text": "triple",

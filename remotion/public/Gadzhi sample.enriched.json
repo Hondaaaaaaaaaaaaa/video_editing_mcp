@@ -1960,6 +1960,604 @@
                 "emphasis": false,
                 "startMs": 2619,
                 "endMs": 2839
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 2879,
+                "endMs": 2980
+              },
+              {
+                "text": "you.",
+                "emphasis": true,
+                "startMs": 3019,
+                "endMs": 3179
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Just",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599
+              },
+              {
+                "text": "hear",
+                "emphasis": false,
+                "startMs": 3659,
+                "endMs": 3799
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "me",
+                "emphasis": false,
+                "startMs": 3859,
+                "endMs": 3939
+              },
+              {
+                "text": "out.",
+                "emphasis": false,
+                "startMs": 4000,
+                "endMs": 4139
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "You",
+                "emphasis": false,
+                "startMs": 4679,
+                "endMs": 4759
+              },
+              {
+                "text": "can",
+                "emphasis": false,
+                "startMs": 4799,
+                "endMs": 4920
+              },
+              {
+                "text": "set",
+                "emphasis": false,
+                "startMs": 4940,
+                "endMs": 5059
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "yourself",
+                "emphasis": false,
+                "startMs": 5119,
+                "endMs": 5480
+              },
+              {
+                "text": "up",
+                "emphasis": false,
+                "startMs": 5539,
+                "endMs": 5679
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 5699,
+                "endMs": 6119
+              },
+              {
+                "text": "370,000",
+                "emphasis": true,
+                "startMs": 6559,
+                "endMs": 7960
+              },
+              {
+                "text": "pounds",
+                "emphasis": true,
+                "startMs": 8019,
+                "endMs": 8319
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "by",
+                "emphasis": false,
+                "startMs": 8439,
+                "endMs": 8579
+              },
+              {
+                "text": "doing",
+                "emphasis": false,
+                "startMs": 8619,
+                "endMs": 8980
+              },
+              {
+                "text": "one",
+                "emphasis": true,
+                "startMs": 9059,
+                "endMs": 9300
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "thing",
+                "emphasis": true,
+                "startMs": 9340,
+                "endMs": 9899
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 9939,
+                "endMs": 10039
+              },
+              {
+                "text": "just",
+                "emphasis": false,
+                "startMs": 10119,
+                "endMs": 10360
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "10",
+                "emphasis": true,
+                "startMs": 10399,
+                "endMs": 11060
+              },
+              {
+                "text": "years.",
+                "emphasis": true,
+                "startMs": 11119,
+                "endMs": 11460
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "edits": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "If",
+                "emphasis": false,
+                "startMs": 519,
+                "endMs": 680
+              },
+              {
+                "text": "you're",
+                "emphasis": false,
+                "startMs": 719,
+                "endMs": 800
+              },
+              {
+                "text": "Gen",
+                "emphasis": true,
+                "startMs": 859,
+                "endMs": 1000
+              },
+              {
+                "text": "Z",
+                "emphasis": true,
+                "startMs": 1120,
+                "endMs": 1240
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 1259,
+                "endMs": 1399
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1419,
+                "endMs": 1559
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 1620,
+                "endMs": 1799
+              },
+              {
+                "text": "invest,",
+                "emphasis": true,
+                "startMs": 1839,
+                "endMs": 2240
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 2399,
+                "endMs": 2559
+              },
+              {
+                "text": "one's",
+                "emphasis": false,
+                "startMs": 2619,
+                "endMs": 2839
+              },
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 2879,
+                "endMs": 2980
+              },
+              {
+                "text": "you.",
+                "emphasis": true,
+                "startMs": 3019,
+                "endMs": 3179
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Just",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599
+              },
+              {
+                "text": "hear",
+                "emphasis": false,
+                "startMs": 3659,
+                "endMs": 3799
+              },
+              {
+                "text": "me",
+                "emphasis": false,
+                "startMs": 3859,
+                "endMs": 3939
+              },
+              {
+                "text": "out.",
+                "emphasis": false,
+                "startMs": 4000,
+                "endMs": 4139
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "You",
+                "emphasis": false,
+                "startMs": 4679,
+                "endMs": 4759
+              },
+              {
+                "text": "can",
+                "emphasis": false,
+                "startMs": 4799,
+                "endMs": 4920
+              },
+              {
+                "text": "set",
+                "emphasis": false,
+                "startMs": 4940,
+                "endMs": 5059
+              },
+              {
+                "text": "yourself",
+                "emphasis": false,
+                "startMs": 5119,
+                "endMs": 5480
+              },
+              {
+                "text": "up",
+                "emphasis": false,
+                "startMs": 5539,
+                "endMs": 5679
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 5699,
+                "endMs": 6119
+              },
+              {
+                "text": "370,000",
+                "emphasis": true,
+                "startMs": 6559,
+                "endMs": 7960
+              },
+              {
+                "text": "pounds",
+                "emphasis": true,
+                "startMs": 8019,
+                "endMs": 8319
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "by",
+                "emphasis": false,
+                "startMs": 8439,
+                "endMs": 8579
+              },
+              {
+                "text": "doing",
+                "emphasis": false,
+                "startMs": 8619,
+                "endMs": 8980
+              },
+              {
+                "text": "one",
+                "emphasis": true,
+                "startMs": 9059,
+                "endMs": 9300
+              },
+              {
+                "text": "thing",
+                "emphasis": true,
+                "startMs": 9340,
+                "endMs": 9899
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 9939,
+                "endMs": 10039
+              },
+              {
+                "text": "just",
+                "emphasis": false,
+                "startMs": 10119,
+                "endMs": 10360
+              },
+              {
+                "text": "10",
+                "emphasis": true,
+                "startMs": 10399,
+                "endMs": 11060
+              },
+              {
+                "text": "years.",
+                "emphasis": true,
+                "startMs": 11119,
+                "endMs": 11460
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "typewriter3": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "If",
+                "emphasis": false,
+                "startMs": 519,
+                "endMs": 680
+              },
+              {
+                "text": "you're",
+                "emphasis": false,
+                "startMs": 719,
+                "endMs": 800
+              },
+              {
+                "text": "Gen",
+                "emphasis": true,
+                "startMs": 859,
+                "endMs": 1000
+              },
+              {
+                "text": "Z",
+                "emphasis": true,
+                "startMs": 1120,
+                "endMs": 1240
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 1259,
+                "endMs": 1399
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1419,
+                "endMs": 1559
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 1620,
+                "endMs": 1799
+              },
+              {
+                "text": "invest,",
+                "emphasis": true,
+                "startMs": 1839,
+                "endMs": 2240
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 2399,
+                "endMs": 2559
+              },
+              {
+                "text": "one's",
+                "emphasis": false,
+                "startMs": 2619,
+                "endMs": 2839
               },
               {
                 "text": "for",
@@ -2163,7 +2761,1237 @@
         ]
       }
     ],
+    "writer": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "If",
+                "emphasis": false,
+                "startMs": 519,
+                "endMs": 680
+              },
+              {
+                "text": "you're",
+                "emphasis": false,
+                "startMs": 719,
+                "endMs": 800
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Gen",
+                "emphasis": true,
+                "startMs": 859,
+                "endMs": 1000
+              },
+              {
+                "text": "Z",
+                "emphasis": true,
+                "startMs": 1120,
+                "endMs": 1240
+              },
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 1259,
+                "endMs": 1399
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1419,
+                "endMs": 1559
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 2,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 1620,
+                "endMs": 1799
+              },
+              {
+                "text": "invest,",
+                "emphasis": true,
+                "startMs": 1839,
+                "endMs": 2240
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 2399,
+                "endMs": 2559
+              },
+              {
+                "text": "one's",
+                "emphasis": false,
+                "startMs": 2619,
+                "endMs": 2839
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 2879,
+                "endMs": 2980
+              },
+              {
+                "text": "you.",
+                "emphasis": true,
+                "startMs": 3019,
+                "endMs": 3179
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Just",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599
+              },
+              {
+                "text": "hear",
+                "emphasis": false,
+                "startMs": 3659,
+                "endMs": 3799
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "me",
+                "emphasis": false,
+                "startMs": 3859,
+                "endMs": 3939
+              },
+              {
+                "text": "out.",
+                "emphasis": false,
+                "startMs": 4000,
+                "endMs": 4139
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "You",
+                "emphasis": false,
+                "startMs": 4679,
+                "endMs": 4759
+              },
+              {
+                "text": "can",
+                "emphasis": false,
+                "startMs": 4799,
+                "endMs": 4920
+              },
+              {
+                "text": "set",
+                "emphasis": false,
+                "startMs": 4940,
+                "endMs": 5059
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "yourself",
+                "emphasis": false,
+                "startMs": 5119,
+                "endMs": 5480
+              },
+              {
+                "text": "up",
+                "emphasis": false,
+                "startMs": 5539,
+                "endMs": 5679
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 5699,
+                "endMs": 6119
+              },
+              {
+                "text": "370,000",
+                "emphasis": true,
+                "startMs": 6559,
+                "endMs": 7960
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "pounds",
+                "emphasis": true,
+                "startMs": 8019,
+                "endMs": 8319
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "by",
+                "emphasis": false,
+                "startMs": 8439,
+                "endMs": 8579
+              },
+              {
+                "text": "doing",
+                "emphasis": false,
+                "startMs": 8619,
+                "endMs": 8980
+              },
+              {
+                "text": "one",
+                "emphasis": true,
+                "startMs": 9059,
+                "endMs": 9300
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "thing",
+                "emphasis": true,
+                "startMs": 9340,
+                "endMs": 9899
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 9939,
+                "endMs": 10039
+              },
+              {
+                "text": "just",
+                "emphasis": false,
+                "startMs": 10119,
+                "endMs": 10360
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "10",
+                "emphasis": true,
+                "startMs": 10399,
+                "endMs": 11060
+              },
+              {
+                "text": "years.",
+                "emphasis": true,
+                "startMs": 11119,
+                "endMs": 11460
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "classic2": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "If",
+                "emphasis": false,
+                "startMs": 519,
+                "endMs": 680
+              },
+              {
+                "text": "you're",
+                "emphasis": false,
+                "startMs": 719,
+                "endMs": 800
+              },
+              {
+                "text": "Gen",
+                "emphasis": true,
+                "startMs": 859,
+                "endMs": 1000
+              },
+              {
+                "text": "Z",
+                "emphasis": true,
+                "startMs": 1120,
+                "endMs": 1240
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 1259,
+                "endMs": 1399
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1419,
+                "endMs": 1559
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 1620,
+                "endMs": 1799
+              },
+              {
+                "text": "invest,",
+                "emphasis": true,
+                "startMs": 1839,
+                "endMs": 2240
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 2399,
+                "endMs": 2559
+              },
+              {
+                "text": "one's",
+                "emphasis": false,
+                "startMs": 2619,
+                "endMs": 2839
+              },
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 2879,
+                "endMs": 2980
+              },
+              {
+                "text": "you.",
+                "emphasis": true,
+                "startMs": 3019,
+                "endMs": 3179
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Just",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599
+              },
+              {
+                "text": "hear",
+                "emphasis": false,
+                "startMs": 3659,
+                "endMs": 3799
+              },
+              {
+                "text": "me",
+                "emphasis": false,
+                "startMs": 3859,
+                "endMs": 3939
+              },
+              {
+                "text": "out.",
+                "emphasis": false,
+                "startMs": 4000,
+                "endMs": 4139
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "You",
+                "emphasis": false,
+                "startMs": 4679,
+                "endMs": 4759
+              },
+              {
+                "text": "can",
+                "emphasis": false,
+                "startMs": 4799,
+                "endMs": 4920
+              },
+              {
+                "text": "set",
+                "emphasis": false,
+                "startMs": 4940,
+                "endMs": 5059
+              },
+              {
+                "text": "yourself",
+                "emphasis": false,
+                "startMs": 5119,
+                "endMs": 5480
+              },
+              {
+                "text": "up",
+                "emphasis": false,
+                "startMs": 5539,
+                "endMs": 5679
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 5699,
+                "endMs": 6119
+              },
+              {
+                "text": "370,000",
+                "emphasis": true,
+                "startMs": 6559,
+                "endMs": 7960
+              },
+              {
+                "text": "pounds",
+                "emphasis": true,
+                "startMs": 8019,
+                "endMs": 8319
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "by",
+                "emphasis": false,
+                "startMs": 8439,
+                "endMs": 8579
+              },
+              {
+                "text": "doing",
+                "emphasis": false,
+                "startMs": 8619,
+                "endMs": 8980
+              },
+              {
+                "text": "one",
+                "emphasis": true,
+                "startMs": 9059,
+                "endMs": 9300
+              },
+              {
+                "text": "thing",
+                "emphasis": true,
+                "startMs": 9340,
+                "endMs": 9899
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 9939,
+                "endMs": 10039
+              },
+              {
+                "text": "just",
+                "emphasis": false,
+                "startMs": 10119,
+                "endMs": 10360
+              },
+              {
+                "text": "10",
+                "emphasis": true,
+                "startMs": 10399,
+                "endMs": 11060
+              },
+              {
+                "text": "years.",
+                "emphasis": true,
+                "startMs": 11119,
+                "endMs": 11460
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "animator": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "If",
+                "emphasis": false,
+                "startMs": 519,
+                "endMs": 680
+              },
+              {
+                "text": "you're",
+                "emphasis": false,
+                "startMs": 719,
+                "endMs": 800
+              },
+              {
+                "text": "Gen",
+                "emphasis": true,
+                "startMs": 859,
+                "endMs": 1000
+              },
+              {
+                "text": "Z",
+                "emphasis": true,
+                "startMs": 1120,
+                "endMs": 1240
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 1259,
+                "endMs": 1399
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1419,
+                "endMs": 1559
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 1620,
+                "endMs": 1799
+              },
+              {
+                "text": "invest,",
+                "emphasis": true,
+                "startMs": 1839,
+                "endMs": 2240
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 2399,
+                "endMs": 2559
+              },
+              {
+                "text": "one's",
+                "emphasis": false,
+                "startMs": 2619,
+                "endMs": 2839
+              },
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 2879,
+                "endMs": 2980
+              },
+              {
+                "text": "you.",
+                "emphasis": true,
+                "startMs": 3019,
+                "endMs": 3179
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Just",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599
+              },
+              {
+                "text": "hear",
+                "emphasis": false,
+                "startMs": 3659,
+                "endMs": 3799
+              },
+              {
+                "text": "me",
+                "emphasis": false,
+                "startMs": 3859,
+                "endMs": 3939
+              },
+              {
+                "text": "out.",
+                "emphasis": false,
+                "startMs": 4000,
+                "endMs": 4139
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "You",
+                "emphasis": false,
+                "startMs": 4679,
+                "endMs": 4759
+              },
+              {
+                "text": "can",
+                "emphasis": false,
+                "startMs": 4799,
+                "endMs": 4920
+              },
+              {
+                "text": "set",
+                "emphasis": false,
+                "startMs": 4940,
+                "endMs": 5059
+              },
+              {
+                "text": "yourself",
+                "emphasis": false,
+                "startMs": 5119,
+                "endMs": 5480
+              },
+              {
+                "text": "up",
+                "emphasis": false,
+                "startMs": 5539,
+                "endMs": 5679
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 5699,
+                "endMs": 6119
+              },
+              {
+                "text": "370,000",
+                "emphasis": true,
+                "startMs": 6559,
+                "endMs": 7960
+              },
+              {
+                "text": "pounds",
+                "emphasis": true,
+                "startMs": 8019,
+                "endMs": 8319
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "by",
+                "emphasis": false,
+                "startMs": 8439,
+                "endMs": 8579
+              },
+              {
+                "text": "doing",
+                "emphasis": false,
+                "startMs": 8619,
+                "endMs": 8980
+              },
+              {
+                "text": "one",
+                "emphasis": true,
+                "startMs": 9059,
+                "endMs": 9300
+              },
+              {
+                "text": "thing",
+                "emphasis": true,
+                "startMs": 9340,
+                "endMs": 9899
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 9939,
+                "endMs": 10039
+              },
+              {
+                "text": "just",
+                "emphasis": false,
+                "startMs": 10119,
+                "endMs": 10360
+              },
+              {
+                "text": "10",
+                "emphasis": true,
+                "startMs": 10399,
+                "endMs": 11060
+              },
+              {
+                "text": "years.",
+                "emphasis": true,
+                "startMs": 11119,
+                "endMs": 11460
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "typewriter": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "If",
+                "emphasis": false,
+                "startMs": 519,
+                "endMs": 680
+              },
+              {
+                "text": "you're",
+                "emphasis": false,
+                "startMs": 719,
+                "endMs": 800
+              },
+              {
+                "text": "Gen",
+                "emphasis": true,
+                "startMs": 859,
+                "endMs": 1000
+              },
+              {
+                "text": "Z",
+                "emphasis": true,
+                "startMs": 1120,
+                "endMs": 1240
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 1259,
+                "endMs": 1399
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 1419,
+                "endMs": 1559
+              },
+              {
+                "text": "don't",
+                "emphasis": false,
+                "startMs": 1620,
+                "endMs": 1799
+              },
+              {
+                "text": "invest,",
+                "emphasis": true,
+                "startMs": 1839,
+                "endMs": 2240
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 2399,
+                "endMs": 2559
+              },
+              {
+                "text": "one's",
+                "emphasis": false,
+                "startMs": 2619,
+                "endMs": 2839
+              },
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 2879,
+                "endMs": 2980
+              },
+              {
+                "text": "you.",
+                "emphasis": true,
+                "startMs": 3019,
+                "endMs": 3179
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Just",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599
+              },
+              {
+                "text": "hear",
+                "emphasis": false,
+                "startMs": 3659,
+                "endMs": 3799
+              },
+              {
+                "text": "me",
+                "emphasis": false,
+                "startMs": 3859,
+                "endMs": 3939
+              },
+              {
+                "text": "out.",
+                "emphasis": false,
+                "startMs": 4000,
+                "endMs": 4139
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "You",
+                "emphasis": false,
+                "startMs": 4679,
+                "endMs": 4759
+              },
+              {
+                "text": "can",
+                "emphasis": false,
+                "startMs": 4799,
+                "endMs": 4920
+              },
+              {
+                "text": "set",
+                "emphasis": false,
+                "startMs": 4940,
+                "endMs": 5059
+              },
+              {
+                "text": "yourself",
+                "emphasis": false,
+                "startMs": 5119,
+                "endMs": 5480
+              },
+              {
+                "text": "up",
+                "emphasis": false,
+                "startMs": 5539,
+                "endMs": 5679
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 5699,
+                "endMs": 6119
+              },
+              {
+                "text": "370,000",
+                "emphasis": true,
+                "startMs": 6559,
+                "endMs": 7960
+              },
+              {
+                "text": "pounds",
+                "emphasis": true,
+                "startMs": 8019,
+                "endMs": 8319
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "by",
+                "emphasis": false,
+                "startMs": 8439,
+                "endMs": 8579
+              },
+              {
+                "text": "doing",
+                "emphasis": false,
+                "startMs": 8619,
+                "endMs": 8980
+              },
+              {
+                "text": "one",
+                "emphasis": true,
+                "startMs": 9059,
+                "endMs": 9300
+              },
+              {
+                "text": "thing",
+                "emphasis": true,
+                "startMs": 9340,
+                "endMs": 9899
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "for",
+                "emphasis": false,
+                "startMs": 9939,
+                "endMs": 10039
+              },
+              {
+                "text": "just",
+                "emphasis": false,
+                "startMs": 10119,
+                "endMs": 10360
+              },
+              {
+                "text": "10",
+                "emphasis": true,
+                "startMs": 10399,
+                "endMs": 11060
+              },
+              {
+                "text": "years.",
+                "emphasis": true,
+                "startMs": 11119,
+                "endMs": 11460
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "wordbyword": [
       {
         "ideaIndex": 0,
         "part": 0,

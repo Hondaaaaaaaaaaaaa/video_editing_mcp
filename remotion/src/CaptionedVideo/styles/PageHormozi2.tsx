@@ -204,7 +204,12 @@ export const HORMOZI2_DEFAULTS: Hormozi2Style = {
           // controls remain for looks that do want them.
           textAnimation: {
             fadeInMs: 0,
+            // Irrelevant while fadeInMs is 0 — there is no fade to apply it to.
+            // Carried so the shared slot stays fully specified.
+            fadeUnit: "word" as const,
             popIn: { enabled: false as const },
+            trackOut: { enabled: false as const },
+            zoomContinuous: { enabled: false as const },
           },
           // Measured from public/References/wiggle.mp4. See wiggle-slot.ts.
           wiggle: {

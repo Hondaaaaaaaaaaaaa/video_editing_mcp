@@ -6453,7 +6453,12 @@
                 "startMs": 1220,
                 "endMs": 1419,
                 "variant": "elegant"
-              },
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
               {
                 "text": "your",
                 "emphasis": false,
@@ -6891,6 +6896,5299 @@
           {
             "align": "center",
             "words": [
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 12479,
+                "endMs": 12500,
+                "variant": "base"
+              },
+              {
+                "text": "second",
+                "emphasis": true,
+                "startMs": 12659,
+                "endMs": 13019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 11,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 13079,
+                "endMs": 13179,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 13199,
+                "endMs": 13299,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 13380,
+                "endMs": 13659,
+                "variant": "elegant"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "reel.",
+                "emphasis": true,
+                "startMs": 13739,
+                "endMs": 13939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 12,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That",
+                "emphasis": false,
+                "startMs": 14319,
+                "endMs": 14420,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": false,
+                "startMs": 14519,
+                "endMs": 14679,
+                "variant": "base"
+              },
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 14739,
+                "endMs": 14899,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 14960,
+                "endMs": 15060,
+                "variant": "base"
+              },
+              {
+                "text": "gonna",
+                "emphasis": false,
+                "startMs": 15079,
+                "endMs": 15239,
+                "variant": "base"
+              },
+              {
+                "text": "hit",
+                "emphasis": true,
+                "startMs": 15259,
+                "endMs": 15380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 13,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 15439,
+                "endMs": 15579,
+                "variant": "base"
+              },
+              {
+                "text": "followers",
+                "emphasis": true,
+                "startMs": 15659,
+                "endMs": 16260,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16340,
+                "endMs": 16440,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 16459,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "select",
+                "emphasis": true,
+                "startMs": 16600,
+                "endMs": 16840,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": false,
+                "startMs": 16899,
+                "endMs": 17079,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 14,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 17100,
+                "endMs": 17219,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers.",
+                "emphasis": true,
+                "startMs": 17319,
+                "endMs": 18079,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 15,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "But",
+                "emphasis": false,
+                "startMs": 18199,
+                "endMs": 18279,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 18319,
+                "endMs": 18420,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 18479,
+                "endMs": 18779,
+                "variant": "elegant"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 18819,
+                "endMs": 18979,
+                "variant": "base"
+              },
+              {
+                "text": "will",
+                "emphasis": false,
+                "startMs": 19039,
+                "endMs": 19139,
+                "variant": "base"
+              },
+              {
+                "text": "be",
+                "emphasis": false,
+                "startMs": 19159,
+                "endMs": 19219,
+                "variant": "base"
+              },
+              {
+                "text": "shown",
+                "emphasis": true,
+                "startMs": 19340,
+                "endMs": 19520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 16,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 19539,
+                "endMs": 19600,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 19639,
+                "endMs": 19719,
+                "variant": "base"
+              },
+              {
+                "text": "completely",
+                "emphasis": false,
+                "startMs": 19760,
+                "endMs": 20239,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "different",
+                "emphasis": true,
+                "startMs": 20340,
+                "endMs": 20600,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": true,
+                "startMs": 20639,
+                "endMs": 20819,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 17,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 20899,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers,",
+                "emphasis": true,
+                "startMs": 20979,
+                "endMs": 21780,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "which",
+                "emphasis": false,
+                "startMs": 21899,
+                "endMs": 22020,
+                "variant": "base"
+              },
+              {
+                "text": "basically",
+                "emphasis": false,
+                "startMs": 22100,
+                "endMs": 22459,
+                "variant": "base"
+              },
+              {
+                "text": "means",
+                "emphasis": false,
+                "startMs": 22500,
+                "endMs": 23019,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 23199,
+                "endMs": 23459,
+                "variant": "elegant"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 23500,
+                "endMs": 23579,
+                "variant": "base"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 23680,
+                "endMs": 24039,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 19,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That's",
+                "emphasis": false,
+                "startMs": 24279,
+                "endMs": 24779,
+                "variant": "base"
+              },
+              {
+                "text": "free",
+                "emphasis": true,
+                "startMs": 24920,
+                "endMs": 25219,
+                "variant": "punch"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 25439,
+                "endMs": 25879,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 20,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Do",
+                "emphasis": false,
+                "startMs": 26059,
+                "endMs": 26159,
+                "variant": "base"
+              },
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 26219,
+                "endMs": 26479,
+                "variant": "base"
+              },
+              {
+                "text": "every",
+                "emphasis": false,
+                "startMs": 26559,
+                "endMs": 26760,
+                "variant": "base"
+              },
+              {
+                "text": "time",
+                "emphasis": false,
+                "startMs": 26899,
+                "endMs": 27079,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 27119,
+                "endMs": 27239,
+                "variant": "base"
+              },
+              {
+                "text": "post.",
+                "emphasis": true,
+                "startMs": 27260,
+                "endMs": 27599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "edits": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "This",
+                "emphasis": false,
+                "startMs": 79,
+                "endMs": 159,
+                "variant": "base"
+              },
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 199,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 299,
+                "endMs": 399,
+                "variant": "base"
+              },
+              {
+                "text": "fastest",
+                "emphasis": true,
+                "startMs": 439,
+                "endMs": 819,
+                "variant": "punch"
+              },
+              {
+                "text": "way",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 1019,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 1079,
+                "endMs": 1139,
+                "variant": "base"
+              },
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 1220,
+                "endMs": 1419,
+                "variant": "elegant"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 1480,
+                "endMs": 1579,
+                "variant": "base"
+              },
+              {
+                "text": "views",
+                "emphasis": true,
+                "startMs": 1599,
+                "endMs": 1860,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 1879,
+                "endMs": 2079,
+                "variant": "base"
+              },
+              {
+                "text": "no",
+                "emphasis": false,
+                "startMs": 2139,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "extra",
+                "emphasis": false,
+                "startMs": 2319,
+                "endMs": 2559,
+                "variant": "base"
+              },
+              {
+                "text": "effort,",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 2919,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "explained",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "in",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3699,
+                "variant": "base"
+              },
+              {
+                "text": "under",
+                "emphasis": false,
+                "startMs": 3740,
+                "endMs": 3919,
+                "variant": "base"
+              },
+              {
+                "text": "30",
+                "emphasis": true,
+                "startMs": 4039,
+                "endMs": 4159,
+                "variant": "punch"
+              },
+              {
+                "text": "seconds.",
+                "emphasis": false,
+                "startMs": 4199,
+                "endMs": 4559,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Before",
+                "emphasis": false,
+                "startMs": 4699,
+                "endMs": 4940,
+                "variant": "base"
+              },
+              {
+                "text": "posting",
+                "emphasis": false,
+                "startMs": 5039,
+                "endMs": 5339,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 5380,
+                "endMs": 5480,
+                "variant": "base"
+              },
+              {
+                "text": "next",
+                "emphasis": false,
+                "startMs": 5519,
+                "endMs": 5699,
+                "variant": "base"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 5779,
+                "endMs": 5980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 6319,
+                "endMs": 6339,
+                "variant": "base"
+              },
+              {
+                "text": "want",
+                "emphasis": false,
+                "startMs": 6420,
+                "endMs": 6539,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 6579,
+                "endMs": 6639,
+                "variant": "base"
+              },
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 6679,
+                "endMs": 6839,
+                "variant": "base"
+              },
+              {
+                "text": "save",
+                "emphasis": true,
+                "startMs": 6899,
+                "endMs": 7099,
+                "variant": "punch"
+              },
+              {
+                "text": "it",
+                "emphasis": false,
+                "startMs": 7139,
+                "endMs": 7239,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 7279,
+                "endMs": 7339,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 7379,
+                "endMs": 7539,
+                "variant": "base"
+              },
+              {
+                "text": "drafts,",
+                "emphasis": true,
+                "startMs": 7579,
+                "endMs": 7980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 7,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 8300,
+                "endMs": 8519,
+                "variant": "base"
+              },
+              {
+                "text": "go",
+                "emphasis": true,
+                "startMs": 8579,
+                "endMs": 8720,
+                "variant": "elegant"
+              },
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 8760,
+                "endMs": 8820,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 8859,
+                "endMs": 8940,
+                "variant": "base"
+              },
+              {
+                "text": "drafts",
+                "emphasis": true,
+                "startMs": 9019,
+                "endMs": 9539,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 8,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9579,
+                "endMs": 9760,
+                "variant": "base"
+              },
+              {
+                "text": "duplicate",
+                "emphasis": true,
+                "startMs": 9800,
+                "endMs": 10260,
+                "variant": "punch"
+              },
+              {
+                "text": "it.",
+                "emphasis": false,
+                "startMs": 10300,
+                "endMs": 10420,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 9,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Post",
+                "emphasis": false,
+                "startMs": 10500,
+                "endMs": 10719,
+                "variant": "base"
+              },
+              {
+                "text": "one",
+                "emphasis": false,
+                "startMs": 10800,
+                "endMs": 10880,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 9,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 10939,
+                "endMs": 11019,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 11059,
+                "endMs": 11180,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": true,
+                "startMs": 11199,
+                "endMs": 11359,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 11439,
+                "endMs": 11639,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 10,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 11920,
+                "endMs": 12000,
+                "variant": "base"
+              },
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 12019,
+                "endMs": 12199,
+                "variant": "base"
+              },
+              {
+                "text": "post",
+                "emphasis": false,
+                "startMs": 12239,
+                "endMs": 12439,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 12479,
+                "endMs": 12500,
+                "variant": "base"
+              },
+              {
+                "text": "second",
+                "emphasis": true,
+                "startMs": 12659,
+                "endMs": 13019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 11,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 13079,
+                "endMs": 13179,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 13199,
+                "endMs": 13299,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 13380,
+                "endMs": 13659,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel.",
+                "emphasis": true,
+                "startMs": 13739,
+                "endMs": 13939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 12,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That",
+                "emphasis": false,
+                "startMs": 14319,
+                "endMs": 14420,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": false,
+                "startMs": 14519,
+                "endMs": 14679,
+                "variant": "base"
+              },
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 14739,
+                "endMs": 14899,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 12,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 14960,
+                "endMs": 15060,
+                "variant": "base"
+              },
+              {
+                "text": "gonna",
+                "emphasis": false,
+                "startMs": 15079,
+                "endMs": 15239,
+                "variant": "base"
+              },
+              {
+                "text": "hit",
+                "emphasis": true,
+                "startMs": 15259,
+                "endMs": 15380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 13,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 15439,
+                "endMs": 15579,
+                "variant": "base"
+              },
+              {
+                "text": "followers",
+                "emphasis": true,
+                "startMs": 15659,
+                "endMs": 16260,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 13,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16340,
+                "endMs": 16440,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 16459,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "select",
+                "emphasis": true,
+                "startMs": 16600,
+                "endMs": 16840,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": false,
+                "startMs": 16899,
+                "endMs": 17079,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 14,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 17100,
+                "endMs": 17219,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers.",
+                "emphasis": true,
+                "startMs": 17319,
+                "endMs": 18079,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 15,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "But",
+                "emphasis": false,
+                "startMs": 18199,
+                "endMs": 18279,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 18319,
+                "endMs": 18420,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 18479,
+                "endMs": 18779,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 15,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 18819,
+                "endMs": 18979,
+                "variant": "base"
+              },
+              {
+                "text": "will",
+                "emphasis": false,
+                "startMs": 19039,
+                "endMs": 19139,
+                "variant": "base"
+              },
+              {
+                "text": "be",
+                "emphasis": false,
+                "startMs": 19159,
+                "endMs": 19219,
+                "variant": "base"
+              },
+              {
+                "text": "shown",
+                "emphasis": true,
+                "startMs": 19340,
+                "endMs": 19520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 16,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 19539,
+                "endMs": 19600,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 19639,
+                "endMs": 19719,
+                "variant": "base"
+              },
+              {
+                "text": "completely",
+                "emphasis": false,
+                "startMs": 19760,
+                "endMs": 20239,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 16,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "different",
+                "emphasis": true,
+                "startMs": 20340,
+                "endMs": 20600,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": true,
+                "startMs": 20639,
+                "endMs": 20819,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 17,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 20899,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers,",
+                "emphasis": true,
+                "startMs": 20979,
+                "endMs": 21780,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "which",
+                "emphasis": false,
+                "startMs": 21899,
+                "endMs": 22020,
+                "variant": "base"
+              },
+              {
+                "text": "basically",
+                "emphasis": false,
+                "startMs": 22100,
+                "endMs": 22459,
+                "variant": "base"
+              },
+              {
+                "text": "means",
+                "emphasis": false,
+                "startMs": 22500,
+                "endMs": 23019,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 23199,
+                "endMs": 23459,
+                "variant": "elegant"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 23500,
+                "endMs": 23579,
+                "variant": "base"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 23680,
+                "endMs": 24039,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 19,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That's",
+                "emphasis": false,
+                "startMs": 24279,
+                "endMs": 24779,
+                "variant": "base"
+              },
+              {
+                "text": "free",
+                "emphasis": true,
+                "startMs": 24920,
+                "endMs": 25219,
+                "variant": "punch"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 25439,
+                "endMs": 25879,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 20,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Do",
+                "emphasis": false,
+                "startMs": 26059,
+                "endMs": 26159,
+                "variant": "base"
+              },
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 26219,
+                "endMs": 26479,
+                "variant": "base"
+              },
+              {
+                "text": "every",
+                "emphasis": false,
+                "startMs": 26559,
+                "endMs": 26760,
+                "variant": "base"
+              },
+              {
+                "text": "time",
+                "emphasis": false,
+                "startMs": 26899,
+                "endMs": 27079,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 20,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 27119,
+                "endMs": 27239,
+                "variant": "base"
+              },
+              {
+                "text": "post.",
+                "emphasis": true,
+                "startMs": 27260,
+                "endMs": 27599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "typewriter3": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "This",
+                "emphasis": false,
+                "startMs": 79,
+                "endMs": 159,
+                "variant": "base"
+              },
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 199,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 299,
+                "endMs": 399,
+                "variant": "base"
+              },
+              {
+                "text": "fastest",
+                "emphasis": true,
+                "startMs": 439,
+                "endMs": 819,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "way",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 1019,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 1079,
+                "endMs": 1139,
+                "variant": "base"
+              },
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 1220,
+                "endMs": 1419,
+                "variant": "elegant"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 1480,
+                "endMs": 1579,
+                "variant": "base"
+              },
+              {
+                "text": "views",
+                "emphasis": true,
+                "startMs": 1599,
+                "endMs": 1860,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 1879,
+                "endMs": 2079,
+                "variant": "base"
+              },
+              {
+                "text": "no",
+                "emphasis": false,
+                "startMs": 2139,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "extra",
+                "emphasis": false,
+                "startMs": 2319,
+                "endMs": 2559,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "effort,",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 2919,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "explained",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "in",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3699,
+                "variant": "base"
+              },
+              {
+                "text": "under",
+                "emphasis": false,
+                "startMs": 3740,
+                "endMs": 3919,
+                "variant": "base"
+              },
+              {
+                "text": "30",
+                "emphasis": true,
+                "startMs": 4039,
+                "endMs": 4159,
+                "variant": "punch"
+              },
+              {
+                "text": "seconds.",
+                "emphasis": false,
+                "startMs": 4199,
+                "endMs": 4559,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Before",
+                "emphasis": false,
+                "startMs": 4699,
+                "endMs": 4940,
+                "variant": "base"
+              },
+              {
+                "text": "posting",
+                "emphasis": false,
+                "startMs": 5039,
+                "endMs": 5339,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 5380,
+                "endMs": 5480,
+                "variant": "base"
+              },
+              {
+                "text": "next",
+                "emphasis": false,
+                "startMs": 5519,
+                "endMs": 5699,
+                "variant": "base"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 5779,
+                "endMs": 5980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 6319,
+                "endMs": 6339,
+                "variant": "base"
+              },
+              {
+                "text": "want",
+                "emphasis": false,
+                "startMs": 6420,
+                "endMs": 6539,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 6579,
+                "endMs": 6639,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 6679,
+                "endMs": 6839,
+                "variant": "base"
+              },
+              {
+                "text": "save",
+                "emphasis": true,
+                "startMs": 6899,
+                "endMs": 7099,
+                "variant": "punch"
+              },
+              {
+                "text": "it",
+                "emphasis": false,
+                "startMs": 7139,
+                "endMs": 7239,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 7279,
+                "endMs": 7339,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 7379,
+                "endMs": 7539,
+                "variant": "base"
+              },
+              {
+                "text": "drafts,",
+                "emphasis": true,
+                "startMs": 7579,
+                "endMs": 7980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 7,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 8300,
+                "endMs": 8519,
+                "variant": "base"
+              },
+              {
+                "text": "go",
+                "emphasis": true,
+                "startMs": 8579,
+                "endMs": 8720,
+                "variant": "elegant"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 8760,
+                "endMs": 8820,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 8859,
+                "endMs": 8940,
+                "variant": "base"
+              },
+              {
+                "text": "drafts",
+                "emphasis": true,
+                "startMs": 9019,
+                "endMs": 9539,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 8,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9579,
+                "endMs": 9760,
+                "variant": "base"
+              },
+              {
+                "text": "duplicate",
+                "emphasis": true,
+                "startMs": 9800,
+                "endMs": 10260,
+                "variant": "punch"
+              },
+              {
+                "text": "it.",
+                "emphasis": false,
+                "startMs": 10300,
+                "endMs": 10420,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 9,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Post",
+                "emphasis": false,
+                "startMs": 10500,
+                "endMs": 10719,
+                "variant": "base"
+              },
+              {
+                "text": "one",
+                "emphasis": false,
+                "startMs": 10800,
+                "endMs": 10880,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 10939,
+                "endMs": 11019,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 11059,
+                "endMs": 11180,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": true,
+                "startMs": 11199,
+                "endMs": 11359,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 11439,
+                "endMs": 11639,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 10,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 11920,
+                "endMs": 12000,
+                "variant": "base"
+              },
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 12019,
+                "endMs": 12199,
+                "variant": "base"
+              },
+              {
+                "text": "post",
+                "emphasis": false,
+                "startMs": 12239,
+                "endMs": 12439,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 12479,
+                "endMs": 12500,
+                "variant": "base"
+              },
+              {
+                "text": "second",
+                "emphasis": true,
+                "startMs": 12659,
+                "endMs": 13019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 11,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 13079,
+                "endMs": 13179,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 13199,
+                "endMs": 13299,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 13380,
+                "endMs": 13659,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel.",
+                "emphasis": true,
+                "startMs": 13739,
+                "endMs": 13939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 12,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That",
+                "emphasis": false,
+                "startMs": 14319,
+                "endMs": 14420,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": false,
+                "startMs": 14519,
+                "endMs": 14679,
+                "variant": "base"
+              },
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 14739,
+                "endMs": 14899,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 14960,
+                "endMs": 15060,
+                "variant": "base"
+              },
+              {
+                "text": "gonna",
+                "emphasis": false,
+                "startMs": 15079,
+                "endMs": 15239,
+                "variant": "base"
+              },
+              {
+                "text": "hit",
+                "emphasis": true,
+                "startMs": 15259,
+                "endMs": 15380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 13,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 15439,
+                "endMs": 15579,
+                "variant": "base"
+              },
+              {
+                "text": "followers",
+                "emphasis": true,
+                "startMs": 15659,
+                "endMs": 16260,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16340,
+                "endMs": 16440,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 16459,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "select",
+                "emphasis": true,
+                "startMs": 16600,
+                "endMs": 16840,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": false,
+                "startMs": 16899,
+                "endMs": 17079,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 14,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 17100,
+                "endMs": 17219,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers.",
+                "emphasis": true,
+                "startMs": 17319,
+                "endMs": 18079,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 15,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "But",
+                "emphasis": false,
+                "startMs": 18199,
+                "endMs": 18279,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 18319,
+                "endMs": 18420,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 18479,
+                "endMs": 18779,
+                "variant": "elegant"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 18819,
+                "endMs": 18979,
+                "variant": "base"
+              },
+              {
+                "text": "will",
+                "emphasis": false,
+                "startMs": 19039,
+                "endMs": 19139,
+                "variant": "base"
+              },
+              {
+                "text": "be",
+                "emphasis": false,
+                "startMs": 19159,
+                "endMs": 19219,
+                "variant": "base"
+              },
+              {
+                "text": "shown",
+                "emphasis": true,
+                "startMs": 19340,
+                "endMs": 19520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 16,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 19539,
+                "endMs": 19600,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 19639,
+                "endMs": 19719,
+                "variant": "base"
+              },
+              {
+                "text": "completely",
+                "emphasis": false,
+                "startMs": 19760,
+                "endMs": 20239,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "different",
+                "emphasis": true,
+                "startMs": 20340,
+                "endMs": 20600,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": true,
+                "startMs": 20639,
+                "endMs": 20819,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 17,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 20899,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers,",
+                "emphasis": true,
+                "startMs": 20979,
+                "endMs": 21780,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "which",
+                "emphasis": false,
+                "startMs": 21899,
+                "endMs": 22020,
+                "variant": "base"
+              },
+              {
+                "text": "basically",
+                "emphasis": false,
+                "startMs": 22100,
+                "endMs": 22459,
+                "variant": "base"
+              },
+              {
+                "text": "means",
+                "emphasis": false,
+                "startMs": 22500,
+                "endMs": 23019,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 23199,
+                "endMs": 23459,
+                "variant": "elegant"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 23500,
+                "endMs": 23579,
+                "variant": "base"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 23680,
+                "endMs": 24039,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 19,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That's",
+                "emphasis": false,
+                "startMs": 24279,
+                "endMs": 24779,
+                "variant": "base"
+              },
+              {
+                "text": "free",
+                "emphasis": true,
+                "startMs": 24920,
+                "endMs": 25219,
+                "variant": "punch"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 25439,
+                "endMs": 25879,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 20,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Do",
+                "emphasis": false,
+                "startMs": 26059,
+                "endMs": 26159,
+                "variant": "base"
+              },
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 26219,
+                "endMs": 26479,
+                "variant": "base"
+              },
+              {
+                "text": "every",
+                "emphasis": false,
+                "startMs": 26559,
+                "endMs": 26760,
+                "variant": "base"
+              },
+              {
+                "text": "time",
+                "emphasis": false,
+                "startMs": 26899,
+                "endMs": 27079,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 27119,
+                "endMs": 27239,
+                "variant": "base"
+              },
+              {
+                "text": "post.",
+                "emphasis": true,
+                "startMs": 27260,
+                "endMs": 27599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "writer": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "This",
+                "emphasis": false,
+                "startMs": 79,
+                "endMs": 159,
+                "variant": "base"
+              },
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 199,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 299,
+                "endMs": 399,
+                "variant": "base"
+              },
+              {
+                "text": "fastest",
+                "emphasis": true,
+                "startMs": 439,
+                "endMs": 819,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 0,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "way",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 1019,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 1079,
+                "endMs": 1139,
+                "variant": "base"
+              },
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 1220,
+                "endMs": 1419,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 1480,
+                "endMs": 1579,
+                "variant": "base"
+              },
+              {
+                "text": "views",
+                "emphasis": true,
+                "startMs": 1599,
+                "endMs": 1860,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 1879,
+                "endMs": 2079,
+                "variant": "base"
+              },
+              {
+                "text": "no",
+                "emphasis": false,
+                "startMs": 2139,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "extra",
+                "emphasis": false,
+                "startMs": 2319,
+                "endMs": 2559,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "effort,",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 2919,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "explained",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "in",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3699,
+                "variant": "base"
+              },
+              {
+                "text": "under",
+                "emphasis": false,
+                "startMs": 3740,
+                "endMs": 3919,
+                "variant": "base"
+              },
+              {
+                "text": "30",
+                "emphasis": true,
+                "startMs": 4039,
+                "endMs": 4159,
+                "variant": "punch"
+              },
+              {
+                "text": "seconds.",
+                "emphasis": false,
+                "startMs": 4199,
+                "endMs": 4559,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Before",
+                "emphasis": false,
+                "startMs": 4699,
+                "endMs": 4940,
+                "variant": "base"
+              },
+              {
+                "text": "posting",
+                "emphasis": false,
+                "startMs": 5039,
+                "endMs": 5339,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 5380,
+                "endMs": 5480,
+                "variant": "base"
+              },
+              {
+                "text": "next",
+                "emphasis": false,
+                "startMs": 5519,
+                "endMs": 5699,
+                "variant": "base"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 5779,
+                "endMs": 5980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 6319,
+                "endMs": 6339,
+                "variant": "base"
+              },
+              {
+                "text": "want",
+                "emphasis": false,
+                "startMs": 6420,
+                "endMs": 6539,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 6579,
+                "endMs": 6639,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 6679,
+                "endMs": 6839,
+                "variant": "base"
+              },
+              {
+                "text": "save",
+                "emphasis": true,
+                "startMs": 6899,
+                "endMs": 7099,
+                "variant": "punch"
+              },
+              {
+                "text": "it",
+                "emphasis": false,
+                "startMs": 7139,
+                "endMs": 7239,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 7279,
+                "endMs": 7339,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 7379,
+                "endMs": 7539,
+                "variant": "base"
+              },
+              {
+                "text": "drafts,",
+                "emphasis": true,
+                "startMs": 7579,
+                "endMs": 7980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 7,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 8300,
+                "endMs": 8519,
+                "variant": "base"
+              },
+              {
+                "text": "go",
+                "emphasis": true,
+                "startMs": 8579,
+                "endMs": 8720,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 7,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 8760,
+                "endMs": 8820,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 8859,
+                "endMs": 8940,
+                "variant": "base"
+              },
+              {
+                "text": "drafts",
+                "emphasis": true,
+                "startMs": 9019,
+                "endMs": 9539,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 8,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9579,
+                "endMs": 9760,
+                "variant": "base"
+              },
+              {
+                "text": "duplicate",
+                "emphasis": true,
+                "startMs": 9800,
+                "endMs": 10260,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 8,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "it.",
+                "emphasis": false,
+                "startMs": 10300,
+                "endMs": 10420,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 9,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Post",
+                "emphasis": false,
+                "startMs": 10500,
+                "endMs": 10719,
+                "variant": "base"
+              },
+              {
+                "text": "one",
+                "emphasis": false,
+                "startMs": 10800,
+                "endMs": 10880,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 9,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 10939,
+                "endMs": 11019,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 11059,
+                "endMs": 11180,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": true,
+                "startMs": 11199,
+                "endMs": 11359,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 11439,
+                "endMs": 11639,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 10,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 11920,
+                "endMs": 12000,
+                "variant": "base"
+              },
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 12019,
+                "endMs": 12199,
+                "variant": "base"
+              },
+              {
+                "text": "post",
+                "emphasis": false,
+                "startMs": 12239,
+                "endMs": 12439,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 10,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 12479,
+                "endMs": 12500,
+                "variant": "base"
+              },
+              {
+                "text": "second",
+                "emphasis": true,
+                "startMs": 12659,
+                "endMs": 13019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 11,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 13079,
+                "endMs": 13179,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 13199,
+                "endMs": 13299,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 13380,
+                "endMs": 13659,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 11,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "reel.",
+                "emphasis": true,
+                "startMs": 13739,
+                "endMs": 13939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 12,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That",
+                "emphasis": false,
+                "startMs": 14319,
+                "endMs": 14420,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": false,
+                "startMs": 14519,
+                "endMs": 14679,
+                "variant": "base"
+              },
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 14739,
+                "endMs": 14899,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 12,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 14960,
+                "endMs": 15060,
+                "variant": "base"
+              },
+              {
+                "text": "gonna",
+                "emphasis": false,
+                "startMs": 15079,
+                "endMs": 15239,
+                "variant": "base"
+              },
+              {
+                "text": "hit",
+                "emphasis": true,
+                "startMs": 15259,
+                "endMs": 15380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 13,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 15439,
+                "endMs": 15579,
+                "variant": "base"
+              },
+              {
+                "text": "followers",
+                "emphasis": true,
+                "startMs": 15659,
+                "endMs": 16260,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 13,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16340,
+                "endMs": 16440,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 16459,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "select",
+                "emphasis": true,
+                "startMs": 16600,
+                "endMs": 16840,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": false,
+                "startMs": 16899,
+                "endMs": 17079,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 14,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 17100,
+                "endMs": 17219,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 14,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "non-followers.",
+                "emphasis": true,
+                "startMs": 17319,
+                "endMs": 18079,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 15,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "But",
+                "emphasis": false,
+                "startMs": 18199,
+                "endMs": 18279,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 18319,
+                "endMs": 18420,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 18479,
+                "endMs": 18779,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 15,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 18819,
+                "endMs": 18979,
+                "variant": "base"
+              },
+              {
+                "text": "will",
+                "emphasis": false,
+                "startMs": 19039,
+                "endMs": 19139,
+                "variant": "base"
+              },
+              {
+                "text": "be",
+                "emphasis": false,
+                "startMs": 19159,
+                "endMs": 19219,
+                "variant": "base"
+              },
+              {
+                "text": "shown",
+                "emphasis": true,
+                "startMs": 19340,
+                "endMs": 19520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 16,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 19539,
+                "endMs": 19600,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 19639,
+                "endMs": 19719,
+                "variant": "base"
+              },
+              {
+                "text": "completely",
+                "emphasis": false,
+                "startMs": 19760,
+                "endMs": 20239,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 16,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "different",
+                "emphasis": true,
+                "startMs": 20340,
+                "endMs": 20600,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": true,
+                "startMs": 20639,
+                "endMs": 20819,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 17,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 20899,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 17,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "non-followers,",
+                "emphasis": true,
+                "startMs": 20979,
+                "endMs": 21780,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 0,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "which",
+                "emphasis": false,
+                "startMs": 21899,
+                "endMs": 22020,
+                "variant": "base"
+              },
+              {
+                "text": "basically",
+                "emphasis": false,
+                "startMs": 22100,
+                "endMs": 22459,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 1,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "means",
+                "emphasis": false,
+                "startMs": 22500,
+                "endMs": 23019,
+                "variant": "base"
+              },
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 23199,
+                "endMs": 23459,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 2,
+        "parts": 3,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 23500,
+                "endMs": 23579,
+                "variant": "base"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 23680,
+                "endMs": 24039,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 19,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That's",
+                "emphasis": false,
+                "startMs": 24279,
+                "endMs": 24779,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 19,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "free",
+                "emphasis": true,
+                "startMs": 24920,
+                "endMs": 25219,
+                "variant": "punch"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 25439,
+                "endMs": 25879,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 20,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Do",
+                "emphasis": false,
+                "startMs": 26059,
+                "endMs": 26159,
+                "variant": "base"
+              },
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 26219,
+                "endMs": 26479,
+                "variant": "base"
+              },
+              {
+                "text": "every",
+                "emphasis": false,
+                "startMs": 26559,
+                "endMs": 26760,
+                "variant": "base"
+              },
+              {
+                "text": "time",
+                "emphasis": false,
+                "startMs": 26899,
+                "endMs": 27079,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 20,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 27119,
+                "endMs": 27239,
+                "variant": "base"
+              },
+              {
+                "text": "post.",
+                "emphasis": true,
+                "startMs": 27260,
+                "endMs": 27599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "classic2": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "This",
+                "emphasis": false,
+                "startMs": 79,
+                "endMs": 159,
+                "variant": "base"
+              },
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 199,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 299,
+                "endMs": 399,
+                "variant": "base"
+              },
+              {
+                "text": "fastest",
+                "emphasis": true,
+                "startMs": 439,
+                "endMs": 819,
+                "variant": "punch"
+              },
+              {
+                "text": "way",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 1019,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 1079,
+                "endMs": 1139,
+                "variant": "base"
+              },
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 1220,
+                "endMs": 1419,
+                "variant": "elegant"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 1480,
+                "endMs": 1579,
+                "variant": "base"
+              },
+              {
+                "text": "views",
+                "emphasis": true,
+                "startMs": 1599,
+                "endMs": 1860,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 1879,
+                "endMs": 2079,
+                "variant": "base"
+              },
+              {
+                "text": "no",
+                "emphasis": false,
+                "startMs": 2139,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "extra",
+                "emphasis": false,
+                "startMs": 2319,
+                "endMs": 2559,
+                "variant": "base"
+              },
+              {
+                "text": "effort,",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 2919,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "explained",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "in",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3699,
+                "variant": "base"
+              },
+              {
+                "text": "under",
+                "emphasis": false,
+                "startMs": 3740,
+                "endMs": 3919,
+                "variant": "base"
+              },
+              {
+                "text": "30",
+                "emphasis": true,
+                "startMs": 4039,
+                "endMs": 4159,
+                "variant": "punch"
+              },
+              {
+                "text": "seconds.",
+                "emphasis": false,
+                "startMs": 4199,
+                "endMs": 4559,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Before",
+                "emphasis": false,
+                "startMs": 4699,
+                "endMs": 4940,
+                "variant": "base"
+              },
+              {
+                "text": "posting",
+                "emphasis": false,
+                "startMs": 5039,
+                "endMs": 5339,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 5380,
+                "endMs": 5480,
+                "variant": "base"
+              },
+              {
+                "text": "next",
+                "emphasis": false,
+                "startMs": 5519,
+                "endMs": 5699,
+                "variant": "base"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 5779,
+                "endMs": 5980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 6319,
+                "endMs": 6339,
+                "variant": "base"
+              },
+              {
+                "text": "want",
+                "emphasis": false,
+                "startMs": 6420,
+                "endMs": 6539,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 6579,
+                "endMs": 6639,
+                "variant": "base"
+              },
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 6679,
+                "endMs": 6839,
+                "variant": "base"
+              },
+              {
+                "text": "save",
+                "emphasis": true,
+                "startMs": 6899,
+                "endMs": 7099,
+                "variant": "punch"
+              },
+              {
+                "text": "it",
+                "emphasis": false,
+                "startMs": 7139,
+                "endMs": 7239,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 7279,
+                "endMs": 7339,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 7379,
+                "endMs": 7539,
+                "variant": "base"
+              },
+              {
+                "text": "drafts,",
+                "emphasis": true,
+                "startMs": 7579,
+                "endMs": 7980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 7,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 8300,
+                "endMs": 8519,
+                "variant": "base"
+              },
+              {
+                "text": "go",
+                "emphasis": true,
+                "startMs": 8579,
+                "endMs": 8720,
+                "variant": "elegant"
+              },
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 8760,
+                "endMs": 8820,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 8859,
+                "endMs": 8940,
+                "variant": "base"
+              },
+              {
+                "text": "drafts",
+                "emphasis": true,
+                "startMs": 9019,
+                "endMs": 9539,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 8,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9579,
+                "endMs": 9760,
+                "variant": "base"
+              },
+              {
+                "text": "duplicate",
+                "emphasis": true,
+                "startMs": 9800,
+                "endMs": 10260,
+                "variant": "punch"
+              },
+              {
+                "text": "it.",
+                "emphasis": false,
+                "startMs": 10300,
+                "endMs": 10420,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 9,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Post",
+                "emphasis": false,
+                "startMs": 10500,
+                "endMs": 10719,
+                "variant": "base"
+              },
+              {
+                "text": "one",
+                "emphasis": false,
+                "startMs": 10800,
+                "endMs": 10880,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 9,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 10939,
+                "endMs": 11019,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 11059,
+                "endMs": 11180,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": true,
+                "startMs": 11199,
+                "endMs": 11359,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 11439,
+                "endMs": 11639,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 10,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 11920,
+                "endMs": 12000,
+                "variant": "base"
+              },
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 12019,
+                "endMs": 12199,
+                "variant": "base"
+              },
+              {
+                "text": "post",
+                "emphasis": false,
+                "startMs": 12239,
+                "endMs": 12439,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 12479,
+                "endMs": 12500,
+                "variant": "base"
+              },
+              {
+                "text": "second",
+                "emphasis": true,
+                "startMs": 12659,
+                "endMs": 13019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 11,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 13079,
+                "endMs": 13179,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 13199,
+                "endMs": 13299,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 13380,
+                "endMs": 13659,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel.",
+                "emphasis": true,
+                "startMs": 13739,
+                "endMs": 13939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 12,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That",
+                "emphasis": false,
+                "startMs": 14319,
+                "endMs": 14420,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": false,
+                "startMs": 14519,
+                "endMs": 14679,
+                "variant": "base"
+              },
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 14739,
+                "endMs": 14899,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 12,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 14960,
+                "endMs": 15060,
+                "variant": "base"
+              },
+              {
+                "text": "gonna",
+                "emphasis": false,
+                "startMs": 15079,
+                "endMs": 15239,
+                "variant": "base"
+              },
+              {
+                "text": "hit",
+                "emphasis": true,
+                "startMs": 15259,
+                "endMs": 15380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 13,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 15439,
+                "endMs": 15579,
+                "variant": "base"
+              },
+              {
+                "text": "followers",
+                "emphasis": true,
+                "startMs": 15659,
+                "endMs": 16260,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 13,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16340,
+                "endMs": 16440,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 16459,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "select",
+                "emphasis": true,
+                "startMs": 16600,
+                "endMs": 16840,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": false,
+                "startMs": 16899,
+                "endMs": 17079,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 14,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 17100,
+                "endMs": 17219,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers.",
+                "emphasis": true,
+                "startMs": 17319,
+                "endMs": 18079,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 15,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "But",
+                "emphasis": false,
+                "startMs": 18199,
+                "endMs": 18279,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 18319,
+                "endMs": 18420,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 18479,
+                "endMs": 18779,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 15,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 18819,
+                "endMs": 18979,
+                "variant": "base"
+              },
+              {
+                "text": "will",
+                "emphasis": false,
+                "startMs": 19039,
+                "endMs": 19139,
+                "variant": "base"
+              },
+              {
+                "text": "be",
+                "emphasis": false,
+                "startMs": 19159,
+                "endMs": 19219,
+                "variant": "base"
+              },
+              {
+                "text": "shown",
+                "emphasis": true,
+                "startMs": 19340,
+                "endMs": 19520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 16,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 19539,
+                "endMs": 19600,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 19639,
+                "endMs": 19719,
+                "variant": "base"
+              },
+              {
+                "text": "completely",
+                "emphasis": false,
+                "startMs": 19760,
+                "endMs": 20239,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 16,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "different",
+                "emphasis": true,
+                "startMs": 20340,
+                "endMs": 20600,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": true,
+                "startMs": 20639,
+                "endMs": 20819,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 17,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 20899,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers,",
+                "emphasis": true,
+                "startMs": 20979,
+                "endMs": 21780,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "which",
+                "emphasis": false,
+                "startMs": 21899,
+                "endMs": 22020,
+                "variant": "base"
+              },
+              {
+                "text": "basically",
+                "emphasis": false,
+                "startMs": 22100,
+                "endMs": 22459,
+                "variant": "base"
+              },
+              {
+                "text": "means",
+                "emphasis": false,
+                "startMs": 22500,
+                "endMs": 23019,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 23199,
+                "endMs": 23459,
+                "variant": "elegant"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 23500,
+                "endMs": 23579,
+                "variant": "base"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 23680,
+                "endMs": 24039,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 19,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That's",
+                "emphasis": false,
+                "startMs": 24279,
+                "endMs": 24779,
+                "variant": "base"
+              },
+              {
+                "text": "free",
+                "emphasis": true,
+                "startMs": 24920,
+                "endMs": 25219,
+                "variant": "punch"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 25439,
+                "endMs": 25879,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 20,
+        "part": 0,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Do",
+                "emphasis": false,
+                "startMs": 26059,
+                "endMs": 26159,
+                "variant": "base"
+              },
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 26219,
+                "endMs": 26479,
+                "variant": "base"
+              },
+              {
+                "text": "every",
+                "emphasis": false,
+                "startMs": 26559,
+                "endMs": 26760,
+                "variant": "base"
+              },
+              {
+                "text": "time",
+                "emphasis": false,
+                "startMs": 26899,
+                "endMs": 27079,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 20,
+        "part": 1,
+        "parts": 2,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 27119,
+                "endMs": 27239,
+                "variant": "base"
+              },
+              {
+                "text": "post.",
+                "emphasis": true,
+                "startMs": 27260,
+                "endMs": 27599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "animator": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "This",
+                "emphasis": false,
+                "startMs": 79,
+                "endMs": 159,
+                "variant": "base"
+              },
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 199,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 299,
+                "endMs": 399,
+                "variant": "base"
+              },
+              {
+                "text": "fastest",
+                "emphasis": true,
+                "startMs": 439,
+                "endMs": 819,
+                "variant": "punch"
+              },
+              {
+                "text": "way",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 1019,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 1079,
+                "endMs": 1139,
+                "variant": "base"
+              },
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 1220,
+                "endMs": 1419,
+                "variant": "elegant"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 1480,
+                "endMs": 1579,
+                "variant": "base"
+              },
+              {
+                "text": "views",
+                "emphasis": true,
+                "startMs": 1599,
+                "endMs": 1860,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 1879,
+                "endMs": 2079,
+                "variant": "base"
+              },
+              {
+                "text": "no",
+                "emphasis": false,
+                "startMs": 2139,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "extra",
+                "emphasis": false,
+                "startMs": 2319,
+                "endMs": 2559,
+                "variant": "base"
+              },
+              {
+                "text": "effort,",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 2919,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "explained",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "in",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3699,
+                "variant": "base"
+              },
+              {
+                "text": "under",
+                "emphasis": false,
+                "startMs": 3740,
+                "endMs": 3919,
+                "variant": "base"
+              },
+              {
+                "text": "30",
+                "emphasis": true,
+                "startMs": 4039,
+                "endMs": 4159,
+                "variant": "punch"
+              },
+              {
+                "text": "seconds.",
+                "emphasis": false,
+                "startMs": 4199,
+                "endMs": 4559,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Before",
+                "emphasis": false,
+                "startMs": 4699,
+                "endMs": 4940,
+                "variant": "base"
+              },
+              {
+                "text": "posting",
+                "emphasis": false,
+                "startMs": 5039,
+                "endMs": 5339,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 5380,
+                "endMs": 5480,
+                "variant": "base"
+              },
+              {
+                "text": "next",
+                "emphasis": false,
+                "startMs": 5519,
+                "endMs": 5699,
+                "variant": "base"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 5779,
+                "endMs": 5980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 6319,
+                "endMs": 6339,
+                "variant": "base"
+              },
+              {
+                "text": "want",
+                "emphasis": false,
+                "startMs": 6420,
+                "endMs": 6539,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 6579,
+                "endMs": 6639,
+                "variant": "base"
+              },
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 6679,
+                "endMs": 6839,
+                "variant": "base"
+              },
+              {
+                "text": "save",
+                "emphasis": true,
+                "startMs": 6899,
+                "endMs": 7099,
+                "variant": "punch"
+              },
+              {
+                "text": "it",
+                "emphasis": false,
+                "startMs": 7139,
+                "endMs": 7239,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 7279,
+                "endMs": 7339,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 7379,
+                "endMs": 7539,
+                "variant": "base"
+              },
+              {
+                "text": "drafts,",
+                "emphasis": true,
+                "startMs": 7579,
+                "endMs": 7980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 7,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 8300,
+                "endMs": 8519,
+                "variant": "base"
+              },
+              {
+                "text": "go",
+                "emphasis": true,
+                "startMs": 8579,
+                "endMs": 8720,
+                "variant": "elegant"
+              },
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 8760,
+                "endMs": 8820,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 8859,
+                "endMs": 8940,
+                "variant": "base"
+              },
+              {
+                "text": "drafts",
+                "emphasis": true,
+                "startMs": 9019,
+                "endMs": 9539,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 8,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9579,
+                "endMs": 9760,
+                "variant": "base"
+              },
+              {
+                "text": "duplicate",
+                "emphasis": true,
+                "startMs": 9800,
+                "endMs": 10260,
+                "variant": "punch"
+              },
+              {
+                "text": "it.",
+                "emphasis": false,
+                "startMs": 10300,
+                "endMs": 10420,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 9,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Post",
+                "emphasis": false,
+                "startMs": 10500,
+                "endMs": 10719,
+                "variant": "base"
+              },
+              {
+                "text": "one",
+                "emphasis": false,
+                "startMs": 10800,
+                "endMs": 10880,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 10939,
+                "endMs": 11019,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 11059,
+                "endMs": 11180,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": true,
+                "startMs": 11199,
+                "endMs": 11359,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 11439,
+                "endMs": 11639,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 10,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 11920,
+                "endMs": 12000,
+                "variant": "base"
+              },
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 12019,
+                "endMs": 12199,
+                "variant": "base"
+              },
+              {
+                "text": "post",
+                "emphasis": false,
+                "startMs": 12239,
+                "endMs": 12439,
+                "variant": "base"
+              },
               {
                 "text": "a",
                 "emphasis": false,
@@ -8355,6 +13653,976 @@
           {
             "align": "center",
             "words": [
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 27119,
+                "endMs": 27239,
+                "variant": "base"
+              },
+              {
+                "text": "post.",
+                "emphasis": true,
+                "startMs": 27260,
+                "endMs": 27599,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "wordbyword": [
+      {
+        "ideaIndex": 0,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "This",
+                "emphasis": false,
+                "startMs": 79,
+                "endMs": 159,
+                "variant": "base"
+              },
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 199,
+                "endMs": 259,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 299,
+                "endMs": 399,
+                "variant": "base"
+              },
+              {
+                "text": "fastest",
+                "emphasis": true,
+                "startMs": 439,
+                "endMs": 819,
+                "variant": "punch"
+              },
+              {
+                "text": "way",
+                "emphasis": false,
+                "startMs": 899,
+                "endMs": 1019,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 1,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 1079,
+                "endMs": 1139,
+                "variant": "base"
+              },
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 1220,
+                "endMs": 1419,
+                "variant": "elegant"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 1480,
+                "endMs": 1579,
+                "variant": "base"
+              },
+              {
+                "text": "views",
+                "emphasis": true,
+                "startMs": 1599,
+                "endMs": 1860,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 2,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "with",
+                "emphasis": false,
+                "startMs": 1879,
+                "endMs": 2079,
+                "variant": "base"
+              },
+              {
+                "text": "no",
+                "emphasis": false,
+                "startMs": 2139,
+                "endMs": 2240,
+                "variant": "base"
+              },
+              {
+                "text": "extra",
+                "emphasis": false,
+                "startMs": 2319,
+                "endMs": 2559,
+                "variant": "base"
+              },
+              {
+                "text": "effort,",
+                "emphasis": true,
+                "startMs": 2659,
+                "endMs": 2919,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 3,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "explained",
+                "emphasis": false,
+                "startMs": 3259,
+                "endMs": 3599,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "in",
+                "emphasis": false,
+                "startMs": 3639,
+                "endMs": 3699,
+                "variant": "base"
+              },
+              {
+                "text": "under",
+                "emphasis": false,
+                "startMs": 3740,
+                "endMs": 3919,
+                "variant": "base"
+              },
+              {
+                "text": "30",
+                "emphasis": true,
+                "startMs": 4039,
+                "endMs": 4159,
+                "variant": "punch"
+              },
+              {
+                "text": "seconds.",
+                "emphasis": false,
+                "startMs": 4199,
+                "endMs": 4559,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 4,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Before",
+                "emphasis": false,
+                "startMs": 4699,
+                "endMs": 4940,
+                "variant": "base"
+              },
+              {
+                "text": "posting",
+                "emphasis": false,
+                "startMs": 5039,
+                "endMs": 5339,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 5380,
+                "endMs": 5480,
+                "variant": "base"
+              },
+              {
+                "text": "next",
+                "emphasis": false,
+                "startMs": 5519,
+                "endMs": 5699,
+                "variant": "base"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 5779,
+                "endMs": 5980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 5,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "I",
+                "emphasis": false,
+                "startMs": 6319,
+                "endMs": 6339,
+                "variant": "base"
+              },
+              {
+                "text": "want",
+                "emphasis": false,
+                "startMs": 6420,
+                "endMs": 6539,
+                "variant": "base"
+              },
+              {
+                "text": "you",
+                "emphasis": false,
+                "startMs": 6579,
+                "endMs": 6639,
+                "variant": "base"
+              },
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 6679,
+                "endMs": 6839,
+                "variant": "base"
+              },
+              {
+                "text": "save",
+                "emphasis": true,
+                "startMs": 6899,
+                "endMs": 7099,
+                "variant": "punch"
+              },
+              {
+                "text": "it",
+                "emphasis": false,
+                "startMs": 7139,
+                "endMs": 7239,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 6,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 7279,
+                "endMs": 7339,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 7379,
+                "endMs": 7539,
+                "variant": "base"
+              },
+              {
+                "text": "drafts,",
+                "emphasis": true,
+                "startMs": 7579,
+                "endMs": 7980,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 7,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 8300,
+                "endMs": 8519,
+                "variant": "base"
+              },
+              {
+                "text": "go",
+                "emphasis": true,
+                "startMs": 8579,
+                "endMs": 8720,
+                "variant": "elegant"
+              },
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 8760,
+                "endMs": 8820,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 8859,
+                "endMs": 8940,
+                "variant": "base"
+              },
+              {
+                "text": "drafts",
+                "emphasis": true,
+                "startMs": 9019,
+                "endMs": 9539,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 8,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 9579,
+                "endMs": 9760,
+                "variant": "base"
+              },
+              {
+                "text": "duplicate",
+                "emphasis": true,
+                "startMs": 9800,
+                "endMs": 10260,
+                "variant": "punch"
+              },
+              {
+                "text": "it.",
+                "emphasis": false,
+                "startMs": 10300,
+                "endMs": 10420,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 9,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Post",
+                "emphasis": false,
+                "startMs": 10500,
+                "endMs": 10719,
+                "variant": "base"
+              },
+              {
+                "text": "one",
+                "emphasis": false,
+                "startMs": 10800,
+                "endMs": 10880,
+                "variant": "base"
+              },
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 10939,
+                "endMs": 11019,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 11059,
+                "endMs": 11180,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": true,
+                "startMs": 11199,
+                "endMs": 11359,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel,",
+                "emphasis": true,
+                "startMs": 11439,
+                "endMs": 11639,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 10,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 11920,
+                "endMs": 12000,
+                "variant": "base"
+              },
+              {
+                "text": "then",
+                "emphasis": false,
+                "startMs": 12019,
+                "endMs": 12199,
+                "variant": "base"
+              },
+              {
+                "text": "post",
+                "emphasis": false,
+                "startMs": 12239,
+                "endMs": 12439,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 12479,
+                "endMs": 12500,
+                "variant": "base"
+              },
+              {
+                "text": "second",
+                "emphasis": true,
+                "startMs": 12659,
+                "endMs": 13019,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 11,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "as",
+                "emphasis": false,
+                "startMs": 13079,
+                "endMs": 13179,
+                "variant": "base"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 13199,
+                "endMs": 13299,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 13380,
+                "endMs": 13659,
+                "variant": "elegant"
+              },
+              {
+                "text": "reel.",
+                "emphasis": true,
+                "startMs": 13739,
+                "endMs": 13939,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 12,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That",
+                "emphasis": false,
+                "startMs": 14319,
+                "endMs": 14420,
+                "variant": "base"
+              },
+              {
+                "text": "main",
+                "emphasis": false,
+                "startMs": 14519,
+                "endMs": 14679,
+                "variant": "base"
+              },
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 14739,
+                "endMs": 14899,
+                "variant": "base"
+              },
+              {
+                "text": "is",
+                "emphasis": false,
+                "startMs": 14960,
+                "endMs": 15060,
+                "variant": "base"
+              },
+              {
+                "text": "gonna",
+                "emphasis": false,
+                "startMs": 15079,
+                "endMs": 15239,
+                "variant": "base"
+              },
+              {
+                "text": "hit",
+                "emphasis": true,
+                "startMs": 15259,
+                "endMs": 15380,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 13,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 15439,
+                "endMs": 15579,
+                "variant": "base"
+              },
+              {
+                "text": "followers",
+                "emphasis": true,
+                "startMs": 15659,
+                "endMs": 16260,
+                "variant": "punch"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "and",
+                "emphasis": false,
+                "startMs": 16340,
+                "endMs": 16440,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 16459,
+                "endMs": 16559,
+                "variant": "base"
+              },
+              {
+                "text": "select",
+                "emphasis": true,
+                "startMs": 16600,
+                "endMs": 16840,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": false,
+                "startMs": 16899,
+                "endMs": 17079,
+                "variant": "base"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 14,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 17100,
+                "endMs": 17219,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers.",
+                "emphasis": true,
+                "startMs": 17319,
+                "endMs": 18079,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 15,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "But",
+                "emphasis": false,
+                "startMs": 18199,
+                "endMs": 18279,
+                "variant": "base"
+              },
+              {
+                "text": "the",
+                "emphasis": false,
+                "startMs": 18319,
+                "endMs": 18420,
+                "variant": "base"
+              },
+              {
+                "text": "trial",
+                "emphasis": true,
+                "startMs": 18479,
+                "endMs": 18779,
+                "variant": "elegant"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "reel",
+                "emphasis": false,
+                "startMs": 18819,
+                "endMs": 18979,
+                "variant": "base"
+              },
+              {
+                "text": "will",
+                "emphasis": false,
+                "startMs": 19039,
+                "endMs": 19139,
+                "variant": "base"
+              },
+              {
+                "text": "be",
+                "emphasis": false,
+                "startMs": 19159,
+                "endMs": 19219,
+                "variant": "base"
+              },
+              {
+                "text": "shown",
+                "emphasis": true,
+                "startMs": 19340,
+                "endMs": 19520,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 16,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "to",
+                "emphasis": false,
+                "startMs": 19539,
+                "endMs": 19600,
+                "variant": "base"
+              },
+              {
+                "text": "a",
+                "emphasis": false,
+                "startMs": 19639,
+                "endMs": 19719,
+                "variant": "base"
+              },
+              {
+                "text": "completely",
+                "emphasis": false,
+                "startMs": 19760,
+                "endMs": 20239,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "different",
+                "emphasis": true,
+                "startMs": 20340,
+                "endMs": 20600,
+                "variant": "elegant"
+              },
+              {
+                "text": "group",
+                "emphasis": true,
+                "startMs": 20639,
+                "endMs": 20819,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 17,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "of",
+                "emphasis": false,
+                "startMs": 20819,
+                "endMs": 20899,
+                "variant": "base"
+              },
+              {
+                "text": "non-followers,",
+                "emphasis": true,
+                "startMs": 20979,
+                "endMs": 21780,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 18,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "which",
+                "emphasis": false,
+                "startMs": 21899,
+                "endMs": 22020,
+                "variant": "base"
+              },
+              {
+                "text": "basically",
+                "emphasis": false,
+                "startMs": 22100,
+                "endMs": 22459,
+                "variant": "base"
+              },
+              {
+                "text": "means",
+                "emphasis": false,
+                "startMs": 22500,
+                "endMs": 23019,
+                "variant": "base"
+              }
+            ]
+          },
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "double",
+                "emphasis": true,
+                "startMs": 23199,
+                "endMs": 23459,
+                "variant": "elegant"
+              },
+              {
+                "text": "your",
+                "emphasis": false,
+                "startMs": 23500,
+                "endMs": 23579,
+                "variant": "base"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 23680,
+                "endMs": 24039,
+                "variant": "punch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 19,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "That's",
+                "emphasis": false,
+                "startMs": 24279,
+                "endMs": 24779,
+                "variant": "base"
+              },
+              {
+                "text": "free",
+                "emphasis": true,
+                "startMs": 24920,
+                "endMs": 25219,
+                "variant": "punch"
+              },
+              {
+                "text": "views.",
+                "emphasis": true,
+                "startMs": 25439,
+                "endMs": 25879,
+                "variant": "elegant"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ideaIndex": 20,
+        "part": 0,
+        "parts": 1,
+        "lines": [
+          {
+            "align": "center",
+            "words": [
+              {
+                "text": "Do",
+                "emphasis": false,
+                "startMs": 26059,
+                "endMs": 26159,
+                "variant": "base"
+              },
+              {
+                "text": "this",
+                "emphasis": false,
+                "startMs": 26219,
+                "endMs": 26479,
+                "variant": "base"
+              },
+              {
+                "text": "every",
+                "emphasis": false,
+                "startMs": 26559,
+                "endMs": 26760,
+                "variant": "base"
+              },
+              {
+                "text": "time",
+                "emphasis": false,
+                "startMs": 26899,
+                "endMs": 27079,
+                "variant": "base"
+              },
               {
                 "text": "you",
                 "emphasis": false,

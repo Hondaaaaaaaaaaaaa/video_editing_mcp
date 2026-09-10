@@ -15,6 +15,12 @@ import type { z } from "zod";
 import type { CaptionStyle } from "./styles/types";
 
 import {
+  PageWordByWord,
+  wordByWordSchema,
+  WORD_BY_WORD_DEFAULTS,
+  WordByWordStyleProvider,
+} from "./styles/PageWordByWord";
+import {
   PageClassic,
   classicSchema,
   CLASSIC_DEFAULTS,
@@ -229,6 +235,15 @@ export const TEMPLATES: TemplateDef[] = [
     Page: PageAnimator,
     documentDriven: true,
     shape: "animator",
+  },
+  {
+    id: "Word by Word",
+    schema: wordByWordSchema,
+    defaults: stripSrc(WORD_BY_WORD_DEFAULTS),
+    Provider: WordByWordStyleProvider as unknown as React.Provider<never>,
+    Page: PageWordByWord,
+    documentDriven: true,
+    shape: "wordbyword",
   },
   {
     id: "Classic 2",

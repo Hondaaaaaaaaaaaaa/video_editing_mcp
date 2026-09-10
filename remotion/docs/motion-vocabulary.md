@@ -44,6 +44,9 @@ confused: they are independent, and a look can use both at once.
 | **wipe** | a mask edge | a hard or soft edge travels across the text, revealing or hiding it progressively. The glyphs themselves do not move, resize, or change opacity — they are simply covered. |
 | **blur** | blur radius | text resolves out of / dissolves into softness. |
 | **highlight** | colour | the word changes colour on its cue (karaoke). No opacity or geometry change. |
+| **track** | letter-spacing | the gaps between letters widen or tighten. The line grows or shrinks sideways from its centre while every glyph keeps its exact size. After Effects calls this property *Tracking*. |
+| **zoom** | scale of a whole caption block | everything grows together — cap height, glyph widths AND gaps. Distinct from **track**, which grows only the gaps. |
+| **wiggle** | position / rotation, randomly | the text jitters back and forth around where it sits, and keeps jittering. Named after the After Effects `wiggle()` expression. It OSCILLATES — if the motion only ever goes one way and then settles, it is not a wiggle. |
 
 Combinations are written with `+`: **fade+pop in** = opacity and scale animate
 together over the same window.
@@ -52,6 +55,18 @@ together over the same window.
 If text vanishes without changing size, it is a fade, never a pop — no matter
 how snappy it feels. And a *wipe* is not a fade: under a wipe, a letter is
 either covered or not; under a fade, every letter dims at once.
+
+**Track vs pop.** Both make a line "grow", and they are easy to confuse by eye —
+text spreading outward from the middle looks like it is being zoomed. Tell them
+apart by measuring one glyph:
+
+| | cap height | glyph width | gaps | line centre |
+| --- | --- | --- | --- | --- |
+| **pop** (scale) | grows | grows | grow | fixed |
+| **track** | **unchanged** | **unchanged** | grow | fixed |
+
+If the letters keep their size and only the space between them changes, it is
+tracking. This is exactly what the "Fade + pop" reference turned out to be.
 
 ## 3. UNIT — what the animation applies to
 
@@ -65,6 +80,21 @@ either covered or not; under a fade, every letter dims at once.
 A unit that repeats needs a **stagger** — the delay between one unit starting
 and the next. Zero stagger means they all move together, which is the same as
 animating the larger unit.
+
+## 3b. Whether the ramp settles
+
+A growth (pop, zoom, track) runs one of two ways, and this is a separate choice
+from what it animates:
+
+| term | meaning |
+| --- | --- |
+| **settle** | ease to a target over a duration, then hold still. A `pop in` is a settle: it scales to 1 and stops. |
+| **continuous** | keep going at a fixed rate for as long as the caption is on screen, so it is STILL MOVING when the next sentence takes over. Never reaches a target. |
+
+**"Zoom continuous"** is the user's name (chosen 2026-09-06) for a per-caption
+zoom in continuous mode, and it is the motion picked out of the four-way
+comparison in `src/FadePopDemo.tsx`. It is NOT a pop in: a pop in settles at 1
+and stops; a zoom continuous does not stop, and can pass 1.
 
 ## 4. Modifiers
 
@@ -82,6 +112,7 @@ animating the larger unit.
 | Edits (v1) | per-word fade+pop in, 133 ms, ease-out, centre-anchored so the line re-centres as each word lands | none — hard cut |
 | Speed | per-word fade in, 133 ms, ease-out (plus a pop set by eye) | hard cut |
 | Classic 2 | per-word reveal in place, hard cut by default | — |
+| **Fade + Pop** (reference) | **per-word fade in**, ~333 ms, linear — plus a **caption track out**, +8.9 % over ~1 s, ease-out. No pop despite the folder name. | whole-caption fade out, ~430 ms |
 | **Edits 2** | **per-word fade in**, ~250 ms, **linear**, no pop, no slide — the caption is laid out for its full text up front so words appear in their final slots and nothing re-centres | **per-caption fade out with a per-word stagger** — the words leave in the order they arrived, but close enough together that it reads as the sentence going as one |
 
 ## 6. How to describe a look you want

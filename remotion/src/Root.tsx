@@ -80,7 +80,6 @@ import {
 import {
   PageAnimator,
   animatorSchema,
-  ANIMATOR_DEFAULTS,
   AnimatorStyleProvider,
 } from "./CaptionedVideo/styles/PageAnimator";
 import {
@@ -89,12 +88,27 @@ import {
   CLASSIC2_DEFAULTS,
   Classic2StyleProvider,
 } from "./CaptionedVideo/styles/PageClassic2";
+import {
+  PageTypewriter3,
+  typewriter3Schema,
+  TYPEWRITER3_DEFAULTS,
+  Typewriter3StyleProvider,
+} from "./CaptionedVideo/styles/PageTypewriter3";
 
 // The video that captions are rendered over (a vertical clip at
 // remotion/public/sample-video.mp4). Stored as a PLAIN FILENAME — not
 // staticFile("…") — so every composition's defaultProps stay a fully static
 // object literal that Remotion Studio can SAVE (a function call would block
 // "save default props"). CaptionedVideo resolves the filename via staticFile().
+import { FadePopDemo, fadePopDemoSchema, PRESETS, preset } from "./FadePopDemo";
+
+import {
+  PageWordByWord,
+  wordByWordSchema,
+  WORD_BY_WORD_DEFAULTS,
+  WordByWordStyleProvider,
+} from "./CaptionedVideo/styles/PageWordByWord";
+
 const SAMPLE_VIDEO = "sample-video.mp4";
 
 // The Edits 2 reference reel (remotion/public/edits 2.mp4) — 576x576, 30 fps,
@@ -103,12 +117,24 @@ const SAMPLE_VIDEO = "sample-video.mp4";
 // the Studio timeline scrubs the same footage the measurements come from.
 const EDITS2_REFERENCE = "References/Fade + pop/edits 2.mp4";
 
-// The Words Animator reference reel (remotion/public/Words Animator/easing
-// sample 2.mp4) — 720x1280, 23.98fps, with its own captions burned in. The
-// "Animator" composition plays THIS rather than the shared sample video, so the
-// Studio timeline scrubs the exact footage the motion was measured from and our
-// words land on top of the reference's for comparison.
-const WORDS_ANIMATOR_REFERENCE = "Words Animator/easing sample 2.mp4";
+// The Word by Word reference reel. Lives under public/References/, which is
+// gitignored for .mp4 — bring it by hand on a new machine or point `src` at a
+// clip that has a caption document beside it.
+const WORD_BY_WORD_REFERENCE = "References/Fade + pop/fade  in .mp4";
+
+// The Writer reference reel (remotion/public/References/Type Writer/1.mp4) —
+// 1920x1080, with its own captions burned in, so ours land on top of them for
+// comparison. Reference 1 of the five: the plain-white one, no coloured keyword.
+// H.264, transcoded from the original: reference 1 ships as HEVC/H.265, which
+// Chromium cannot decode, so the Studio PREVIEW showed no footage at all (a
+// render was fine — that path goes through ffmpeg, not the browser).
+const WRITER_REFERENCE = "References/Type Writer/1-h264.mp4";
+
+// The Typewriter 3 reference reel — 576x576 @30fps, already H.264 so it plays
+// in the Studio preview as-is. Its own captions are burned in, so ours land on
+// top of them for comparison. The filename really does carry a space before the
+// extension; it is the file as supplied.
+const TYPEWRITER3_REFERENCE = "References/typewriter 3 .mp4";
 
 // Thin wrappers bind a caption *style* to the shared CaptionedVideo
 // composition. Same video + captions, different look per composition.
@@ -142,6 +168,14 @@ const makeCaptionedVideo = <P extends CaptionBaseProps>(
   );
   return Wrapped;
 };
+// Typewriter 3 paints one <Sequence> per screen and types each screen out a
+// character at a time, so it reads its own `typewriter3` layout variant.
+const Typewriter3CaptionedVideo = makeCaptionedVideo<z.infer<typeof typewriter3Schema>>(
+  Typewriter3StyleProvider,
+  PageTypewriter3,
+  "typewriter3",
+);
+
 const ClassicCaptionedVideo = makeCaptionedVideo<z.infer<typeof classicSchema>>(
   ClassicStyleProvider,
   PageClassic,
@@ -228,10 +262,25 @@ const SpeedCaptionedVideo = makeCaptionedVideo<z.infer<typeof speedSchema>>(
 // Edits reads the caption document's segments and paints the whole timeline
 // itself, so it renders as a single surface. One small centred line of heavy
 // caps that grows a word at a time, the line re-centring as each lands.
+const WordByWordCaptionedVideo = makeCaptionedVideo<z.infer<typeof wordByWordSchema>>(
+  WordByWordStyleProvider,
+  PageWordByWord,
+  "wordbyword",
+);
+
 const EditsCaptionedVideo = makeCaptionedVideo<z.infer<typeof editsSchema>>(
   EditsStyleProvider,
   PageEdits,
   "edits",
+);
+
+// Writer paints with the same component as Edits but reads its OWN layout
+// variant: it renders at more than double the em, so it cannot share Edits'
+// character budget without putting far too much text on screen at once.
+const WriterCaptionedVideo = makeCaptionedVideo<z.infer<typeof editsSchema>>(
+  EditsStyleProvider,
+  PageEdits,
+  "writer",
 );
 
 // Animator is the slider-driven one: the caption document gives it the words,
@@ -412,6 +461,76 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{ src: "sample-video.mp4", ...HORMOZI2_DEFAULTS }}
       />
 
+      {/* TEXT MOTION LAB — four ways a caption can "grow", each on a plain
+          background with no footage and no caption document, so the motion can
+          be judged on its own. Same component, four presets; every value is a
+          control in the Studio props panel. See the header of FadePopDemo.tsx
+          for what each one is and which the reference actually measures as. */}
+      <Composition
+        id="MotionA-FadeOnly"
+        component={FadePopDemo}
+        schema={fadePopDemoSchema}
+        fps={30}
+        durationInFrames={165}
+        width={1080}
+        height={1080}
+        defaultProps={preset(PRESETS.fadeOnly)}
+      />
+      <Composition
+        id="MotionB-TrackOut"
+        component={FadePopDemo}
+        schema={fadePopDemoSchema}
+        fps={30}
+        durationInFrames={165}
+        width={1080}
+        height={1080}
+        defaultProps={preset(PRESETS.trackOut)}
+      />
+      <Composition
+        id="MotionC-ZoomContinuous"
+        component={FadePopDemo}
+        schema={fadePopDemoSchema}
+        fps={30}
+        durationInFrames={165}
+        width={1080}
+        height={1080}
+        defaultProps={preset(PRESETS.zoomOut)}
+      />
+      <Composition
+        id="MotionD-WordPop"
+        component={FadePopDemo}
+        schema={fadePopDemoSchema}
+        fps={30}
+        durationInFrames={165}
+        width={1080}
+        height={1080}
+        defaultProps={preset(PRESETS.wordPop)}
+      />
+
+      {/* "Word by Word" — the caption is laid out in full and its words arrive
+          one at a time into slots they never leave, so nothing re-centres. It
+          carries the SHARED text-animation slot in full: fade in, pop in, track
+          out and zoom continuous are all controls in the props panel. The
+          DEFAULT is zoom continuous — the caption keeps scaling up about its
+          centre and never settles.
+
+          Plays over ITS OWN REFERENCE (public/References/Fade + pop/fade  in
+          .mp4, 720x720) rather than the shared sample video, so the composition
+          is SQUARE. The reference carries its own burned-in captions, so ours
+          land on top of them — point `src` at a clean clip to see it alone.
+          Every default is a measurement; see the header of PageWordByWord.tsx. */}
+      <Composition
+        id="WordByWord"
+        component={WordByWordCaptionedVideo}
+        schema={wordByWordSchema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={600}
+        width={1080}
+        height={1080}
+        defaultProps={{ src: WORD_BY_WORD_REFERENCE, ...WORD_BY_WORD_DEFAULTS }}
+      />
+
       {/* "Edits" — the cinematic edit caption: ONE small line of heavy white
           caps that grows a word at a time while staying centred, so everything
           already on screen slides outward as the next word lands. Reverse-
@@ -439,15 +558,26 @@ export const RemotionRoot: React.FC = () => {
           reference to confirm ours lands on top of the burned-in captions. The
           product "Edits" comp above is unchanged. */}
       <Composition
-        id="EditsMatch"
-        component={EditsCaptionedVideo}
+        id="Typewriter3"
+        component={Typewriter3CaptionedVideo}
+        schema={typewriter3Schema}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
+        durationInFrames={1849}
+        width={576}
+        height={576}
+        defaultProps={{ src: TYPEWRITER3_REFERENCE, ...TYPEWRITER3_DEFAULTS }}
+      />
+      <Composition
+        id="Writer"
+        component={WriterCaptionedVideo}
         schema={editsSchema}
-        calculateMetadata={captionedVideoMetadataAtFps(60)}
-        fps={60}
+        calculateMetadata={calculateCaptionedVideoMetadata}
+        fps={30}
         durationInFrames={600}
-        width={1080}
+        width={1920}
         height={1080}
-        defaultProps={{ src: "References/Type Writer/edits.mp4", ...EDITS_MATCH_DEFAULTS }}
+        defaultProps={{ src: WRITER_REFERENCE, ...EDITS_MATCH_DEFAULTS }}
       />
 
       {/* "Animator" — the slider-driven word animator, modelled on the Text
@@ -466,7 +596,53 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={600}
         width={1080}
         height={1920}
-        defaultProps={{ src: WORDS_ANIMATOR_REFERENCE, ...ANIMATOR_DEFAULTS }}
+        defaultProps={{
+          src: "Words Animator/easing sample 2.mp4",
+          showPunctuation: false,
+          frame: "9:16" as const,
+          animation: {
+            slideDirection: "right" as const,
+            slideDistancePct: 25.5,
+            fadeFrom: 0,
+            fadeMs: 730,
+            blurPct: 0.83,
+            blurMs: 540,
+            scaleFrom: 1,
+            rotateFrom: 0,
+            durationMs: 555,
+            staggerMs: 190,
+            easing: { type: "ease-out" as const, strength: 4 },
+            direction: "reading" as const,
+            seed: 0,
+          },
+          layout: {
+            fontSizePct: 6.7,
+            captionScale: 1,
+            letterSpacing: 0,
+            wordSpacing: 0.24,
+            lineSpacing: 1.2,
+            positionX: 50,
+            positionY: 50,
+            alignment: "center" as const,
+          },
+          text: {
+            font: { family: "Playfair Display" as const, custom: "" },
+            weight: 700,
+            uppercase: false,
+            color: "#ffffff",
+            accentColor: "#e02020",
+            accentOnEmphasis: true,
+          },
+          effects: {
+            shadow: {
+              enabled: true,
+              color: "rgba(0,0,0,0.5)",
+              blur: 10,
+              offsetY: 3,
+            },
+            glow: { enabled: false, blur: 18, opacity: 0.3 },
+          },
+        }}
       />
 
       {/* "Classic 2 Match" — the cinematic movie-clip caption: ONE short centred
