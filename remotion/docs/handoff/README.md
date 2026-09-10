@@ -1,5 +1,9 @@
 # Handoff — caption templates
 
+> **Read [`START-HERE.md`](START-HERE.md) first.** The files here record what was
+> MEASURED; that one records what the user WANTS — the intent, the corrections
+> already made, and how to work alongside their other sessions.
+
 Everything a fresh session (or a different account) needs to carry on. Written
 2026-08-16, at the end of a long stretch of work on the **Ali** and **Speed**
 templates.
