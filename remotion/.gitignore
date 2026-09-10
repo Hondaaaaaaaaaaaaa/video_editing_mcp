@@ -28,3 +28,16 @@ public/**/*.mov
 public/**/*.png
 public/**/*.jpg
 public/**/*.jpeg
+public/**/*.webp
+#
+# The same rule for the Adobe reference packs: .mogrt / .aep / .ffx are template
+# SOURCES we read to recover a motion model (the Text Animator Pro expressions
+# came out of one), not anything the render needs. Two .aep files alone are
+# 6.6 MB, and every git worktree would carry another copy.
+public/**/*.mogrt
+public/**/*.aep
+public/**/*.ffx
+# The pack folders wholesale, so their bundled readmes and vendor HTML do not
+# keep showing up as untracked either.
+public/References/Text Mogrts Adobe/
+public/References/images/
